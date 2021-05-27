@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,7 +33,8 @@ public class TeacherMenuController {
 	@FXML
 	private Button ExamButton;
 
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception {/////// i think we don't need for this start func , we open TeacherMain when we login as a Teacher ( open it from another func )
+		                                                    ////// if i right delete it :D 
 	
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/TeacherMain.fxml"));
 		primaryStage.setScene(new Scene(root, 300, 300));

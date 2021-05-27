@@ -27,14 +27,7 @@ public class ManagerMenuController {
     private Button OutButton;
     
     
-    
-    public void start(Stage primaryStage) throws Exception {
-    	
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/ManagerMenu.fxml"));
-		primaryStage.setScene(new Scene(root, 300, 300));
-		primaryStage.show();
-	}
-    
+   
     
     @FXML
    void GoToStatistics() {

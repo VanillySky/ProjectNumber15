@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1044.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
+   <children>
+      <ImageView fitHeight="637.0" fitWidth="1044.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../Desktop/project%20photo/Screenshot%202021-05-27%20223843.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="125.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="OutButton" layoutX="923.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: transparent;" />
+      <TableView layoutX="51.0" layoutY="216.0" prefHeight="133.0" prefWidth="920.0">
+        <columns>
+          <TableColumn fx:id="QuestionNumberTable" prefWidth="99.0" text="Question Number" />
+          <TableColumn fx:id="QuestionCodeTable" prefWidth="124.0" text="Question Code" />
+            <TableColumn fx:id="CourseTable" prefWidth="99.0" text="Course" />
+            <TableColumn fx:id="QuestionTable" prefWidth="99.0" text="Question " />
+            <TableColumn fx:id="QuestionInstractionsTable" prefWidth="139.0" text="Question Instractions" />
+            <TableColumn fx:id="AnswersTable" prefWidth="115.0" text="Answers" />
+            <TableColumn fx:id="RightAnswerTable" prefWidth="114.0" text="Right Answer" />
+            <TableColumn fx:id="AuthorTable" prefWidth="130.0" text="Author" />
+        </columns>
+      </TableView>
+      <TableView layoutX="51.0" layoutY="397.0" prefHeight="133.0" prefWidth="920.0">
+         <columns>
+            <TableColumn fx:id="QuestionNumberTable2" prefWidth="99.0" text="Question Number" />
+            <TableColumn fx:id="QuestionCodeTable2" prefWidth="124.0" text="Question Code" />
+            <TableColumn fx:id="CourseTable2" prefWidth="99.0" text="Course" />
+            <TableColumn fx:id="QuestionTable2" prefWidth="99.0" text="Question " />
+            <TableColumn fx:id="QuestionInstractionsTable2" prefWidth="115.0" text="Question Instractions" />
+            <TableColumn fx:id="AnswersTable2" prefWidth="83.0" text="Answers" />
+            <TableColumn fx:id="RightAnswerTable2" prefWidth="99.0" text="Right Answer" />
+            <TableColumn fx:id="AuthorTable2" prefWidth="99.0" text="Author" />
+            <TableColumn fx:id="PointsTable" prefWidth="99.0" text="Points" />
+         </columns>
+      </TableView>
+      <TextField layoutX="213.0" layoutY="175.0" prefHeight="31.0" prefWidth="252.0" />
+      <Button fx:id="CourseNameSearchButton" layoutX="476.0" layoutY="178.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
+      <TextField layoutX="213.0" layoutY="134.0" prefHeight="31.0" prefWidth="252.0" />
+      <Button fx:id="TeacherNameSearchButton" layoutX="476.0" layoutY="137.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddnewQuestionBTN" layoutX="435.0" layoutY="357.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="RemoveQuestionBTN" layoutX="435.0" layoutY="536.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ReturnBTN" layoutX="147.0" layoutY="567.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="DoneBTN" layoutX="757.0" layoutY="567.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>

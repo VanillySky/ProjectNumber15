@@ -73,13 +73,7 @@ public class ManagerStatisticsController {
     @FXML
     private Button ReturnBTN;
 
- public void start(Stage primaryStage) throws Exception {
-    	
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/ManagerStatistics.fxml"));
-		primaryStage.setScene(new Scene(root, 300, 300));
-		primaryStage.show();
-	}
- 
+
  
  public void PressReturn() {
 	 ReturnBTN.setOnAction(event -> {
