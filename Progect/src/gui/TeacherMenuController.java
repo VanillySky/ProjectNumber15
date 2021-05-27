@@ -63,6 +63,6 @@ public class TeacherMenuController {
 				stage.setScene(new Scene(root));
 				stage.showAndWait();
 			});
-		}//In to  ExamsTable.fxml
+		}//In to  ExamsTable.fxml a
 	}
 }
