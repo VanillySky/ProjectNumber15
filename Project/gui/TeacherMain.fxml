@@ -5,11 +5,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMenuController">
    <children>
       <ImageView fitHeight="342.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/TeacherMenu.png" />
+            <Image url="@../Images/TeacherMenu.png" />
          </image>
       </ImageView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="82.0" style="-fx-background-color: transparent;" />

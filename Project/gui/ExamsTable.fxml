@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="598.0" fitWidth="1065.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/ExamTable.png" />
+            <Image url="@../Images/ExamTable.png" />
          </image>
       </ImageView>
       <TextField fx:id="SerchByTeacherNameTXT" layoutX="223.0" layoutY="167.0" prefHeight="25.0" prefWidth="251.0">

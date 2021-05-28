@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="598.0" fitWidth="1094.0" layoutX="-4.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/BuildNewExamM.png" />
+            <Image url="@../Images/BuildNewExamM.png" />
          </image>
       </ImageView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="125.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
