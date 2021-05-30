@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamStatisticsController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="1224.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Fon.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="121.0" layoutX="129.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ExamStatistics3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="1086.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ExamStatistics1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="121.0" layoutX="720.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ExamStatistics2.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="CourseNameTXT" layoutX="217.0" layoutY="163.0" prefHeight="31.0" prefWidth="268.0" />
+      <TableView layoutY="217.0" prefHeight="200.0" prefWidth="1062.0">
+        <columns>
+          <TableColumn fx:id="ExamNumber" prefWidth="116.0" text="Exam Number" />
+          <TableColumn fx:id="ExamCode" prefWidth="108.0" text="Exam Code" />
+            <TableColumn fx:id="ChosenNumber" minWidth="1.0" prefWidth="97.0" text="Chosen &#10;question &#10;number" />
+            <TableColumn fx:id="ExamTime" prefWidth="93.0" text="Exam Time" />
+            <TableColumn fx:id="QuestionPoint" prefWidth="103.0" text="Questio point" />
+            <TableColumn fx:id="Subject" prefWidth="60.0" text="Subject" />
+            <TableColumn fx:id="Course" prefWidth="59.0" text="Course" />
+            <TableColumn fx:id="StudentInst" prefWidth="143.0" text="Studet&#10;Instructions" />
+            <TableColumn fx:id="TeacherInst" prefWidth="155.0" text="Teacher Instructions" />
+            <TableColumn fx:id="Author" prefWidth="127.0" text="Author" />
+        </columns>
+      </TableView>
+      <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="129.0" prefWidth="136.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SignOutButton" layoutX="940.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SerchButton" layoutX="485.0" layoutY="169.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
+      <Button fx:id="GetReportButton" layoutX="719.0" layoutY="482.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="127.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ReturnButton" layoutX="129.0" layoutY="482.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>
