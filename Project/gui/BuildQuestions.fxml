@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildQuestionsController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="1174.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Fon.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="220.0" fitWidth="1065.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Build%20Questions1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="158.0" fitWidth="274.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="442.0">
+         <image>
+            <Image url="@../Images/QuestionsButtons.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="QuestionTable" layoutY="229.0" prefHeight="200.0" prefWidth="987.0">
+        <columns>
+          <TableColumn fx:id="QuestNum" prefWidth="140.0" text="Question Number" />
+          <TableColumn fx:id="QuestCode" minWidth="0.0" prefWidth="135.0" text="Question Code" />
+            <TableColumn fx:id="Course" prefWidth="147.0" text="Course" />
+            <TableColumn fx:id="Question" prefWidth="95.0" text="Question" />
+            <TableColumn fx:id="QuestInst" prefWidth="165.0" text="Question Instructions" />
+            <TableColumn fx:id="Answers" prefWidth="109.0" text="Answers" />
+            <TableColumn fx:id="RightAns" prefWidth="136.0" text="The right answer" />
+            <TableColumn fx:id="Author" prefWidth="137.0" text="Author" />
+        </columns>
+      </TableView>
+      <Button fx:id="CEMSButton" layoutX="-3.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="137.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="DeleteQuestionButton" layoutX="22.0" layoutY="536.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="UpdateQuestionButton" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddQuestionButton" layoutX="22.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SignOutButton" layoutX="924.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SerchByCourseButton" layoutX="458.0" layoutY="178.0" minWidth="26.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="553.0" />
+      <Button fx:id="SerchByTeacherButton" layoutX="458.0" layoutY="143.0" minWidth="22.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="CourseNameTXT" layoutX="225.0" layoutY="176.0" prefHeight="26.0" prefWidth="260.0" />
+      <TextField fx:id="teacherNameTXT" layoutX="225.0" layoutY="147.0" prefHeight="22.0" prefWidth="260.0" AnchorPane.bottomAnchor="431.0" AnchorPane.topAnchor="147.0" />
+   </children>
+</AnchorPane>
