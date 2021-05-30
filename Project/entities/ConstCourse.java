@@ -1,4 +1,4 @@
-package Teacher;
+package entities;
 
 public enum ConstCourse {
 	Algebra,//01
