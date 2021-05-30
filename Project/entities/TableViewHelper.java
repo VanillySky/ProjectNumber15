@@ -4,6 +4,7 @@ package entities;
 
 public class TableViewHelper {
 	
+	String ExamCode;
 	String ExamNumber;
 	String ExamSubject;
 	String ExamCourse;
@@ -12,9 +13,10 @@ public class TableViewHelper {
 	String StudentInstructions;
 	String TeacherInstructions;
 	
-	public TableViewHelper(String ExamNumber,String ExamSubject,String ExamCourse,Float  ExamTime,
+	public TableViewHelper(String ExamCode,String ExamNumber,String ExamSubject,String ExamCourse,Float  ExamTime,
 	String TeacherName,String StudentInstructions,String TeacherInstructions) {
 		super();
+		this.ExamCode=ExamCode;
 		this.ExamNumber=ExamNumber;
 		this.ExamSubject=ExamSubject;
 		this.ExamCourse=ExamCourse;
@@ -22,6 +24,14 @@ public class TableViewHelper {
 		this.TeacherName=TeacherName;
 		this.StudentInstructions=StudentInstructions;
 		this.TeacherInstructions=TeacherInstructions;}
+
+	public String getExamCode() {
+		return ExamCode;
+	}
+
+	public void setExamCode(String examCode) {
+		ExamCode = examCode;
+	}
 
 	public String getExamNumber() {
 		return ExamNumber;

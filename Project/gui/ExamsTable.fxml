@@ -9,39 +9,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="1056.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamsTableController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1201.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamsTableController">
    <children>
-      <ImageView fitHeight="598.0" fitWidth="1065.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="679.0" fitWidth="1229.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/ExamTable.png" />
          </image>
       </ImageView>
-      <TextField fx:id="SerchByTeacherNameTXT" layoutX="223.0" layoutY="167.0" prefHeight="25.0" prefWidth="251.0">
+      <TextField fx:id="SerchByTeacherNameTXT" layoutX="256.0" layoutY="196.0" prefHeight="25.0" prefWidth="280.0">
          <font>
             <Font size="7.0" />
          </font>
       </TextField>
-      <TextField fx:id="SerchByCourseNameTXT" layoutX="223.0" layoutY="200.0" prefHeight="25.0" prefWidth="251.0">
+      <TextField fx:id="SerchByCourseNameTXT" layoutX="256.0" layoutY="228.0" prefHeight="25.0" prefWidth="280.0">
          <font>
             <Font size="7.0" />
          </font>
       </TextField>
-      <TableView layoutY="251.0" prefHeight="173.0" prefWidth="1055.0">
+      <TableView fx:id="ExamTable" layoutX="14.0" layoutY="308.0" onMousePressed="#selectSale" prefHeight="174.0" prefWidth="1183.0">
         <columns>
-          <TableColumn fx:id="ExamNumberTable" prefWidth="165.0" text="Exam number" />
-          <TableColumn fx:id="ExamCodeTable" minWidth="0.0" prefWidth="141.0" text="Exam code" />
-            <TableColumn fx:id="ChoseQuestionNumberTable" prefWidth="190.0" text="Chosen question number" />
-            <TableColumn fx:id="ExamTimeTable" prefWidth="101.0" text="Exam time" />
-            <TableColumn fx:id="QuestionPointsTable" prefWidth="149.0" text="Question point" />
-            <TableColumn fx:id="SubjectTable" prefWidth="98.0" text="Subject" />
-            <TableColumn fx:id="CourseTable" prefWidth="64.0" text="Course" />
-            <TableColumn fx:id="StudentInstructionTable" prefWidth="169.0" text="Student Instructions" />
+          <TableColumn fx:id="ExamCodeTable" minWidth="0.0" prefWidth="93.0" text="Exam code" />
+          <TableColumn fx:id="ExamNumberTable" prefWidth="101.0" text="Exam number" />
+            <TableColumn fx:id="SubjectTable" prefWidth="120.0" text="Subject" />
+            <TableColumn fx:id="CourseTable" prefWidth="122.0" text="Course" />
+            <TableColumn fx:id="ExamTimeTable" prefWidth="86.0" text="Exam time" />
+            <TableColumn fx:id="TeacherNameTable" prefWidth="86.0" text="Teacher Name" />
+            <TableColumn fx:id="ChoseQuestionNumberTable" prefWidth="172.0" text="Chosen question number" />
+            <TableColumn fx:id="QuestionPointsTable" prefWidth="109.0" text="Question point" />
+            <TableColumn fx:id="StudentInstructionTable" prefWidth="140.0" text="Student Instructions" />
+            <TableColumn fx:id="TeacherInstructionTable" prefWidth="149.0" text="Teacher Instructions" />
         </columns>
       </TableView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="122.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="AddNewExamBTN" layoutX="54.0" layoutY="456.0" mnemonicParsing="false" onAction="#AddNewExam" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="UpdateExamBTN" layoutX="54.0" layoutY="494.0" mnemonicParsing="false" onAction="#UpdateExam" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="DeleteExamBTN" layoutX="54.0" layoutY="541.0" mnemonicParsing="false" onAction="#DeleteExam" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddNewExamBTN" layoutX="40.0" layoutY="469.0" mnemonicParsing="false" onAction="#AddNewExam" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="UpdateExamBTN" layoutX="40.0" layoutY="510.0" mnemonicParsing="false" onAction="#UpdateExam" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="DeleteExamBTN" layoutX="40.0" layoutY="553.0" mnemonicParsing="false" onAction="#DeleteExam" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" />
       <Button fx:id="CourseNameSerchBTN" layoutX="482.0" layoutY="196.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="17.0" style="-fx-background-color: transparent;" />
       <Button fx:id="TeacherNameSerchBTN" layoutX="478.0" layoutY="163.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="25.0" style="-fx-background-color: transparent;" />
       <Button fx:id="OutButton" layoutX="938.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent;" />

@@ -1,6 +1,8 @@
 package entities;
 
 public class Exam {
+	
+	String ExamCode;
 	String ExamNumber;
 	String ExamSubject;
 	String ExamCourse;
@@ -9,9 +11,10 @@ public class Exam {
 	String StudentInstructions;
 	String TeacherInstructions;
 	
-	public Exam(String ExamNumber,String ExamSubject,String ExamCourse,Float  ExamTime,
+	public Exam(String ExamCode,String ExamNumber,String ExamSubject,String ExamCourse,Float  ExamTime,
 	String TeacherName,String StudentInstructions,String TeacherInstructions) {
 		super();
+		this.ExamCode=ExamCode;
 		this.ExamNumber=ExamNumber;
 		this.ExamSubject=ExamSubject;
 		this.ExamCourse=ExamCourse;
@@ -19,6 +22,14 @@ public class Exam {
 		this.TeacherName=TeacherName;
 		this.StudentInstructions=StudentInstructions;
 		this.TeacherInstructions=TeacherInstructions;}
+
+	public String getExamCode() {
+		return ExamCode;
+	}
+
+	public void setExamCode(String examCode) {
+		ExamCode = examCode;
+	}
 
 	public String getExamNumber() {
 		return ExamNumber;
