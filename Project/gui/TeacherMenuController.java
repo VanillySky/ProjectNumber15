@@ -32,18 +32,56 @@ public class TeacherMenuController {
 
 	@FXML
 	private Button ExamButton;
-
-	public void start(Stage primaryStage) throws Exception {/////// i think we don't need for this start func , we open TeacherMain when we login as a Teacher ( open it from another func )
-		                                                    ////// if i right delete it :D 
 	
-		Parent root = FXMLLoader.load(getClass().getResource("/gui/TeacherMain.fxml"));
-		primaryStage.setScene(new Scene(root, 300, 300));
-		primaryStage.show();
-	}
+	 @FXML
+	    public void PressCEMS() {
+	   	 CEMSButton.setOnAction(event -> {
+	   		 CEMSButton.getScene().getWindow().hide();
 
-	@FXML
-	void initialize() {
-		{
+	   			FXMLLoader loader = new FXMLLoader();
+
+	   			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
+
+	   			try {
+	   				loader.load();
+	   			} catch (IOException e) {
+	   				// TODO Auto-generated catch block
+	   				e.printStackTrace();
+	   			}
+
+	   			Parent root = loader.getRoot();
+	   			Stage stage = new Stage();
+	   			stage.setScene(new Scene(root));
+	   			stage.showAndWait();
+	   		});
+	    }
+	    
+	 
+	    
+	    @FXML
+	    public void SignOut() {
+	    	OutButton.setOnAction(event -> {
+	      		 OutButton.getScene().getWindow().hide();
+
+	      			FXMLLoader loader = new FXMLLoader();
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	      			loader.setLocation(getClass().getResource("/gui/Signin.fxml"));
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	      			try {
+	      				loader.load();
+	      			} catch (IOException e) {
+	      				// TODO Auto-generated catch block
+	      				e.printStackTrace();
+	      			}
+
+	      			Parent root = loader.getRoot();
+	      			Stage stage = new Stage();
+	      			stage.setScene(new Scene(root));
+	      			stage.showAndWait();
+	      		});
+	    }
+	    @FXML
+	    public void ExamIn() {
 			ExamButton.setOnAction(event -> {
 				ExamButton.getScene().getWindow().hide();
 
@@ -64,5 +102,52 @@ public class TeacherMenuController {
 				stage.showAndWait();
 			});
 		}//In to  ExamsTable.fxml a
+	    @FXML
+	public void QuestionIn()
+	{
+	    	QuestionButton.setOnAction(event -> {
+				ExamButton.getScene().getWindow().hide();
+
+				FXMLLoader loader = new FXMLLoader();
+/*
+				loader.setLocation(getClass().getResource("/gui/Question"));
+*/
+				try {
+					loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				Parent root = loader.getRoot();
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root));
+				stage.showAndWait();
+			});
+		
 	}
+	    public void StatisticIn()
+	    {
+	    	StatisticsButton.setOnAction(event -> {
+				ExamButton.getScene().getWindow().hide();
+
+				FXMLLoader loader = new FXMLLoader();
+/*
+				loader.setLocation(getClass().getResource("/gui/Statistic"));
+*/
+				try {
+					loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				Parent root = loader.getRoot();
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root));
+				stage.showAndWait();
+			});
+	    	
+	    	
+	    }
 }
