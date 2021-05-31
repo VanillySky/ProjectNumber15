@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1044.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
    <children>
       <ImageView fitHeight="598.0" fitWidth="1094.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -44,8 +44,8 @@
             <Image url="@../Images/Star.png" />
          </image>
       </ImageView>
-      <Label fx:id="onlytwonumberLBL" layoutX="662.0" layoutY="169.0" text="only two number!!" textFill="#ff0505" visible="false" />
-      <Label fx:id="emptyfieldLBL" layoutX="820.0" layoutY="472.0" prefHeight="17.0" prefWidth="160.0" text="* there is empty fields" textFill="#ff0505" visible="false" wrapText="true" />
-      <Label fx:id="onlynumbersLBL1" layoutX="662.0" layoutY="313.0" text="only numbers!!!" textFill="#ff0505" visible="false" />
+      <Label fx:id="onlytwonumberLBL" layoutX="661.0" layoutY="168.0" text="only two digitals please!!!" textFill="RED" />
+      <Label fx:id="onlynumbersLBL1" layoutX="661.0" layoutY="313.0" text="only digitals!!" textFill="RED" visible="false" />
+      <Label fx:id="emptyfieldLBL" layoutX="681.0" layoutY="500.0" prefHeight="34.0" prefWidth="224.0" text="* please fill an important empty fields !!" textFill="RED" />
    </children>
 </AnchorPane>

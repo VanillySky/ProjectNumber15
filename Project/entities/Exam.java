@@ -8,20 +8,46 @@ public class Exam {
 	String ExamCourse;
 	Float ExamTime;
 	String TeacherName;
+	String ChosenQuestion;
+	String QuestionPoint ;
 	String StudentInstructions;
 	String TeacherInstructions;
 	
 	public Exam(String ExamCode,String ExamNumber,String ExamSubject,String ExamCourse,Float  ExamTime,
-	String TeacherName,String StudentInstructions,String TeacherInstructions) {
+	String TeacherName,String ChosenQuestion,String QuestionPoint ,String StudentInstructions,String TeacherInstructions) {
 		super();
 		this.ExamCode=ExamCode;
 		this.ExamNumber=ExamNumber;
 		this.ExamSubject=ExamSubject;
 		this.ExamCourse=ExamCourse;
 		this.ExamTime=ExamTime;
+		this.ChosenQuestion=ChosenQuestion;
+		this.QuestionPoint=QuestionPoint;
 		this.TeacherName=TeacherName;
 		this.StudentInstructions=StudentInstructions;
-		this.TeacherInstructions=TeacherInstructions;}
+		this.TeacherInstructions=TeacherInstructions;
+		}
+
+	
+	public String getChosenQuestion() {
+		return ChosenQuestion;
+	}
+
+
+	public void setChosenQuestion(String chosenQuestion) {
+		ChosenQuestion = chosenQuestion;
+	}
+
+
+	public String getQuestionPoint() {
+		return QuestionPoint;
+	}
+
+
+	public void setQuestionPoint(String questionPoint) {
+		QuestionPoint = questionPoint;
+	}
+
 
 	public String getExamCode() {
 		return ExamCode;

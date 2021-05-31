@@ -140,91 +140,92 @@ public class BuildNewExamController {
 		});
 	}
 
+	
+
 	@SuppressWarnings("unused")
-	public boolean checkFields() {
+	@FXML
+	public void AddQuestions() {
+		int count = 0;
+		boolean temp1 = true;
+		while (temp1) {
+			if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
+					|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
+				emptyfieldLBL.setVisible(true);
 
-		if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
-				|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
-			emptyfieldLBL.setVisible(true);
+				try {
+					int temp = Integer.parseInt(ExamNumberField.getText());
+					if ((!ExamNumberField.getText().isEmpty()) && ExamNumberField.getText().length() == 2)
+						ExamNumberER.setVisible(false);
+					else
+						onlytwonumberLBL.setVisible(true);
 
+				} catch (NumberFormatException e) {
+					onlytwonumberLBL.setVisible(true);
+				}
+
+				if (!ExamSubjectField.getText().isEmpty())
+					ExamSubjectER.setVisible(false);
+
+				if (!ExamCourseField.getText().isEmpty())
+					ExamCourseER.setVisible(false);
+
+				try {
+					int temp = Integer.parseInt(ExamTimeField.getText());
+					if (!ExamTimeField.getText().isEmpty())
+						ExamTimeER.setVisible(false);
+				} catch (NumberFormatException e) {
+					onlynumbersLBL1.setVisible(true);
+				}
+				count++;
+
+			}
 			try {
 				int temp = Integer.parseInt(ExamNumberField.getText());
 				if ((!ExamNumberField.getText().isEmpty()) && ExamNumberField.getText().length() == 2)
 					ExamNumberER.setVisible(false);
-				else
-					onlytwonumberLBL.setVisible(true);
+				else {
+					onlytwonumberLBL.setVisible(true);// more than two numbers
+					count++;
+				}
 
 			} catch (NumberFormatException e) {
 				onlytwonumberLBL.setVisible(true);
+				count++;
 			}
 
-			if (!ExamSubjectField.getText().isEmpty())
-				ExamSubjectER.setVisible(false);
-
-			if (!ExamCourseField.getText().isEmpty())
-				ExamCourseER.setVisible(false);
-
 			try {
-				int temp1 = Integer.parseInt(ExamTimeField.getText());
+				int temp = Integer.parseInt(ExamTimeField.getText());
 				if (!ExamTimeField.getText().isEmpty())
 					ExamTimeER.setVisible(false);
 			} catch (NumberFormatException e) {
 				onlynumbersLBL1.setVisible(true);
+				count++;
 			}
-			return false;
+			if (count > 0)
+				temp1 = true;
+			else
+				temp1 = false;
+			count=0;
+
 		}
-// its a special situation , if all fields are filled and the exam number or time not numbers !!  
-		try {
-			int temp = Integer.parseInt(ExamNumberField.getText());
-			if ((!ExamNumberField.getText().isEmpty()) && ExamNumberField.getText().length() == 2)
-				ExamNumberER.setVisible(false);
-			else {
-				onlytwonumberLBL.setVisible(true);// more than two numbers
-				return false;
+		AddQuestionsButton.setOnAction(event -> {
+			AddQuestionsButton.getScene().getWindow().hide();
+
+			FXMLLoader loader = new FXMLLoader();
+
+			loader.setLocation(getClass().getResource("/gui/QuestionSelection.fxml"));
+
+			try {
+				loader.load();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
-		} catch (NumberFormatException e) {
-			onlytwonumberLBL.setVisible(true);
-			return false;
-		}
-		
-		try {
-			int temp1 = Integer.parseInt(ExamTimeField.getText());
-			if (!ExamTimeField.getText().isEmpty())
-				ExamTimeER.setVisible(false);
-		} catch (NumberFormatException e) {
-			onlynumbersLBL1.setVisible(true);
-			return false;
-		}
-		
-
-		return true;
-
+			Parent root = loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+		});
 	}
-
-	@FXML
-	public void AddQuestions() {
-		if (checkFields()) {
-			AddQuestionsButton.setOnAction(event -> {
-				AddQuestionsButton.getScene().getWindow().hide();
-
-				FXMLLoader loader = new FXMLLoader();
-
-				loader.setLocation(getClass().getResource("/gui/QuestionSelection.fxml"));
-
-				try {
-					loader.load();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				Parent root = loader.getRoot();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.showAndWait();
-			});
-		}
-	}
-
 }
