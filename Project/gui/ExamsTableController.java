@@ -2,22 +2,32 @@ package gui;
 
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
+import javax.swing.text.TabableView;
+
+import java.net.URL;
 import entities.Exam;
 import entities.TableViewHelper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ExamsTableController {
+public class ExamsTableController implements Initializable {
 	
 	@FXML
 	private TableView<TableViewHelper> ExamTable;
@@ -80,7 +90,96 @@ public class ExamsTableController {
     private Button OutButton;
     
     private TableViewHelper selectedExam = null;
+    
+    private final ObservableList<Exam> dataList = FXCollections.observableArrayList();
 
+    
+    @Override
+ public void initialize(URL url, ResourceBundle rb) {
+    	
+    	ExamCodeTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("ExamCodeTable"));
+    	ExamNumberTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("ExamNumberTable"));
+    	SubjectTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("SubjectTable"));
+    	CourseTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("CourseTable"));
+    	ExamTimeTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, Float>("ExamTimeTable"));
+    	TeacherNameTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("TeacherNameTable"));
+       	StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("StudentInstructionTable"));
+       	TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("TeacherInstructionTable"));
+        
+    	
+    }
+    
+    @FXML
+    public void Search(ActionEvent event) {
+    
+    	FilteredList<Exam> filteredData = new FilteredList<Exam>(dataList,b -> true);
+    	
+    	if(TeacherNameSerchBTN.isPressed()) {
+    		SerchByTeacherNameTXT.textProperty().addListener((Observable,oldValue,newValue)->{
+    			filteredData.setPredicate(Exam->{
+    				if(newValue==null || newValue.isEmpty()) {
+    					return true;
+    				}
+    				
+    				String lowerCaseFilter= newValue.toLowerCase();
+    				if(Exam.getTeacherName().toLowerCase().indexOf(lowerCaseFilter)!= -1)
+    					return true ;
+    				return false;// doesnt match
+    				
+    				
+    				
+    			});
+    		});
+    		
+    		
+    	}else {
+    		SerchByCourseNameTXT.textProperty().addListener((Observable,oldValue,newValue)->{
+    			filteredData.setPredicate(Exam->{
+    				if(newValue==null || newValue.isEmpty()) {
+    					return true;
+    				}
+    				
+    				String lowerCaseFilter= newValue.toLowerCase();
+    				if(Exam.getExamCourse().toLowerCase().indexOf(lowerCaseFilter)!= -1)
+    					return true ;
+    				return false;// doesnt match
+    			});
+    		});	
+    	}
+    	
+    	SortedList<Exam> sortedData = new SortedList<>(filteredData);
+    //	sortedData.comparatorProperty().bind(ExamTable.comparatorProperty());
+    //	ExamTable.setItems(sortedData);
+    	
+    		
+    	
+    }
+   
+    
+    @FXML
+    public void PressCEMS() {
+   	 CEMSButton.setOnAction(event -> {
+   		 CEMSButton.getScene().getWindow().hide();
+
+   			FXMLLoader loader = new FXMLLoader();
+
+   			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
+
+   			try {
+   				loader.load();
+   			} catch (IOException e) {
+   				// TODO Auto-generated catch block
+   				e.printStackTrace();
+   			}
+
+   			Parent root = loader.getRoot();
+   			Stage stage = new Stage();
+   			stage.setScene(new Scene(root));
+   			stage.showAndWait();
+   		});
+    }
+    
+    
     @FXML
     public void AddNewExam() {
     	 AddNewExamBTN.setOnAction(event -> {
@@ -106,29 +205,6 @@ public class ExamsTableController {
     }
     
     @FXML
-    public void PressCEMS() {
-   	 CEMSButton.setOnAction(event -> {
-   		 CEMSButton.getScene().getWindow().hide();
-
-   			FXMLLoader loader = new FXMLLoader();
-
-   			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
-
-   			try {
-   				loader.load();
-   			} catch (IOException e) {
-   				// TODO Auto-generated catch block
-   				e.printStackTrace();
-   			}
-
-   			Parent root = loader.getRoot();
-   			Stage stage = new Stage();
-   			stage.setScene(new Scene(root));
-   			stage.showAndWait();
-   		});
-    }
-    
-    @FXML
     public void UpdateExam(ActionEvent event) {
     	if(selectedExam!=null) {
     		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
@@ -141,7 +217,7 @@ public class ExamsTableController {
     }
     
     @FXML
-    public void DeleteExam() {
+    public void DeleteExam(ActionEvent event) {
 
     	if(selectedExam!=null) {
     		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
@@ -177,5 +253,6 @@ public class ExamsTableController {
       			stage.showAndWait();
       		});
     }
+    
     
 }
