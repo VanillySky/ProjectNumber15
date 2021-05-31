@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,136 +10,221 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class BuildNewExamController {
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private Button CEMSButton;
+	@FXML
+	private Button CEMSButton;
 
-    @FXML
-    private Button OutButton;
+	@FXML
+	private Button OutButton;
 
-    @FXML
-    private Button BackButton;
+	@FXML
+	private Button BackButton;
 
-    @FXML
-    private Button AddQuestionsButton;
+	@FXML
+	private Button AddQuestionsButton;
 
-    @FXML
-    private TextField ExamNumberField;
+	@FXML
+	private TextField ExamNumberField;
 
-    @FXML
-    private TextField ExamSubjectField;
+	@FXML
+	private TextField ExamSubjectField;
 
-    @FXML
-    private TextField ExamCourseField;
+	@FXML
+	private TextField ExamCourseField;
 
-    @FXML
-    private TextField ExamTimeField;
+	@FXML
+	private TextField ExamTimeField;
 
-    @FXML
-    private TextField StudentInstructionField;
+	@FXML
+	private TextField StudentInstructionField;
 
-    @FXML
-    private TextField TeacherInstructionField;
+	@FXML
+	private TextField TeacherInstructionField;
 
-    
-    @FXML
-    public void PressBack() {
-   	 BackButton.setOnAction(event -> {
-   		 BackButton.getScene().getWindow().hide();
+	@FXML
+	private ImageView ExamNumberER;
 
-   			FXMLLoader loader = new FXMLLoader();
+	@FXML
+	private ImageView ExamSubjectER;
 
-   			loader.setLocation(getClass().getResource("/gui/ExamsTable.fxml"));
+	@FXML
+	private ImageView ExamCourseER;
 
-   			try {
-   				loader.load();
-   			} catch (IOException e) {
-   				// TODO Auto-generated catch block
-   				e.printStackTrace();
-   			}
+	@FXML
+	private ImageView ExamTimeER;
 
-   			Parent root = loader.getRoot();
-   			Stage stage = new Stage();
-   			stage.setScene(new Scene(root));
-   			stage.showAndWait();
-   		});
-    	
-    }
-    @FXML
-    public void PressCEMS() {
-   	 CEMSButton.setOnAction(event -> {
-   		 CEMSButton.getScene().getWindow().hide();
+	@FXML
+	private Label onlytwonumberLBL;
 
-   			FXMLLoader loader = new FXMLLoader();
+	@FXML
+	private Label emptyfieldLBL;
 
-   			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
+	@FXML
+	private Label onlynumbersLBL1;
 
-   			try {
-   				loader.load();
-   			} catch (IOException e) {
-   				// TODO Auto-generated catch block
-   				e.printStackTrace();
-   			}
+	@FXML
+	public void PressBack() {
+		BackButton.setOnAction(event -> {
+			BackButton.getScene().getWindow().hide();
 
-   			Parent root = loader.getRoot();
-   			Stage stage = new Stage();
-   			stage.setScene(new Scene(root));
-   			stage.showAndWait();
-   		});
-    }
-    @FXML
-    public void SignOut() {
-    	OutButton.setOnAction(event -> {
-      		 OutButton.getScene().getWindow().hide();
+			FXMLLoader loader = new FXMLLoader();
 
-      			FXMLLoader loader = new FXMLLoader();
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      			loader.setLocation(getClass().getResource("/gui/Signin.fxml"));
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      			try {
-      				loader.load();
-      			} catch (IOException e) {
-      				// TODO Auto-generated catch block
-      				e.printStackTrace();
-      			}
+			loader.setLocation(getClass().getResource("/gui/ExamsTable.fxml"));
 
-      			Parent root = loader.getRoot();
-      			Stage stage = new Stage();
-      			stage.setScene(new Scene(root));
-      			stage.showAndWait();
-      		});
-    }
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @FXML
-    public void AddQuestions() {
-   	 AddQuestionsButton.setOnAction(event -> {
-   		 AddQuestionsButton.getScene().getWindow().hide();
+			try {
+				loader.load();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-   			FXMLLoader loader = new FXMLLoader();
+			Parent root = loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+		});
 
-   			loader.setLocation(getClass().getResource("/gui/QuestionSelection.fxml"));
+	}
 
-   			try {
-   				loader.load();
-   			} catch (IOException e) {
-   				// TODO Auto-generated catch block
-   				e.printStackTrace();
-   			}
+	@FXML
+	public void PressCEMS() {
+		CEMSButton.setOnAction(event -> {
+			CEMSButton.getScene().getWindow().hide();
 
-   			Parent root = loader.getRoot();
-   			Stage stage = new Stage();
-   			stage.setScene(new Scene(root));
-   			stage.showAndWait();
-   		});
-    }
-    
+			FXMLLoader loader = new FXMLLoader();
+
+			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
+
+			try {
+				loader.load();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Parent root = loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+		});
+	}
+
+	@FXML
+	public void SignOut() {
+		OutButton.setOnAction(event -> {
+			OutButton.getScene().getWindow().hide();
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/gui/Signin.fxml"));
+			try {
+				loader.load();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Parent root = loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+		});
+	}
+
+	@SuppressWarnings("unused")
+	public boolean checkFields() {
+
+		if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
+				|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
+			emptyfieldLBL.setVisible(true);
+
+			try {
+				int temp = Integer.parseInt(ExamNumberField.getText());
+				if ((!ExamNumberField.getText().isEmpty()) && ExamNumberField.getText().length() == 2)
+					ExamNumberER.setVisible(false);
+				else
+					onlytwonumberLBL.setVisible(true);
+
+			} catch (NumberFormatException e) {
+				onlytwonumberLBL.setVisible(true);
+			}
+
+			if (!ExamSubjectField.getText().isEmpty())
+				ExamSubjectER.setVisible(false);
+
+			if (!ExamCourseField.getText().isEmpty())
+				ExamCourseER.setVisible(false);
+
+			try {
+				int temp1 = Integer.parseInt(ExamTimeField.getText());
+				if (!ExamTimeField.getText().isEmpty())
+					ExamTimeER.setVisible(false);
+			} catch (NumberFormatException e) {
+				onlynumbersLBL1.setVisible(true);
+			}
+			return false;
+		}
+// its a special situation , if all fields are filled and the exam number or time not numbers !!  
+		try {
+			int temp = Integer.parseInt(ExamNumberField.getText());
+			if ((!ExamNumberField.getText().isEmpty()) && ExamNumberField.getText().length() == 2)
+				ExamNumberER.setVisible(false);
+			else {
+				onlytwonumberLBL.setVisible(true);// more than two numbers
+				return false;
+			}
+
+		} catch (NumberFormatException e) {
+			onlytwonumberLBL.setVisible(true);
+			return false;
+		}
+		
+		try {
+			int temp1 = Integer.parseInt(ExamTimeField.getText());
+			if (!ExamTimeField.getText().isEmpty())
+				ExamTimeER.setVisible(false);
+		} catch (NumberFormatException e) {
+			onlynumbersLBL1.setVisible(true);
+			return false;
+		}
+		
+
+		return true;
+
+	}
+
+	@FXML
+	public void AddQuestions() {
+		if (checkFields()) {
+			AddQuestionsButton.setOnAction(event -> {
+				AddQuestionsButton.getScene().getWindow().hide();
+
+				FXMLLoader loader = new FXMLLoader();
+
+				loader.setLocation(getClass().getResource("/gui/QuestionSelection.fxml"));
+
+				try {
+					loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				Parent root = loader.getRoot();
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root));
+				stage.showAndWait();
+			});
+		}
+	}
+
 }

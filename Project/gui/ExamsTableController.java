@@ -4,11 +4,10 @@ package gui;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-import javax.swing.text.TabableView;
 
 import java.net.URL;
 import entities.Exam;
-import entities.TableViewHelper;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -27,10 +26,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ExamsTableController implements Initializable {
+public class ExamsTableController extends Application implements Initializable  {
 	
 	@FXML
-	private TableView<TableViewHelper> ExamTable;
+	private TableView<Exam> ExamTable;
 
     @FXML
     private TextField SerchByTeacherNameTXT;
@@ -39,34 +38,34 @@ public class ExamsTableController implements Initializable {
     private TextField SerchByCourseNameTXT;
 
     @FXML
-    private TableColumn<TableViewHelper, String> ExamNumberTable;
+    private TableColumn<Exam, String> ExamNumberTable;
 
     @FXML
-    private TableColumn<TableViewHelper, String> ExamCodeTable;
+    private TableColumn<Exam, String> ExamCodeTable;
 
     @FXML
-    private TableColumn<TableViewHelper, String> ChoseQuestionNumberTable;
+    private TableColumn<Exam, String> ChoseQuestionNumberTable;
 
     @FXML
-    private TableColumn<TableViewHelper, Float> ExamTimeTable;
+    private TableColumn<Exam, Float> ExamTimeTable;
 
     @FXML
-    private TableColumn<TableViewHelper, String> QuestionPointsTable;
+    private TableColumn<Exam, String> QuestionPointsTable;
 
     @FXML
-    private TableColumn<TableViewHelper, String> SubjectTable;
+    private TableColumn<Exam, String> SubjectTable;
     
     @FXML
-    private TableColumn<TableViewHelper, String> TeacherNameTable;
+    private TableColumn<Exam, String> TeacherNameTable;
 
     @FXML
-    private TableColumn<TableViewHelper, String> CourseTable;
+    private TableColumn<Exam, String> CourseTable;
 
     @FXML
-    private TableColumn<TableViewHelper, String> StudentInstructionTable;
+    private TableColumn<Exam, String> StudentInstructionTable;
     
     @FXML
-    private TableColumn<TableViewHelper, String> TeacherInstructionTable;
+    private TableColumn<Exam, String> TeacherInstructionTable;
 
     @FXML
     private Button CEMSButton;
@@ -89,22 +88,43 @@ public class ExamsTableController implements Initializable {
     @FXML
     private Button OutButton;
     
-    private TableViewHelper selectedExam = null;
+    private Exam selectedExam = null;
     
     private final ObservableList<Exam> dataList = FXCollections.observableArrayList();
+    
+    
+    public static void main(String[] args) {
+		launch(args);
+	}
+    
+    
+    @Override
+    public void start(Stage primaryStage){	
+    	try {
+		Parent root = FXMLLoader.load(getClass().getResource("/gui/ExamsTable.fxml"));
+				
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("Academic Managment Tool");
+		primaryStage.setScene(scene);
+		
+		primaryStage.show();	 
+    	}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
     
     @Override
  public void initialize(URL url, ResourceBundle rb) {
     	
-    	ExamCodeTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("ExamCodeTable"));
-    	ExamNumberTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("ExamNumberTable"));
-    	SubjectTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("SubjectTable"));
-    	CourseTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("CourseTable"));
-    	ExamTimeTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, Float>("ExamTimeTable"));
-    	TeacherNameTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("TeacherNameTable"));
-       	StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("StudentInstructionTable"));
-       	TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<TableViewHelper, String>("TeacherInstructionTable"));
+    	ExamCodeTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamCodeTable"));
+    	ExamNumberTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamNumberTable"));
+    	SubjectTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("SubjectTable"));
+    	CourseTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("CourseTable"));
+    	ExamTimeTable.setCellValueFactory(new PropertyValueFactory<Exam, Float>("ExamTimeTable"));
+    	TeacherNameTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherNameTable"));
+       	StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("StudentInstructionTable"));
+       	TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherInstructionTable"));
         
     	
     }
@@ -148,8 +168,8 @@ public class ExamsTableController implements Initializable {
     	}
     	
     	SortedList<Exam> sortedData = new SortedList<>(filteredData);
-    //	sortedData.comparatorProperty().bind(ExamTable.comparatorProperty());
-    //	ExamTable.setItems(sortedData);
+    	sortedData.comparatorProperty().bind(ExamTable.comparatorProperty());
+    	ExamTable.setItems(sortedData);
     	
     		
     	
@@ -206,13 +226,13 @@ public class ExamsTableController implements Initializable {
     
     @FXML
     public void UpdateExam(ActionEvent event) {
-    	if(selectedExam!=null) {
-    		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
-    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), null, null);
+//    	if(selectedExam!=null) {
+//    		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
+//    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getStudentInstructions(), selectedExam.getTeacherInstructions());
     		/////////////// send it to build new exam 
     		//func that called makeUpdate 
     		
-    	}
+    //	}
     	
     }
     
@@ -220,8 +240,8 @@ public class ExamsTableController implements Initializable {
     public void DeleteExam(ActionEvent event) {
 
     	if(selectedExam!=null) {
-    		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
-    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), null, null);
+//    		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
+//    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getStudentInstructions(), selectedExam.getTeacherInstructions());
     	ExamTable.getItems().removeAll(selectedExam);
     	}    	
     }
