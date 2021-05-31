@@ -36,8 +36,8 @@
             <TableColumn fx:id="TeacherNameTable" prefWidth="86.0" text="Teacher Name" />
             <TableColumn fx:id="ChoseQuestionNumberTable" prefWidth="172.0" text="Chosen question number" />
             <TableColumn fx:id="QuestionPointsTable" prefWidth="109.0" text="Question point" />
-            <TableColumn fx:id="StudentInstructionTable" prefWidth="140.0" text="Student Instructions" />
             <TableColumn fx:id="TeacherInstructionTable" prefWidth="149.0" text="Teacher Instructions" />
+            <TableColumn fx:id="StudentInstructionTable" prefWidth="140.0" text="Student Instructions" />
         </columns>
       </TableView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="142.0" prefWidth="153.0" style="-fx-background-color: transparent;" />
