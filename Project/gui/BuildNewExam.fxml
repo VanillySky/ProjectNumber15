@@ -45,7 +45,7 @@
          </image>
       </ImageView>
       <Label fx:id="onlytwonumberLBL" layoutX="662.0" layoutY="169.0" text="only two number!!" textFill="#ff0505" visible="false" />
-      <Label fx:id="emptyfieldLBL" layoutX="820.0" layoutY="472.0" prefHeight="17.0" prefWidth="160.0" text="* there is empty fields" textFill="#ff0505" visible="false" />
+      <Label fx:id="emptyfieldLBL" layoutX="820.0" layoutY="472.0" prefHeight="17.0" prefWidth="160.0" text="* there is empty fields" textFill="#ff0505" visible="false" wrapText="true" />
       <Label fx:id="onlynumbersLBL1" layoutX="662.0" layoutY="313.0" text="only numbers!!!" textFill="#ff0505" visible="false" />
    </children>
 </AnchorPane>
