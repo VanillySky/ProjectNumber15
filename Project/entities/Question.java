@@ -14,6 +14,8 @@ public class Question {
 	private static String RightAnswer;
 	private static String Author;
 	
+	
+	//////////////////// its should be the subject not the course !!! like math 
 	//Algebra,//01
 	//Geometry,//02
 	//Logica,//03
