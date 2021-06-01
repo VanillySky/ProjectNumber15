@@ -18,10 +18,10 @@ import javafx.stage.Stage;
 public class BuildNewExamController {
 
 	@FXML
-	private static Label AddNewExamLBL;
+	private  Label AddExamLBL;
 
 	@FXML
-	private static Label UpdateExamLBL;
+	private  Label UpdateExamLBL;
 
 	@FXML
 	private ResourceBundle resources;
@@ -42,25 +42,25 @@ public class BuildNewExamController {
 	private Button AddQuestionsButton;
 
 	@FXML
-	private static TextField ExamNumberField;
+	private  TextField ExamNumberField;
 
 	@FXML
-	private static TextField ExamSubjectField;
+	private  TextField ExamSubjectField;
 
 	@FXML
-	private static TextField ExamCourseField;
+	private  TextField ExamCourseField;
 
 	@FXML
-	private static TextField ExamTimeField;
+	private  TextField ExamTimeField;
 
 	@FXML
-	private static TextField StudentInstructionField;
+	private  TextField StudentInstructionField;
 
 	@FXML
-	private static TextField TeacherInstructionField;
+	private  TextField TeacherInstructionField;
 
 	@FXML
-	private static ImageView ExamNumberER;
+	private  ImageView ExamNumberER;
 
 	@FXML
 	private ImageView ExamSubjectER;
@@ -206,19 +206,16 @@ public class BuildNewExamController {
 		});
 	}
 
-	public static void changetoNew() {
-		AddNewExamLBL.setText("hello");
+	public  void changetoNew() {
+		AddExamLBL.setText("Build New Exam");
 		
-//		AddNewExamLBL.setVisible(true);
-//		UpdateExamLBL.setVisible(false);
 	}
 
-	public static void changetoupdate() {
-		AddNewExamLBL.setVisible(false);
-		UpdateExamLBL.setVisible(true);
+	public  void changetoupdate() {
+		AddExamLBL.setText("Update Exam");
 	}
 
-	public static void UpdateExam(Exam exam) {
+	public void UpdateExam(Exam exam) {
 		ExamNumberField.setText(exam.getExamNumber());
 		ExamSubjectField.setText(exam.getExamSubject());
 		ExamCourseField.setText(exam.getExamCourse());

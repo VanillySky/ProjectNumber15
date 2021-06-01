@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1044.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
    <children>
       <ImageView fitHeight="637.0" fitWidth="1044.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/BuildNewExam.png" />
+            <Image url="@../Images/QuestionSelectionX.png" />
          </image>
       </ImageView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="125.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
       <Button fx:id="OutButton" layoutX="923.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: transparent;" />
-      <TableView layoutX="51.0" layoutY="216.0" prefHeight="133.0" prefWidth="920.0">
+      <TableView fx:id="Table" layoutX="51.0" layoutY="200.0" prefHeight="125.0" prefWidth="920.0">
         <columns>
           <TableColumn fx:id="QuestionNumberTable" prefWidth="99.0" text="Question Number" />
           <TableColumn fx:id="QuestionCodeTable" prefWidth="124.0" text="Question Code" />
@@ -29,7 +31,7 @@
             <TableColumn fx:id="AuthorTable" prefWidth="130.0" text="Author" />
         </columns>
       </TableView>
-      <TableView layoutX="51.0" layoutY="397.0" prefHeight="133.0" prefWidth="920.0">
+      <TableView fx:id="Table2" layoutX="51.0" layoutY="369.0" prefHeight="146.0" prefWidth="920.0">
          <columns>
             <TableColumn fx:id="QuestionNumberTable2" prefWidth="99.0" text="Question Number" />
             <TableColumn fx:id="QuestionCodeTable2" prefWidth="124.0" text="Question Code" />
@@ -42,13 +44,18 @@
             <TableColumn fx:id="PointsTable" prefWidth="99.0" text="Points" />
          </columns>
       </TableView>
-      <TextField layoutX="213.0" layoutY="175.0" prefHeight="31.0" prefWidth="252.0" />
-      <Button fx:id="CourseNameSearchButton" layoutX="476.0" layoutY="178.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
-      <TextField layoutX="213.0" layoutY="134.0" prefHeight="31.0" prefWidth="252.0" />
-      <Button fx:id="TeacherNameSearchButton" layoutX="476.0" layoutY="137.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="AddnewQuestionBTN" layoutX="435.0" layoutY="357.0" mnemonicParsing="false" onAction="#AddNewQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="RemoveQuestionBTN" layoutX="435.0" layoutY="536.0" mnemonicParsing="false" onAction="#RemoveQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="ReturnBTN" layoutX="147.0" layoutY="567.0" mnemonicParsing="false" onAction="#PressReturn" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="DoneBTN" layoutX="757.0" layoutY="567.0" mnemonicParsing="false" onAction="#PressDone" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="SerchBySubjectrNameTXT" layoutX="213.0" layoutY="166.0" prefHeight="10.0" prefWidth="252.0" />
+      <Button fx:id="CourseNameSearchButton" layoutX="476.0" layoutY="166.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="SerchByTeacherNameTXT" layoutX="213.0" layoutY="134.0" prefHeight="25.0" prefWidth="252.0" />
+      <Button fx:id="TeacherNameSearchButton" layoutX="476.0" layoutY="134.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddnewQuestionBTN" layoutX="445.0" layoutY="331.0" mnemonicParsing="false" onAction="#AddNewQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="RemoveQuestionBTN" layoutX="445.0" layoutY="521.0" mnemonicParsing="false" onAction="#RemoveQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ReturnBTN" layoutX="51.0" layoutY="552.0" mnemonicParsing="false" onAction="#PressReturn" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="DoneBTN" layoutX="839.0" layoutY="552.0" mnemonicParsing="false" onAction="#PressDone" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Label layoutX="371.0" layoutY="30.0" prefHeight="49.0" prefWidth="302.0" text="Build New Exam" textFill="#0b2d8a">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

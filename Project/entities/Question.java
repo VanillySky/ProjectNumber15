@@ -16,7 +16,7 @@ public class Question {
 	public String QuestionNumber;
 	public String QuestionCode;
 	public String Question;
-	public String Course;
+	public String Subject;
 	public String QuestionInstruction;
 	public String Answer1;
 	public String Answer2;
@@ -27,11 +27,11 @@ public class Question {
 
 	
 
-	public Question(String QuestionNumber, String Course, String Question, String QuestionInstruction, String Answer1,
+	public Question(String QuestionNumber, String Subject, String Question, String QuestionInstruction, String Answer1,
 			String Answer2, String Answer3, String Answer4, String RightAnswer, String Author) {
 
 		this.QuestionNumber = QuestionNumber;
-		this.Course = Course;
+		this.Subject = Subject;
 		this.Question = Question;
 		this.QuestionInstruction = QuestionInstruction;
 		this.Answer1 = Answer1;
@@ -39,7 +39,7 @@ public class Question {
 		this.Answer3 = Answer3;
 		this.Answer4 = Answer4;
 		this.RightAnswer = RightAnswer;
-		this.QuestionNumber = Course + QuestionNumber;
+		this.QuestionCode = Subject + QuestionNumber;
 		this.Author = Author;
 
 	}
@@ -68,12 +68,12 @@ public class Question {
 		Question = question;
 	}
 
-	public String getCourse() {
-		return Course;
+	public String getSubject() {
+		return Subject;
 	}
 
-	public void setCourse(String course) {
-		Course = course;
+	public void setSubject(String subject) {
+		Subject = subject;
 	}
 
 	public String getQuestionInstruction() {

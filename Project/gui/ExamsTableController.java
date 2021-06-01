@@ -192,7 +192,8 @@ public class ExamsTableController extends Application implements Initializable {
 
 	@FXML
 	public void AddNewExam() {
-	//	BuildNewExamController.changetoNew();
+		BuildNewExamController newexam = new BuildNewExamController();
+		newexam.changetoNew();
 		AddNewExamBTN.setOnAction(event -> {
 			AddNewExamBTN.getScene().getWindow().hide();
 
@@ -221,7 +222,8 @@ public class ExamsTableController extends Application implements Initializable {
     		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), 
    				selectedExam.getQuestionPoint(),selectedExam.getTeacherInstructions() , selectedExam.getStudentInstructions());
-    		BuildNewExamController.changetoupdate();
+    		BuildNewExamController updateExam = new BuildNewExamController();
+    		updateExam.changetoupdate();
     		
     		UpdateExamBTN.setOnAction(event -> {
 			CEMSButton.getScene().getWindow().hide();
@@ -243,8 +245,7 @@ public class ExamsTableController extends Application implements Initializable {
 			stage.showAndWait();
 		});
     		
-    		BuildNewExamController.UpdateExam(exam);
-    
+    		updateExam.UpdateExam(exam);
 
 		 }
 

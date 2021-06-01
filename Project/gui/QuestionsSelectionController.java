@@ -2,21 +2,33 @@ package gui;
 
 import java.io.IOException;
 
+import entities.Exam;
+import entities.Question;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class QuestionsSelectionController {
 	
-    @FXML
+	@FXML
     private Button CEMSButton;
 
     @FXML
     private Button OutButton;
+    
+    @FXML
+    private TableView<?> Table;
+
+    @FXML
+    private TableColumn<?, ?> QuestionTable;
 
     @FXML
     private TableColumn<?, ?> QuestionNumberTable;
@@ -25,10 +37,7 @@ public class QuestionsSelectionController {
     private TableColumn<?, ?> QuestionCodeTable;
 
     @FXML
-    private TableColumn<?, ?> CourseTable;
-
-    @FXML
-    private TableColumn<?, ?> QuestionTable;
+    private TableColumn<?, ?> SubjectTable;
 
     @FXML
     private TableColumn<?, ?> QuestionInstractionsTable;
@@ -41,6 +50,12 @@ public class QuestionsSelectionController {
 
     @FXML
     private TableColumn<?, ?> AuthorTable;
+    
+    @FXML
+    private TableView<?> Table2;
+
+    @FXML
+    private TableColumn<?, ?> QuestionTable2;
 
     @FXML
     private TableColumn<?, ?> QuestionNumberTable2;
@@ -49,10 +64,7 @@ public class QuestionsSelectionController {
     private TableColumn<?, ?> QuestionCodeTable2;
 
     @FXML
-    private TableColumn<?, ?> CourseTable2;
-
-    @FXML
-    private TableColumn<?, ?> QuestionTable2;
+    private TableColumn<?, ?> subjectTable2;
 
     @FXML
     private TableColumn<?, ?> QuestionInstractionsTable2;
@@ -70,7 +82,13 @@ public class QuestionsSelectionController {
     private TableColumn<?, ?> PointsTable;
 
     @FXML
+    private TextField SerchBySubjectrNameTXT;
+
+    @FXML
     private Button CourseNameSearchButton;
+
+    @FXML
+    private TextField SerchByTeacherNameTXT;
 
     @FXML
     private Button TeacherNameSearchButton;
@@ -87,6 +105,13 @@ public class QuestionsSelectionController {
     @FXML
     private Button DoneBTN;
 
+    private Question selectedQuestion = null;
+    
+    
+    @FXML
+    void search(ActionEvent event) {
+
+    }
  
     
     @FXML
@@ -112,13 +137,14 @@ public class QuestionsSelectionController {
    		});
     }
     
+    
     @FXML
-    public void AddNewQuestion() {
+    public void AddNewQuestion(ActionEvent event) {
     	
     }
     
     @FXML
-    public void RemoveQuestion() {
+    public void RemoveQuestion(ActionEvent event) {
     	
     }
     
@@ -145,7 +171,6 @@ public class QuestionsSelectionController {
        		});
     }
     
-    /////////////////////////////////////////////////////////////////////////////////
     @FXML
     public void PressDone() {
    	 ReturnBTN.setOnAction(event -> {
@@ -167,8 +192,14 @@ public class QuestionsSelectionController {
       			stage.setScene(new Scene(root));
       			stage.showAndWait();
       		});
-   }
+    }
     
+    @FXML
+	void selectSale(MouseEvent event) {
+		if (Table.getSelectionModel().getSelectedItem() != null) {
+	   //	selectedQuestion = Table.getSelectionModel().getSelectedItem();
+		}
+	}
     
     
     
