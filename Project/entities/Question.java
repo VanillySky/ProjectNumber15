@@ -2,56 +2,126 @@
 package entities;
 
 public class Question {
+
+	public String QuestionNumber;
+	public String QuestionCode;
+	public String Question;
+	public String Course;
+	public String QuestionInstruction;
+	public String Answer1;
+	public String Answer2;
+	public String Answer3;
+	public String Answer4;
+	public String RightAnswer;
+	public String Author;
+
 	
-	private static long QuestionNumber;
-	private static long QuestionCode;
-	private static String Question;
-	private static String Course;
-	private static String QuestionInstruction;
-	private static String Answer1;
-	private static String Answer2;
-	private static String Answer3;
-	private static String Answer4;
-	private static String RightAnswer;
-	private static String Author;
-	
-	
-	//////////////////// its should be the subject not the course !!! like math 
-	//Algebra,//01
-	//Geometry,//02
-	//Logica,//03
-	//Physics1,//04
-	//Physics2,//05
-	//Geography,//06
-	//Chemistry;//07
-	
-	
-	public void Exam( long QuestionNumber,String Course,
-			String Question,
-	 String QuestionInstruction,String Answer1,
-	 String Answer2,String Answer3, String Answer4,String RightAnswer ) {
-		String Temp;
-		QuestionNumber=QuestionNumber;
-		Course=Course;
-		Question=Question;
-		QuestionInstruction=QuestionInstruction;
-		Answer1=Answer1;
-		Answer2=Answer2;
-		Answer3=Answer3;
-		Answer4=Answer4;
-		RightAnswer=RightAnswer;
-		switch (Course) {
-		case("Algebra"):{QuestionNumber=Long.parseLong("01" + QuestionNumber);}
-		case("Geometry"):{QuestionNumber=Long.parseLong("02" + QuestionNumber);}
-		case("Logica"):{QuestionNumber=Long.parseLong("03" + QuestionNumber);}
-		case("Physics1"):{QuestionNumber=Long.parseLong("04" + QuestionNumber);}
-		case("Physics2"):{QuestionNumber=Long.parseLong("05" + QuestionNumber);}
-		case("Geography"):{QuestionNumber=Long.parseLong("06" + QuestionNumber);}
-		case("Chemistry"):{QuestionNumber=Long.parseLong("07" + QuestionNumber);}
-		}
-		//Author=;
-			
+
+	public Question(String QuestionNumber, String Course, String Question, String QuestionInstruction, String Answer1,
+			String Answer2, String Answer3, String Answer4, String RightAnswer, String Author) {
+
+		this.QuestionNumber = QuestionNumber;
+		this.Course = Course;
+		this.Question = Question;
+		this.QuestionInstruction = QuestionInstruction;
+		this.Answer1 = Answer1;
+		this.Answer2 = Answer2;
+		this.Answer3 = Answer3;
+		this.Answer4 = Answer4;
+		this.RightAnswer = RightAnswer;
+		this.QuestionNumber = Course + QuestionNumber;
+		this.Author = Author;
+
 	}
+
+	public String getQuestionNumber() {
+		return QuestionNumber;
+	}
+
+	public void setQuestionNumber(String questionNumber) {
+		QuestionNumber = questionNumber;
+	}
+
+	public String getQuestionCode() {
+		return QuestionCode;
+	}
+
+	public void setQuestionCode(String questionCode) {
+		QuestionCode = questionCode;
+	}
+
+	public String getQuestion() {
+		return Question;
+	}
+
+	public void setQuestion(String question) {
+		Question = question;
+	}
+
+	public String getCourse() {
+		return Course;
+	}
+
+	public void setCourse(String course) {
+		Course = course;
+	}
+
+	public String getQuestionInstruction() {
+		return QuestionInstruction;
+	}
+
+	public void setQuestionInstruction(String questionInstruction) {
+		QuestionInstruction = questionInstruction;
+	}
+
+	public String getAnswer1() {
+		return Answer1;
+	}
+
+	public void setAnswer1(String answer1) {
+		Answer1 = answer1;
+	}
+
+	public String getAnswer2() {
+		return Answer2;
+	}
+
+	public void setAnswer2(String answer2) {
+		Answer2 = answer2;
+	}
+
+	public String getAnswer3() {
+		return Answer3;
+	}
+
+	public void setAnswer3(String answer3) {
+		Answer3 = answer3;
+	}
+
+	public String getAnswer4() {
+		return Answer4;
+	}
+
+	public void setAnswer4(String answer4) {
+		Answer4 = answer4;
+	}
+
+	public String getRightAnswer() {
+		return RightAnswer;
+	}
+
+	public void setRightAnswer(String rightAnswer) {
+		RightAnswer = rightAnswer;
+	}
+
+	public String getAuthor() {
+		return Author;
+	}
+
+	public void setAuthor(String author) {
+		Author = author;
+	}
+	
 	
 
 }

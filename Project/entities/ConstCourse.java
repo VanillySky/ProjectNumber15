@@ -1,12 +1,12 @@
 package entities;
 
-public enum ConstCourse {
-	Algebra,//01
-	Geometry,//02
-	Logica,//03
-	Physics1,//04
-	Physics2,//05
-	Geography,//06
-	Chemistry;//07
+public class ConstCourse {
+	public static final String Algebra = "01";
+	public static final String Geometry = "02";
+	public static final String Logica = "03";
+	public static final String Physics1 = "04";
+	public static final String Physics2 = "05";
+	public static final String Geography = "06";
+	public static final String Chemistry = "07";
 
 }

@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import entities.Question;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,9 +59,10 @@ public class BuildNewQuestionController {
 	//private Client cl = new Client();
 
 	public void AddQuestionButton() {
-		
+		String author="AAAAA";
+		Question Qer= new Question (QuestionNumberTxt.getText(),CourseTxt.getText(),TheQuestionTxt.getText(),QustionInstructionTxt.getText(),Answer1Txt.getText(),Answer2Txt.getText(),Answer3Txt.getText(),Answer4Txt.getText(),RightAnswerTxt.getText(),author);
 		if(CourseTxt.getText().equals("")||QuestionNumberTxt.getText().equals("")||
-				TheQuestionTxt.equals("")||Answer1Txt.getText().equals("")||
+				TheQuestionTxt.getText().equals("")||Answer1Txt.getText().equals("")||
 				Answer2Txt.getText().equals("")||Answer3Txt.getText().equals("")||Answer4Txt.getText().equals("")
 				||RightAnswerTxt.getText().equals("")||
 		QustionInstructionTxt.getText().equals(""))
