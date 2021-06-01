@@ -1,22 +1,30 @@
 package gui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import entities.Exam;
 import entities.Question;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class QuestionsSelectionController {
+public class QuestionsSelectionController implements Initializable {
 	
 	@FXML
     private Button CEMSButton;
@@ -25,67 +33,67 @@ public class QuestionsSelectionController {
     private Button OutButton;
     
     @FXML
-    private TableView<?> Table;
+    private TableView<Question> Table;
 
     @FXML
-    private TableColumn<?, ?> QuestionTable;
+    private TableColumn<Question, String> QuestionNumberTable;
 
     @FXML
-    private TableColumn<?, ?> QuestionNumberTable;
+    private TableColumn<Question, String> QuestionCodeTable;
 
     @FXML
-    private TableColumn<?, ?> QuestionCodeTable;
-
-    @FXML
-    private TableColumn<?, ?> SubjectTable;
-
-    @FXML
-    private TableColumn<?, ?> QuestionInstractionsTable;
-
-    @FXML
-    private TableColumn<?, ?> AnswersTable;
-
-    @FXML
-    private TableColumn<?, ?> RightAnswerTable;
-
-    @FXML
-    private TableColumn<?, ?> AuthorTable;
+    private TableColumn<Question, String> SubjectTable;
     
     @FXML
-    private TableView<?> Table2;
+    private TableColumn<Question, String> QuestionTable;
 
     @FXML
-    private TableColumn<?, ?> QuestionTable2;
+    private TableColumn<Question, String> QuestionInstractionsTable;
 
     @FXML
-    private TableColumn<?, ?> QuestionNumberTable2;
+    private TableColumn<Question, String> AnswersTable;
 
     @FXML
-    private TableColumn<?, ?> QuestionCodeTable2;
+    private TableColumn<Question, String> RightAnswerTable;
 
     @FXML
-    private TableColumn<?, ?> subjectTable2;
+    private TableColumn<Question, String> AuthorTable;
+    
+    @FXML
+    private TableView<Question> Table2;
 
     @FXML
-    private TableColumn<?, ?> QuestionInstractionsTable2;
+    private TableColumn<Question, String> QuestionNumberTable2;
 
     @FXML
-    private TableColumn<?, ?> AnswersTable2;
+    private TableColumn<Question, String> QuestionCodeTable2;
 
     @FXML
-    private TableColumn<?, ?> RightAnswerTable2;
+    private TableColumn<Question, String> subjectTable2;
+    
+    @FXML
+    private TableColumn<Question, String> QuestionTable2;
 
     @FXML
-    private TableColumn<?, ?> AuthorTable2;
+    private TableColumn<Question, String> QuestionInstractionsTable2;
 
     @FXML
-    private TableColumn<?, ?> PointsTable;
+    private TableColumn<Question, String> AnswersTable2;
 
     @FXML
-    private TextField SerchBySubjectrNameTXT;
+    private TableColumn<Question, String> RightAnswerTable2;
 
     @FXML
-    private Button CourseNameSearchButton;
+    private TableColumn<Question, String> AuthorTable2;
+
+    @FXML
+    private TableColumn<Question, String> PointsTable;
+
+    @FXML
+    private TextField SerchBySubjectNameTXT;
+
+    @FXML
+    private Button SubjectNameSearchButton;
 
     @FXML
     private TextField SerchByTeacherNameTXT;
@@ -107,9 +115,46 @@ public class QuestionsSelectionController {
 
     private Question selectedQuestion = null;
     
+    private final ObservableList<Question> dataList = FXCollections.observableArrayList();
+    
     
     @FXML
     void search(ActionEvent event) {
+    	
+    	FilteredList<Question> filteredData = new FilteredList<Question>(dataList,b-> true);
+    	if (TeacherNameSearchButton.isPressed()) {
+			SerchByTeacherNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
+				filteredData.setPredicate(Question -> {
+					if (newValue == null || newValue.isEmpty()) {
+						return true;
+					}
+
+					String lowerCaseFilter = newValue.toLowerCase();
+					if (Question.getAuthor().toLowerCase().indexOf(lowerCaseFilter) != -1)
+						return true;
+					return false;// doesnt match
+
+				});
+			});
+    	} else {
+    		SerchBySubjectNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
+				filteredData.setPredicate(Question-> {
+					if (newValue == null || newValue.isEmpty()) {
+						return true;
+					}
+
+					String lowerCaseFilter = newValue.toLowerCase();
+					if (Question.getSubject().toLowerCase().indexOf(lowerCaseFilter) != -1)
+						return true;
+					return false;// doesnt match
+				});
+			});
+    		
+    	}
+    	
+    	SortedList<Question> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(Table.comparatorProperty());
+		Table.setItems(sortedData);
 
     }
  
@@ -197,7 +242,7 @@ public class QuestionsSelectionController {
     @FXML
 	void selectSale(MouseEvent event) {
 		if (Table.getSelectionModel().getSelectedItem() != null) {
-	   //	selectedQuestion = Table.getSelectionModel().getSelectedItem();
+	     	selectedQuestion = Table.getSelectionModel().getSelectedItem();
 		}
 	}
     
@@ -209,9 +254,7 @@ public class QuestionsSelectionController {
       		 OutButton.getScene().getWindow().hide();
 
       			FXMLLoader loader = new FXMLLoader();
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      			loader.setLocation(getClass().getResource("/gui/Signin.fxml"));
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      			loader.setLocation(getClass().getResource("/gui/LoginFrame.fxml"));
       			try {
       				loader.load();
       			} catch (IOException e) {
@@ -225,4 +268,28 @@ public class QuestionsSelectionController {
       			stage.showAndWait();
       		});
     }
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		QuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionNumberTable"));
+		QuestionCodeTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionCodeTable"));
+		SubjectTable.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectTable"));
+		QuestionTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionTable"));
+		QuestionInstractionsTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionInstractionsTable"));
+		AnswersTable.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable"));
+		RightAnswerTable.setCellValueFactory(new PropertyValueFactory<Question, String>("RightAnswerTable"));
+		AuthorTable.setCellValueFactory(new PropertyValueFactory<Question, String>("AuthorTable"));
+		QuestionNumberTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionNumberTable2"));
+		QuestionCodeTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionCodeTable2"));
+		subjectTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectTable2"));
+		QuestionTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionTable2"));
+		QuestionInstractionsTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionInstractionsTable2"));
+		AnswersTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable2"));
+		RightAnswerTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("RightAnswerTable2"));
+		AuthorTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("AuthorTable2"));
+		PointsTable.setCellValueFactory(new PropertyValueFactory<Question, String>("PointsTable"));
+		
+		
+	}
 }

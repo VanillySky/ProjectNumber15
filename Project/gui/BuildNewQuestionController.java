@@ -60,7 +60,9 @@ public class BuildNewQuestionController {
 
 	public void AddQuestionButton() {
 		String author="AAAAA";
-		Question Qer= new Question (QuestionNumberTxt.getText(),CourseTxt.getText(),TheQuestionTxt.getText(),QustionInstructionTxt.getText(),Answer1Txt.getText(),Answer2Txt.getText(),Answer3Txt.getText(),Answer4Txt.getText(),RightAnswerTxt.getText(),author);
+		Question Qer= new Question (QuestionNumberTxt.getText(),CourseTxt.getText(),TheQuestionTxt.getText()
+				,QustionInstructionTxt.getText(),Answer1Txt.getText(),Answer2Txt.getText(),Answer3Txt.getText()
+				,Answer4Txt.getText(),RightAnswerTxt.getText(),author,null);
 		if(CourseTxt.getText().equals("")||QuestionNumberTxt.getText().equals("")||
 				TheQuestionTxt.getText().equals("")||Answer1Txt.getText().equals("")||
 				Answer2Txt.getText().equals("")||Answer3Txt.getText().equals("")||Answer4Txt.getText().equals("")

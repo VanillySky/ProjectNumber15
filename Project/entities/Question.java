@@ -24,11 +24,12 @@ public class Question {
 	public String Answer4;
 	public String RightAnswer;
 	public String Author;
+	public String point;
 
 	
 
 	public Question(String QuestionNumber, String Subject, String Question, String QuestionInstruction, String Answer1,
-			String Answer2, String Answer3, String Answer4, String RightAnswer, String Author) {
+			String Answer2, String Answer3, String Answer4, String RightAnswer, String Author,String point) {
 
 		this.QuestionNumber = QuestionNumber;
 		this.Subject = Subject;
@@ -41,7 +42,16 @@ public class Question {
 		this.RightAnswer = RightAnswer;
 		this.QuestionCode = Subject + QuestionNumber;
 		this.Author = Author;
+		this.point=point;
 
+	}
+
+	public String getPoint() {
+		return point;
+	}
+
+	public void setPoint(String point) {
+		this.point = point;
 	}
 
 	public String getQuestionNumber() {
