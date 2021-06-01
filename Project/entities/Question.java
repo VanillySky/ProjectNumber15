@@ -1,6 +1,16 @@
 
 package entities;
-
+/*
+ConstCourse {
+ Algebra = "01";
+ Geometry = "02";
+ Logic = "03";
+ Physics1 = "04";
+ Physics2 = "05";
+ Geography = "06";
+ Chemistry = "07";
+}
+*/
 public class Question {
 
 	public String QuestionNumber;
