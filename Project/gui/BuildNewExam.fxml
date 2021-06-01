@@ -6,18 +6,19 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
    <children>
-      <ImageView fitHeight="598.0" fitWidth="1094.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="1063.0" layoutX="-18.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/BuildNewExamC.png" />
+            <Image url="@../Images/BuildNewExamX.png" />
          </image>
       </ImageView>
-      <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="125.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="OutButton" layoutX="937.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="BackButton" layoutX="108.0" layoutY="456.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="AddQuestionsButton" layoutX="689.0" layoutY="456.0" mnemonicParsing="false" onAction="#AddQuestions" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="125.0" prefWidth="119.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="OutButton" layoutX="930.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="25.0" prefWidth="119.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="BackButton" layoutX="96.0" layoutY="456.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddQuestionsButton" layoutX="681.0" layoutY="456.0" mnemonicParsing="false" onAction="#AddQuestions" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
       <TextField fx:id="ExamNumberField" layoutX="395.0" layoutY="162.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 01" />
       <TextField fx:id="ExamSubjectField" layoutX="395.0" layoutY="205.0" prefHeight="33.0" prefWidth="260.0" promptText="ex. math(02)" />
       <TextField fx:id="ExamCourseField" layoutX="395.0" layoutY="254.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. algebra(03)" />
@@ -44,8 +45,18 @@
             <Image url="@../Images/Star.png" />
          </image>
       </ImageView>
-      <Label fx:id="onlytwonumberLBL" layoutX="661.0" layoutY="168.0" text="only two digitals please!!!" textFill="RED" />
+      <Label fx:id="onlytwonumberLBL" layoutX="665.0" layoutY="169.0" text="only two digitals please!!!" textFill="RED" visible="false" />
       <Label fx:id="onlynumbersLBL1" layoutX="661.0" layoutY="313.0" text="only digitals!!" textFill="RED" visible="false" />
-      <Label fx:id="emptyfieldLBL" layoutX="681.0" layoutY="500.0" prefHeight="34.0" prefWidth="224.0" text="* please fill an important empty fields !!" textFill="RED" />
+      <Label fx:id="emptyfieldLBL" layoutX="681.0" layoutY="500.0" prefHeight="34.0" prefWidth="224.0" text="* please fill an important empty fields !!" textFill="RED" visible="false" />
+      <Label fx:id="AddNewExamLBL" layoutX="380.0" layoutY="24.0" prefHeight="42.0" prefWidth="290.0" text="Build New Exam" textFill="#1e1572">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="UpdateExamLBL" layoutX="396.0" layoutY="24.0" prefHeight="42.0" prefWidth="233.0" text="Update Exam" textFill="#1e1572" visible="false">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

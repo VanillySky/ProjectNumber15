@@ -41,7 +41,7 @@
         </columns>
       </TableView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="142.0" prefWidth="153.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="AddNewExamBTN" layoutX="66.0" layoutY="520.0" mnemonicParsing="false" onAction="#AddNewExam" onMouseClicked="#AddNewExam" prefHeight="33.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddNewExamBTN" layoutX="66.0" layoutY="520.0" mnemonicParsing="false" onAction="#AddNewExam" prefHeight="33.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
       <Button fx:id="UpdateExamBTN" layoutX="59.0" layoutY="563.0" mnemonicParsing="false" onAction="#UpdateExam" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
       <Button fx:id="DeleteExamBTN" layoutX="59.0" layoutY="611.0" mnemonicParsing="false" onAction="#DeleteExam" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
       <Button fx:id="CourseNameSerchBTN" layoutX="547.0" layoutY="228.0" mnemonicParsing="false" onAction="#Search" prefHeight="25.0" prefWidth="17.0" style="-fx-background-color: transparent;" />

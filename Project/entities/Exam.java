@@ -6,14 +6,14 @@ public class Exam {
 	String ExamNumber;
 	String ExamSubject;
 	String ExamCourse;
-	Float ExamTime;
+	String ExamTime;
 	String TeacherName;
 	String ChosenQuestion;
 	String QuestionPoint ;
 	String StudentInstructions;
 	String TeacherInstructions;
 	
-	public Exam(String ExamCode,String ExamNumber,String ExamSubject,String ExamCourse,Float  ExamTime,
+	public Exam(String ExamCode,String ExamNumber,String ExamSubject,String ExamCourse,String  ExamTime,
 	String TeacherName,String ChosenQuestion,String QuestionPoint ,String StudentInstructions,String TeacherInstructions) {
 		super();
 		this.ExamCode=ExamCode;
@@ -81,11 +81,11 @@ public class Exam {
 		ExamCourse = examCourse;
 	}
 
-	public Float getExamTime() {
+	public String getExamTime() {
 		return ExamTime;
 	}
 
-	public void setExamTime(Float examTime) {
+	public void setExamTime(String examTime) {
 		ExamTime = examTime;
 	}
 

@@ -21,7 +21,7 @@
         <columns>
           <TableColumn fx:id="QuestionNumberTable" prefWidth="99.0" text="Question Number" />
           <TableColumn fx:id="QuestionCodeTable" prefWidth="124.0" text="Question Code" />
-            <TableColumn fx:id="CourseTable" prefWidth="99.0" text="Course" />
+            <TableColumn fx:id="SubjectTable" prefWidth="99.0" text="subject" />
             <TableColumn fx:id="QuestionTable" prefWidth="99.0" text="Question " />
             <TableColumn fx:id="QuestionInstractionsTable" prefWidth="139.0" text="Question Instractions" />
             <TableColumn fx:id="AnswersTable" prefWidth="115.0" text="Answers" />
@@ -33,7 +33,7 @@
          <columns>
             <TableColumn fx:id="QuestionNumberTable2" prefWidth="99.0" text="Question Number" />
             <TableColumn fx:id="QuestionCodeTable2" prefWidth="124.0" text="Question Code" />
-            <TableColumn fx:id="CourseTable2" prefWidth="99.0" text="Course" />
+            <TableColumn fx:id="subjectTable2" prefWidth="99.0" text="subject" />
             <TableColumn fx:id="QuestionTable2" prefWidth="99.0" text="Question " />
             <TableColumn fx:id="QuestionInstractionsTable2" prefWidth="115.0" text="Question Instractions" />
             <TableColumn fx:id="AnswersTable2" prefWidth="83.0" text="Answers" />

@@ -45,7 +45,7 @@ public class ExamsTableController extends Application implements Initializable {
 	private TableColumn<Exam, String> ChoseQuestionNumberTable;
 
 	@FXML
-	private TableColumn<Exam, Float> ExamTimeTable;
+	private TableColumn<Exam, String> ExamTimeTable;
 
 	@FXML
 	private TableColumn<Exam, String> QuestionPointsTable;
@@ -108,8 +108,8 @@ public class ExamsTableController extends Application implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
+	}	
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
@@ -119,7 +119,7 @@ public class ExamsTableController extends Application implements Initializable {
 		CourseTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("CourseTable"));
 		ChoseQuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ChoseQuestionNumberTable"));
 		QuestionPointsTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("QuestionPointsTable"));
-		ExamTimeTable.setCellValueFactory(new PropertyValueFactory<Exam, Float>("ExamTimeTable"));
+		ExamTimeTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamTimeTable"));
 		TeacherNameTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherNameTable"));
 		StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("StudentInstructionTable"));
 		TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherInstructionTable"));
@@ -192,6 +192,7 @@ public class ExamsTableController extends Application implements Initializable {
 
 	@FXML
 	public void AddNewExam() {
+	//	BuildNewExamController.changetoNew();
 		AddNewExamBTN.setOnAction(event -> {
 			AddNewExamBTN.getScene().getWindow().hide();
 
@@ -215,16 +216,35 @@ public class ExamsTableController extends Application implements Initializable {
 	}
 
 	@FXML
-	public void UpdateExam(ActionEvent event) {
+	public void UpdateExam() {
    	if(selectedExam!=null) {
     		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), 
    				selectedExam.getQuestionPoint(),selectedExam.getTeacherInstructions() , selectedExam.getStudentInstructions());
+    		BuildNewExamController.changetoupdate();
     		
+    		UpdateExamBTN.setOnAction(event -> {
+			CEMSButton.getScene().getWindow().hide();
+
+			FXMLLoader loader = new FXMLLoader();
+
+			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
+
+			try {
+				loader.load();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Parent root = loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+		});
     		
-    		
-		/////////////// send it to build new exam
-		// func that called makeUpdate
+    		BuildNewExamController.UpdateExam(exam);
+    
 
 		 }
 
@@ -234,9 +254,10 @@ public class ExamsTableController extends Application implements Initializable {
 	public void DeleteExam(ActionEvent event) {
 
 		if (selectedExam != null) {
-//    		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
-//    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getStudentInstructions(), selectedExam.getTeacherInstructions());
-			ExamTable.getItems().removeAll(selectedExam);
+			Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
+	   				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), 
+	   				selectedExam.getQuestionPoint(),selectedExam.getTeacherInstructions() , selectedExam.getStudentInstructions());
+			ExamTable.getItems().removeAll(exam);
 		}
 	}
 

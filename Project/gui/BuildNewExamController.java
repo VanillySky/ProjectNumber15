@@ -1,19 +1,27 @@
 package gui;
 
-import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import entities.Exam;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class BuildNewExamController {
+
+	@FXML
+	private static Label AddNewExamLBL;
+
+	@FXML
+	private static Label UpdateExamLBL;
 
 	@FXML
 	private ResourceBundle resources;
@@ -34,25 +42,25 @@ public class BuildNewExamController {
 	private Button AddQuestionsButton;
 
 	@FXML
-	private TextField ExamNumberField;
+	private static TextField ExamNumberField;
 
 	@FXML
-	private TextField ExamSubjectField;
+	private static TextField ExamSubjectField;
 
 	@FXML
-	private TextField ExamCourseField;
+	private static TextField ExamCourseField;
 
 	@FXML
-	private TextField ExamTimeField;
+	private static TextField ExamTimeField;
 
 	@FXML
-	private TextField StudentInstructionField;
+	private static TextField StudentInstructionField;
 
 	@FXML
-	private TextField TeacherInstructionField;
+	private static TextField TeacherInstructionField;
 
 	@FXML
-	private ImageView ExamNumberER;
+	private static ImageView ExamNumberER;
 
 	@FXML
 	private ImageView ExamSubjectER;
@@ -140,8 +148,6 @@ public class BuildNewExamController {
 		});
 	}
 
-	
-
 	@SuppressWarnings("unused")
 	@FXML
 	public void AddQuestions() {
@@ -151,39 +157,12 @@ public class BuildNewExamController {
 			if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
 					|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
 				emptyfieldLBL.setVisible(true);
-
-				try {
-					int temp = Integer.parseInt(ExamNumberField.getText());
-					if ((!ExamNumberField.getText().isEmpty()) && ExamNumberField.getText().length() == 2)
-						ExamNumberER.setVisible(false);
-					else
-						onlytwonumberLBL.setVisible(true);
-
-				} catch (NumberFormatException e) {
-					onlytwonumberLBL.setVisible(true);
-				}
-
-				if (!ExamSubjectField.getText().isEmpty())
-					ExamSubjectER.setVisible(false);
-
-				if (!ExamCourseField.getText().isEmpty())
-					ExamCourseER.setVisible(false);
-
-				try {
-					int temp = Integer.parseInt(ExamTimeField.getText());
-					if (!ExamTimeField.getText().isEmpty())
-						ExamTimeER.setVisible(false);
-				} catch (NumberFormatException e) {
-					onlynumbersLBL1.setVisible(true);
-				}
 				count++;
 
 			}
 			try {
 				int temp = Integer.parseInt(ExamNumberField.getText());
-				if ((!ExamNumberField.getText().isEmpty()) && ExamNumberField.getText().length() == 2)
-					ExamNumberER.setVisible(false);
-				else {
+				if (ExamNumberField.getText().length() != 2) {
 					onlytwonumberLBL.setVisible(true);// more than two numbers
 					count++;
 				}
@@ -195,8 +174,6 @@ public class BuildNewExamController {
 
 			try {
 				int temp = Integer.parseInt(ExamTimeField.getText());
-				if (!ExamTimeField.getText().isEmpty())
-					ExamTimeER.setVisible(false);
 			} catch (NumberFormatException e) {
 				onlynumbersLBL1.setVisible(true);
 				count++;
@@ -205,7 +182,7 @@ public class BuildNewExamController {
 				temp1 = true;
 			else
 				temp1 = false;
-			count=0;
+			count = 0;
 
 		}
 		AddQuestionsButton.setOnAction(event -> {
@@ -227,5 +204,29 @@ public class BuildNewExamController {
 			stage.setScene(new Scene(root));
 			stage.showAndWait();
 		});
+	}
+
+	public static void changetoNew() {
+		AddNewExamLBL.setText("hello");
+		
+//		AddNewExamLBL.setVisible(true);
+//		UpdateExamLBL.setVisible(false);
+	}
+
+	public static void changetoupdate() {
+		AddNewExamLBL.setVisible(false);
+		UpdateExamLBL.setVisible(true);
+	}
+
+	public static void UpdateExam(Exam exam) {
+		ExamNumberField.setText(exam.getExamNumber());
+		ExamSubjectField.setText(exam.getExamSubject());
+		ExamCourseField.setText(exam.getExamCourse());
+		ExamTimeField.setText(exam.getExamTime());
+		StudentInstructionField.setText(exam.getStudentInstructions());
+		TeacherInstructionField.setText(exam.getTeacherInstructions());
+
+		// go to update on add question
+
 	}
 }
