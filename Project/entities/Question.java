@@ -28,7 +28,7 @@ public class Question {
 
 	
 
-	public Question(String QuestionNumber, String Subject, String Question, String QuestionInstruction, String Answer1,
+	public Question(String QuestionNumber,String QuestionCode, String Subject, String Question, String QuestionInstruction, String Answer1,
 			String Answer2, String Answer3, String Answer4, String RightAnswer, String Author,String point) {
 
 		this.QuestionNumber = QuestionNumber;
@@ -40,7 +40,7 @@ public class Question {
 		this.Answer3 = Answer3;
 		this.Answer4 = Answer4;
 		this.RightAnswer = RightAnswer;
-		this.QuestionCode = Subject + QuestionNumber;
+		this.QuestionCode = QuestionCode;
 		this.Author = Author;
 		this.point=point;
 

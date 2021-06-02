@@ -117,10 +117,10 @@ public class ExamsTableController extends Application implements Initializable {
 		ExamNumberTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamNumberTable"));
 		SubjectTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("SubjectTable"));
 		CourseTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("CourseTable"));
-		ChoseQuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ChoseQuestionNumberTable"));
-		QuestionPointsTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("QuestionPointsTable"));
 		ExamTimeTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamTimeTable"));
 		TeacherNameTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherNameTable"));
+		ChoseQuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ChoseQuestionNumberTable"));
+		QuestionPointsTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("QuestionPointsTable"));
 		StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("StudentInstructionTable"));
 		TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherInstructionTable"));
 
@@ -263,7 +263,7 @@ public class ExamsTableController extends Application implements Initializable {
 	}
 
 	@FXML
-	void selectSale(MouseEvent event) {
+	void selectExam(MouseEvent event) {
 		if (ExamTable.getSelectionModel().getSelectedItem() != null) {
 			selectedExam = ExamTable.getSelectionModel().getSelectedItem();
 		}
