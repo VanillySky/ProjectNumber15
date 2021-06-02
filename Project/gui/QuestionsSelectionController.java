@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import entities.Question;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,16 +26,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class QuestionsSelectionController implements Initializable {
-	
+public class QuestionsSelectionController extends Application implements Initializable {
+
+	@FXML
+	private TableView<Question> Table;
+
 	@FXML
 	private Button CEMSButton;
 
 	@FXML
 	private Button OutButton;
-
-	@FXML
-	private TableView<Question> Table;
 
 	@FXML
 	private TableColumn<Question, String> QuestionNumberTable;
@@ -144,10 +146,24 @@ public class QuestionsSelectionController implements Initializable {
 	private Label pointERRLBL;
 
 	private Question selectedQuestion = null;
-	private Question selectedQuestion2 = null;
 
 	private final ObservableList<Question> dataList = FXCollections.observableArrayList();
 	private ArrayList<Question> arr = new ArrayList<Question>();
+
+	public void start(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/gui/QuestionsSelection.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Questions Selection");
+			primaryStage.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@FXML
 	void search(ActionEvent event) {
@@ -190,26 +206,10 @@ public class QuestionsSelectionController implements Initializable {
 	}
 
 	@FXML
-	public void PressCEMS() {
-		CEMSButton.setOnAction(event -> {
-			CEMSButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+	public void PressCEMS(ActionEvent event) {
+		TeacherMenuController TMCC = new TeacherMenuController();
+		TMCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
@@ -225,81 +225,59 @@ public class QuestionsSelectionController implements Initializable {
 			Table.setItems(dataList);
 			dataList.clear();
 
+		} else {
+			pointERRLBL.setText("please chose any question first!!");
+			pointERRLBL.setVisible(true);
 		}
 
 	}
 
 	@FXML
 	public void RemoveQuestion(ActionEvent event) {
-		if (selectedQuestion2 != null) {
-			Question question = new Question(selectedQuestion2.QuestionNumber, selectedQuestion2.QuestionCode,
-					selectedQuestion2.Subject, selectedQuestion2.Question, selectedQuestion2.QuestionInstruction,
-					selectedQuestion2.Answer1, selectedQuestion2.Answer2, selectedQuestion2.Answer3,
-					selectedQuestion2.Answer4, selectedQuestion2.RightAnswer, selectedQuestion2.Author,
-					selectedQuestion2.point);
+		if (selectedQuestion != null) {
+			Question question = new Question(selectedQuestion.QuestionNumber, selectedQuestion.QuestionCode,
+					selectedQuestion.Subject, selectedQuestion.Question, selectedQuestion.QuestionInstruction,
+					selectedQuestion.Answer1, selectedQuestion.Answer2, selectedQuestion.Answer3,
+					selectedQuestion.Answer4, selectedQuestion.RightAnswer, selectedQuestion.Author,
+					selectedQuestion.point);
 			Table2.getItems().removeAll(question);
 			arr.remove(question);
+		} else {
+			pointERRLBL.setText("please chose any question first!!");
+			pointERRLBL.setVisible(true);
+
 		}
 
 	}
 
 	@FXML
-	public void PressReturn() {
-		ReturnBTN.setOnAction(event -> {
-			ReturnBTN.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/BuildNewExam.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+	public void PressReturn(ActionEvent event) {
+		BuildNewExamController BNECC = new BuildNewExamController();
+		BNECC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
-	public void PressDone() {
-		boolean temp = false;
+	public void PressDone(ActionEvent event) {
+
 		int count = 0;
-		for (int i = 0; i < arr.size(); i++)
+		for (int i = 0; i < arr.size(); i++) {
 			if ((arr.get(i).point == null) || (arr.get(i).point == "0")) {
+				pointERRLBL.setText("fill all points");
 				pointERRLBL.setVisible(true);
 				count++;
-
 			}
+		}
+		if (arr.isEmpty()) {
+			pointERRLBL.setText("please add any question!!");
+			pointERRLBL.setVisible(true);
+			count++;
+		}
 
-		if (count == 0)
-			temp = true;
-
-		if (temp == true) {
-			ReturnBTN.setOnAction(event -> {
-				ReturnBTN.getScene().getWindow().hide();
-
-				FXMLLoader loader = new FXMLLoader();
-
-				loader.setLocation(getClass().getResource("/gui/ExamTable.fxml"));
-
-				try {
-					loader.load();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				Parent root = loader.getRoot();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.showAndWait();
-			});
+		if (count == 0) {
+			ExamsTableController ETCC = new ExamsTableController();
+			ETCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
 		}
 	}
 
@@ -312,8 +290,8 @@ public class QuestionsSelectionController implements Initializable {
 
 	@FXML
 	void selectQuestion2(MouseEvent event) {
-		if (Table.getSelectionModel().getSelectedItem() != null) {
-			selectedQuestion2 = Table.getSelectionModel().getSelectedItem();
+		if (Table2.getSelectionModel().getSelectedItem() != null) {
+			selectedQuestion = Table.getSelectionModel().getSelectedItem();
 		}
 	}
 
@@ -340,6 +318,7 @@ public class QuestionsSelectionController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
 		QuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionNumberTable"));
 		QuestionCodeTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionCodeTable"));
 		SubjectTable.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectTable"));

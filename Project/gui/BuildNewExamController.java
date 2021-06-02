@@ -1,12 +1,12 @@
 package gui;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import entities.Exam;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,17 +17,9 @@ import javafx.stage.Stage;
 
 public class BuildNewExamController {
 
-	@FXML
-	private  Label AddExamLBL;
 
 	@FXML
-	private  Label UpdateExamLBL;
-
-	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
+	private Label UpdateExamLBL;
 
 	@FXML
 	private Button CEMSButton;
@@ -42,25 +34,25 @@ public class BuildNewExamController {
 	private Button AddQuestionsButton;
 
 	@FXML
-	private  TextField ExamNumberField;
+	private TextField ExamNumberField;
 
 	@FXML
-	private  TextField ExamSubjectField;
+	private TextField ExamSubjectField;
 
 	@FXML
-	private  TextField ExamCourseField;
+	private TextField ExamCourseField;
 
 	@FXML
-	private  TextField ExamTimeField;
+	private TextField ExamTimeField;
 
 	@FXML
-	private  TextField StudentInstructionField;
+	private TextField StudentInstructionField;
 
 	@FXML
-	private  TextField TeacherInstructionField;
+	private TextField TeacherInstructionField;
 
 	@FXML
-	private  ImageView ExamNumberER;
+	private ImageView ExamNumberER;
 
 	@FXML
 	private ImageView ExamSubjectER;
@@ -79,54 +71,40 @@ public class BuildNewExamController {
 
 	@FXML
 	private Label onlynumbersLBL1;
+	
+	
+	
+	public void start(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/gui/BuildNewExam.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Build Exam");
+			primaryStage.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
 
 	@FXML
-	public void PressBack() {
-		BackButton.setOnAction(event -> {
-			BackButton.getScene().getWindow().hide();
+	public void PressBack(ActionEvent event) {
+		ExamsTableController ETCC = new ExamsTableController();
+		ETCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/ExamsTable.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
 
 	}
 
 	@FXML
-	public void PressCEMS() {
-		CEMSButton.setOnAction(event -> {
-			CEMSButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+	public void PressCEMS(ActionEvent event) {
+		TeacherMenuController TMCC = new TeacherMenuController();
+		TMCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-
+	
 	@FXML
 	public void SignOut() {
 		OutButton.setOnAction(event -> {
@@ -148,72 +126,46 @@ public class BuildNewExamController {
 		});
 	}
 
-	@SuppressWarnings("unused")
+	
 	@FXML
-	public void AddQuestions() {
+	public void AddQuestions(ActionEvent event) {
 		int count = 0;
-		boolean temp1 = true;
-		while (temp1) {
-			if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
-					|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
-				emptyfieldLBL.setVisible(true);
+		if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
+				|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
+			emptyfieldLBL.setVisible(true);
+			count++;
+
+		}
+		try {
+			 Integer.parseInt(ExamNumberField.getText());
+			if ((ExamNumberField.getText().length() != 2) && (ExamNumberField.getText().length() != 0)) {
+				onlytwonumberLBL.setVisible(true);// more than two numbers
 				count++;
-
 			}
-			try {
-				int temp = Integer.parseInt(ExamNumberField.getText());
-				if (ExamNumberField.getText().length() != 2) {
-					onlytwonumberLBL.setVisible(true);// more than two numbers
-					count++;
-				}
 
-			} catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
+			if (ExamNumberField.getText().length() != 0) {
 				onlytwonumberLBL.setVisible(true);
 				count++;
 			}
+		}
 
-			try {
-				int temp = Integer.parseInt(ExamTimeField.getText());
-			} catch (NumberFormatException e) {
+		try {
+		 Integer.parseInt(ExamTimeField.getText());
+		} catch (NumberFormatException e) {
+			if (ExamTimeField.getText().length() != 0) {
 				onlynumbersLBL1.setVisible(true);
 				count++;
 			}
-			if (count > 0)
-				temp1 = true;
-			else
-				temp1 = false;
-			count = 0;
-
 		}
-		AddQuestionsButton.setOnAction(event -> {
-			AddQuestionsButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/QuestionSelection.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+		if (count == 0) {
+			QuestionsSelectionController QSCC = new QuestionsSelectionController();
+			QSCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+		}
 	}
 
-	public  void changetoNew() {
-		AddExamLBL.setText("Build New Exam");
-		
-	}
-
-	public  void changetoupdate() {
-		AddExamLBL.setText("Update Exam");
-	}
+	
 
 	public void UpdateExam(Exam exam) {
 		ExamNumberField.setText(exam.getExamNumber());

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="1043.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionsSelectionController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1043.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -35,7 +35,7 @@
                </columns></TableColumn>
             <TableColumn fx:id="RightAnswerTable" minWidth="0.0" prefWidth="82.4000244140625" text="Right Answer" />
             <TableColumn fx:id="AuthorTable" prefWidth="77.60003662109375" text="Author" />
-            <TableColumn fx:id="pointsTable1" prefWidth="84.800048828125" text="points" />
+            <TableColumn fx:id="PointsTable1" prefWidth="84.800048828125" text="points" />
         </columns>
       </TableView>
       <TableView fx:id="Table2" layoutX="17.0" layoutY="369.0" onMousePressed="#selectQuestion2" prefHeight="146.0" prefWidth="1006.0">
@@ -63,13 +63,13 @@
       <Button fx:id="TeacherNameSearchButton" layoutX="476.0" layoutY="134.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
       <Button fx:id="AddnewQuestionBTN" layoutX="445.0" layoutY="331.0" mnemonicParsing="false" onAction="#AddNewQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
       <Button fx:id="RemoveQuestionBTN" layoutX="445.0" layoutY="521.0" mnemonicParsing="false" onAction="#RemoveQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="ReturnBTN" layoutX="51.0" layoutY="552.0" mnemonicParsing="false" onAction="#PressReturn" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ReturnBTN" layoutX="51.0" layoutY="546.0" mnemonicParsing="false" onAction="#PressReturn" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
       <Button fx:id="DoneBTN" layoutX="839.0" layoutY="552.0" mnemonicParsing="false" onAction="#PressDone" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
-      <Label layoutX="371.0" layoutY="30.0" prefHeight="49.0" prefWidth="302.0" text="Build New Exam" textFill="#0b2d8a">
+      <Label layoutX="409.0" layoutY="30.0" prefHeight="49.0" prefWidth="302.0" text="Build Exam" textFill="#0b2d8a">
          <font>
             <Font name="Arial" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="pointERRLBL" layoutX="839.0" layoutY="528.0" prefHeight="18.0" prefWidth="184.0" text="* fill all points please ." textFill="RED" visible="false" />
+      <Label fx:id="pointERRLBL" layoutX="839.0" layoutY="528.0" prefHeight="18.0" prefWidth="200.0" text="* fill all points please ." textFill="RED" visible="false" />
    </children>
 </AnchorPane>

@@ -14,9 +14,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -85,6 +87,9 @@ public class ExamsTableController extends Application implements Initializable {
 
 	@FXML
 	private Button OutButton;
+	
+	 @FXML
+	    private Label LabelERR;
 
 	private Exam selectedExam = null;
 
@@ -98,7 +103,7 @@ public class ExamsTableController extends Application implements Initializable {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/GUI/ExamsTable.fxml"));
+			loader.setLocation(getClass().getResource("/gui/ExamsTable.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
@@ -168,86 +173,38 @@ public class ExamsTableController extends Application implements Initializable {
 	}
 
 	@FXML
-	public void PressCEMS() {
-		CEMSButton.setOnAction(event -> {
-			CEMSButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+	public void PressCEMS(ActionEvent event) {
+		TeacherMenuController TMCC = new TeacherMenuController();
+		TMCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
-	public void AddNewExam() {
-		BuildNewExamController newexam = new BuildNewExamController();
-		newexam.changetoNew();
-		AddNewExamBTN.setOnAction(event -> {
-			AddNewExamBTN.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/BuildNewExam.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
-
+	public void AddNewExam(ActionEvent event) {
+		BuildNewExamController BNECC = new BuildNewExamController();
+		BNECC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
-	public void UpdateExam() {
+	public void UpdateExam(ActionEvent event) {
    	if(selectedExam!=null) {
     		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
    				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), 
    				selectedExam.getQuestionPoint(),selectedExam.getTeacherInstructions() , selectedExam.getStudentInstructions());
     		BuildNewExamController updateExam = new BuildNewExamController();
-    		updateExam.changetoupdate();
     		
-    		UpdateExamBTN.setOnAction(event -> {
-			CEMSButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+    		BuildNewExamController BNECC = new BuildNewExamController();
+    		BNECC.start(new Stage());
+    		((Node) event.getSource()).getScene().getWindow().hide();
     		
     		updateExam.UpdateExam(exam);
 
-		 }
+		 }else {
+				LabelERR.setText("please chose any Exam first to Update!!");
+				LabelERR.setVisible(true);
+
+			}
 
 	}
 
@@ -259,6 +216,10 @@ public class ExamsTableController extends Application implements Initializable {
 	   				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), 
 	   				selectedExam.getQuestionPoint(),selectedExam.getTeacherInstructions() , selectedExam.getStudentInstructions());
 			ExamTable.getItems().removeAll(exam);
+		}else {
+			LabelERR.setText("please chose any Exam first to Delete!!");
+			LabelERR.setVisible(true);
+
 		}
 	}
 
