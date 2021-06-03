@@ -1,7 +1,7 @@
 
 package client;
 
-import ocsf.client.*;
+
 import client.*;
 import common.ChatIF;
 import entities.Manager;
@@ -11,7 +11,7 @@ import entities.User;
 import java.io.*;
 import java.util.HashMap;
 
-import Protocol.ServerMessage;
+import messages.ServerMessage;
 
 /**
  * This class overrides some of the methods defined in the abstract
