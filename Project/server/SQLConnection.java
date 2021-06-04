@@ -29,7 +29,7 @@ public class SQLConnection {
         }
         try {
             //SQLConnection.conn = DriverManager.getConnection("jdbc:mysql://localhost/test/world?serverTimezone=IST","root","Ahmf1144");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sys?serverTimezone=IST","root","IbraPro1234");
+        	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/world?serverTimezone=IST","root","Ahmf1144");
 
             System.out.println("SQL connection succeed");
         }
