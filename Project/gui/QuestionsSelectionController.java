@@ -222,7 +222,7 @@ public class QuestionsSelectionController extends Application implements Initial
 					selectedQuestion.point);
 			arr.add(question);
 			dataList.add(question);
-			Table.setItems(dataList);
+			Table2.setItems(dataList);
 			dataList.clear();
 
 		} else {
