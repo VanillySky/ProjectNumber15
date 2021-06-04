@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import com.sun.jndi.ldap.Connection;
+//import com.sun.jndi.ldap.Connection;
 
 import Protocol.ClientMessage;
 import Protocol.ServerMessage;
@@ -94,20 +94,14 @@ public class LoginFrameController {
 	
 	@FXML
 	void actionLogInBtn(ActionEvent event) throws Exception {
-		System.out.println("szdfghf");
 		String textUserName;
 		String textPassword;
 		textUserName = userName.getText();
 		textPassword = password.getText();
 		ArrayList<Object> params = new ArrayList<Object>();
 		User user ;
-		System.out.println("HHHHHH");
 		user = LoginController.checkUser(textUserName, textPassword);
-		System.out.println("ASDFDSASD");
 		ChatClient.currentUser = user;
-		System.out.println(user.getUserName());
-		System.out.println(user.getPassword());
-		System.out.println(user.getRole());
 		if (user.getRole() == "Teacher") {
 			try {
 				params.add(new entities.Connection(InetAddress.getLocalHost().getHostAddress(),
