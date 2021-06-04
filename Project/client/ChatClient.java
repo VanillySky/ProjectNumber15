@@ -7,11 +7,12 @@ import common.ChatIF;
 import entities.Manager;
 import entities.Student;
 import entities.User;
+import ocsf.client.AbstractClient;
 
 import java.io.*;
 import java.util.HashMap;
 
-import messages.ServerMessage;
+import Protocol.ServerMessage;
 
 /**
  * This class overrides some of the methods defined in the abstract
