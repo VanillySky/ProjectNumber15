@@ -69,6 +69,8 @@ public class LoginFrameController {
 	 * 
 	 * @param primaryStage
 	 */
+	
+	
 	public void start(Stage primaryStage) {
 		try {
 

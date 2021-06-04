@@ -9,6 +9,7 @@ import javax.sound.midi.ControllerEventListener;
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 import entities.Connection;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ import server.SQLConnection;
  * @author ibrahim and shaden
  *
  */
-public class ServerPortController implements Initializable {
+public class ServerPortController extends Application implements Initializable {
 
 	@FXML
 	private Button connectBtn;
@@ -90,6 +91,13 @@ public class ServerPortController implements Initializable {
 	 * 
 	 * @param primaryStage
 	 */
+	
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/gui/ServerPort.fxml"));
