@@ -1,18 +1,14 @@
 package gui;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-
-//import com.sun.jndi.ldap.Connection;
 
 import Protocol.ClientMessage;
 import Protocol.ServerMessage;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.LoginController;
-import entities.Teacher;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,10 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -77,6 +70,8 @@ public class LoginFrameController {
 	 * 
 	 * @param primaryStage
 	 */
+	
+	
 	public void start(Stage primaryStage) {
 		try {
 
