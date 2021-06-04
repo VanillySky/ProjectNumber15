@@ -1,18 +1,22 @@
 package gui;
 
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import Protocol.ClientMessage;
 import Protocol.ServerMessage;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.LoginController;
+import entities.Connection;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class LoginFrameController {
+public class LoginFrameController implements Initializable{
 	@FXML
 	private AnchorPane AnPane;
 
@@ -88,7 +92,7 @@ public class LoginFrameController {
 	}
 	
 	@FXML
-	void actionLogInBtn(ActionEvent event) throws Exception {
+	void actionLogInBtn(ActionEvent event) {
 		String textUserName;
 		String textPassword;
 		textUserName = userName.getText();
@@ -97,9 +101,9 @@ public class LoginFrameController {
 		User user ;
 		user = LoginController.checkUser(textUserName, textPassword);
 		ChatClient.currentUser = user;
-		if (user.getRole() == "Teacher") {
+		if (user.getRole()=="Teacher") {
 			try {
-				params.add(new entities.Connection(InetAddress.getLocalHost().getHostAddress(),
+				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
 						InetAddress.getLocalHost().getHostName(), "Teacher", user.getUserId()));
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
@@ -116,5 +120,14 @@ public class LoginFrameController {
 				incorrectLogin.setVisible(true);
 			}
 		}
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		 final ArrayList<String> msg = new ArrayList<String>();
+	        msg.add("");
+	        System.out.println("1");
+	        ClientUI.chat.accept(msg);
+	        System.out.println("2");
 	}
 }

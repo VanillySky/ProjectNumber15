@@ -45,7 +45,7 @@ public class EchoServer extends AbstractServer {
 					if(!clientsMap.containsValue((Connection)((ClientMessage) msg).getParameters().get(0)))
 					{
 						clientTypes.add((Connection)((ClientMessage) msg).getParameters().get(0));
-						//serverController.addConnection();
+						serverController.addConnection();
 						clientsMap.put(client, (Connection)((ClientMessage) msg).getParameters().get(0));	
 					}
 					else {
@@ -54,7 +54,7 @@ public class EchoServer extends AbstractServer {
 					try {
 						client.sendToClient(sr);
 					} catch (IOException e) {e.printStackTrace();}
-					//serverController.refresh();
+					serverController.refresh();
 					return;
 				}
 				else 

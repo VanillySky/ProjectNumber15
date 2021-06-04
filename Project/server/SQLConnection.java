@@ -13,7 +13,8 @@ import entities.User;
 
 
 public class SQLConnection {
-    private static Connection conn;
+    private static Connection conn= null;
+    
 
     static {
         SQLConnection.conn = null;
@@ -110,25 +111,28 @@ public class SQLConnection {
 	}
  
     public static User checkUser(ArrayList<Object> arr) {
-		// arraylist = String username,String password
 		String username = (String) arr.get(0);
 		String password = (String) arr.get(1);
 		User user = null;
+
 		if (conn != null)
 			try {
-				String query = "Select * FROM users WHERE userName = '" + username + "'AND password = '" + password
-						+ "'";
+				
+				String query = "Select * FROM users WHERE userName = '" + username +"'";
 				Statement st = conn.createStatement();
 
 				// execute the query, and get a java resultset
 				ResultSet rs = st.executeQuery(query);
 
+				
 				if (rs.next()) {
-					String role = rs.getString("role");
 					String firstName = rs.getString("firstName");
 					String lastName = rs.getString("lastName");
 					String userId = rs.getString("userId");
 					String email = rs.getString("email");
+					String role = rs.getString("role");
+					
+					
 					switch (role) {
 					case "Teacher":
 						return new Teacher(username, password, firstName, lastName, userId,email);

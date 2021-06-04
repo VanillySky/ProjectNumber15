@@ -17,8 +17,9 @@ public class LoginController {
 		list.add(password);
 		
 		ClientMessage msgFromClient = new ClientMessage("checkUser", list, list.size());
+		
 		ClientUI.chat.accept(msgFromClient);
-
+	
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		User user = (User) msgFromServer.getData();
 		return user;

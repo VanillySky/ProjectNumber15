@@ -93,9 +93,6 @@ public class ServerPortController extends Application implements Initializable {
 	 */
 	
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
 	
 	
 	public void start(Stage primaryStage) throws Exception {

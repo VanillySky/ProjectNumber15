@@ -2,10 +2,8 @@
 package client;
 
 
-import client.*;
+
 import common.ChatIF;
-import entities.Manager;
-import entities.Student;
 import entities.User;
 import ocsf.client.AbstractClient;
 
@@ -46,7 +44,7 @@ public class ChatClient extends AbstractClient
    * @param port The port number to connect on.
    * @param clientUI The interface type variable.
    */
-	public static ChatClient instance;
+	//public static ChatClient instance;
 
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException {
 		super(host, port); // Call the superclass constructor
@@ -64,14 +62,13 @@ public class ChatClient extends AbstractClient
   public void handleMessageFromServer(Object msg) 
   {
 	  System.out.println("--> handleMessageFromServer");
-	
+	  
+		awaitResponse = false;
 
 		if (msg instanceof ServerMessage) {
 			
 			messageRecievedFromServerEvents.put(((ServerMessage) msg).getCommand(), (ServerMessage) msg);
 		}
-	
-		awaitResponse = false;
   }
 
   /**
@@ -90,7 +87,7 @@ public class ChatClient extends AbstractClient
 			// wait for response
 			while (awaitResponse) {
 				try {
-					Thread.sleep(100);
+					Thread.sleep(100L);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -102,6 +99,11 @@ public class ChatClient extends AbstractClient
 		}
   }
 
+  @Override
+	protected void connectionClosed() {
+		
+	}
+  
   
   /**
    * This method terminates the client.
@@ -112,7 +114,8 @@ public class ChatClient extends AbstractClient
     {
       closeConnection();
     }
-    catch(IOException e) {}
-    System.exit(0);
+    catch(IOException e) {
+    	
+    }
   }
 }
