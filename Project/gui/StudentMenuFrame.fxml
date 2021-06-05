@@ -10,19 +10,19 @@
    <children>
       <ImageView fitHeight="579.0" fitWidth="1048.0">
          <image>
-            <Image url="@../../bin/Images/Studnet%20menu.png" />
+            <Image url="@../Images/StudentMenu.png" />
          </image>
       </ImageView>
-      <Button layoutX="244.0" layoutY="315.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: 051942;" text="Exam" textFill="#f8f4f4">
+      <Button layoutX="241.0" layoutY="303.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: transparent;" textFill="#f8f4f4">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button layoutX="573.0" layoutY="315.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="196.0" style="-fx-background-color: 051942;" text="Statistics" textFill="#f8f4f4">
+      <Button layoutX="577.0" layoutY="313.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="196.0" style="-fx-background-color: transparent;" textFill="#f8f4f4">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button layoutX="936.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" style="-fx-background-color: #051942FFFFFF;" text="Sign out" textFill="#051940" />
+      <Button layoutX="921.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="127.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>
