@@ -1,7 +1,12 @@
 package gui;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
+
+import client.ChatClient;
+import controllers.DisplayExams;
 
 import java.net.URL;
 import entities.Exam;
@@ -122,7 +127,8 @@ public class ExamsTableController implements Initializable {
 		QuestionPointsTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("QuestionPointsTable"));
 		StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("StudentInstructionTable"));
 		TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherInstructionTable"));
-
+        this.ExamTable.setItems(FXCollections.observableArrayList((Collection)controllers.DisplayExams.ShowExams()));
+        this.ExamTable.refresh();
 	}
 
 	@FXML

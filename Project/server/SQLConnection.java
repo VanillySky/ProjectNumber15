@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import entities.Teacher;
 import entities.User;
+import entities.Exam;
 
 
 public class SQLConnection {
@@ -27,7 +28,7 @@ public class SQLConnection {
         }
         try {
             //SQLConnection.conn = DriverManager.getConnection("jdbc:mysql://localhost/test/world?serverTimezone=IST","root","Ahmf1144");
-        	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sys?serverTimezone=IST","root","Shaden#2034");
+        	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 
             System.out.println("SQL connection succeed");
         }
@@ -37,7 +38,7 @@ public class SQLConnection {
             System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
-
+/*
     public static void saveUserToDB(final ArrayList<String> list) {
         if (conn != null) {
             try {
@@ -104,7 +105,7 @@ public class SQLConnection {
             }
         }
         return str;
-    }
+    }*/
     public static Connection getConn() {
 		return conn;
 	}
@@ -149,4 +150,22 @@ public class SQLConnection {
 			}
 		return user;
 	}
+    public static ArrayList<Exam> getAllexams() {
+        ArrayList<Exam> array = new ArrayList<Exam>();
+        if (conn != null) {
+            try {
+                String query = "Select * FROM exams";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    Exam ex = new Exam( rs.getString("ExamCode"),rs.getString("ExamNumber"), rs.getString("ExamSubject"), rs.getString("ExamCourse"), rs.getString("ExamTime"),rs.getString("TeacherName"),rs.getString("ChosenQuestion"),rs.getString("QuestionPoint"),rs.getString("StudentInstructions"),rs.getString("TeacherInstructions"));
+                    array.add(ex);
+                }
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return array;
+    }
 }
