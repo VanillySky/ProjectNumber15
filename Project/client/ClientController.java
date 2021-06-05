@@ -1,6 +1,5 @@
 package client;
 import java.io.*;
-import client.*;
 import common.ChatIF;
 
 

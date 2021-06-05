@@ -1,13 +1,8 @@
 package server;
 
 import javafx.application.Application;
-import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
-
-import java.awt.Desktop;
 import java.io.IOException;
-import java.util.Vector;
-
 import gui.ServerPortController;
 
 
@@ -20,6 +15,7 @@ public class ServerUI extends Application {
        launch(args);
     }
 
+    @Override
     public void start(final Stage primaryStage) throws Exception {
         final ServerPortController server = new ServerPortController();
         server.start(primaryStage);
@@ -36,7 +32,7 @@ public class ServerUI extends Application {
         catch (Throwable t) {
             System.out.println("ERROR - Could not connect!");
         }
-        final EchoServer sv = new EchoServer(port);
+       sv = new EchoServer(port);
         try {
             sv.listen();
         }

@@ -13,12 +13,10 @@ import entities.User;
 
 
 public class SQLConnection {
-    private static Connection conn;
-
-    static {
-        SQLConnection.conn = null;
-    }
+    private static Connection conn= null;
     
+
+
     public static void connecttoDB() throws ParseException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -29,7 +27,7 @@ public class SQLConnection {
         }
         try {
             //SQLConnection.conn = DriverManager.getConnection("jdbc:mysql://localhost/test/world?serverTimezone=IST","root","Ahmf1144");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sys?serverTimezone=IST","root","IbraPro1234");
+        	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/world?serverTimezone=IST","root","Ahmf1144");
 
             System.out.println("SQL connection succeed");
         }
@@ -43,12 +41,14 @@ public class SQLConnection {
     public static void saveUserToDB(final ArrayList<String> list) {
         if (conn != null) {
             try {
-                final PreparedStatement stmt = conn.prepareStatement("INSERT INTO Test VALUES (?, ?,?, ?,?);");
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO users VALUES (?,?,?,?,?,?,?);");
                 stmt.setString(1, list.get(0));
                 stmt.setString(2, list.get(1));
                 stmt.setString(3, list.get(2));
                 stmt.setString(4, list.get(3));
                 stmt.setString(5, list.get(4));
+                stmt.setString(6, list.get(5));
+                stmt.setString(7, list.get(6));
                 stmt.executeUpdate();
             }
             catch (SQLException e) {
@@ -64,7 +64,7 @@ public class SQLConnection {
                 str = String.valueOf(str) + Field2;
                 str = String.valueOf(str) + "= '";
                 str = String.valueOf(str) + newValue;
-                str = String.valueOf(str) + "' Where TestID = '";
+                str = String.valueOf(str) + "' Where userName = '";
                 str = String.valueOf(str) + id;
                 str = String.valueOf(str) + "'";
                 final Statement stmt = conn.createStatement();
@@ -110,25 +110,28 @@ public class SQLConnection {
 	}
  
     public static User checkUser(ArrayList<Object> arr) {
-		// arraylist = String username,String password
 		String username = (String) arr.get(0);
 		String password = (String) arr.get(1);
 		User user = null;
+
 		if (conn != null)
 			try {
-				String query = "Select * FROM users WHERE userName = '" + username + "'AND password = '" + password
-						+ "'";
+				
+				String query = "Select * FROM users WHERE userName = '" + username + "'AND password = '" + password +"'";
 				Statement st = conn.createStatement();
 
 				// execute the query, and get a java resultset
 				ResultSet rs = st.executeQuery(query);
 
+				
 				if (rs.next()) {
-					String role = rs.getString("role");
 					String firstName = rs.getString("firstName");
 					String lastName = rs.getString("lastName");
 					String userId = rs.getString("userId");
 					String email = rs.getString("email");
+					String role = rs.getString("role");
+					
+					
 					switch (role) {
 					case "Teacher":
 						return new Teacher(username, password, firstName, lastName, userId,email);

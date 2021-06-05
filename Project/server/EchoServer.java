@@ -21,7 +21,7 @@ public class EchoServer extends AbstractServer {
 	public static HashMap<ConnectionToClient, Connection> clientsMap=new HashMap<ConnectionToClient, Connection>();
     public static ServerPortController serverController;
     
-    public EchoServer(final int port) {
+    public EchoServer(int port) {
         super(port);
         try {
            SQLConnection.connecttoDB();
@@ -45,7 +45,7 @@ public class EchoServer extends AbstractServer {
 					if(!clientsMap.containsValue((Connection)((ClientMessage) msg).getParameters().get(0)))
 					{
 						clientTypes.add((Connection)((ClientMessage) msg).getParameters().get(0));
-						//serverController.addConnection();
+						serverController.addConnection();
 						clientsMap.put(client, (Connection)((ClientMessage) msg).getParameters().get(0));	
 					}
 					else {
@@ -54,12 +54,12 @@ public class EchoServer extends AbstractServer {
 					try {
 						client.sendToClient(sr);
 					} catch (IOException e) {e.printStackTrace();}
-					//serverController.refresh();
+					serverController.refresh();
 					return;
 				}
 				else 
 				if (((ClientMessage) msg).getNumParameters() == 0)
-					method = SQLConnection.class.getMethod(((ClientMessage) msg).getMethodName(), null);
+					method = SQLConnection.class.getMethod(((ClientMessage) msg).getMethodName());
 				else
 					method = SQLConnection.class.getMethod(((ClientMessage) msg).getMethodName(),
 							((ClientMessage) msg).getParameters().getClass());
@@ -88,6 +88,13 @@ public class EchoServer extends AbstractServer {
 				e.printStackTrace();
 				
 			}
+			
+			try {
+				ServerMessage sr = new ServerMessage(((ClientMessage)msg).getMethodName(), result);
+				client.sendToClient(sr);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			System.out.println("Message received: " + ((ClientMessage) msg).getMethodName() + " from " + client);
 
@@ -95,7 +102,7 @@ public class EchoServer extends AbstractServer {
     }
 
     protected void serverStarted() {
-        System.out.println("Server listening for connections on port " + this.getPort());
+        System.out.println("Server listening for connections on port " + getPort());
     }
 
     protected void serverStopped() {
@@ -137,4 +144,12 @@ public class EchoServer extends AbstractServer {
 		}
 		return cnt;
 	}
+	
+	protected  void	clientDisconnected(ConnectionToClient client)
+	{
+		Connection connection=clientsMap.remove(client);
+		clientTypes.remove(connection);
+		serverController.refresh();
+	}
+	
 }

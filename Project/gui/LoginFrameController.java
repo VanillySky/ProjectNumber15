@@ -1,18 +1,22 @@
 package gui;
 
 import java.net.InetAddress;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import Protocol.ClientMessage;
 import Protocol.ServerMessage;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.LoginController;
+import entities.Connection;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -88,7 +92,7 @@ public class LoginFrameController {
 	}
 	
 	@FXML
-	void actionLogInBtn(ActionEvent event) throws Exception {
+	void actionLogInBtn(ActionEvent event) {
 		String textUserName;
 		String textPassword;
 		textUserName = userName.getText();
@@ -97,11 +101,12 @@ public class LoginFrameController {
 		User user ;
 		user = LoginController.checkUser(textUserName, textPassword);
 		ChatClient.currentUser = user;
-		if (user.getRole() == "Teacher") {
+		if(user!=null) {
+		if (user.getRole().equals("Teacher")) {
 			try {
-				params.add(new entities.Connection(InetAddress.getLocalHost().getHostAddress(),
+				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
 						InetAddress.getLocalHost().getHostName(), "Teacher", user.getUserId()));
-			} catch (UnknownHostException e) {
+				} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
 			ClientMessage msg = new ClientMessage("", params, params.size());
@@ -115,6 +120,13 @@ public class LoginFrameController {
 				incorrectLogin.setText("You are already logged in!");
 				incorrectLogin.setVisible(true);
 			}
+		}
+		
+		
+		}else {
+			System.out.println("This Account is not exist");
+			incorrectLogin.setText("*Login details are incorrect*");
+			incorrectLogin.setVisible(true);
 		}
 	}
 }

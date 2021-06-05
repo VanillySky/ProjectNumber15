@@ -2,8 +2,10 @@ package gui;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -68,29 +70,29 @@ public class BuildQuestionsController {
     @FXML
     private TextField teacherNameTXT;
     
-    @FXML
-    public void PressCEMS() {
-   	 CEMSButton.setOnAction(event -> {
-   		 CEMSButton.getScene().getWindow().hide();
-
-   			FXMLLoader loader = new FXMLLoader();
-
-   			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
-
-   			try {
-   				loader.load();
-   			} catch (IOException e) {
-   				// TODO Auto-generated catch block
-   				e.printStackTrace();
-   			}
-
-   			Parent root = loader.getRoot();
-   			Stage stage = new Stage();
-   			stage.setScene(new Scene(root));
-   			stage.showAndWait();
-   		});
-    }
     
+    public void start(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/gui/BuildQuestions.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Build Question");
+			primaryStage.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+    
+    
+    @FXML
+	public void PressCEMS(ActionEvent event) {
+		TeacherMenuController TMCC = new TeacherMenuController();
+		TMCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+	}
  
     
     @FXML

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginFrameController">
    <children>
       <ImageView fitHeight="579.0" fitWidth="1048.0">
          <image>
@@ -18,10 +18,10 @@
       </ImageView>
       <AnchorPane fx:id="AnPane" layoutX="22.0" layoutY="147.0" prefHeight="252.0" prefWidth="520.0">
          <children>
-            <TextField fx:id="userName" alignment="CENTER" layoutX="140.0" layoutY="27.0" prefHeight="33.0" prefWidth="261.0" style="-fx-border-color: white;" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="27.0" />
+            <TextField fx:id="userName" layoutX="140.0" layoutY="27.0" prefHeight="33.0" prefWidth="261.0" style="-fx-border-color: white;" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="27.0" />
             <Button fx:id="loginBTN" graphicTextGap="15.0" layoutX="158.0" layoutY="210.0" mnemonicParsing="false" onAction="#actionLogInBtn" prefHeight="50.0" prefWidth="124.0" text="Login" />
             <PasswordField fx:id="password" layoutX="140.0" layoutY="80.0" prefHeight="31.0" prefWidth="265.0" />
-            <Label layoutX="92.0" layoutY="144.0" prefHeight="31.0" prefWidth="345.0" />
+            <Label fx:id="incorrectLogin" layoutX="92.0" layoutY="144.0" prefHeight="31.0" prefWidth="345.0" textFill="RED" />
          </children>
       </AnchorPane>
    </children>
