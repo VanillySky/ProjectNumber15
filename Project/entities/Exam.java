@@ -1,6 +1,7 @@
 package entities;
+import java.io.Serializable;
 
-public class Exam {
+public class Exam implements Serializable{
 	
 	String ExamCode;
 	String ExamNumber;

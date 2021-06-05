@@ -1,11 +1,11 @@
 package gui;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
+import client.ClientUI;
 import controllers.DisplayExams;
 
 import java.net.URL;
@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class ExamsTableController implements Initializable {
 
@@ -91,14 +92,14 @@ public class ExamsTableController implements Initializable {
 
 	@FXML
 	private Button OutButton;
-	
-	 @FXML
-	    private Label LabelERR;
+
+	@FXML
+	private Label LabelERR;
 
 	private Exam selectedExam = null;
 
 	private final ObservableList<Exam> dataList = FXCollections.observableArrayList();
-	
+
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -112,23 +113,44 @@ public class ExamsTableController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
-	
+	}
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-		ExamCodeTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamCodeTable"));
-		ExamNumberTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamNumberTable"));
-		SubjectTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("SubjectTable"));
-		CourseTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("CourseTable"));
-		ExamTimeTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ExamTimeTable"));
-		TeacherNameTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherNameTable"));
-		ChoseQuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("ChoseQuestionNumberTable"));
-		QuestionPointsTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("QuestionPointsTable"));
-		StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("StudentInstructionTable"));
-		TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam, String>("TeacherInstructionTable"));
-        this.ExamTable.setItems(FXCollections.observableArrayList((Collection)controllers.DisplayExams.ShowExams()));
-        this.ExamTable.refresh();
+		/*
+		 * ExamCodeTable.setCellValueFactory(new PropertyValueFactory<Exam,
+		 * String>("ExamCodeTable")); ExamNumberTable.setCellValueFactory(new
+		 * PropertyValueFactory<Exam, String>("ExamNumberTable"));
+		 * SubjectTable.setCellValueFactory(new PropertyValueFactory<Exam,
+		 * String>("SubjectTable")); CourseTable.setCellValueFactory(new
+		 * PropertyValueFactory<Exam, String>("CourseTable"));
+		 * ExamTimeTable.setCellValueFactory(new PropertyValueFactory<Exam,
+		 * String>("ExamTimeTable")); TeacherNameTable.setCellValueFactory(new
+		 * PropertyValueFactory<Exam, String>("TeacherNameTable"));
+		 * ChoseQuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Exam,
+		 * String>("ChoseQuestionNumberTable"));
+		 * QuestionPointsTable.setCellValueFactory(new PropertyValueFactory<Exam,
+		 * String>("QuestionPointsTable"));
+		 * StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam,
+		 * String>("StudentInstructionTable"));
+		 * TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam,
+		 * String>("TeacherInstructionTable"));
+		 * this.ExamTable.setItems(FXCollections.observableArrayList((Collection)
+		 * controllers.DisplayExams.ShowExams())); this.ExamTable.refresh();
+		 */
+
+		this.ExamCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
+		this.ExamNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamNumber"));
+		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamSubject"));
+		this.CourseTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
+		this.ExamTimeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamTime"));
+		this.TeacherNameTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
+		this.ChoseQuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ChosenQuestion"));
+		this.QuestionPointsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionPoint"));
+		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstruction"));
+		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstruction"));
+		this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayExams.ShowExams()));
 	}
 
 	@FXML
@@ -188,23 +210,24 @@ public class ExamsTableController implements Initializable {
 
 	@FXML
 	public void UpdateExam(ActionEvent event) {
-   	if(selectedExam!=null) {
-    		Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
-   				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), 
-   				selectedExam.getQuestionPoint(),selectedExam.getTeacherInstructions() , selectedExam.getStudentInstructions());
-    		BuildNewExamController updateExam = new BuildNewExamController();
-    		
-    		BuildNewExamController BNECC = new BuildNewExamController();
-    		BNECC.start(new Stage());
-    		((Node) event.getSource()).getScene().getWindow().hide();
-    		
-    		updateExam.UpdateExam(exam);
+		if (selectedExam != null) {
+			Exam exam = new Exam(selectedExam.getExamCode(), selectedExam.getExamNumber(),
+					selectedExam.getExamSubject(), selectedExam.getExamCourse(), selectedExam.getExamTime(),
+					selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), selectedExam.getQuestionPoint(),
+					selectedExam.getTeacherInstructions(), selectedExam.getStudentInstructions());
+			BuildNewExamController updateExam = new BuildNewExamController();
 
-		 }else {
-				LabelERR.setText("please chose any Exam first to Update!!");
-				LabelERR.setVisible(true);
+			BuildNewExamController BNECC = new BuildNewExamController();
+			BNECC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
 
-			}
+			updateExam.UpdateExam(exam);
+
+		} else {
+			LabelERR.setText("please chose any Exam first to Update!!");
+			LabelERR.setVisible(true);
+
+		}
 
 	}
 
@@ -212,11 +235,12 @@ public class ExamsTableController implements Initializable {
 	public void DeleteExam(ActionEvent event) {
 
 		if (selectedExam != null) {
-			Exam exam = new Exam(selectedExam.getExamCode(),selectedExam.getExamNumber(), selectedExam.getExamSubject(),
-	   				selectedExam.getExamCourse(),selectedExam.getExamTime(), selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), 
-	   				selectedExam.getQuestionPoint(),selectedExam.getTeacherInstructions() , selectedExam.getStudentInstructions());
+			Exam exam = new Exam(selectedExam.getExamCode(), selectedExam.getExamNumber(),
+					selectedExam.getExamSubject(), selectedExam.getExamCourse(), selectedExam.getExamTime(),
+					selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), selectedExam.getQuestionPoint(),
+					selectedExam.getTeacherInstructions(), selectedExam.getStudentInstructions());
 			ExamTable.getItems().removeAll(exam);
-		}else {
+		} else {
 			LabelERR.setText("please chose any Exam first to Delete!!");
 			LabelERR.setVisible(true);
 

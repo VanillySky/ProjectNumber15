@@ -28,8 +28,8 @@ public class SQLConnection {
         }
         try {
             //SQLConnection.conn = DriverManager.getConnection("jdbc:mysql://localhost/test/world?serverTimezone=IST","root","Ahmf1144");
-        	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
-
+        	//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
+        	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","Shaden#2034");
             System.out.println("SQL connection succeed");
         }
         catch (SQLException ex) {
@@ -166,6 +166,7 @@ public class SQLConnection {
                 e.printStackTrace();
             }
         }
+        System.out.println(array.get(0).getExamCode());
         return array;
     }
 }

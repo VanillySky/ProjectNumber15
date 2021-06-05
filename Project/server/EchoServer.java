@@ -92,6 +92,7 @@ public class EchoServer extends AbstractServer {
 			try {
 				ServerMessage sr = new ServerMessage(((ClientMessage)msg).getMethodName(), result);
 				client.sendToClient(sr);
+				
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
