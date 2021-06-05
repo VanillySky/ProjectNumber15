@@ -16,10 +16,7 @@ public class SQLConnection {
     private static Connection conn= null;
     
 
-    static {
-        SQLConnection.conn = null;
-    }
-    
+
     public static void connecttoDB() throws ParseException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -44,12 +41,14 @@ public class SQLConnection {
     public static void saveUserToDB(final ArrayList<String> list) {
         if (conn != null) {
             try {
-                final PreparedStatement stmt = conn.prepareStatement("INSERT INTO Test VALUES (?, ?,?, ?,?);");
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO users VALUES (?,?,?,?,?,?,?);");
                 stmt.setString(1, list.get(0));
                 stmt.setString(2, list.get(1));
                 stmt.setString(3, list.get(2));
                 stmt.setString(4, list.get(3));
                 stmt.setString(5, list.get(4));
+                stmt.setString(6, list.get(5));
+                stmt.setString(7, list.get(6));
                 stmt.executeUpdate();
             }
             catch (SQLException e) {
@@ -65,7 +64,7 @@ public class SQLConnection {
                 str = String.valueOf(str) + Field2;
                 str = String.valueOf(str) + "= '";
                 str = String.valueOf(str) + newValue;
-                str = String.valueOf(str) + "' Where TestID = '";
+                str = String.valueOf(str) + "' Where userName = '";
                 str = String.valueOf(str) + id;
                 str = String.valueOf(str) + "'";
                 final Statement stmt = conn.createStatement();
@@ -118,7 +117,7 @@ public class SQLConnection {
 		if (conn != null)
 			try {
 				
-				String query = "Select * FROM users WHERE userName = '" + username +"'";
+				String query = "Select * FROM users WHERE userName = '" + username + "'AND password = '" + password +"'";
 				Statement st = conn.createStatement();
 
 				// execute the query, and get a java resultset

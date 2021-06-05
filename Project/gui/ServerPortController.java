@@ -4,12 +4,7 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.sound.midi.ControllerEventListener;
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
 import entities.Connection;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +34,7 @@ import server.SQLConnection;
  * @author ibrahim and shaden
  *
  */
-public class ServerPortController extends Application implements Initializable {
+public class ServerPortController implements Initializable {
 
 	@FXML
 	private Button connectBtn;

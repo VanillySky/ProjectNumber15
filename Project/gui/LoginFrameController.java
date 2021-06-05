@@ -101,11 +101,11 @@ public class LoginFrameController implements Initializable{
 		User user ;
 		user = LoginController.checkUser(textUserName, textPassword);
 		ChatClient.currentUser = user;
-		if (user.getRole()=="Teacher") {
+		if (user.getRole().equals("Teacher")) {
 			try {
 				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
 						InetAddress.getLocalHost().getHostName(), "Teacher", user.getUserId()));
-			} catch (UnknownHostException e) {
+				} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
 			ClientMessage msg = new ClientMessage("", params, params.size());
@@ -119,15 +119,19 @@ public class LoginFrameController implements Initializable{
 				incorrectLogin.setText("You are already logged in!");
 				incorrectLogin.setVisible(true);
 			}
+		}else {
+			System.out.println("This Account is not exist");
+			incorrectLogin.setText("*Login details are incorrect*");
+			incorrectLogin.setVisible(true);
 		}
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		 final ArrayList<String> msg = new ArrayList<String>();
-	        msg.add("");
-	        System.out.println("1");
-	        ClientUI.chat.accept(msg);
-	        System.out.println("2");
+//		 final ArrayList<String> msg = new ArrayList<String>();
+//	        msg.add("");
+//	        System.out.println("1");
+//	        ClientUI.chat.accept(msg);
+//	        System.out.println("10");
 	}
 }

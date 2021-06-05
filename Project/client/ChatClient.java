@@ -1,12 +1,9 @@
 
 package client;
 
-
-
 import common.ChatIF;
 import entities.User;
 import ocsf.client.AbstractClient;
-
 import java.io.*;
 import java.util.HashMap;
 
@@ -82,7 +79,6 @@ public class ChatClient extends AbstractClient
 	  try {
 			openConnection();// in order to send more than one message
 			awaitResponse = true;
-
 			sendToServer(str);
 			// wait for response
 			while (awaitResponse) {
