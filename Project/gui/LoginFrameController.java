@@ -113,16 +113,52 @@ public class LoginFrameController {
 			ClientUI.chat.accept(msg);
 			ServerMessage sm = ChatClient.messageRecievedFromServerEvents.get(msg.getMethodName());
 			if ((boolean) sm.getData()) {
-				TeacherMenuController vSHPCC = new TeacherMenuController();
-				vSHPCC.start(new Stage());
+				TeacherMenuController menu = new TeacherMenuController();
+				menu.start(new Stage());
 				AnPane.getScene().getWindow().hide();
 			} else {
 				incorrectLogin.setText("You are already logged in!");
 				incorrectLogin.setVisible(true);
 			}
 		}
-		
-		
+	/*	if (user.getRole().equals("Student")) {
+			try {
+				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
+						InetAddress.getLocalHost().getHostName(), "Student", user.getUserId()));
+				} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
+			ClientMessage msg = new ClientMessage("", params, params.size());
+			ClientUI.chat.accept(msg);
+			ServerMessage sm = ChatClient.messageRecievedFromServerEvents.get(msg.getMethodName());
+			if ((boolean) sm.getData()) {
+				StudentMenuController menu = new StudentMenuController();
+				menu.start(new Stage());
+				AnPane.getScene().getWindow().hide();
+			} else {
+				incorrectLogin.setText("You are already logged in!");
+				incorrectLogin.setVisible(true);
+			}
+		}
+		if (user.getRole().equals("Manager")) {
+			try {
+				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
+						InetAddress.getLocalHost().getHostName(), "Manager", user.getUserId()));
+				} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
+			ClientMessage msg = new ClientMessage("", params, params.size());
+			ClientUI.chat.accept(msg);
+			ServerMessage sm = ChatClient.messageRecievedFromServerEvents.get(msg.getMethodName());
+			if ((boolean) sm.getData()) {
+				ManagerMenuController menu = new ManagerMenuController();
+				menu.start(new Stage());
+				AnPane.getScene().getWindow().hide();
+			} else {
+				incorrectLogin.setText("You are already logged in!");
+				incorrectLogin.setVisible(true);
+			}
+		}*/
 		}else {
 			System.out.println("This Account is not exist");
 			incorrectLogin.setText("*Login details are incorrect*");
