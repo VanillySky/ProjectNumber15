@@ -101,6 +101,7 @@ public class LoginFrameController implements Initializable{
 		User user ;
 		user = LoginController.checkUser(textUserName, textPassword);
 		ChatClient.currentUser = user;
+		if(user!=null) {
 		if (user.getRole().equals("Teacher")) {
 			try {
 				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
@@ -119,6 +120,9 @@ public class LoginFrameController implements Initializable{
 				incorrectLogin.setText("You are already logged in!");
 				incorrectLogin.setVisible(true);
 			}
+		}
+		
+		
 		}else {
 			System.out.println("This Account is not exist");
 			incorrectLogin.setText("*Login details are incorrect*");
