@@ -14,8 +14,8 @@
       </ImageView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="135.0" prefWidth="147.0" style="-fx-background-color: transparent;" />
       <Button fx:id="OutButton" layoutX="971.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="36.0" prefWidth="129.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="StatisticsButton" layoutX="774.0" layoutY="351.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="54.0" prefWidth="158.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="QuestionButton" layoutX="482.0" layoutY="346.0" mnemonicParsing="false" onAction="#QuestionIn" prefHeight="64.0" prefWidth="168.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="ExamButton" layoutX="192.0" layoutY="341.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="64.0" prefWidth="147.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="StatisticsButton" layoutX="710.0" layoutY="331.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="54.0" prefWidth="158.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="QuestionButton" layoutX="443.0" layoutY="326.0" mnemonicParsing="false" onAction="#QuestionIn" prefHeight="64.0" prefWidth="168.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ExamButton" layoutX="165.0" layoutY="326.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="64.0" prefWidth="147.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>
