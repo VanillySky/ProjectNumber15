@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="579.0" fitWidth="1048.0">
          <image>
-            <Image url="@../OneDrive/מסמכים/Studnet%20menu.png" />
+            <Image url="@../../bin/Images/Studnet%20menu.png" />
          </image>
       </ImageView>
       <Button layoutX="244.0" layoutY="315.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: 051942;" text="Exam" textFill="#f8f4f4">
