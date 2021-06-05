@@ -6,7 +6,8 @@ import java.util.ResourceBundle;
 
 import client.ChatClient;
 import client.ClientUI;
-import controllers.DisplayExams;
+import controllers.DeleteController;
+import controllers.DisplayController;
 
 import java.net.URL;
 import entities.Exam;
@@ -118,28 +119,6 @@ public class ExamsTableController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-		/*
-		 * ExamCodeTable.setCellValueFactory(new PropertyValueFactory<Exam,
-		 * String>("ExamCodeTable")); ExamNumberTable.setCellValueFactory(new
-		 * PropertyValueFactory<Exam, String>("ExamNumberTable"));
-		 * SubjectTable.setCellValueFactory(new PropertyValueFactory<Exam,
-		 * String>("SubjectTable")); CourseTable.setCellValueFactory(new
-		 * PropertyValueFactory<Exam, String>("CourseTable"));
-		 * ExamTimeTable.setCellValueFactory(new PropertyValueFactory<Exam,
-		 * String>("ExamTimeTable")); TeacherNameTable.setCellValueFactory(new
-		 * PropertyValueFactory<Exam, String>("TeacherNameTable"));
-		 * ChoseQuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Exam,
-		 * String>("ChoseQuestionNumberTable"));
-		 * QuestionPointsTable.setCellValueFactory(new PropertyValueFactory<Exam,
-		 * String>("QuestionPointsTable"));
-		 * StudentInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam,
-		 * String>("StudentInstructionTable"));
-		 * TeacherInstructionTable.setCellValueFactory(new PropertyValueFactory<Exam,
-		 * String>("TeacherInstructionTable"));
-		 * this.ExamTable.setItems(FXCollections.observableArrayList((Collection)
-		 * controllers.DisplayExams.ShowExams())); this.ExamTable.refresh();
-		 */
-
 		this.ExamCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
 		this.ExamNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamNumber"));
 		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamSubject"));
@@ -150,7 +129,13 @@ public class ExamsTableController implements Initializable {
 		this.QuestionPointsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionPoint"));
 		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
 		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 		this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayExams.ShowExams()));
+=======
+		if(controllers.DisplayController.ShowExams()!=null) {
+		this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
+		}
+>>>>>>> 8cb18c5 delete done
 	}
 
 	@FXML
@@ -196,6 +181,7 @@ public class ExamsTableController implements Initializable {
 
 	@FXML
 	public void PressCEMS(ActionEvent event) {
+		//System.out.println(selectedExam.getExamCode());
 		TeacherMenuController TMCC = new TeacherMenuController();
 		TMCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -208,6 +194,9 @@ public class ExamsTableController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	
+	
+	
 	@FXML
 	public void UpdateExam(ActionEvent event) {
 		if (selectedExam != null) {
@@ -226,25 +215,15 @@ public class ExamsTableController implements Initializable {
 		} else {
 			LabelERR.setText("please chose any Exam first to Update!!");
 			LabelERR.setVisible(true);
-
 		}
-
 	}
-
 	@FXML
 	public void DeleteExam(ActionEvent event) {
-
-		if (selectedExam != null) {
-			Exam exam = new Exam(selectedExam.getExamCode(), selectedExam.getExamNumber(),
-					selectedExam.getExamSubject(), selectedExam.getExamCourse(), selectedExam.getExamTime(),
-					selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), selectedExam.getQuestionPoint(),
-					selectedExam.getTeacherInstructions(), selectedExam.getStudentInstructions());
-			ExamTable.getItems().removeAll(exam);
-		} else {
-			LabelERR.setText("please chose any Exam first to Delete!!");
-			LabelERR.setVisible(true);
-
-		}
+        DeleteController DC = new DeleteController();
+        DC.DeleteExam(selectedExam.getExamCode()); 
+        
+        this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
+		this.ExamTable.refresh();
 	}
 
 	@FXML
