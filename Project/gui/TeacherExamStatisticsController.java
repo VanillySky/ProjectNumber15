@@ -1,9 +1,9 @@
 package gui;
-import java.io.IOException;
 
-import entities.Exam;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -45,7 +45,10 @@ public class TeacherExamStatisticsController {
 	    private TableColumn<?, ?> AuthorTable;
 	    @FXML
 	    private TableView<entities.Exam> ExamsTable;
-
+	    
+	    @FXML
+		private Button CEMSButton;
+	    
 	    @FXML
 	    private Button GetReportBTN;
 
@@ -57,25 +60,51 @@ public class TeacherExamStatisticsController {
 	    @FXML
 	    private Button SearchBTN;
 	    
+	    public void start(Stage primaryStage) {
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource("/gui/TeacherExamsStatistics.fxml"));
+				Parent root = loader.load();
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.setTitle("Teacher Exam Statics");
+				primaryStage.show();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}	
+	    
 	    @FXML
-	    public void SignOut() 
-	    {
-	    	SignOutBTN.setOnAction(event -> {
-	    		SignOutBTN.getScene().getWindow().hide();
-
-	      			FXMLLoader loader = new FXMLLoader();
-	      			loader.setLocation(getClass().getResource("/gui/Signin.fxml"));
-	      			try {
-	      				loader.load();
-	      			} catch (IOException e) {
-	      				// TODO Auto-generated catch block
-	      				e.printStackTrace();
-	      			}
-
-	      			Parent root = loader.getRoot();
-	      			Stage stage = new Stage();
-	      			stage.setScene(new Scene(root));
-	      			stage.showAndWait();
-	      		});
-	    }
+		public void Search(ActionEvent event) {
+			
+		}
+	    
+	    
+	    @FXML
+		public void PressCEMS(ActionEvent event) {
+			TeacherMenuController TMCC = new TeacherMenuController();
+			TMCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+		}
+	    
+	    @FXML
+		public void PressBack(ActionEvent event) {
+	    	TeacherMenuController TMCC = new TeacherMenuController();
+			TMCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+		}
+	    
+	
+	    @FXML
+		public void PressReport(ActionEvent event) {
+			
+		}
+	    
+	    @FXML
+		public void SignOut(ActionEvent event) {
+			LoginFrameController LFCC = new LoginFrameController();
+			LFCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+		}
 }

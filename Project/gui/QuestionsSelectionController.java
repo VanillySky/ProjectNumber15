@@ -1,6 +1,6 @@
 package gui;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -296,24 +296,10 @@ public class QuestionsSelectionController extends Application implements Initial
 	}
 
 	@FXML
-	public void SignOut() {
-		OutButton.setOnAction(event -> {
-			OutButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/gui/LoginFrame.fxml"));
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+	public void SignOut(ActionEvent event) {
+		LoginFrameController LFCC = new LoginFrameController();
+		LFCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@Override

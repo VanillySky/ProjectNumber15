@@ -37,7 +37,7 @@
             <TableColumn fx:id="Author" prefWidth="137.0" text="Author" />
         </columns>
       </TableView>
-      <Button fx:id="CEMSButton" layoutX="-3.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="137.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="CEMSButton" layoutX="-3.0" layoutY="-5.0" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="137.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
       <Button fx:id="DeleteQuestionButton" layoutX="22.0" layoutY="536.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
       <Button fx:id="UpdateQuestionButton" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
       <Button fx:id="AddQuestionButton" layoutX="22.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="188.0" style="-fx-background-color: transparent;" />

@@ -106,26 +106,11 @@ public class BuildNewExamController {
 	}
 	
 	@FXML
-	public void SignOut() {
-		OutButton.setOnAction(event -> {
-			OutButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/gui/Signin.fxml"));
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
+	public void SignOut(ActionEvent event) {
+		LoginFrameController LFCC = new LoginFrameController();
+		LFCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-
 	
 	@FXML
 	public void AddQuestions(ActionEvent event) {

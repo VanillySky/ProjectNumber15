@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamStatisticsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherExamStatisticsController">
    <children>
       <ImageView fitHeight="579.0" fitWidth="1200.0">
          <image>
@@ -17,9 +17,9 @@
       </ImageView>
       <Button fx:id="SignOutBTN" layoutX="1067.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: transparent;" />
       <TextField fx:id="SearchByCourseNameTXT" layoutX="245.0" layoutY="159.0" prefHeight="31.0" prefWidth="292.0" />
-      <Button fx:id="SearchBTN" layoutX="536.0" layoutY="159.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="ReturnBTN" layoutX="129.0" layoutY="461.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="GetReportBTN" layoutX="851.0" layoutY="461.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SearchBTN" layoutX="536.0" layoutY="159.0" mnemonicParsing="false" onAction="#Search" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ReturnBTN" layoutX="129.0" layoutY="461.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="GetReportBTN" layoutX="851.0" layoutY="461.0" mnemonicParsing="false" onAction="#PressReport" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
       <TableView fx:id="ExamsTable" layoutX="4.0" layoutY="211.0" prefHeight="238.0" prefWidth="1190.0">
         <columns>
           <TableColumn fx:id="ExamNumberTable" prefWidth="117.0" text="Exam number" />
@@ -34,5 +34,6 @@
             <TableColumn fx:id="AuthorTable" prefWidth="75.0" text="Author" />
         </columns>
       </TableView>
+      <Button fx:id="CEMSButton" layoutX="-1.0" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="117.0" prefWidth="157.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

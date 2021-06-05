@@ -31,7 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class LoginFrameController implements Initializable{
+public class LoginFrameController {
 	@FXML
 	private AnchorPane AnPane;
 
@@ -128,14 +128,5 @@ public class LoginFrameController implements Initializable{
 			incorrectLogin.setText("*Login details are incorrect*");
 			incorrectLogin.setVisible(true);
 		}
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-//		 final ArrayList<String> msg = new ArrayList<String>();
-//	        msg.add("");
-//	        System.out.println("1");
-//	        ClientUI.chat.accept(msg);
-//	        System.out.println("10");
 	}
 }

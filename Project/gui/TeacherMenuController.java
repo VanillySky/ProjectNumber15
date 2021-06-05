@@ -35,7 +35,7 @@ public class TeacherMenuController {
 
 	@FXML
 	private Button ExamButton;
-	
+
 	public void start(Stage primaryStage) {
 		try {
 
@@ -50,88 +50,33 @@ public class TeacherMenuController {
 			e.printStackTrace();
 		}
 	}
-	
-	    
-	    @FXML
-	    public void SignOut() {
-	    	OutButton.setOnAction(event -> {
-	      		 OutButton.getScene().getWindow().hide();
 
-	      			FXMLLoader loader = new FXMLLoader();
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	      			loader.setLocation(getClass().getResource("/gui/Signin.fxml"));
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	      			try {
-	      				loader.load();
-	      			} catch (IOException e) {
-	      				// TODO Auto-generated catch block
-	      				e.printStackTrace();
-	      			}
-
-	      			Parent root = loader.getRoot();
-	      			Stage stage = new Stage();
-	      			stage.setScene(new Scene(root));
-	      			stage.showAndWait();
-	      		});
-	    }
-	    
-	    @FXML
-	    public void ExamIn(ActionEvent event) {
-	    	ExamsTableController ETCC = new ExamsTableController();
-			ETCC.start(new Stage());
-			((Node) event.getSource()).getScene().getWindow().hide();	
-		}//In to  ExamsTable.fxml a
-	    
-	    
-	    
-	    
-	    @FXML
-	public void QuestionIn()
-	{
-	    	QuestionButton.setOnAction(event -> {
-				ExamButton.getScene().getWindow().hide();
-
-				FXMLLoader loader = new FXMLLoader();
-/*
-				loader.setLocation(getClass().getResource("/gui/Question"));
-*/
-				try {
-					loader.load();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				Parent root = loader.getRoot();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.showAndWait();
-			});
-		
+	@FXML
+	public void SignOut(ActionEvent event) {
+		LoginFrameController LFCC = new LoginFrameController();
+		LFCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-	    public void StatisticIn()
-	    {
-	    	StatisticsButton.setOnAction(event -> {
-				ExamButton.getScene().getWindow().hide();
 
-				FXMLLoader loader = new FXMLLoader();
-/*
-				loader.setLocation(getClass().getResource("/gui/Statistic"));
-*/
-				try {
-					loader.load();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	@FXML
+	public void ExamIn(ActionEvent event) {
+		ExamsTableController ETCC = new ExamsTableController();
+		ETCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+	}// In to ExamsTable.fxml a
 
-				Parent root = loader.getRoot();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.showAndWait();
-			});
-	    	
-	    	
-	    }
-	    //ROMEO
+	@FXML
+	public void QuestionIn(ActionEvent event) {
+		BuildQuestionsController BQCC = new BuildQuestionsController();
+		BQCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+
+	}
+
+	public void StatisticIn(ActionEvent event) {
+		TeacherExamStatisticsController TES = new TeacherExamStatisticsController();
+		TES.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+
+	}
 }
