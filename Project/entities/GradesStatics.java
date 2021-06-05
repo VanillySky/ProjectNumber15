@@ -1,6 +1,6 @@
 package entities;
-
-public class GradesStatics {
+import java.io.Serializable;
+public class GradesStatics implements Serializable{
 	private String CodeExam;
 	private int numberOfStudent;
 	private int Avergae;

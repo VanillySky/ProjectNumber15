@@ -1,6 +1,6 @@
 package entities;
-
-public enum ConstCourse {
+import java.io.Serializable;
+public enum ConstCourse implements Serializable{
 	Algebra,//01
 	Geometry,//02
 	Logica,//03

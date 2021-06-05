@@ -148,8 +148,8 @@ public class ExamsTableController implements Initializable {
 		this.TeacherNameTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
 		this.ChoseQuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ChosenQuestion"));
 		this.QuestionPointsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionPoint"));
-		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstruction"));
-		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstruction"));
+		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
+		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
 		this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayExams.ShowExams()));
 	}
 

@@ -3,19 +3,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMenuController">
+<Pane prefHeight="577.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMenuController">
    <children>
-      <ImageView fitHeight="342.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="579.0" fitWidth="1048.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/TeacherMenu.png" />
          </image>
       </ImageView>
-      <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="82.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="OutButton" layoutX="535.0" layoutY="1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="22.0" prefWidth="65.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="StatisticsButton" layoutX="409.0" layoutY="121.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="119.0" prefWidth="114.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="QuestionButton" layoutX="252.0" layoutY="122.0" mnemonicParsing="false" onAction="#QuestionIn" prefHeight="119.0" prefWidth="121.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="ExamButton" layoutX="87.0" layoutY="126.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="112.0" prefWidth="114.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="135.0" prefWidth="147.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="OutButton" layoutX="971.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="36.0" prefWidth="129.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="StatisticsButton" layoutX="774.0" layoutY="351.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="54.0" prefWidth="158.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="QuestionButton" layoutX="482.0" layoutY="346.0" mnemonicParsing="false" onAction="#QuestionIn" prefHeight="64.0" prefWidth="168.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ExamButton" layoutX="192.0" layoutY="341.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="64.0" prefWidth="147.0" style="-fx-background-color: transparent;" />
    </children>
-</AnchorPane>
+</Pane>

@@ -13,10 +13,10 @@
    <children>
       <ImageView fitHeight="576.0" fitWidth="972.0">
          <image>
-            <Image url="@../Downloads/StatisticalsReport.png" />
+            <Image url="@../Images/Gradelist.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="96.0" layoutY="128.0" prefHeight="410.0" prefWidth="780.0">
+      <AnchorPane layoutX="35.0" layoutY="134.0" prefHeight="410.0" prefWidth="780.0">
          <children>
             <TableView layoutX="22.0" prefHeight="320.0" prefWidth="780.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
@@ -25,13 +25,14 @@
                   <TableColumn prefWidth="316.0" text="Exam grade" />
               </columns>
             </TableView>
-            <Button layoutX="287.0" layoutY="340.0" mnemonicParsing="false" style="-fx-background-color: #051942;" text="Get exam notebook" textFill="#fffdfd">
+            <Button layoutX="209.0" layoutY="338.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="173.0" style="-fx-background-color: transparent;" textFill="#fffdfd">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="858.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" style="-fx-background-color: #051942FFFFFF;" text="Sign out" textFill="#051940" />
+      <Button layoutX="858.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" textFill="#051940" />
+      <Button mnemonicParsing="false" prefHeight="122.0" prefWidth="126.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

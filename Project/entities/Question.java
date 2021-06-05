@@ -1,5 +1,8 @@
 
 package entities;
+
+import java.io.Serializable;
+
 /*
 ConstCourse {
  Algebra = "01";
@@ -11,7 +14,7 @@ ConstCourse {
  Chemistry = "07";
 }
 */
-public class Question {
+public class Question  implements Serializable{
 
 	public String QuestionNumber;
 	public String QuestionCode;

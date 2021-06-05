@@ -1,6 +1,6 @@
 package entities;
-
-public class Range {
+import java.io.Serializable;
+public class Range  implements Serializable{
 	private int Ramge1, Range2,Range3,Range4,Range5,Range6,Range7,Range8,Range9;
 
 	public Range(int ramge1, int range2, int range3, int range4, int range5, int range6, int range7, int range8,
