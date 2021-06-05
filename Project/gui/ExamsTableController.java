@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import java.net.URL;
 import entities.Exam;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ExamsTableController extends Application implements Initializable {
+public class ExamsTableController implements Initializable {
 
 	@FXML
 	private TableView<Exam> ExamTable;
@@ -94,11 +93,6 @@ public class ExamsTableController extends Application implements Initializable {
 	private Exam selectedExam = null;
 
 	private final ObservableList<Exam> dataList = FXCollections.observableArrayList();
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	
 	public void start(Stage primaryStage) {
 		try {
