@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import entities.Teacher;
 import entities.User;
 import entities.Exam;
+import entities.Question;
 
 public class SQLConnection {
 	private static Connection conn = null;
@@ -23,10 +24,9 @@ public class SQLConnection {
 			System.out.println("Driver definition failed");
 		}
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
-					"Ahmf1144");
-			// conn =
-			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
+			//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","Ahmf1144");
+			 conn =
+			 DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","Shaden#2034");
 			System.out.println("SQL connection succeed");
@@ -130,12 +130,32 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(array.get(0).getStudentInstructions());
-		System.out.println(array.get(0).getTeacherInstructions());
+		
 
 		return array;
 	}
+	public static ArrayList<Question> getAllquestions() {
+		ArrayList<Question> array = new ArrayList<Question>();
+		if (conn != null) {
+			try {
+				String query = "Select * FROM questions";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					Question qu = new Question(rs.getString("QuestionNumber"), rs.getString("QuestionCode"),
+							rs.getString("Question"), rs.getString("Subject"), rs.getString("QuestionInstruction"),
+							rs.getString("Answer1"), rs.getString("Answer2"), rs.getString("Answer3"),
+							rs.getString("Answer4"), rs.getString("RightAnswer"),rs.getString("Author"),rs.getString("point"));
+					array.add(qu);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 
+		return array;
+	}
 	public static void DeleteExam(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -144,6 +164,19 @@ public class SQLConnection {
 				PreparedStatement ps = conn.prepareStatement(
 						"DELETE FROM exams  WHERE ExamCode = ?");
 				ps.setString(1, ExamCode);
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	public static void DeleteQuestion(ArrayList<Object> arr) {
+
+		String questioncode = (String) arr.get(0);
+		if (conn != null)
+			try {
+				PreparedStatement ps = conn.prepareStatement(
+						"DELETE FROM questions  WHERE QuestionCode = ?");
+				ps.setString(1, questioncode);
 				ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();

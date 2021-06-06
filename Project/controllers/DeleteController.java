@@ -20,4 +20,14 @@ public class DeleteController {
 	
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 	}
+	public void DeleteQuestion(String Questioncode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(Questioncode);
+	
+		ClientMessage msgFromClient = new ClientMessage("DeleteQuestion", list, list.size());
+		
+		ClientUI.chat.accept(msgFromClient);
+	
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+	}
 }

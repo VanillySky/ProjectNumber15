@@ -129,13 +129,9 @@ public class ExamsTableController implements Initializable {
 		this.QuestionPointsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionPoint"));
 		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
 		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
-		this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayExams.ShowExams()));
-=======
 		if(controllers.DisplayController.ShowExams()!=null) {
 		this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
 		}
->>>>>>> 8cb18c5 delete done
 	}
 
 	@FXML
