@@ -120,6 +120,7 @@ public class BuildNewExamController {
 	
 	@FXML
 	public void AddQuestions(ActionEvent event) {
+		System.out.println(TeacherName);
 		int count = 0;
 		if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
 				|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
@@ -178,12 +179,11 @@ public class BuildNewExamController {
 			}
 		}
 		if (count == 0) {
-			String Examcode = ExamSubjectField.getText()+ExamCourseField.getText()+ExamNumberField.getText();
-			
-			Exam exam = new Exam(Examcode, ExamNumberField.getText(), ExamSubjectField.getText(), ExamCourseField.getText(),
-					ExamTimeField.getText(), TeacherName, null, null, StudentInstructionField.getText(), TeacherInstructionField.getText());
+		final String Examcode = ExamSubjectField.getText()+ExamCourseField.getText()+ExamNumberField.getText();
+						
 			QuestionsSelectionController QSCC = new QuestionsSelectionController();
-			QSCC.GetExam(exam);
+			QSCC.GetExam(Examcode,ExamSubjectField.getText());
+			System.out.println(Examcode);
 			QSCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
 		}

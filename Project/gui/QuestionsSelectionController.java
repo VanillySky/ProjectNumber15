@@ -1,11 +1,11 @@
 package gui;
 
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
+import controllers.AddController;
 import entities.Exam;
 import entities.Question;
 import javafx.application.Application;
@@ -149,11 +149,19 @@ public class QuestionsSelectionController extends Application implements Initial
 	@FXML
 	private Label pointERRLBL;
 
+	@FXML
+	private Button AddPoint;
+
+	@FXML
+	private TextField AddPointTXT;
+
 	private Question selectedQuestion = null;
+	private Question selectedQuestion2 = null;
 
 	private ObservableList<Question> dataList = FXCollections.observableArrayList();
-	private ArrayList<Question> arr = new ArrayList<Question>();
+	private ObservableList<Question> dataList2 = FXCollections.observableArrayList();
 	private Exam exam;
+	private String ExamCode , Subject;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -169,8 +177,6 @@ public class QuestionsSelectionController extends Application implements Initial
 			e.printStackTrace();
 		}
 	}
-
-	
 
 	@FXML
 	public void SearchByTeacher(ActionEvent event) {
@@ -255,16 +261,28 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	@FXML
 	public void AddNewQuestion(ActionEvent event) {
+		boolean flag = false;
+		
+		System.out.println(ExamCode);
 		if (selectedQuestion != null) {
-			Question question = new Question(selectedQuestion.QuestionNumber, selectedQuestion.QuestionCode,
+			Question question = new Question(selectedQuestion.QuestionCode, selectedQuestion.QuestionNumber,
 					selectedQuestion.Subject, selectedQuestion.Question, selectedQuestion.QuestionInstruction,
 					selectedQuestion.Answer1, selectedQuestion.Answer2, selectedQuestion.Answer3,
 					selectedQuestion.Answer4, selectedQuestion.RightAnswer, selectedQuestion.Author,
 					selectedQuestion.point);
-			arr.add(question);
-			dataList.add(question);
-			Table2.setItems(dataList);
-			dataList.clear();
+
+			for (int i = 0; i < dataList2.size(); i++) {
+				if (dataList2.get(i).QuestionCode == question.QuestionCode)
+					flag = true;
+			}
+			if (flag == false) {
+				dataList2.add(question);
+				Table2.setItems(dataList2);
+				Table2.refresh();
+			} else {
+				pointERRLBL.setText("the question is existed!!");
+				pointERRLBL.setVisible(true);
+			}
 
 		} else {
 			pointERRLBL.setText("please chose any question first!!");
@@ -275,15 +293,12 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	@FXML
 	public void RemoveQuestion(ActionEvent event) {
-		if (selectedQuestion != null) {
-			Question question = new Question(selectedQuestion.QuestionNumber, selectedQuestion.QuestionCode,
-					selectedQuestion.Subject, selectedQuestion.Question, selectedQuestion.QuestionInstruction,
-					selectedQuestion.Answer1, selectedQuestion.Answer2, selectedQuestion.Answer3,
-					selectedQuestion.Answer4, selectedQuestion.RightAnswer, selectedQuestion.Author,
-					selectedQuestion.point);
-			Table2.getItems().removeAll(question);
-			arr.remove(question);
+		if (Table2.getSelectionModel().getSelectedItem() != null) {
+			Table2.getItems().removeAll(Table2.getSelectionModel().getSelectedItem());
+			Table2.setItems(dataList2);
+			Table2.refresh();
 		} else {
+
 			pointERRLBL.setText("please chose any question first!!");
 			pointERRLBL.setVisible(true);
 
@@ -300,22 +315,39 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	@FXML
 	public void PressDone(ActionEvent event) {
-
 		int count = 0;
-		for (int i = 0; i < arr.size(); i++) {
-			if ((arr.get(i).point == null) || (arr.get(i).point == "0")) {
+		String questionscodes = "",points="";
+		
+		for(int i=0 ;i < dataList2.size() ; i++) {
+			
+		   questionscodes += dataList2.get(i).getQuestionCode()+"\n";
+			
+		   points += dataList2.get(i).getPoint()+"\n";
+		}
+//		exam.setChosenQuestion(questionscodes);
+//		exam.setQuestionPoint(points);
+		
+		
+		
+		for (int i = 0; i < dataList2.size(); i++) {
+			if ((dataList2.get(i).point == null) || (dataList2.get(i).point == "0")) {
 				pointERRLBL.setText("fill all points");
 				pointERRLBL.setVisible(true);
 				count++;
 			}
 		}
-		if (arr.isEmpty()) {
+		if (dataList2.isEmpty()) {
 			pointERRLBL.setText("please add any question!!");
 			pointERRLBL.setVisible(true);
 			count++;
 		}
+		
+		
 
 		if (count == 0) {
+			AddController AddCC = new AddController();
+			AddCC.AddExam(exam.getExamCode(), exam.getExamNumber() , exam.getExamSubject(), exam.getExamCourse(), exam.getExamTime(), exam.getTeacherName(),
+					questionscodes, points, exam.getStudentInstructions(),exam.getTeacherInstructions());
 			ExamsTableController ETCC = new ExamsTableController();
 			ETCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
@@ -332,7 +364,7 @@ public class QuestionsSelectionController extends Application implements Initial
 	@FXML
 	void selectQuestion2(MouseEvent event) {
 		if (Table2.getSelectionModel().getSelectedItem() != null) {
-			selectedQuestion = Table.getSelectionModel().getSelectedItem();
+			selectedQuestion2 = Table2.getSelectionModel().getSelectedItem();
 		}
 	}
 
@@ -342,16 +374,27 @@ public class QuestionsSelectionController extends Application implements Initial
 		LFCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-	
-	
-	public void GetExam (Exam exam ) {
-		this.exam=exam;
+
+	@FXML
+	void AddPoint(ActionEvent event) {
+		
+		if (selectedQuestion2 != null && AddPointTXT.getText()!=null) {
+			
+			selectedQuestion2.setPoint(AddPointTXT.getText());
+			Table2.refresh();
+		}
+
 	}
-	
+
+	public void GetExam(String ExamCode, String Subject) {
+		this.ExamCode=ExamCode;
+		this.Subject=Subject;
+		
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		this.QuestionCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
 		this.QuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionNumber"));
 		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("Subject"));
@@ -364,6 +407,20 @@ public class QuestionsSelectionController extends Application implements Initial
 		this.RightAnswerTable.setCellValueFactory((Callback) new PropertyValueFactory("RightAnswer"));
 		this.AuthorTable.setCellValueFactory((Callback) new PropertyValueFactory("Author"));
 		this.PointsTable1.setCellValueFactory((Callback) new PropertyValueFactory("point"));
+
+		this.QuestionCodeTable2.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
+		this.QuestionNumberTable2.setCellValueFactory((Callback) new PropertyValueFactory("QuestionNumber"));
+		this.subjectTable2.setCellValueFactory((Callback) new PropertyValueFactory("Subject"));
+		this.QuestionTable2.setCellValueFactory((Callback) new PropertyValueFactory("Question"));
+		this.QuestionInstractionsTable2.setCellValueFactory((Callback) new PropertyValueFactory("QuestionInstruction"));
+		this.AnswersTable21.setCellValueFactory((Callback) new PropertyValueFactory("Answer1"));
+		this.AnswersTable22.setCellValueFactory((Callback) new PropertyValueFactory("Answer2"));
+		this.AnswersTable23.setCellValueFactory((Callback) new PropertyValueFactory("Answer3"));
+		this.AnswersTable24.setCellValueFactory((Callback) new PropertyValueFactory("Answer4"));
+		this.RightAnswerTable2.setCellValueFactory((Callback) new PropertyValueFactory("RightAnswer"));
+		this.AuthorTable2.setCellValueFactory((Callback) new PropertyValueFactory("Author"));
+		this.PointsTable2.setCellValueFactory((Callback) new PropertyValueFactory("point"));
+
 		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions());
 		Table.setItems(dataList);
 	}

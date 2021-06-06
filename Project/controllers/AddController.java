@@ -29,4 +29,30 @@ public class AddController {
 	//	boolean bool=(boolean) msgFromServer.getData();
 		//return bool;
 	}
+	
+	
+	
+	public void AddExam(String ExamCode,String ExamNumber,String ExamSubject,String ExamCourse,String  ExamTime,
+			String TeacherName,String ChosenQuestion,String QuestionPoint ,String StudentInstructions,String TeacherInstructions) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		list.add( ExamNumber);
+		list.add( ExamSubject);
+		list.add(  ExamCourse);
+		list.add(ExamTime);
+		list.add( TeacherName);
+		list.add( ChosenQuestion);
+		list.add( QuestionPoint);
+		list.add( StudentInstructions);
+		list.add( TeacherInstructions);
+		
+		System.out.println(list.toString());
+		
+		ClientMessage msgFromClient = new ClientMessage("AddNewExam", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+	//	boolean bool=(boolean) msgFromServer.getData();
+		//return bool;
+	}
+	
 }

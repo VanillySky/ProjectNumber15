@@ -217,6 +217,41 @@ public class SQLConnection {
 			}
 		}
 	}
+	
+	
+	public static void AddNewExam(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+				
+						PreparedStatement stmt = conn.prepareStatement("INSERT INTO exams VALUES (?,?,?,?,?,?,?,?,?,?);");
+						/// String IdNumber,boolean isGuide()
+						stmt.setString(1, ((Exam) list.get(0)).getExamCode());
+						stmt.setString(2, ((Exam) list.get(0)).getExamNumber());
+						stmt.setString(3, ((Exam) list.get(0)).getExamSubject());
+
+						stmt.setString(4, ((Exam) list.get(0)).getExamCourse());
+
+						stmt.setString(5, ((Exam) list.get(0)).getExamTime());
+
+						stmt.setString(6, ((Exam) list.get(0)).getTeacherName());
+
+						stmt.setString(7, ((Exam) list.get(0)).getChosenQuestion());
+
+						stmt.setString(8, ((Exam) list.get(0)).getQuestionPoint());
+
+						stmt.setString(9, ((Exam) list.get(0)).getStudentInstructions());
+
+						stmt.setString(10, ((Exam) list.get(0)).getTeacherInstructions());
+
+						stmt.executeUpdate();
+					
+				}
+			 catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }
 
 
