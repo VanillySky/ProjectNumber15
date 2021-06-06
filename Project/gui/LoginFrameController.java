@@ -104,6 +104,8 @@ public class LoginFrameController {
 		if(user!=null) {
 		if (user.getRole().equals("Teacher")) {
 			try {
+				BuildNewExamController BNEC = new BuildNewExamController();
+				BNEC.getTeacherName(user.getFirstName());
 				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
 						InetAddress.getLocalHost().getHostName(), "Teacher", user.getUserId()));
 				} catch (UnknownHostException e) {

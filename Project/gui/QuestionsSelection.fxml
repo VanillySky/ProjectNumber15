@@ -21,8 +21,8 @@
       <Button fx:id="OutButton" layoutX="923.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: transparent;" />
       <TableView fx:id="Table" layoutX="17.0" layoutY="200.0" onMousePressed="#selectQuestion" prefHeight="126.0" prefWidth="1006.0">
         <columns>
-          <TableColumn fx:id="QuestionNumberTable" prefWidth="108.79998397827148" text="Question Number" />
           <TableColumn fx:id="QuestionCodeTable" prefWidth="88.80001831054688" text="Question Code" />
+          <TableColumn fx:id="QuestionNumberTable" prefWidth="108.79998397827148" text="Question Number" />
             <TableColumn fx:id="SubjectTable" prefWidth="97.60005187988281" text="subject" />
             <TableColumn fx:id="QuestionTable" prefWidth="103.20001220703125" text="Question " />
             <TableColumn fx:id="QuestionInstractionsTable" prefWidth="111.19998168945312" text="Question Instractions" />
@@ -40,8 +40,8 @@
       </TableView>
       <TableView fx:id="Table2" layoutX="17.0" layoutY="369.0" onMousePressed="#selectQuestion2" prefHeight="146.0" prefWidth="1006.0">
          <columns>
-            <TableColumn fx:id="QuestionNumberTable2" prefWidth="99.0" text="Question Number" />
             <TableColumn fx:id="QuestionCodeTable2" prefWidth="97.0" text="Question Code" />
+            <TableColumn fx:id="QuestionNumberTable2" prefWidth="99.0" text="Question Number" />
             <TableColumn fx:id="subjectTable2" prefWidth="68.0" text="subject" />
             <TableColumn fx:id="QuestionTable2" prefWidth="74.0" text="Question " />
             <TableColumn fx:id="QuestionInstractionsTable2" prefWidth="151.0" text="Question Instractions" />
@@ -60,7 +60,7 @@
       <TextField fx:id="SerchBySubjectNameTXT" layoutX="213.0" layoutY="166.0" prefHeight="10.0" prefWidth="252.0" />
       <Button fx:id="SubjectNameSearchButton" layoutX="476.0" layoutY="166.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
       <TextField fx:id="SerchByTeacherNameTXT" layoutX="213.0" layoutY="134.0" prefHeight="25.0" prefWidth="252.0" />
-      <Button fx:id="TeacherNameSearchButton" layoutX="476.0" layoutY="134.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="TeacherNameSearchButton" layoutX="476.0" layoutY="134.0" mnemonicParsing="false" onAction="#SearchByTeacher" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
       <Button fx:id="AddnewQuestionBTN" layoutX="445.0" layoutY="331.0" mnemonicParsing="false" onAction="#AddNewQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
       <Button fx:id="RemoveQuestionBTN" layoutX="445.0" layoutY="521.0" mnemonicParsing="false" onAction="#RemoveQuestion" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
       <Button fx:id="ReturnBTN" layoutX="51.0" layoutY="546.0" mnemonicParsing="false" onAction="#PressReturn" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />

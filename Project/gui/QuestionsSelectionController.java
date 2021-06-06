@@ -3,7 +3,10 @@ package gui;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
+
+import entities.Exam;
 import entities.Question;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -25,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class QuestionsSelectionController extends Application implements Initializable {
 
@@ -147,8 +151,9 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	private Question selectedQuestion = null;
 
-	private final ObservableList<Question> dataList = FXCollections.observableArrayList();
+	private ObservableList<Question> dataList = FXCollections.observableArrayList();
 	private ArrayList<Question> arr = new ArrayList<Question>();
+	private Exam exam;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -165,44 +170,80 @@ public class QuestionsSelectionController extends Application implements Initial
 		}
 	}
 
+	
+
 	@FXML
-	void search(ActionEvent event) {
+	public void SearchByTeacher(ActionEvent event) {
 
+		this.QuestionCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
+		this.QuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionNumber"));
+		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("Subject"));
+		this.QuestionTable.setCellValueFactory((Callback) new PropertyValueFactory("Question"));
+		this.QuestionInstractionsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionInstruction"));
+		this.AnswersTable1.setCellValueFactory((Callback) new PropertyValueFactory("Answer1"));
+		this.AnswersTable2.setCellValueFactory((Callback) new PropertyValueFactory("Answer2"));
+		this.AnswersTable3.setCellValueFactory((Callback) new PropertyValueFactory("Answer3"));
+		this.AnswersTable4.setCellValueFactory((Callback) new PropertyValueFactory("Answer4"));
+		this.RightAnswerTable.setCellValueFactory((Callback) new PropertyValueFactory("RightAnswer"));
+		this.AuthorTable.setCellValueFactory((Callback) new PropertyValueFactory("Author"));
+		this.PointsTable1.setCellValueFactory((Callback) new PropertyValueFactory("point"));
+
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions());
+		Table.setItems(dataList);
 		FilteredList<Question> filteredData = new FilteredList<Question>(dataList, b -> true);
-		if (TeacherNameSearchButton.isPressed()) {
-			SerchByTeacherNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
-				filteredData.setPredicate(Question -> {
-					if (newValue == null || newValue.isEmpty()) {
-						return true;
-					}
+		SerchByTeacherNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
+			filteredData.setPredicate(Question -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
 
-					String lowerCaseFilter = newValue.toLowerCase();
-					if (Question.getAuthor().toLowerCase().indexOf(lowerCaseFilter) != -1)
-						return true;
-					return false;// doesnt match
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (Question.Author.toLowerCase().indexOf(lowerCaseFilter) != -1)
+					return true;
+				return false;// doesnt match
 
-				});
 			});
-		} else {
-			SerchBySubjectNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
-				filteredData.setPredicate(Question -> {
-					if (newValue == null || newValue.isEmpty()) {
-						return true;
-					}
-
-					String lowerCaseFilter = newValue.toLowerCase();
-					if (Question.getSubject().toLowerCase().indexOf(lowerCaseFilter) != -1)
-						return true;
-					return false;// doesnt match
-				});
-			});
-
-		}
-
+		});
 		SortedList<Question> sortedData = new SortedList<>(filteredData);
 		sortedData.comparatorProperty().bind(Table.comparatorProperty());
 		Table.setItems(sortedData);
+	}
 
+	@FXML
+	public void SearchByCourse(ActionEvent event) {
+
+		this.QuestionCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
+		this.QuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionNumber"));
+		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("Subject"));
+		this.QuestionTable.setCellValueFactory((Callback) new PropertyValueFactory("Question"));
+		this.QuestionInstractionsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionInstruction"));
+		this.AnswersTable1.setCellValueFactory((Callback) new PropertyValueFactory("Answer1"));
+		this.AnswersTable2.setCellValueFactory((Callback) new PropertyValueFactory("Answer2"));
+		this.AnswersTable3.setCellValueFactory((Callback) new PropertyValueFactory("Answer3"));
+		this.AnswersTable4.setCellValueFactory((Callback) new PropertyValueFactory("Answer4"));
+		this.RightAnswerTable.setCellValueFactory((Callback) new PropertyValueFactory("RightAnswer"));
+		this.AuthorTable.setCellValueFactory((Callback) new PropertyValueFactory("Author"));
+		this.PointsTable1.setCellValueFactory((Callback) new PropertyValueFactory("point"));
+
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions());
+		Table.setItems(dataList);
+		FilteredList<Question> filteredData = new FilteredList<Question>(dataList, b -> true);
+		SerchBySubjectNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
+			filteredData.setPredicate(Question -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (Question.Subject.toLowerCase().indexOf(lowerCaseFilter) != -1)
+					return true;
+				return false;// doesnt match
+
+			});
+		});
+		SortedList<Question> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(Table.comparatorProperty());
+		Table.setItems(sortedData);
 	}
 
 	@FXML
@@ -301,36 +342,29 @@ public class QuestionsSelectionController extends Application implements Initial
 		LFCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
+	
+	
+	public void GetExam (Exam exam ) {
+		this.exam=exam;
+	}
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		QuestionNumberTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionNumberTable"));
-		QuestionCodeTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionCodeTable"));
-		SubjectTable.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectTable"));
-		QuestionTable.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionTable"));
-		QuestionInstractionsTable
-				.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionInstractionsTable"));
-		AnswersTable1.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable1"));
-		AnswersTable222.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable222"));
-		AnswersTable3.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable3"));
-		AnswersTable4.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable4"));
-		RightAnswerTable.setCellValueFactory(new PropertyValueFactory<Question, String>("RightAnswerTable"));
-		AuthorTable.setCellValueFactory(new PropertyValueFactory<Question, String>("AuthorTable"));
-		PointsTable1.setCellValueFactory(new PropertyValueFactory<Question, String>("PointsTable1"));
-		QuestionNumberTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionNumberTable2"));
-		QuestionCodeTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionCodeTable2"));
-		subjectTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("SubjectTable2"));
-		QuestionTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionTable2"));
-		QuestionInstractionsTable2
-				.setCellValueFactory(new PropertyValueFactory<Question, String>("QuestionInstractionsTable2"));
-		AnswersTable21.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable21"));
-		AnswersTable22.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable22"));
-		AnswersTable23.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable23"));
-		AnswersTable24.setCellValueFactory(new PropertyValueFactory<Question, String>("AnswersTable24"));
-		RightAnswerTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("RightAnswerTable2"));
-		AuthorTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("AuthorTable2"));
-		PointsTable2.setCellValueFactory(new PropertyValueFactory<Question, String>("PointsTable2"));
-
+		
+		this.QuestionCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
+		this.QuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionNumber"));
+		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("Subject"));
+		this.QuestionTable.setCellValueFactory((Callback) new PropertyValueFactory("Question"));
+		this.QuestionInstractionsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionInstruction"));
+		this.AnswersTable1.setCellValueFactory((Callback) new PropertyValueFactory("Answer1"));
+		this.AnswersTable2.setCellValueFactory((Callback) new PropertyValueFactory("Answer2"));
+		this.AnswersTable3.setCellValueFactory((Callback) new PropertyValueFactory("Answer3"));
+		this.AnswersTable4.setCellValueFactory((Callback) new PropertyValueFactory("Answer4"));
+		this.RightAnswerTable.setCellValueFactory((Callback) new PropertyValueFactory("RightAnswer"));
+		this.AuthorTable.setCellValueFactory((Callback) new PropertyValueFactory("Author"));
+		this.PointsTable1.setCellValueFactory((Callback) new PropertyValueFactory("point"));
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions());
+		Table.setItems(dataList);
 	}
 }

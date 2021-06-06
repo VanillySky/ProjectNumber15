@@ -31,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import server.SQLConnection;
 
 public class ExamsTableController implements Initializable {
 
@@ -86,20 +87,21 @@ public class ExamsTableController implements Initializable {
 	private Button DeleteExamBTN;
 
 	@FXML
-	private Button CourseNameSerchBTN;
-
-	@FXML
-	private Button TeacherNameSerchBTN;
-
-	@FXML
 	private Button OutButton;
 
 	@FXML
 	private Label LabelERR;
 
+	@FXML
+	private Button SearchByTeacherBTN;
+
+	@FXML
+	private Button SearchBycourseBTN;
+
 	private Exam selectedExam = null;
 
-	private final ObservableList<Exam> dataList = FXCollections.observableArrayList();
+	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
+	private ObservableList<Exam> dataList1 = FXCollections.observableArrayList();
 
 	public void start(Stage primaryStage) {
 		try {
@@ -116,8 +118,8 @@ public class ExamsTableController implements Initializable {
 		}
 	}
 
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
+	@FXML
+	public void SearchByTeacher(ActionEvent event) {
 
 		this.ExamCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
 		this.ExamNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamNumber"));
@@ -129,46 +131,60 @@ public class ExamsTableController implements Initializable {
 		this.QuestionPointsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionPoint"));
 		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
 		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
-		if(controllers.DisplayController.ShowExams()!=null) {
-		this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
-		}
+
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams());
+		ExamTable.setItems(dataList);
+
+		FilteredList<Exam> filteredData = new FilteredList<Exam>(dataList, b -> true);
+		SerchByTeacherNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
+			filteredData.setPredicate(Exam -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (Exam.getTeacherName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+					return true;
+				return false;// doesnt match
+
+			});
+		});
+		SortedList<Exam> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(ExamTable.comparatorProperty());
+		ExamTable.setItems(sortedData);
 	}
 
 	@FXML
-	public void Search(ActionEvent event) {
+	public void SearchByCourse(ActionEvent event) {
 
-		FilteredList<Exam> filteredData = new FilteredList<Exam>(dataList, b -> true);
+		this.ExamCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
+		this.ExamNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamNumber"));
+		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamSubject"));
+		this.CourseTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
+		this.ExamTimeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamTime"));
+		this.TeacherNameTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
+		this.ChoseQuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ChosenQuestion"));
+		this.QuestionPointsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionPoint"));
+		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
+		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
 
-		if (TeacherNameSerchBTN.isPressed()) {
-			SerchByTeacherNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
-				filteredData.setPredicate(Exam -> {
-					if (newValue == null || newValue.isEmpty()) {
-						return true;
-					}
+		dataList1 = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams());
+		ExamTable.setItems(dataList1);
 
-					String lowerCaseFilter = newValue.toLowerCase();
-					if (Exam.getTeacherName().toLowerCase().indexOf(lowerCaseFilter) != -1)
-						return true;
-					return false;// doesnt match
+		FilteredList<Exam> filteredData = new FilteredList<Exam>(dataList1, b -> true);
+		SerchByCourseNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
+			filteredData.setPredicate(Exam -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
 
-				});
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (Exam.getExamCourse().toLowerCase().indexOf(lowerCaseFilter) != -1)
+					return true;
+				return false;// doesnt match
+
 			});
-
-		} else {
-			SerchByCourseNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
-				filteredData.setPredicate(Exam -> {
-					if (newValue == null || newValue.isEmpty()) {
-						return true;
-					}
-
-					String lowerCaseFilter = newValue.toLowerCase();
-					if (Exam.getExamCourse().toLowerCase().indexOf(lowerCaseFilter) != -1)
-						return true;
-					return false;// doesnt match
-				});
-			});
-		}
-
+		});
 		SortedList<Exam> sortedData = new SortedList<>(filteredData);
 		sortedData.comparatorProperty().bind(ExamTable.comparatorProperty());
 		ExamTable.setItems(sortedData);
@@ -177,7 +193,6 @@ public class ExamsTableController implements Initializable {
 
 	@FXML
 	public void PressCEMS(ActionEvent event) {
-		//System.out.println(selectedExam.getExamCode());
 		TeacherMenuController TMCC = new TeacherMenuController();
 		TMCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -190,9 +205,6 @@ public class ExamsTableController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
-	
-	
-	
 	@FXML
 	public void UpdateExam(ActionEvent event) {
 		if (selectedExam != null) {
@@ -213,12 +225,14 @@ public class ExamsTableController implements Initializable {
 			LabelERR.setVisible(true);
 		}
 	}
+
 	@FXML
 	public void DeleteExam(ActionEvent event) {
-        DeleteController DC = new DeleteController();
-        DC.DeleteExam(selectedExam.getExamCode()); 
-        
-        this.ExamTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
+		DeleteController DC = new DeleteController();
+		DC.DeleteExam(selectedExam.getExamCode());
+
+		this.ExamTable
+				.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
 		this.ExamTable.refresh();
 	}
 
@@ -234,5 +248,24 @@ public class ExamsTableController implements Initializable {
 		LoginFrameController LFCC = new LoginFrameController();
 		LFCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+
+		this.ExamCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
+		this.ExamNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamNumber"));
+		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamSubject"));
+		this.CourseTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
+		this.ExamTimeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamTime"));
+		this.TeacherNameTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
+		this.ChoseQuestionNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ChosenQuestion"));
+		this.QuestionPointsTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionPoint"));
+		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
+		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
+		if (controllers.DisplayController.ShowExams() != null) {
+			this.ExamTable.setItems(
+					FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
+		}
 	}
 }
