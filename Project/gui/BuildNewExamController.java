@@ -72,6 +72,12 @@ public class BuildNewExamController {
 	@FXML
 	private Label onlynumbersLBL1;
 	
+	@FXML
+    private Label onlytwonumberLBL1;
+
+    @FXML
+    private Label onlytwonumberLBL11;
+	private String TeacherName;
 	
 	
 	public void start(Stage primaryStage) {
@@ -114,6 +120,7 @@ public class BuildNewExamController {
 	
 	@FXML
 	public void AddQuestions(ActionEvent event) {
+		System.out.println(TeacherName);
 		int count = 0;
 		if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
 				|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
@@ -124,13 +131,41 @@ public class BuildNewExamController {
 		try {
 			 Integer.parseInt(ExamNumberField.getText());
 			if ((ExamNumberField.getText().length() != 2) && (ExamNumberField.getText().length() != 0)) {
-				onlytwonumberLBL.setVisible(true);// more than two numbers
+				onlytwonumberLBL.setVisible(true);
 				count++;
 			}
 
 		} catch (NumberFormatException e) {
 			if (ExamNumberField.getText().length() != 0) {
 				onlytwonumberLBL.setVisible(true);
+				count++;
+			}
+		}
+		
+		try {
+			 Integer.parseInt(ExamSubjectField.getText());
+			if ((ExamSubjectField.getText().length() != 2) && (ExamSubjectField.getText().length() != 0)) {
+				onlytwonumberLBL1.setVisible(true);
+				count++;
+			}
+
+		} catch (NumberFormatException e) {
+			if (ExamSubjectField.getText().length() != 0) {
+				onlytwonumberLBL1.setVisible(true);
+				count++;
+			}
+		}
+		
+		try {
+			 Integer.parseInt(ExamCourseField.getText());
+			if ((ExamCourseField.getText().length() != 2) && (ExamCourseField.getText().length() != 0)) {
+				onlytwonumberLBL11.setVisible(true);
+				count++;
+			}
+
+		} catch (NumberFormatException e) {
+			if (ExamCourseField.getText().length() != 0) {
+				onlytwonumberLBL11.setVisible(true);
 				count++;
 			}
 		}
@@ -144,13 +179,19 @@ public class BuildNewExamController {
 			}
 		}
 		if (count == 0) {
+		final String Examcode = ExamSubjectField.getText()+ExamCourseField.getText()+ExamNumberField.getText();
+						
 			QuestionsSelectionController QSCC = new QuestionsSelectionController();
+			QSCC.GetExam(Examcode,ExamSubjectField.getText());
+			System.out.println(Examcode);
 			QSCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
 		}
 	}
 
-	
+	public void getTeacherName(String TeacherName) {
+		this.TeacherName = TeacherName;
+	}
 
 	public void UpdateExam(Exam exam) {
 		ExamNumberField.setText(exam.getExamNumber());

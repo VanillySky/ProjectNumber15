@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewExamController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="1063.0" layoutX="-18.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="1063.0" layoutX="-19.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/BuildNewExamX.png" />
          </image>
@@ -20,8 +20,8 @@
       <Button fx:id="BackButton" layoutX="96.0" layoutY="456.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
       <Button fx:id="AddQuestionsButton" layoutX="681.0" layoutY="456.0" mnemonicParsing="false" onAction="#AddQuestions" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
       <TextField fx:id="ExamNumberField" layoutX="395.0" layoutY="162.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 01" />
-      <TextField fx:id="ExamSubjectField" layoutX="395.0" layoutY="205.0" prefHeight="33.0" prefWidth="260.0" promptText="ex. math(02)" />
-      <TextField fx:id="ExamCourseField" layoutX="395.0" layoutY="254.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. algebra(03)" />
+      <TextField fx:id="ExamSubjectField" layoutX="395.0" layoutY="205.0" prefHeight="33.0" prefWidth="260.0" promptText="ex. 02" />
+      <TextField fx:id="ExamCourseField" layoutX="395.0" layoutY="254.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 03" />
       <TextField fx:id="ExamTimeField" layoutX="395.0" layoutY="307.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 3" />
       <TextField fx:id="StudentInstructionField" layoutX="395.0" layoutY="350.0" prefHeight="31.0" prefWidth="260.0" />
       <TextField fx:id="TeacherInstructionField" layoutX="395.0" layoutY="396.0" prefHeight="31.0" prefWidth="260.0" />
@@ -53,5 +53,7 @@
             <Font name="Arial" size="36.0" />
          </font>
       </Label>
+      <Label fx:id="onlytwonumberLBL1" layoutX="665.0" layoutY="213.0" text="only two digitals please!!!" textFill="RED" visible="false" />
+      <Label fx:id="onlytwonumberLBL11" layoutX="665.0" layoutY="262.0" text="only two digitals please!!!" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

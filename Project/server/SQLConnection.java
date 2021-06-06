@@ -24,9 +24,8 @@ public class SQLConnection {
 			System.out.println("Driver definition failed");
 		}
 		try {
-			//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","Ahmf1144");
-			 conn =
-			 DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","Ahmf1144");
+			 //conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","Shaden#2034");
 			System.out.println("SQL connection succeed");
@@ -142,8 +141,8 @@ public class SQLConnection {
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				while (rs.next()) {
-					Question qu = new Question(rs.getString("QuestionNumber"), rs.getString("QuestionCode"),
-							rs.getString("Question"), rs.getString("Subject"), rs.getString("QuestionInstruction"),
+					Question qu = new Question( rs.getString("QuestionCode"),rs.getString("QuestionNumber"),
+							rs.getString("Subject"),rs.getString("Question"),  rs.getString("QuestionInstruction"),
 							rs.getString("Answer1"), rs.getString("Answer2"), rs.getString("Answer3"),
 							rs.getString("Answer4"), rs.getString("RightAnswer"),rs.getString("Author"),rs.getString("point"));
 					array.add(qu);
@@ -218,23 +217,42 @@ public class SQLConnection {
 			}
 		}
 	}
+	
+	
+	public static void AddNewExam(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+				
+						PreparedStatement stmt = conn.prepareStatement("INSERT INTO exams VALUES (?,?,?,?,?,?,?,?,?,?);");
+						/// String IdNumber,boolean isGuide()
+						stmt.setString(1, ((Exam) list.get(0)).getExamCode());
+						stmt.setString(2, ((Exam) list.get(0)).getExamNumber());
+						stmt.setString(3, ((Exam) list.get(0)).getExamSubject());
+
+						stmt.setString(4, ((Exam) list.get(0)).getExamCourse());
+
+						stmt.setString(5, ((Exam) list.get(0)).getExamTime());
+
+						stmt.setString(6, ((Exam) list.get(0)).getTeacherName());
+
+						stmt.setString(7, ((Exam) list.get(0)).getChosenQuestion());
+
+						stmt.setString(8, ((Exam) list.get(0)).getQuestionPoint());
+
+						stmt.setString(9, ((Exam) list.get(0)).getStudentInstructions());
+
+						stmt.setString(10, ((Exam) list.get(0)).getTeacherInstructions());
+
+						stmt.executeUpdate();
+					
+				}
+			 catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }
 
 
-//
-//if (conn != null)
-//	try {
-//		PreparedStatement ps = conn.prepareStatement(
-//				"DELETE FROM waitingList  WHERE parkName = ? and visitDate = ? and visitTime = ? and ordererId = ?");
-//		ps.setString(1, order.getPark().getName());
-//		ps.setDate(2, order.getVisitDate());
-//		ps.setTime(3, order.getVisitTime());
-//		ps.setString(4, order.getOrderer());
-//		ps.executeUpdate();
-//		PreparedStatement ps2 = conn.prepareStatement(
-//				"delete from orders where ordererId=? and visitTime=? and visitDate=? and parkName=? ;");
-//		ps2.setString(1, order.getOrderer());
-//		ps2.setTime(2, order.getVisitTime());
-//		ps2.setDate(3, order.getVisitDate());
-//		ps2.setString(4, order.getPark().getName());
-//		ps2.executeUpdate();
+
