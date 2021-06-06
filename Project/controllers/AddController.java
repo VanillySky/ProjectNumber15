@@ -8,7 +8,7 @@ import client.ChatClient;
 import client.ClientUI;
 
 public class AddController {
-	public void AddQuestion(String QuestionNumber,String QuestionCode,String Question,String Subject,String QuestionInstruction,
+	public static void AddQuestion(String QuestionNumber,String QuestionCode,String Question,String Subject,String QuestionInstruction,
 			String Answer1,String Answer2, String Answer3,String Answer4,String RightAnswer,String Author,String point) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(QuestionNumber);

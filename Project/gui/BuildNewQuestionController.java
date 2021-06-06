@@ -1,18 +1,61 @@
 package gui;
 
-import java.io.IOException;
-import java.util.ArrayList;
 
-import entities.Question;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collection;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import entities.Question;
 
-public class BuildNewQuestionController {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.ResourceBundle;
+
+import client.ChatClient;
+import client.ClientUI;
+import controllers.DeleteController;
+import controllers.DisplayController;
+import controllers.AddController;
+
+import java.net.URL;
+import entities.Exam;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+public class BuildNewQuestionController    {
 
 	@FXML
 	private Button MainButton;
@@ -53,10 +96,9 @@ public class BuildNewQuestionController {
 	@FXML
 	private TextField Answer2Txt;
 
-	@FXML
-	// DatabaseHandler dbHandler
+	
 	public ArrayList<String> AL = new ArrayList();
-	//private Client cl = new Client();
+	@FXML
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -71,6 +113,7 @@ public class BuildNewQuestionController {
 			e.printStackTrace();
 		}
 	}	
+	/*
 	public void AddQuestionButton() {
 		String author="AAAAA";
 		Question Qer= new Question (QuestionNumberTxt.getText(),CourseTxt.getText()+QuestionNumberTxt.getText(),CourseTxt.getText(),TheQuestionTxt.getText()
@@ -118,10 +161,13 @@ public class BuildNewQuestionController {
 			stage.setScene(new Scene(root));
 			stage.showAndWait();
 
-		});
+		});*/
 		
+	
+	@FXML
+	public void AddQ() {
+		controllers.AddController.AddQuestion("1","1","1","1","1","1","1","1","1","1","1","1");
 	}
-
 	@FXML
 	public void PressCEMS() {
 		MainButton.setOnAction(event -> {
@@ -167,7 +213,9 @@ public class BuildNewQuestionController {
 			stage.showAndWait();
 		});
 	}
-
+	
+	
+	
 	@FXML
 	public void SignOut() {
 		SignOutButton.setOnAction(event -> {
@@ -190,5 +238,6 @@ public class BuildNewQuestionController {
 			stage.showAndWait();
 		});
 	}
+	
 
 }

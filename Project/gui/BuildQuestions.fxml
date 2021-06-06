@@ -40,7 +40,7 @@
       <Button fx:id="CEMSButton" layoutX="-3.0" layoutY="-5.0" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="137.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
       <Button fx:id="DeleteQuestionButton" layoutX="22.0" layoutY="536.0" mnemonicParsing="false" onAction="#DeleteQuestion" prefHeight="52.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
       <Button fx:id="UpdateQuestionButton" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="AddQuestionButton" layoutX="22.0" layoutY="442.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddQuestionButton" layoutX="22.0" layoutY="442.0" mnemonicParsing="false" onAction="#AddNewQuestion" prefHeight="44.0" prefWidth="188.0" style="-fx-background-color: transparent;" />
       <Button fx:id="SignOutButton" layoutX="924.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="21.0" prefWidth="142.0" style="-fx-background-color: transparent;" />
       <Button fx:id="SerchByCourseButton" layoutX="458.0" layoutY="178.0" minWidth="26.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="553.0" />
       <Button fx:id="SerchByTeacherButton" layoutX="485.0" layoutY="145.0" minWidth="22.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="22.0" style="-fx-background-color: transparent;" />
