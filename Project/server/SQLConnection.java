@@ -182,6 +182,42 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 	}
+	public static void AddNewQuestion(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+				
+						PreparedStatement stmt = conn.prepareStatement("INSERT INTO questions VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
+						/// String IdNumber,boolean isGuide()
+						stmt.setString(1, ((Question) list.get(0)).getQuestionNumber());
+						stmt.setString(2, ((Question) list.get(0)).getQuestionCode());
+						stmt.setString(3, ((Question) list.get(0)).getQuestion());
+
+						stmt.setString(4, ((Question) list.get(0)).getSubject());
+
+						stmt.setString(5, ((Question) list.get(0)).getQuestionInstruction());
+
+						stmt.setString(6, ((Question) list.get(0)).getAnswer1());
+
+						stmt.setString(7, ((Question) list.get(0)).getAnswer2());
+
+						stmt.setString(8, ((Question) list.get(0)).getAnswer3());
+
+						stmt.setString(9, ((Question) list.get(0)).getAnswer4());
+
+						stmt.setString(10, ((Question) list.get(0)).getRightAnswer());
+
+						stmt.setString(11, ((Question) list.get(0)).getAuthor());
+
+						stmt.setString(12, ((Question) list.get(0)).getPoint());
+
+						stmt.executeUpdate();
+					
+				}
+			 catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
 
 
