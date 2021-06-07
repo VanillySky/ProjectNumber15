@@ -15,7 +15,7 @@
             <Image url="@../Images/Question%20tableX.png" />
          </image>
       </ImageView>
-      <TableView fx:id="Table" layoutX="48.0" layoutY="284.0" prefHeight="222.0" prefWidth="1064.0">
+      <TableView fx:id="Table" layoutX="48.0" layoutY="284.0" onMousePressed="#selectQuestion" prefHeight="222.0" prefWidth="1064.0">
         <columns>
             <TableColumn fx:id="QuestCodeTable" prefWidth="93.0" text="Question Code" />
           <TableColumn fx:id="QuestNumTable" prefWidth="92.0" text="Question Num." />

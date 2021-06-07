@@ -131,16 +131,16 @@ public class NewQuestionController {
     	try {
 			Integer.parseInt(RightAnswerTXT.getText());
 
-			if ((RightAnswerTXT.getText().length() != 2) && (RightAnswerTXT.getText().length() != 0)) {
+			if ((RightAnswerTXT.getText().length() != 1) && (RightAnswerTXT.getText().length() != 0)&& !RightAnswerTXT.getText().equals("1")
+					&& !RightAnswerTXT.getText().equals("2")&& !RightAnswerTXT.getText().equals("3") &&
+					!RightAnswerTXT.getText().equals("4")) {
 				ErrorSelectRDLBL.setVisible(true); // show the suitable warning message
 				count++;
 			}
 
 		} catch (NumberFormatException e) {
 			// if
-			if (RightAnswerTXT.getText().length()!= 0 && !RightAnswerTXT.getText().equals("1")
-					&& !RightAnswerTXT.getText().equals("2")&& !RightAnswerTXT.getText().equals("3") &&
-					!RightAnswerTXT.getText().equals("4")) {
+			if (RightAnswerTXT.getText().length()!= 0) {
 				ErrorSelectRDLBL.setVisible(true);// show the suitable warning message
 				count++;
 			}
@@ -160,15 +160,6 @@ public class NewQuestionController {
         	((Node) event.getSource()).getScene().getWindow().hide();
     		
     	}
-    		
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-
     }
 
     @FXML

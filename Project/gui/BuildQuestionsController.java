@@ -146,7 +146,7 @@ public class BuildQuestionsController implements Initializable {
 	@FXML
 	public void DeleteQuestion(ActionEvent event) {
 		DeleteController DC = new DeleteController();
-		DC.DeleteExam(selectedQuestion.getQuestionCode());
+		DC.DeleteQuestion(selectedQuestion.getQuestionCode());
 
 		Table.setItems(
 				FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions()));

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import client.ChatClient;
 import controllers.AddController;
+import controllers.DeleteController;
 import controllers.UpgradeConroller;
 import entities.Exam;
 import entities.Question;
@@ -360,7 +361,9 @@ public class QuestionsSelectionController extends Application implements Initial
 					ChatClient.currentUser.getFirstName(), questionscodes, points, StudentIns, TeacherIns);
 
 			if (temp) {
-				UpgradeConroller.UpgradeExam(exam);
+				DeleteController DC = new DeleteController();
+				DC.DeleteExam(exam.getExamCode());
+				AddController.AddExam(exam);
 
 			} else
 				AddController.AddExam(exam);
