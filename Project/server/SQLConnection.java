@@ -13,10 +13,9 @@ import client.ChatClient;
 import entities.Teacher;
 import entities.User;
 import entities.Exam;
-import entities.ExamTime;
 import entities.Question;
 import entities.Student;
-import entities.StudentGrade;
+import entities.StudentExamanation;
 
 public class SQLConnection {
 	private static Connection conn = null;
@@ -164,45 +163,27 @@ public class SQLConnection {
 		return array;
 	}
 
-	public static ArrayList<StudentGrade> getAllgrades() {
-		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+	public static ArrayList<StudentExamanation> getTime() {
+		ArrayList<StudentExamanation> array = new ArrayList<StudentExamanation>();
 		if (conn != null) {
 			try {
-				String query = "Select * FROM grades WHERE StudentUserName = '" + ChatClient.currentUser.getUserName()
-						+ "'";
+				String query = "Select * FROM studentexam WHERE StudenUserName + '"
+						+ ChatClient.currentUser.getUserName() + "'";
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				while (rs.next()) {
-					StudentGrade sg = new StudentGrade(null, rs.getString("ExamCode"),
-							rs.getString("ExamCourse"), rs.getString("ExamGrade"));
-					array.add(sg);
+					StudentExamanation SE = new StudentExamanation(rs.getString("StudneUserName"), rs.getString("ExamCode"),
+							rs.getString("ExamHours"),rs.getString("ExamMinutes"));
+					array.add(SE);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(array.get(0).getExamGrade());
+
 		return array;
 	}
-	/*public static ArrayList<StudentGrade> getTime() {
-		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
-		if (conn != null) {
-			try {
-				String query = "Select * FROM exams WHERE StudentUserName = '" + ChatClient.currentUser.getUserName()
-						+ "'";
-				Statement st = conn.createStatement();
-				ResultSet rs = st.executeQuery(query);
-				while (rs.next()) {
-					ExamTime et = new ExamTime(rs.getString("ExamHours"), rs.getString("ExamMinuets"));
-					array.add(et);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		System.out.println(array.get(0).getExamGrade());
-		return array;
-	}*/
+
 	public static void DeleteExam(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -229,13 +210,12 @@ public class SQLConnection {
 			}
 	}
 
-	public static void AddNewQuestion(ArrayList<Object> list) {
+	public static boolean AddNewQuestion(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
 
 				PreparedStatement stmt = conn
 						.prepareStatement("INSERT INTO questions VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
-				/// String IdNumber,boolean isGuide()
 				stmt.setString(1, ((Question) list.get(0)).getQuestionNumber());
 				stmt.setString(2, ((Question) list.get(0)).getQuestionCode());
 				stmt.setString(3, ((Question) list.get(0)).getQuestion());
@@ -259,19 +239,19 @@ public class SQLConnection {
 				stmt.setString(12, ((Question) list.get(0)).getPoint());
 
 				stmt.executeUpdate();
-
+				return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		return false;
 	}
 
-	public static void AddNewExam(ArrayList<Object> list) {
+	public static boolean AddNewExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
 
 				PreparedStatement stmt = conn.prepareStatement("INSERT INTO exams VALUES (?,?,?,?,?,?,?,?,?,?);");
-				/// String IdNumber,boolean isGuide()
 				stmt.setString(1, ((Exam) list.get(0)).getExamCode());
 				stmt.setString(2, ((Exam) list.get(0)).getExamNumber());
 				stmt.setString(3, ((Exam) list.get(0)).getExamSubject());
@@ -291,11 +271,13 @@ public class SQLConnection {
 				stmt.setString(10, ((Exam) list.get(0)).getTeacherInstructions());
 
 				stmt.executeUpdate();
-
+				return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		return false;
+
 	}
 
 }

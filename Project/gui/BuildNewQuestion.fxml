@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewQuestionController">
+<AnchorPane prefHeight="600.0" prefWidth="1057.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildNewQuestionController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1072.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -16,7 +16,7 @@
       <Button fx:id="MainButton" layoutX="-3.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="127.0" prefWidth="141.0" style="-fx-background-color: transparent;" />
       <Button fx:id="SignOutButton" layoutX="941.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: transparent;" />
       <Button fx:id="ReturnButton" layoutX="112.0" layoutY="478.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="AddQuestionButton" layoutX="748.0" layoutY="478.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="134.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddQuestionButton" layoutX="748.0" layoutY="478.0" mnemonicParsing="false" onAction="#AddQ" prefHeight="31.0" prefWidth="134.0" style="-fx-background-color: transparent;" />
       <TextField fx:id="RightAnswerTxt" layoutX="413.0" layoutY="347.0" prefHeight="20.0" prefWidth="55.0" style="-fx-background-color: transparent;" />
       <TextField fx:id="CourseTxt" cache="true" layoutX="413.0" layoutY="133.0" prefHeight="20.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-background-color: transparent;" />
       <TextField fx:id="Answer1Txt" blendMode="DARKEN" layoutX="413.0" layoutY="219.0" prefHeight="20.0" prefWidth="250.0" AnchorPane.bottomAnchor="350.0" />

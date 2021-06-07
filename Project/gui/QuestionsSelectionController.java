@@ -346,8 +346,7 @@ public class QuestionsSelectionController extends Application implements Initial
 
 		if (count == 0) {
 			AddController AddCC = new AddController();
-			AddCC.AddExam(exam.getExamCode(), exam.getExamNumber() , exam.getExamSubject(), exam.getExamCourse(), exam.getExamTime(), exam.getTeacherName(),
-					questionscodes, points, exam.getStudentInstructions(),exam.getTeacherInstructions());
+			AddCC.AddExam(exam);
 			ExamsTableController ETCC = new ExamsTableController();
 			ETCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

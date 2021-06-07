@@ -85,5 +85,5 @@ public class StudentMenuController {
 		((Node) event.getSource()).getScene().getWindow().hide();
 
 	}
-
+	
 }

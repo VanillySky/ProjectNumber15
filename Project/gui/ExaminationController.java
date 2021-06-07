@@ -3,9 +3,6 @@
  */
 package gui;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.sun.glass.ui.Application;
 
 import javafx.event.ActionEvent;
@@ -18,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * @author shaden
@@ -47,15 +45,13 @@ public class ExaminationController {
 
 	@FXML
 	private TextField insertCodeTxtField;
-	int secondsPassed = 0;
-	
-	Timer timer = new Timer();
-	TimerTask timerTask = new TimerTask() {
-		public void run() {
-			secondsPassed++;
-		}
-	};
-	
+
+	@FXML
+	private Label EmptyFieldLBL;
+
+	@FXML
+	private Label IncorrectLBL;
+
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -108,8 +104,29 @@ public class ExaminationController {
 
 	@FXML
 	public void StartExam(ActionEvent event) {
-		int sqlseconds = 0; 
-		//timer.scheduleAtFixedRate(timerTask, 1000, 1000);
-		
+		if (insertCodeTxtField.getText().isEmpty()) {
+			EmptyFieldLBL.setVisible(true);
+			ContainLetterMsgLBL.setVisible(false);
+			IncorrectLBL.setVisible(false);
+		}
+		if (!insertCodeTxtField.getText().isEmpty() & !insertCodeTxtField.getText().contains("[a-zA-Z]+")) {
+			EmptyFieldLBL.setVisible(false);
+			ContainLetterMsgLBL.setVisible(true);
+			IncorrectLBL.setVisible(false);
+		} else if (!insertCodeTxtField.getText().isEmpty() & !insertCodeTxtField.getText().startsWith("M")
+				& !insertCodeTxtField.getText().startsWith("A")) {
+			EmptyFieldLBL.setVisible(false);
+			ContainLetterMsgLBL.setVisible(false);
+			IncorrectLBL.setVisible(true);
+		}
+		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
+			ManualController MC = new ManualController();
+			MC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+		}
+
+		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
+		}
+	
 	}
 }
