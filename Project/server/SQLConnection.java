@@ -24,8 +24,8 @@ public class SQLConnection {
 			System.out.println("Driver definition failed");
 		}
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","Ahmf1144");
-			 //conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
+			//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","Ahmf1144");
+			 conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","Shaden#2034");
 			System.out.println("SQL connection succeed");
@@ -181,12 +181,11 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 	}
-	public static void AddNewQuestion(ArrayList<Object> list) {
+	public static boolean AddNewQuestion(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
 				
 						PreparedStatement stmt = conn.prepareStatement("INSERT INTO questions VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
-						/// String IdNumber,boolean isGuide()
 						stmt.setString(1, ((Question) list.get(0)).getQuestionNumber());
 						stmt.setString(2, ((Question) list.get(0)).getQuestionCode());
 						stmt.setString(3, ((Question) list.get(0)).getQuestion());
@@ -210,21 +209,21 @@ public class SQLConnection {
 						stmt.setString(12, ((Question) list.get(0)).getPoint());
 
 						stmt.executeUpdate();
-					
+					return true;
 				}
 			 catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		return false;
 	}
 	
 	
-	public static void AddNewExam(ArrayList<Object> list) {
+	public static boolean AddNewExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
 				
 						PreparedStatement stmt = conn.prepareStatement("INSERT INTO exams VALUES (?,?,?,?,?,?,?,?,?,?);");
-						/// String IdNumber,boolean isGuide()
 						stmt.setString(1, ((Exam) list.get(0)).getExamCode());
 						stmt.setString(2, ((Exam) list.get(0)).getExamNumber());
 						stmt.setString(3, ((Exam) list.get(0)).getExamSubject());
@@ -244,12 +243,14 @@ public class SQLConnection {
 						stmt.setString(10, ((Exam) list.get(0)).getTeacherInstructions());
 
 						stmt.executeUpdate();
-					
+					return true;
 				}
 			 catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		return false;
+
 	}
 	
 }
