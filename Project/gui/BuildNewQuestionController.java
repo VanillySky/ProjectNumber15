@@ -113,7 +113,7 @@ public class BuildNewQuestionController    {
 			e.printStackTrace();
 		}
 	}	
-	/*
+	
 	public void AddQuestionButton() {
 		String author="AAAAA";
 		Question Qer= new Question (QuestionNumberTxt.getText(),CourseTxt.getText()+QuestionNumberTxt.getText(),CourseTxt.getText(),TheQuestionTxt.getText()
@@ -161,13 +161,11 @@ public class BuildNewQuestionController    {
 			stage.setScene(new Scene(root));
 			stage.showAndWait();
 
-		});*/
+		});
+	}
 		
 	
-	@FXML
-	public void AddQ() {
-		controllers.AddController.AddQuestion("1","1","1","1","1","1","1","1","1","1","1","1");
-	}
+	
 	@FXML
 	public void PressCEMS() {
 		MainButton.setOnAction(event -> {
