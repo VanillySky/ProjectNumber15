@@ -163,7 +163,7 @@ public class QuestionsSelectionController extends Application implements Initial
 			getquestionscodes, getpoints;
 	private ObservableList<Question> dataList = FXCollections.observableArrayList();
 	private ObservableList<Question> dataList2 = FXCollections.observableArrayList();
-	static String saveQuestioncode,savePoints;
+	static String saveQuestioncode, savePoints;
 	private Exam exam;
 	static boolean temp;
 
@@ -312,7 +312,7 @@ public class QuestionsSelectionController extends Application implements Initial
 	public void PressReturn(ActionEvent event) {
 		for (int i = 0; i < dataList2.size(); i++) {
 			saveQuestioncode += dataList2.get(i).getQuestionCode() + "\n";
-			savePoints+= dataList2.get(i).getPoint()+ "\n";
+			savePoints += dataList2.get(i).getPoint() + "\n";
 
 		}
 		BuildNewExamController BNECC = new BuildNewExamController();
@@ -357,23 +357,16 @@ public class QuestionsSelectionController extends Application implements Initial
 			pointERRLBL.setVisible(true);
 			count++;
 		}
-
-		exam = new Exam(ExamCode, Examnumber, examSubject, ExamCourse, ExamTime, ChatClient.currentUser.getFirstName(),
-				questionscodes, points, StudentIns, TeacherIns);
-
 		if (count == 0) {
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
-			AddController AddCC = new AddController();
-			AddCC.AddExam(exam);
-=======
+			exam = new Exam(ExamCode, Examnumber, examSubject, ExamCourse, ExamTime,
+					ChatClient.currentUser.getFirstName(), questionscodes, points, StudentIns, TeacherIns);
+
 			if (temp) {
 				UpgradeConroller.UpgradeExam(exam);
 
 			} else
 				AddController.AddExam(exam);
->>>>>>> 3f20fc4 ..
 			ExamsTableController ETCC = new ExamsTableController();
-
 			ETCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
 		}
@@ -472,7 +465,6 @@ public class QuestionsSelectionController extends Application implements Initial
 							qs = dataList.get(i);
 							qs.setPoint(SPSP[j]);
 							dataList2.add(qs);
-
 						}
 					}
 				Table2.setItems(dataList2);

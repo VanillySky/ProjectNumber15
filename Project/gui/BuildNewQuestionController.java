@@ -161,12 +161,6 @@ public class BuildNewQuestionController    {
 			stage.showAndWait();
 		});
 	}
-		
-	
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
-	
-=======
->>>>>>> 3f20fc4 ..
 	@FXML
 	public void PressCEMS() {
 		MainButton.setOnAction(event -> {

@@ -3,8 +3,6 @@
  */
 package gui;
 
-import com.sun.glass.ui.Application;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

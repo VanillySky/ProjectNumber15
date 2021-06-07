@@ -28,20 +28,19 @@ public class SQLConnection {
 			System.out.println("Driver definition failed");
 		}
 		try {
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
-=======
+
 			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
 					"Ahmf1144");
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
->>>>>>> 3f20fc4 ..
+
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST",
 			// "root","Ahmf1144");
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
-					"Shaden#2034");
+		//	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
+			//		"Shaden#2034");
 			System.out.println("SQL connection succeed");
 		} catch (SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
@@ -170,7 +169,7 @@ public class SQLConnection {
 		return array;
 	}
 
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
+
 	public static ArrayList<StudentExamanation> getTime() {
 		ArrayList<StudentExamanation> array = new ArrayList<StudentExamanation>();
 		if (conn != null) {
@@ -192,8 +191,6 @@ public class SQLConnection {
 		return array;
 	}
 
-=======
->>>>>>> 3f20fc4 ..
 	public static void DeleteExam(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -287,11 +284,7 @@ public class SQLConnection {
 			}
 		}
 		return false;
-
 	}
-
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
-=======
 	public static boolean UpgradeExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -325,6 +318,4 @@ public class SQLConnection {
 		return false;
 
 	}
-
->>>>>>> 3f20fc4 ..
 }
