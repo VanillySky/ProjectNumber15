@@ -31,7 +31,7 @@ public class Question  implements Serializable{
 
 	
 
-	public Question(String QuestionNumber,String QuestionCode, String Subject, String Question, String QuestionInstruction, String Answer1,
+	public Question(String QuestionCode,String QuestionNumber, String Subject, String Question, String QuestionInstruction, String Answer1,
 			String Answer2, String Answer3, String Answer4, String RightAnswer, String Author,String point) {
 
 		this.QuestionNumber = QuestionNumber;

@@ -14,19 +14,42 @@ import javafx.stage.Stage;
 
 public class StudentMenuController {
 
+	/**
+	 * 
+	 */
+	@FXML
+	private ResourceBundle resources;
+
+	/**
+	 * 
+	 */
+	@FXML
+	private URL location;
+
+	/**
+	 * 
+	 */
 	@FXML
 	private Button OutButton;
 
+	/**
+	 * 
+	 */
 	@FXML
 	private Button StatisticsButton;
 
+	/**
+	 * 
+	 */
 	@FXML
 	private Button ExamButton;
-	
-	
+
+	/**
+	 * 
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 		try {
-
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/gui/StudentMenuFrame.fxml"));
 			Parent root = loader.load();
@@ -34,12 +57,12 @@ public class StudentMenuController {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Student Menu");
 			primaryStage.show();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	@FXML
 	public void SignOut(ActionEvent event) {
 		LoginFrameController LFCC = new LoginFrameController();
@@ -49,17 +72,18 @@ public class StudentMenuController {
 
 	@FXML
 	public void ExamIn(ActionEvent event) {
-		ExamsTableController ETCC = new ExamsTableController();
-		ETCC.start(new Stage());
+		ExaminationController EC = new ExaminationController();
+		EC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-	}// In to ExamsTable.fxml a
+	}
+
 
 	
-
 	public void StatisticIn(ActionEvent event) {
-		TeacherExamStatisticsController TES = new TeacherExamStatisticsController();
-		TES.start(new Stage());
+		StudentGradeListController SGS = new StudentGradeListController();
+		SGS.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 
 	}
+
 }

@@ -22,7 +22,6 @@ public class ChatClient extends AbstractClient
 {
 	public static HashMap<String, ServerMessage> messageRecievedFromServerEvents;
 	public static User currentUser;
-	
   //Instance variables **********************************************
   
   /**

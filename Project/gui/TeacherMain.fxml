@@ -5,17 +5,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="577.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMenuController">
+<Pane prefHeight="577.0" prefWidth="1018.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TeacherMenuController">
    <children>
       <ImageView fitHeight="579.0" fitWidth="1048.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/TeacherMenu.png" />
          </image>
       </ImageView>
-      <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="135.0" prefWidth="147.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="OutButton" layoutX="971.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="36.0" prefWidth="129.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="StatisticsButton" layoutX="710.0" layoutY="331.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="54.0" prefWidth="158.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="QuestionButton" layoutX="443.0" layoutY="326.0" mnemonicParsing="false" onAction="#QuestionIn" prefHeight="64.0" prefWidth="168.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="ExamButton" layoutX="165.0" layoutY="326.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="64.0" prefWidth="147.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="125.0" prefWidth="129.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="OutButton" layoutX="887.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="36.0" prefWidth="129.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="StatisticsButton" layoutX="692.0" layoutY="204.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="201.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="QuestionButton" layoutX="433.0" layoutY="210.0" mnemonicParsing="false" onAction="#QuestionIn" prefHeight="192.0" prefWidth="195.0" style="-fx-background-color: transparent; -fx-scale-shape: Circle;" />
+      <Button fx:id="ExamButton" layoutX="143.0" layoutY="211.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="192.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

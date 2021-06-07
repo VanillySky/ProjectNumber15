@@ -56,8 +56,21 @@ public class BuildNewQuestionController {
 	@FXML
 	// DatabaseHandler dbHandler
 	public ArrayList<String> AL = new ArrayList();
-	//private Client cl = new Client();
+	
+	public void start(Stage primaryStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/gui/BuildNewQuestion.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Build Question");
+			primaryStage.show();
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
 	public void AddQuestionButton() {
 		String author="AAAAA";
 		Question Qer= new Question (QuestionNumberTxt.getText(),CourseTxt.getText()+QuestionNumberTxt.getText(),CourseTxt.getText(),TheQuestionTxt.getText()
@@ -85,8 +98,6 @@ public class BuildNewQuestionController {
 			AL.add(RightAnswerTxt.getText());
 			AL.add(QustionInstructionTxt.getText());
 
-			//cl.(AL,"addQuestion");
-
 			AddQuestionButton.getScene().getWindow().hide();
 
 			FXMLLoader loader = new FXMLLoader();
@@ -104,9 +115,7 @@ public class BuildNewQuestionController {
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.showAndWait();
-
 		});
-		
 	}
 
 	@FXML

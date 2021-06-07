@@ -13,17 +13,16 @@
             <Image url="@../Images/StudentMenu.png" />
          </image>
       </ImageView>
-      <Button fx:id="ExamButton" layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: transparent;" textFill="#f8f4f4">
+      <Button fx:id="ExamButton" layoutX="207.0" layoutY="204.0" mnemonicParsing="false" onAction="#ExamIn" prefHeight="194.0" prefWidth="204.0" style="-fx-background-color: transparent;" textFill="#f8f4f4">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button fx:id="StatisticsButton" layoutX="577.0" layoutY="313.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="69.0" prefWidth="196.0" style="-fx-background-color: transparent;" textFill="#f8f4f4">
+      <Button fx:id="StatisticsButton" layoutX="577.0" layoutY="206.0" mnemonicParsing="false" onAction="#StatisticIn" prefHeight="194.0" prefWidth="204.0" style="-fx-background-color: transparent;" textFill="#f8f4f4">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
       <Button fx:id="OutButton" layoutX="921.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="127.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="CEMSbutton" mnemonicParsing="false" prefHeight="120.0" prefWidth="134.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

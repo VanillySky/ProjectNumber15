@@ -13,17 +13,30 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ * @author Shaden
+ *
+ */
 public class TeacherMenuController {
 
+	/**
+	 * 
+	 */
 	@FXML
 	private ResourceBundle resources;
 
 	@FXML
 	private URL location;
 
+	/**
+	 * Button for getting back to the main menu
+	 */
 	@FXML
 	private Button CEMSButton;
 
+	/**
+	 * 
+	 */
 	@FXML
 	private Button OutButton;
 
@@ -36,6 +49,10 @@ public class TeacherMenuController {
 	@FXML
 	private Button ExamButton;
 
+	/**
+	 * The method is the main entry point for JavaFX applications.
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 		try {
 

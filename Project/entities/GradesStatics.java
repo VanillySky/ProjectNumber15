@@ -8,6 +8,7 @@ public class GradesStatics implements Serializable{
 	private int MaxGrade;
 	private int MinGrade;
 	private Range gradeRange;
+
 	
 	public GradesStatics(String codeExam, int numberOfStudent, int avergae, int median, int maxGrade, int minGrade,
 			Range gradeRange) {

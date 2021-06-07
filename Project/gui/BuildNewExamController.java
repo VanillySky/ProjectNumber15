@@ -23,7 +23,6 @@ import javafx.stage.Stage;
  */
 public class BuildNewExamController {
 
-
 	/**
 	 * Label for the Update exam label in the scenebuilder 
 	 */
@@ -131,9 +130,26 @@ public class BuildNewExamController {
 	 */
 	@FXML
 	private Label onlynumbersLBL1;
+
+	/**
+	 * Label that showing warning message "only two digitals please!!!"
+	 */
+	@FXML
+    private Label onlytwonumberLBL1;
+
+    /**
+     * Label that showing warning message "only two digitals please!!!"
+     */
+    @FXML
+    private Label onlytwonumberLBL11;
+
+    /**
+     * String value for the teacher name
+     */
+    private String TeacherName;
 	
 	/**
-	 *  The method is the main entry point for JavaFX applications.
+	 * The method is the main entry point for JavaFX applications.
 	 * @param primaryStage
 	 */
 	public void start(Stage primaryStage) {
@@ -160,8 +176,6 @@ public class BuildNewExamController {
 		ExamsTableController ETCC = new ExamsTableController();
 		ETCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-
-
 	}
 
 	/**
@@ -187,28 +201,59 @@ public class BuildNewExamController {
 	}
 	
 	/**
-	 * This method 
+	 * This method to go to build new exam frame
 	 * @param event
 	 */
 	@FXML
 	public void AddQuestions(ActionEvent event) {
+		System.out.println(TeacherName);//At the first prints the teacher name
 		int count = 0;
+		//if the teacher did't enter any of the fileds marked with *
 		if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
 				|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
-			emptyfieldLBL.setVisible(true);
+			emptyfieldLBL.setVisible(true);//show the suitable warning message
 			count++;
-
 		}
 		try {
 			 Integer.parseInt(ExamNumberField.getText());
+			 //if the teacher insered a number less than 2 digits
 			if ((ExamNumberField.getText().length() != 2) && (ExamNumberField.getText().length() != 0)) {
-				onlytwonumberLBL.setVisible(true);// more than two numbers
+				onlytwonumberLBL.setVisible(true); //show the suitable warning message
 				count++;
 			}
 
 		} catch (NumberFormatException e) {
+			//if 
 			if (ExamNumberField.getText().length() != 0) {
-				onlytwonumberLBL.setVisible(true);
+				onlytwonumberLBL.setVisible(true);//show the suitable warning message
+				count++;
+			}
+		}
+		
+		try {
+			Integer.parseInt(ExamSubjectField.getText());
+			if ((ExamSubjectField.getText().length() != 2) && (ExamSubjectField.getText().length() != 0)) {
+				onlytwonumberLBL1.setVisible(true);
+				count++;
+			}
+
+		} catch (NumberFormatException e) {
+			if (ExamSubjectField.getText().length() != 0) {
+				onlytwonumberLBL1.setVisible(true);//show the suitable warning message
+				count++;
+			}
+		}
+		
+		try {
+			 Integer.parseInt(ExamCourseField.getText());
+			if ((ExamCourseField.getText().length() != 2) && (ExamCourseField.getText().length() != 0)) {
+				onlytwonumberLBL11.setVisible(true);//show the suitable warning message
+				count++;
+			}
+
+		} catch (NumberFormatException e) {
+			if (ExamCourseField.getText().length() != 0) {
+				onlytwonumberLBL11.setVisible(true);//show the suitable warning message
 				count++;
 			}
 		}
@@ -217,20 +262,29 @@ public class BuildNewExamController {
 		 Integer.parseInt(ExamTimeField.getText());
 		} catch (NumberFormatException e) {
 			if (ExamTimeField.getText().length() != 0) {
-				onlynumbersLBL1.setVisible(true);
+				onlynumbersLBL1.setVisible(true);//show the suitable warning message
 				count++;
 			}
 		}
-		if (count == 0) {
+		if (count == 0) {//if every textfield filled right
+		final String Examcode = ExamSubjectField.getText()+ExamCourseField.getText()+ExamNumberField.getText();				
 			QuestionsSelectionController QSCC = new QuestionsSelectionController();
+			QSCC.GetExam(Examcode,ExamSubjectField.getText());
+			System.out.println(Examcode);
 			QSCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
 		}
 	}
-
-	
+	/**
+	 * method that sets the teacher name
+	 * @param TeacherName
+	 */
+	public void getTeacherName(String TeacherName) {
+		this.TeacherName = TeacherName;
+	}
 
 	/**
+	 * method that updated the exam-
 	 * @param exam
 	 */
 	public void UpdateExam(Exam exam) {
@@ -240,8 +294,6 @@ public class BuildNewExamController {
 		ExamTimeField.setText(exam.getExamTime());
 		StudentInstructionField.setText(exam.getStudentInstructions());
 		TeacherInstructionField.setText(exam.getTeacherInstructions());
-
 		// go to update on add question
-
 	}
 }

@@ -121,7 +121,7 @@ public class LoginFrameController {
 				incorrectLogin.setVisible(true);
 			}
 		}
-	/*	if (user.getRole().equals("Student")) {
+		if (user.getRole().equals("Student")) {
 			try {
 				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
 						InetAddress.getLocalHost().getHostName(), "Student", user.getUserId()));
@@ -140,7 +140,7 @@ public class LoginFrameController {
 				incorrectLogin.setVisible(true);
 			}
 		}
-		if (user.getRole().equals("Manager")) {
+		/*if (user.getRole().equals("Manager")) {
 			try {
 				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
 						InetAddress.getLocalHost().getHostName(), "Manager", user.getUserId()));
