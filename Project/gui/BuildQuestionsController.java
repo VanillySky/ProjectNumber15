@@ -130,7 +130,7 @@ public class BuildQuestionsController implements Initializable {
 
 	@FXML
 	public void AddNewQuestion(ActionEvent event) {
-		BuildNewQuestionController BNQCC = new BuildNewQuestionController();
+		NewQuestionController BNQCC = new NewQuestionController();
 		BNQCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
