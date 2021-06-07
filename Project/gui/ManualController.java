@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.Label;
+
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -45,7 +46,8 @@ public class ManualController {
     private Label FileLBL;
 
     @FXML
-   private Label IsntValidLBL;
+    private Label IsntValidLBL;
+    
     
 	int secondsPassed = 0;
 	Timer timer = new Timer();
@@ -115,4 +117,5 @@ public class ManualController {
 		else
 			IsntValidLBL.setVisible(true);
 	}
+
 }

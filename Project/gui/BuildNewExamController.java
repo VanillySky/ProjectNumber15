@@ -1,10 +1,7 @@
 package gui;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,12 +21,14 @@ import javafx.stage.Stage;
  * @author Ahmad
  * 
  */
-	/**
-	 * Label for the Update exam label in the scenebuilder
-	 */
+	
 
 	public class BuildNewExamController implements Initializable {
 
+		
+		/**
+		 * Label for the Update exam label in the scenebuilder
+		 */
 		@FXML
 		private Label UpdateExamLBL;
 
@@ -135,16 +134,6 @@ import javafx.stage.Stage;
 		@FXML
 		private Label onlynumbersLBL1;
 
-		/**
-		 * String value for the teacher name
-		 */
-		private String TeacherName;
-
-		/**
-		 * The method is the main entry point for JavaFX applications.
-		 * 
-		 * @param primaryStage
-		 */
 
 		@FXML
 		private Label onlytwonumberLBL1;
@@ -156,8 +145,11 @@ import javafx.stage.Stage;
 		static String Examcode, Examnumber, examSubject, ExamCourse, ExamTime, StudentIns, TeacherIns,
 				getquestionscodes, getpoints;
 
-		public ArrayList<String> arr = new ArrayList<String>();
-
+		/**
+		 * The method is the main entry point for JavaFX applications.
+		 * 
+		 * @param primaryStage
+		 */
 		public void start(Stage primaryStage) {
 			try {
 				FXMLLoader loader = new FXMLLoader();
@@ -219,13 +211,10 @@ import javafx.stage.Stage;
 		@FXML
 		public void AddQuestions(ActionEvent event) {
 			int count = 0;
-			
 				if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
 						|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
 					
-					emptyfieldLBL.setText("please fill all important empty fields");
 					emptyfieldLBL.setVisible(true);
-
 					count++;
 				}
 
@@ -280,9 +269,8 @@ import javafx.stage.Stage;
 					onlynumbersLBL1.setVisible(true);// show the suitable warning message
 					count++;
 				}
-				
+			}
 				if (count == 0) {
-					System.out.println("1");
 					Saveargs();
 					QuestionsSelectionController QSCC = new QuestionsSelectionController();
 					QSCC.getarugments(Examnumber, examSubject, ExamCourse, ExamTime, StudentIns, TeacherIns,
@@ -292,7 +280,7 @@ import javafx.stage.Stage;
 				}
 			}
 
-		}
+		
 
 		public void Saveargs() {
 			Examnumber = ExamNumberField.getText();

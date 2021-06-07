@@ -1,7 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
@@ -313,7 +312,6 @@ public class QuestionsSelectionController extends Application implements Initial
 		for (int i = 0; i < dataList2.size(); i++) {
 			saveQuestioncode += dataList2.get(i).getQuestionCode() + "\n";
 			savePoints += dataList2.get(i).getPoint() + "\n";
-
 		}
 		BuildNewExamController BNECC = new BuildNewExamController();
 		BNECC.start(new Stage());
@@ -439,7 +437,6 @@ public class QuestionsSelectionController extends Application implements Initial
 		Table.setItems(dataList);
 
 		if (temp) {// if we press update temp=true
-
 			String[] SPQC = getquestionscodes.split("\n");
 			String[] SPP = getpoints.split("\n");
 			Question qs;
@@ -454,24 +451,7 @@ public class QuestionsSelectionController extends Application implements Initial
 				}
 			Table2.setItems(dataList2);
 			Table2.refresh();
-		} else {
-			Question qs;
-			if (saveQuestioncode != "") {
-				String[] SPSQC = saveQuestioncode.split("\n");
-				String[] SPSP = savePoints.split("\n");
-				for (int j = 0; j < SPSQC.length; j++)
-					for (int i = 0; i < dataList.size(); i++) {
-						if (dataList.get(i).QuestionCode.equals(SPSQC[j])) {
-							qs = dataList.get(i);
-							qs.setPoint(SPSP[j]);
-							dataList2.add(qs);
-						}
-					}
-				Table2.setItems(dataList2);
-				Table2.refresh();
-			}
-
-		}
-
+			temp = false;
+		} 
 	}
 }

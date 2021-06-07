@@ -3,6 +3,7 @@
  */
 package gui;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+
 
 /**
  * @author shaden
  *
  */
-public class ExaminationController {
+public class ExaminationController  {
 	@FXML
 	private Button CEMSButton;
 
@@ -107,11 +108,12 @@ public class ExaminationController {
 			ContainLetterMsgLBL.setVisible(false);
 			IncorrectLBL.setVisible(false);
 		}
-		if (!insertCodeTxtField.getText().isEmpty() & !insertCodeTxtField.getText().contains("[a-zA-Z]+")) {
+		else if (!insertCodeTxtField.getText().contains("[a-zA-Z]+")) {
 			EmptyFieldLBL.setVisible(false);
 			ContainLetterMsgLBL.setVisible(true);
 			IncorrectLBL.setVisible(false);
-		} else if (!insertCodeTxtField.getText().isEmpty() & !insertCodeTxtField.getText().startsWith("M")
+		} 
+		if (!insertCodeTxtField.getText().isEmpty() & !insertCodeTxtField.getText().startsWith("M")
 				& !insertCodeTxtField.getText().startsWith("A")) {
 			EmptyFieldLBL.setVisible(false);
 			ContainLetterMsgLBL.setVisible(false);
