@@ -22,9 +22,9 @@ public class Exam implements Serializable{
 		this.ExamSubject=ExamSubject;
 		this.ExamCourse=ExamCourse;
 		this.ExamTime=ExamTime;
+		this.TeacherName=TeacherName;
 		this.ChosenQuestion=ChosenQuestion;
 		this.QuestionPoint=QuestionPoint;
-		this.TeacherName=TeacherName;
 		this.StudentInstructions=StudentInstructions;
 		this.TeacherInstructions=TeacherInstructions;
 		}

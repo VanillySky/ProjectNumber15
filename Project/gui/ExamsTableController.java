@@ -1,13 +1,9 @@
 package gui;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.ResourceBundle;
-
-import client.ChatClient;
-import client.ClientUI;
 import controllers.DeleteController;
-import controllers.DisplayController;
 
 import java.net.URL;
 import entities.Exam;
@@ -31,7 +27,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import server.SQLConnection;
 
 public class ExamsTableController implements Initializable {
 
@@ -200,6 +195,7 @@ public class ExamsTableController implements Initializable {
 
 	@FXML
 	public void AddNewExam(ActionEvent event) {
+		BuildNewExamController.temp = false;
 		BuildNewExamController BNECC = new BuildNewExamController();
 		BNECC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -208,17 +204,19 @@ public class ExamsTableController implements Initializable {
 	@FXML
 	public void UpdateExam(ActionEvent event) {
 		if (selectedExam != null) {
-			Exam exam = new Exam(selectedExam.getExamCode(), selectedExam.getExamNumber(),
-					selectedExam.getExamSubject(), selectedExam.getExamCourse(), selectedExam.getExamTime(),
-					selectedExam.getTeacherName(), selectedExam.getChosenQuestion(), selectedExam.getQuestionPoint(),
-					selectedExam.getTeacherInstructions(), selectedExam.getStudentInstructions());
-			BuildNewExamController updateExam = new BuildNewExamController();
-
+			BuildNewExamController.Examnumber = selectedExam.getExamNumber();
+			BuildNewExamController.examSubject = selectedExam.getExamSubject();
+			BuildNewExamController.ExamCourse = selectedExam.getExamCourse();
+			BuildNewExamController.ExamTime = selectedExam.getExamTime();
+			BuildNewExamController.StudentIns = selectedExam.getStudentInstructions();
+			BuildNewExamController.TeacherIns = selectedExam.getTeacherInstructions();
+			BuildNewExamController.getquestionscodes = selectedExam.getChosenQuestion();
+			BuildNewExamController.getpoints = selectedExam.getQuestionPoint();
+			QuestionsSelectionController.temp = true;
+			BuildNewExamController.temp = true;
 			BuildNewExamController BNECC = new BuildNewExamController();
 			BNECC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
-
-			updateExam.UpdateExam(exam);
 
 		} else {
 			LabelERR.setText("please chose any Exam first to Update!!");
@@ -267,5 +265,6 @@ public class ExamsTableController implements Initializable {
 			this.ExamTable.setItems(
 					FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
 		}
+
 	}
 }

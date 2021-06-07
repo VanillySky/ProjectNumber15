@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
+import client.ChatClient;
 import controllers.AddController;
+import controllers.UpgradeConroller;
 import entities.Exam;
 import entities.Question;
 import javafx.application.Application;
@@ -157,11 +159,13 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	private Question selectedQuestion = null;
 	private Question selectedQuestion2 = null;
-
+	static private String ExamCode, Examnumber, examSubject, ExamCourse, ExamTime, StudentIns, TeacherIns,
+			getquestionscodes, getpoints;
 	private ObservableList<Question> dataList = FXCollections.observableArrayList();
 	private ObservableList<Question> dataList2 = FXCollections.observableArrayList();
+	static String saveQuestioncode,savePoints;
 	private Exam exam;
-	private String ExamCode , Subject;
+	static boolean temp;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -262,8 +266,6 @@ public class QuestionsSelectionController extends Application implements Initial
 	@FXML
 	public void AddNewQuestion(ActionEvent event) {
 		boolean flag = false;
-		
-		System.out.println(ExamCode);
 		if (selectedQuestion != null) {
 			Question question = new Question(selectedQuestion.QuestionCode, selectedQuestion.QuestionNumber,
 					selectedQuestion.Subject, selectedQuestion.Question, selectedQuestion.QuestionInstruction,
@@ -308,27 +310,41 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	@FXML
 	public void PressReturn(ActionEvent event) {
+		for (int i = 0; i < dataList2.size(); i++) {
+			saveQuestioncode += dataList2.get(i).getQuestionCode() + "\n";
+			savePoints+= dataList2.get(i).getPoint()+ "\n";
+
+		}
 		BuildNewExamController BNECC = new BuildNewExamController();
 		BNECC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	public void getarugments(String Examnumber, String examSubject, String ExamCourse, String ExamTime,
+			String StudentIns, String TeacherIns, String questionscodes, String points) {
+		QuestionsSelectionController.ExamCode = examSubject + ExamCourse + Examnumber;
+		QuestionsSelectionController.Examnumber = Examnumber;
+		QuestionsSelectionController.examSubject = examSubject;
+		QuestionsSelectionController.ExamCourse = ExamCourse;
+		QuestionsSelectionController.ExamTime = ExamTime;
+		QuestionsSelectionController.StudentIns = StudentIns;
+		QuestionsSelectionController.TeacherIns = TeacherIns;
+		QuestionsSelectionController.getquestionscodes = questionscodes;
+		QuestionsSelectionController.getpoints = points;
+	}
+
 	@FXML
 	public void PressDone(ActionEvent event) {
 		int count = 0;
-		String questionscodes = "",points="";
-		
-		for(int i=0 ;i < dataList2.size() ; i++) {
-			
-		   questionscodes += dataList2.get(i).getQuestionCode()+"\n";
-			
-		   points += dataList2.get(i).getPoint()+"\n";
+		String questionscodes = "", points = "";
+
+		for (int i = 0; i < dataList2.size(); i++) {
+
+			questionscodes += dataList2.get(i).getQuestionCode() + "\n";
+
+			points += dataList2.get(i).getPoint() + "\n";
 		}
-//		exam.setChosenQuestion(questionscodes);
-//		exam.setQuestionPoint(points);
-		
-		
-		
+
 		for (int i = 0; i < dataList2.size(); i++) {
 			if ((dataList2.get(i).point == null) || (dataList2.get(i).point == "0")) {
 				pointERRLBL.setText("fill all points");
@@ -341,13 +357,23 @@ public class QuestionsSelectionController extends Application implements Initial
 			pointERRLBL.setVisible(true);
 			count++;
 		}
-		
-		
+
+		exam = new Exam(ExamCode, Examnumber, examSubject, ExamCourse, ExamTime, ChatClient.currentUser.getFirstName(),
+				questionscodes, points, StudentIns, TeacherIns);
 
 		if (count == 0) {
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 			AddController AddCC = new AddController();
 			AddCC.AddExam(exam);
+=======
+			if (temp) {
+				UpgradeConroller.UpgradeExam(exam);
+
+			} else
+				AddController.AddExam(exam);
+>>>>>>> 3f20fc4 ..
 			ExamsTableController ETCC = new ExamsTableController();
+
 			ETCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
 		}
@@ -376,19 +402,15 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	@FXML
 	void AddPoint(ActionEvent event) {
-		
-		if (selectedQuestion2 != null && AddPointTXT.getText()!=null) {
-			
+
+		if (selectedQuestion2 != null && AddPointTXT.getText() != null) {
+
 			selectedQuestion2.setPoint(AddPointTXT.getText());
 			Table2.refresh();
+		} else {
+			pointERRLBL.setText("please add question");
+			pointERRLBL.setVisible(true);
 		}
-
-	}
-
-	public void GetExam(String ExamCode, String Subject) {
-		this.ExamCode=ExamCode;
-		this.Subject=Subject;
-		
 	}
 
 	@Override
@@ -422,5 +444,42 @@ public class QuestionsSelectionController extends Application implements Initial
 
 		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions());
 		Table.setItems(dataList);
+
+		if (temp) {// if we press update temp=true
+
+			String[] SPQC = getquestionscodes.split("\n");
+			String[] SPP = getpoints.split("\n");
+			Question qs;
+			for (int j = 0; j < SPQC.length; j++)
+				for (int i = 0; i < dataList.size(); i++) {
+					if (dataList.get(i).QuestionCode.equals(SPQC[j])) {
+						qs = dataList.get(i);
+						qs.setPoint(SPP[j]);
+						dataList2.add(qs);
+
+					}
+				}
+			Table2.setItems(dataList2);
+			Table2.refresh();
+		} else {
+			Question qs;
+			if (saveQuestioncode != "") {
+				String[] SPSQC = saveQuestioncode.split("\n");
+				String[] SPSP = savePoints.split("\n");
+				for (int j = 0; j < SPSQC.length; j++)
+					for (int i = 0; i < dataList.size(); i++) {
+						if (dataList.get(i).QuestionCode.equals(SPSQC[j])) {
+							qs = dataList.get(i);
+							qs.setPoint(SPSP[j]);
+							dataList2.add(qs);
+
+						}
+					}
+				Table2.setItems(dataList2);
+				Table2.refresh();
+			}
+
+		}
+
 	}
 }

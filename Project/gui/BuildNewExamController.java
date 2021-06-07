@@ -1,11 +1,14 @@
 package gui;
 
-import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-import entities.Exam;
+import client.ChatClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 
 /**
  * Date: June, 01 - 2021
@@ -26,6 +30,10 @@ public class BuildNewExamController {
 	/**
 	 * Label for the Update exam label in the scenebuilder 
 	 */
+=======
+public class BuildNewExamController implements Initializable {
+
+>>>>>>> 3f20fc4 ..
 	@FXML
 	private Label UpdateExamLBL;
 
@@ -130,13 +138,17 @@ public class BuildNewExamController {
 	 */
 	@FXML
 	private Label onlynumbersLBL1;
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 
 	/**
 	 * Label that showing warning message "only two digitals please!!!"
 	 */
 	@FXML
     private Label onlytwonumberLBL1;
+=======
+>>>>>>> 3f20fc4 ..
 
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
     /**
      * Label that showing warning message "only two digitals please!!!"
      */
@@ -152,6 +164,20 @@ public class BuildNewExamController {
 	 * The method is the main entry point for JavaFX applications.
 	 * @param primaryStage
 	 */
+=======
+	@FXML
+	private Label onlytwonumberLBL1;
+
+	@FXML
+	private Label onlytwonumberLBL11;
+
+	static boolean temp;
+	static String Examcode, Examnumber, examSubject, ExamCourse, ExamTime, StudentIns, TeacherIns, getquestionscodes,
+			getpoints;
+
+	public ArrayList<String> arr = new ArrayList<String>();
+
+>>>>>>> 3f20fc4 ..
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -165,7 +191,7 @@ public class BuildNewExamController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 
 	/**
 	 * The method is to go back to the previous frame
@@ -176,6 +202,10 @@ public class BuildNewExamController {
 		ExamsTableController ETCC = new ExamsTableController();
 		ETCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
+=======
+
+>>>>>>> 3f20fc4 ..
 	}
 
 	/**
@@ -188,35 +218,69 @@ public class BuildNewExamController {
 		TMCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 	
 	/**
 	 * This method to sign out. 
 	 * @param event
 	 */
+=======
+
+>>>>>>> 3f20fc4 ..
 	@FXML
 	public void SignOut(ActionEvent event) {
 		LoginFrameController LFCC = new LoginFrameController();
 		LFCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 	
 	/**
 	 * This method to go to build new exam frame
 	 * @param event
 	 */
+=======
+
+>>>>>>> 3f20fc4 ..
 	@FXML
 	public void AddQuestions(ActionEvent event) {
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 		System.out.println(TeacherName);//At the first prints the teacher name
+=======
+>>>>>>> 3f20fc4 ..
 		int count = 0;
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 		//if the teacher did't enter any of the fileds marked with *
+=======
+		
+		try {
+>>>>>>> 3f20fc4 ..
 		if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
 				|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 			emptyfieldLBL.setVisible(true);//show the suitable warning message
+=======
+			emptyfieldLBL.setText("please fill all important empty fields");
+			emptyfieldLBL.setVisible(true);
+>>>>>>> 3f20fc4 ..
 			count++;
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
+=======
+}
+		}catch (Exception e) {
+			e.printStackTrace();
+			emptyfieldLBL.setText("please fill all important empty fields");
+			emptyfieldLBL.setVisible(true);
+>>>>>>> 3f20fc4 ..
 		}
+		
 		try {
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 			 Integer.parseInt(ExamNumberField.getText());
 			 //if the teacher insered a number less than 2 digits
+=======
+			Integer.parseInt(ExamNumberField.getText());
+>>>>>>> 3f20fc4 ..
 			if ((ExamNumberField.getText().length() != 2) && (ExamNumberField.getText().length() != 0)) {
 				onlytwonumberLBL.setVisible(true); //show the suitable warning message
 				count++;
@@ -229,7 +293,7 @@ public class BuildNewExamController {
 				count++;
 			}
 		}
-		
+
 		try {
 			Integer.parseInt(ExamSubjectField.getText());
 			if ((ExamSubjectField.getText().length() != 2) && (ExamSubjectField.getText().length() != 0)) {
@@ -243,9 +307,9 @@ public class BuildNewExamController {
 				count++;
 			}
 		}
-		
+
 		try {
-			 Integer.parseInt(ExamCourseField.getText());
+			Integer.parseInt(ExamCourseField.getText());
 			if ((ExamCourseField.getText().length() != 2) && (ExamCourseField.getText().length() != 0)) {
 				onlytwonumberLBL11.setVisible(true);//show the suitable warning message
 				count++;
@@ -259,21 +323,59 @@ public class BuildNewExamController {
 		}
 
 		try {
-		 Integer.parseInt(ExamTimeField.getText());
+			Integer.parseInt(ExamTimeField.getText());
 		} catch (NumberFormatException e) {
 			if (ExamTimeField.getText().length() != 0) {
 				onlynumbersLBL1.setVisible(true);//show the suitable warning message
 				count++;
 			}
 		}
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 		if (count == 0) {//if every textfield filled right
 		final String Examcode = ExamSubjectField.getText()+ExamCourseField.getText()+ExamNumberField.getText();				
+=======
+		if (count == 0) {
+			Saveargs();
+			temp = true;
+>>>>>>> 3f20fc4 ..
 			QuestionsSelectionController QSCC = new QuestionsSelectionController();
-			QSCC.GetExam(Examcode,ExamSubjectField.getText());
-			System.out.println(Examcode);
+			QSCC.getarugments(Examnumber, examSubject, ExamCourse, ExamTime, StudentIns, TeacherIns, getquestionscodes,
+					getpoints);
 			QSCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
+		} 
+
+	}
+
+	public void Saveargs() {
+		Examnumber = ExamNumberField.getText();
+		examSubject = ExamSubjectField.getText();
+		ExamCourse = ExamCourseField.getText();
+		ExamTime = ExamTimeField.getText();
+		StudentIns = StudentInstructionField.getText();
+		TeacherIns = TeacherInstructionField.getText();
+		temp = false;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		if (temp) {
+			ExamNumberField.setText(Examnumber);
+			ExamSubjectField.setText(examSubject);
+			ExamCourseField.setText(ExamCourse);
+			ExamTimeField.setText(ExamTime);
+			StudentInstructionField.setText(StudentIns);
+			TeacherInstructionField.setText(TeacherIns);
+		} else {
+			ExamNumberField.setText("");
+			
+			ExamSubjectField.setText("");
+			ExamCourseField.setText("");
+			ExamTimeField.setText("");
+			StudentInstructionField.setText("");
+			TeacherInstructionField.setText("");
 		}
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 	}
 	/**
 	 * method that sets the teacher name
@@ -295,5 +397,8 @@ public class BuildNewExamController {
 		StudentInstructionField.setText(exam.getStudentInstructions());
 		TeacherInstructionField.setText(exam.getTeacherInstructions());
 		// go to update on add question
+=======
+
+>>>>>>> 3f20fc4 ..
 	}
 }

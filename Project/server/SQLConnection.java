@@ -28,6 +28,13 @@ public class SQLConnection {
 			System.out.println("Driver definition failed");
 		}
 		try {
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
+=======
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
+					"Ahmf1144");
+			// conn =
+			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
+>>>>>>> 3f20fc4 ..
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST",
 			// "root","Ahmf1144");
@@ -163,6 +170,7 @@ public class SQLConnection {
 		return array;
 	}
 
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 	public static ArrayList<StudentExamanation> getTime() {
 		ArrayList<StudentExamanation> array = new ArrayList<StudentExamanation>();
 		if (conn != null) {
@@ -184,6 +192,8 @@ public class SQLConnection {
 		return array;
 	}
 
+=======
+>>>>>>> 3f20fc4 ..
 	public static void DeleteExam(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -280,4 +290,41 @@ public class SQLConnection {
 
 	}
 
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
+=======
+	public static boolean UpgradeExam(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(
+						"UPDATE exams Set ExamNumber = ?, ExamSubject = ? , ExamCourse = ? , ExamTime = ? ,TeacherName=? , ChosenQuestion=? , QuestionPoint = ? , StudentInstructions = ? , TeacherInstructions=? ,WHERE ExamCode = ? ");
+				stmt.setString(1, ((Exam) list.get(0)).getExamCode());
+				stmt.setString(2, ((Exam) list.get(0)).getExamNumber());
+				stmt.setString(3, ((Exam) list.get(0)).getExamSubject());
+
+				stmt.setString(4, ((Exam) list.get(0)).getExamCourse());
+
+				stmt.setString(5, ((Exam) list.get(0)).getExamTime());
+
+				stmt.setString(6, ((Exam) list.get(0)).getTeacherName());
+
+				stmt.setString(7, ((Exam) list.get(0)).getChosenQuestion());
+
+				stmt.setString(8, ((Exam) list.get(0)).getQuestionPoint());
+
+				stmt.setString(9, ((Exam) list.get(0)).getStudentInstructions());
+
+				stmt.setString(10, ((Exam) list.get(0)).getTeacherInstructions());
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
+
+>>>>>>> 3f20fc4 ..
 }
