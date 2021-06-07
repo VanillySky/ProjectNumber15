@@ -97,9 +97,9 @@ public class BuildNewQuestionController    {
 	private TextField Answer2Txt;
 
 	
-	public ArrayList<String> AL = new ArrayList();
 
-	@FXML
+
+
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -107,7 +107,7 @@ public class BuildNewQuestionController    {
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Build Question");
+			primaryStage.setTitle("Build New Question");
 			primaryStage.show();
 
 		} catch (Exception e) {

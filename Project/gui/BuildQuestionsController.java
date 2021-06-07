@@ -1,117 +1,99 @@
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
+
+import controllers.DeleteController;
 import javafx.fxml.Initializable;
 
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import entities.Question;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ResourceBundle;
-
-import client.ChatClient;
-import client.ClientUI;
-import controllers.DeleteController;
-import controllers.DisplayController;
-
-import java.net.URL;
-import entities.Exam;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import entities.Question;
+
 public class BuildQuestionsController implements Initializable {
 
-    @FXML
-    private TableView<Question> QuestionTable;
+	@FXML
+	private TableView<Question> Table;
 
-    @FXML
-    private TableColumn<Question, String> QuestNum;
+	@FXML
+	private TableColumn<Question, String> QuestCodeTable;
 
-    @FXML
-    private TableColumn<Question, String> QuestCode;
+	@FXML
+	private TableColumn<Question, String> QuestNumTable;
 
-    @FXML
-    private TableColumn<Question, String> Course;
+	@FXML
+	private TableColumn<Question, String> QuestSubjectTable;
 
-    @FXML
-    private TableColumn<Question, String> Question;
+	@FXML
+	private TableColumn<Question, String> QuestionTable;
 
-    @FXML
-    private TableColumn<Question, String> QuestInst;
+	@FXML
+	private TableColumn<Question, String> QuestInstTable;
 
-    @FXML
-    private TableColumn <Question, String> Answers;
+	@FXML
+	private TableColumn<Question, String> Answers;
 
-    @FXML
-    private TableColumn<Question, String> RightAns;
+	@FXML
+	private TableColumn<Question, String> Answers1Table;
 
-    @FXML
-    private TableColumn<Question, String> Author;
+	@FXML
+	private TableColumn<Question, String> Answers2Table;
 
-    @FXML
-    private Button CEMSButton;
+	@FXML
+	private TableColumn<Question, String> Answers3Table;
 
-    @FXML
-    private Button DeleteQuestionButton;
+	@FXML
+	private TableColumn<Question, String> Answers4Table;
 
-    @FXML
-    private Button UpdateQuestionButton;
+	@FXML
+	private TableColumn<Question, String> RightAnswerTable;
 
-    @FXML
-    private Button AddQuestionButton;
+	@FXML
+	private TableColumn<Question, String> AuthorTable;
 
-    @FXML
-    private Button SignOutButton;
+	@FXML
+	private TableColumn<Question, String> pointTable;
 
-    @FXML
-    private Button SerchByCourseButton;
+	@FXML
+	private Button CEMSButton;
 
-    @FXML
-    private Button SerchByTeacherButton;
+	@FXML
+	private Button DeleteQuestionButton;
 
-    @FXML
-    private TextField CourseNameTXT;
+	@FXML
+	private Button UpdateQuestionButton;
 
-    @FXML
-    private TextField teacherNameTXT;
-    
+	@FXML
+	private Button AddQuestionButton;
+
+	@FXML
+	private Button SignOutButton;
+
+	@FXML
+	private Button SerchByCourseButton;
+
+	@FXML
+	private Button SerchByTeacherButton;
+
 	private Question selectedQuestion = null;
 
-    public void start(Stage primaryStage) {
+	private ObservableList<Question> dataList = FXCollections.observableArrayList();
+
+	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/gui/BuildQuestions.fxml"));
@@ -124,49 +106,65 @@ public class BuildQuestionsController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
-    @Override
+	}
+
+	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-		this.QuestNum.setCellValueFactory((Callback) new PropertyValueFactory("QuestionNumber"));
-		this.QuestCode.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
-		this.Course.setCellValueFactory((Callback) new PropertyValueFactory("Subject"));
-		this.Question.setCellValueFactory((Callback) new PropertyValueFactory("Question"));
-		this.QuestInst.setCellValueFactory((Callback) new PropertyValueFactory("QuestionInstruction"));
-		this.Answers.setCellValueFactory((Callback) new PropertyValueFactory("Answer1"));
-		//here maybe we have to add more Answers
-		this.RightAns.setCellValueFactory((Callback) new PropertyValueFactory("RightAnswer"));
-		this.Author.setCellValueFactory((Callback) new PropertyValueFactory("Author"));
-				this.QuestionTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions()));
-				this.QuestionTable.refresh();
-		}
-	
-    
-    @FXML
-	public void PressCEMS(ActionEvent event) {
-		TeacherMenuController TMCC = new TeacherMenuController();
-		TMCC.start(new Stage());
-		((Node) event.getSource()).getScene().getWindow().hide();
+		this.QuestCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
+		this.QuestNumTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionNumber"));
+		this.QuestSubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("Subject"));
+		this.QuestionTable.setCellValueFactory((Callback) new PropertyValueFactory("Question"));
+		this.QuestInstTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionInstruction"));
+		this.Answers1Table.setCellValueFactory((Callback) new PropertyValueFactory("Answer1"));
+		this.Answers2Table.setCellValueFactory((Callback) new PropertyValueFactory("Answer2"));
+		this.Answers3Table.setCellValueFactory((Callback) new PropertyValueFactory("Answer3"));
+		this.Answers4Table.setCellValueFactory((Callback) new PropertyValueFactory("Answer4"));
+		this.RightAnswerTable.setCellValueFactory((Callback) new PropertyValueFactory("RightAnswer"));
+		this.AuthorTable.setCellValueFactory((Callback) new PropertyValueFactory("Author"));
+		this.pointTable.setCellValueFactory((Callback) new PropertyValueFactory("point"));
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions());
+		Table.setItems(dataList);
+		Table.refresh();
 	}
-    @FXML
+
+	@FXML
 	public void AddNewQuestion(ActionEvent event) {
 		BuildNewQuestionController BNQCC = new BuildNewQuestionController();
 		BNQCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-    @FXML
-	public void DeleteQuestion(ActionEvent event) {
-        DeleteController DC = new DeleteController();
-        DC.DeleteExam(selectedQuestion.getQuestionCode()); 
-        
-		this.QuestionTable.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions()));
-		this.QuestionTable.refresh();
-	}
-    @FXML
-	void selectQuestion(MouseEvent event) {
-		if (QuestionTable.getSelectionModel().getSelectedItem() != null) {
-			selectedQuestion =QuestionTable.getSelectionModel().getSelectedItem();
+
+	@FXML
+	void UpdateExam(ActionEvent event) {
+		if(selectedQuestion != null) {
+			
 		}
+
+	}
+
+	@FXML
+	public void DeleteQuestion(ActionEvent event) {
+		DeleteController DC = new DeleteController();
+		DC.DeleteExam(selectedQuestion.getQuestionCode());
+
+		Table.setItems(
+				FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowQuestions()));
+		Table.refresh();
+	}
+
+	@FXML
+	void selectQuestion(MouseEvent event) {
+		if (Table.getSelectionModel().getSelectedItem() != null) {
+			selectedQuestion = Table.getSelectionModel().getSelectedItem();
+		}
+	}
+
+	@FXML
+	public void PressCEMS(ActionEvent event) {
+		TeacherMenuController TMCC = new TeacherMenuController();
+		TMCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
@@ -175,8 +173,5 @@ public class BuildQuestionsController implements Initializable {
 		LFCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-
-    
-   
 
 }
