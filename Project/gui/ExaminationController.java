@@ -125,9 +125,11 @@ public class ExaminationController  {
 			if(Examcode!="")
 			{
 			ManualController MC = new ManualController();
+			MC.getcode(Examcode);
 			MC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
 			}
+			
 		}
 
 		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {

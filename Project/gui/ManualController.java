@@ -47,7 +47,7 @@ public class ManualController {
 
     @FXML
     private Label IsntValidLBL;
-    
+    static private String ExamCode;
     
 	int secondsPassed = 0;
 	Timer timer = new Timer();
@@ -117,5 +117,8 @@ public class ManualController {
 		else
 			IsntValidLBL.setVisible(true);
 	}
-
+	public void getcode(String code) {
+		ManualController.ExamCode = code;
+		
+	}
 }
