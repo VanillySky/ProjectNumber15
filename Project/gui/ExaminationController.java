@@ -4,6 +4,7 @@
 package gui;
 
 
+import controllers.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -120,6 +121,7 @@ public class ExaminationController  {
 			IncorrectLBL.setVisible(true);
 		}
 		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
+			String code=LoginController.checkManual(insertCodeTxtField.getText());
 			ManualController MC = new ManualController();
 			MC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

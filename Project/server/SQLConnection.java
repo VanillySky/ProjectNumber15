@@ -29,10 +29,10 @@ public class SQLConnection {
 		}
 		try {
 
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
-					"Ahmf1144");
-			// conn =
-			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
+			//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
+				//	"Ahmf1144");
+			 conn =
+			DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST",
@@ -123,7 +123,30 @@ public class SQLConnection {
 			}
 		return user;
 	}
+	public static String checkManualCode(ArrayList<Object> arr) {
+		String ExamManCode = (String) arr.get(0);
+     String ExamCode="";
+		if (conn != null)
+			try {
 
+				String query = "Select ExamCode FROM studentexamcode WHERE ExamManCode = '" + ExamManCode + "'";
+				Statement st = conn.createStatement();
+
+				ResultSet rs = st.executeQuery(query);
+
+				if (rs.next()) {
+					ExamCode = rs.getString("ExamCode");
+
+					if(ExamCode!="") return ExamCode;
+					
+					}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return ExamCode;
+		}
+	
 	public static ArrayList<Exam> getAllexams() {
 		ArrayList<Exam> array = new ArrayList<Exam>();
 		if (conn != null) {
