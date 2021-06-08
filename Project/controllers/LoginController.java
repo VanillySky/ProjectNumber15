@@ -37,7 +37,7 @@ public class LoginController {
 		return code;
 		else
 		{
-		return null;
+		return "";
 		}
 	}
 }

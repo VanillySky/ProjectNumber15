@@ -121,10 +121,13 @@ public class ExaminationController  {
 			IncorrectLBL.setVisible(true);
 		}
 		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
-			String code=LoginController.checkManual(insertCodeTxtField.getText());
+			String Examcode=LoginController.checkManual(insertCodeTxtField.getText());
+			if(Examcode!="")
+			{
 			ManualController MC = new ManualController();
 			MC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
+			}
 		}
 
 		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
