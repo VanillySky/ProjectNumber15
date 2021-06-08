@@ -117,6 +117,10 @@ public class ManualController {
 		else
 			IsntValidLBL.setVisible(true);
 	}
+	/**
+	 * This method gets the ExamCode from ExaminationController 
+	 * @param event
+	 */
 	public void getcode(String code) {
 		ManualController.ExamCode = code;
 		
