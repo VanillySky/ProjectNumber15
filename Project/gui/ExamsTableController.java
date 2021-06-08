@@ -96,7 +96,6 @@ public class ExamsTableController implements Initializable {
 	private Exam selectedExam = null;
 
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
-	private ObservableList<Exam> dataList1 = FXCollections.observableArrayList();
 
 	public void start(Stage primaryStage) {
 		try {
@@ -163,10 +162,10 @@ public class ExamsTableController implements Initializable {
 		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
 		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
 
-		dataList1 = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams());
-		ExamTable.setItems(dataList1);
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams());
+		ExamTable.setItems(dataList);
 
-		FilteredList<Exam> filteredData = new FilteredList<Exam>(dataList1, b -> true);
+		FilteredList<Exam> filteredData = new FilteredList<Exam>(dataList, b -> true);
 		SerchByCourseNameTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
 			filteredData.setPredicate(Exam -> {
 				if (newValue == null || newValue.isEmpty()) {
@@ -195,6 +194,7 @@ public class ExamsTableController implements Initializable {
 
 	@FXML
 	public void AddNewExam(ActionEvent event) {
+		QuestionsSelectionController.temp = false;
 		BuildNewExamController.temp = false;
 		BuildNewExamController BNECC = new BuildNewExamController();
 		BNECC.start(new Stage());
@@ -214,6 +214,7 @@ public class ExamsTableController implements Initializable {
 			BuildNewExamController.getpoints = selectedExam.getQuestionPoint();
 			QuestionsSelectionController.temp = true;
 			BuildNewExamController.temp = true;
+			BuildNewExamController.help=false;
 			BuildNewExamController BNECC = new BuildNewExamController();
 			BNECC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
@@ -226,12 +227,17 @@ public class ExamsTableController implements Initializable {
 
 	@FXML
 	public void DeleteExam(ActionEvent event) {
+		if(selectedExam!=null) {
 		DeleteController DC = new DeleteController();
 		DC.DeleteExam(selectedExam.getExamCode());
 
 		this.ExamTable
 				.setItems(FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
 		this.ExamTable.refresh();
+		}else {
+			LabelERR.setText("please chose any Exam first to Delete!!");
+			LabelERR.setVisible(true);
+		}
 	}
 
 	@FXML
@@ -262,8 +268,11 @@ public class ExamsTableController implements Initializable {
 		this.StudentInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("StudentInstructions"));
 		this.TeacherInstructionTable.setCellValueFactory((Callback) new PropertyValueFactory("TeacherInstructions"));
 		if (controllers.DisplayController.ShowExams() != null) {
-			this.ExamTable.setItems(
-					FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams()));
+			dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowExams());
+			ExamTable.setItems(dataList);
+			
+			for(int i=0;i<dataList.size();i++)
+				BuildNewExamController.AllExamsCode.add(dataList.get(i).getExamCode());
 		}
 
 	}

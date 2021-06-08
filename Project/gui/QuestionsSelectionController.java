@@ -314,6 +314,7 @@ public class QuestionsSelectionController extends Application implements Initial
 			saveQuestioncode += dataList2.get(i).getQuestionCode() + "\n";
 			savePoints += dataList2.get(i).getPoint() + "\n";
 		}
+		BuildNewExamController.help=true;
 		BuildNewExamController BNECC = new BuildNewExamController();
 		BNECC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -359,11 +360,8 @@ public class QuestionsSelectionController extends Application implements Initial
 		if (count == 0) {
 			exam = new Exam(ExamCode, Examnumber, examSubject, ExamCourse, ExamTime,
 					ChatClient.currentUser.getFirstName(), questionscodes, points, StudentIns, TeacherIns);
-
 			if (temp) {
-				DeleteController DC = new DeleteController();
-				DC.DeleteExam(exam.getExamCode());
-				AddController.AddExam(exam);
+				UpgradeConroller.UpgradeExam(exam);
 
 			} else
 				AddController.AddExam(exam);
@@ -454,7 +452,6 @@ public class QuestionsSelectionController extends Application implements Initial
 				}
 			Table2.setItems(dataList2);
 			Table2.refresh();
-			temp = false;
 		} 
 	}
 }

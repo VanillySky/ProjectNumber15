@@ -11,7 +11,7 @@ import entities.Question;
 
 public class AddController {
 	public static boolean AddQuestion(Question question) {
-		ArrayList<Object> list = new ArrayList<Object>();
+		ArrayList<Object> list = new ArrayList<>();
 		list.add(question);
 		ClientMessage msgFromClient = new ClientMessage("AddNewQuestion", list, list.size());
 		ClientUI.chat.accept(msgFromClient);

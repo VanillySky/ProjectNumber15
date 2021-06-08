@@ -1,7 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import entities.Exam;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -140,8 +145,9 @@ import javafx.stage.Stage;
 
 		@FXML
 		private Label onlytwonumberLBL11;
-
-		static boolean temp;
+		
+		static ArrayList<String> AllExamsCode = new ArrayList<String>();
+		static boolean temp,help;
 		static String Examcode, Examnumber, examSubject, ExamCourse, ExamTime, StudentIns, TeacherIns,
 				getquestionscodes, getpoints;
 
@@ -214,6 +220,7 @@ import javafx.stage.Stage;
 				if (ExamNumberField.getText().isEmpty() || ExamSubjectField.getText().isEmpty()
 						|| ExamCourseField.getText().isEmpty() || ExamTimeField.getText().isEmpty()) {
 					
+					emptyfieldLBL.setText("* please fill an important empty fields !!");
 					emptyfieldLBL.setVisible(true);
 					count++;
 				}
@@ -270,6 +277,15 @@ import javafx.stage.Stage;
 					count++;
 				}
 			}
+			String ExamCodeTemp = ExamSubjectField.getText()+ExamCourseField.getText()+ExamNumberField.getText();
+			for(int i=0 ; i < AllExamsCode.size();i++) 	
+				if(ExamCodeTemp.equals(AllExamsCode.get(i))&&(temp==false)) {
+					emptyfieldLBL.setText("this Exam code is exist");
+					emptyfieldLBL.setVisible(true);
+					count++;
+				}
+			
+			
 				if (count == 0) {
 					Saveargs();
 					QuestionsSelectionController QSCC = new QuestionsSelectionController();
@@ -302,6 +318,12 @@ import javafx.stage.Stage;
 				ExamTimeField.setText(ExamTime);
 				StudentInstructionField.setText(StudentIns);
 				TeacherInstructionField.setText(TeacherIns);
+				if(help) { // if we come from question selection we dont need to disable fields .
+				}
+				else {
+				ExamNumberField.setDisable(true);
+				ExamSubjectField.setDisable(true);
+				ExamCourseField.setDisable(true);}
 			} else {
 				ExamNumberField.setText("");
 				ExamSubjectField.setText("");

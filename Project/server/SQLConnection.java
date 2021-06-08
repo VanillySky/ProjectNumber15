@@ -223,11 +223,11 @@ public class SQLConnection {
 
 				PreparedStatement stmt = conn
 						.prepareStatement("INSERT INTO questions VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
-				stmt.setString(1, ((Question) list.get(0)).getQuestionNumber());
-				stmt.setString(2, ((Question) list.get(0)).getQuestionCode());
-				stmt.setString(3, ((Question) list.get(0)).getQuestion());
+				stmt.setString(1, ((Question) list.get(0)).getQuestionCode());
+				stmt.setString(2, ((Question) list.get(0)).getQuestionNumber());
+				stmt.setString(3, ((Question) list.get(0)).getSubject());
 
-				stmt.setString(4, ((Question) list.get(0)).getSubject());
+				stmt.setString(4, ((Question) list.get(0)).getQuestion());
 
 				stmt.setString(5, ((Question) list.get(0)).getQuestionInstruction());
 
@@ -290,24 +290,19 @@ public class SQLConnection {
 			try {
 
 				PreparedStatement stmt = conn.prepareStatement(
-						"UPDATE exams Set ExamNumber = ?, ExamSubject = ? , ExamCourse = ? , ExamTime = ? ,TeacherName=? , ChosenQuestion=? , QuestionPoint = ? , StudentInstructions = ? , TeacherInstructions=? ,WHERE ExamCode = ? ");
-				stmt.setString(1, ((Exam) list.get(0)).getExamCode());
-				stmt.setString(2, ((Exam) list.get(0)).getExamNumber());
-				stmt.setString(3, ((Exam) list.get(0)).getExamSubject());
+						"UPDATE exams Set ExamTime = ?  , ChosenQuestion=? , QuestionPoint = ? , StudentInstructions = ? , TeacherInstructions=? WHERE ExamCode = ? ");
+				
+				
+				stmt.setString(1, ((Exam) list.get(0)).getExamTime());
 
-				stmt.setString(4, ((Exam) list.get(0)).getExamCourse());
+				stmt.setString(2, ((Exam) list.get(0)).getChosenQuestion());
 
-				stmt.setString(5, ((Exam) list.get(0)).getExamTime());
+				stmt.setString(3, ((Exam) list.get(0)).getQuestionPoint());
 
-				stmt.setString(6, ((Exam) list.get(0)).getTeacherName());
+				stmt.setString(4, ((Exam) list.get(0)).getStudentInstructions());
 
-				stmt.setString(7, ((Exam) list.get(0)).getChosenQuestion());
-
-				stmt.setString(8, ((Exam) list.get(0)).getQuestionPoint());
-
-				stmt.setString(9, ((Exam) list.get(0)).getStudentInstructions());
-
-				stmt.setString(10, ((Exam) list.get(0)).getTeacherInstructions());
+				stmt.setString(5, ((Exam) list.get(0)).getTeacherInstructions());
+				stmt.setString(6, ((Exam) list.get(0)).getExamCode());
 
 				stmt.executeUpdate();
 				return true;
@@ -318,4 +313,42 @@ public class SQLConnection {
 		return false;
 
 	}
+	
+	
+	public static boolean UpgradeQuestion(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(
+						"UPDATE questions Set Question = ?  , QuestionInstruction=? , Answer1 = ? , Answer2 = ? , Answer3 = ? , Answer4 = ? , RightAnswer=? , point=?  WHERE QuestionCode = ? ");
+				
+				
+				stmt.setString(1, ((Question) list.get(0)).getQuestion());
+
+				stmt.setString(2, ((Question) list.get(0)).getQuestionInstruction());
+
+				stmt.setString(3, ((Question) list.get(0)).getAnswer1());
+
+				stmt.setString(4, ((Question) list.get(0)).getAnswer2());
+
+				stmt.setString(5, ((Question) list.get(0)).getAnswer3());
+				
+				stmt.setString(6, ((Question) list.get(0)).getAnswer4());
+				
+				stmt.setString(7, ((Question) list.get(0)).getRightAnswer());
+
+				stmt.setString(8, ((Question) list.get(0)).getPoint());
+				
+				stmt.setString(9, ((Question) list.get(0)).getQuestionCode());
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
+	
 }
