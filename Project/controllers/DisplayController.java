@@ -10,6 +10,7 @@ import client.ClientUI;
 import entities.Exam;
 import entities.Question;
 import entities.StudentGrade;
+import entities.Teacher;
 
 public class DisplayController {
 	@SuppressWarnings("unchecked")
@@ -23,6 +24,17 @@ public class DisplayController {
 		list = (ArrayList<Exam>) msgFromServer.getData();
 		return list;
 	}
+	
+	public static Collection<Object> ShowTeacherExams(String TeacherName)  {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(TeacherName);
+		ClientMessage msgFromClient = new ClientMessage("getTeacherexams", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
 //function to add questions to Questions building in teacher
 	public static ArrayList<Question> ShowQuestions() {
 		// TODO Auto-generated method stub
@@ -33,6 +45,8 @@ public class DisplayController {
 		list = (ArrayList<Question>) msgFromServer.getData();
 		return list;	
 		}
+	
+	
 	public static ArrayList<StudentGrade> ShowStudentGrade() {
 		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
 		ClientMessage msgFromClient = new ClientMessage("getAllgrades", null, 0);
@@ -41,6 +55,8 @@ public class DisplayController {
 		list = (ArrayList<StudentGrade>) msgFromServer.getData();
 		return list;	
 	}
+	
+	
 	public static ArrayList<StudentGrade> ShowExamTime() {
 		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
 		ClientMessage msgFromClient = new ClientMessage("getTime", null, 0);
@@ -49,4 +65,6 @@ public class DisplayController {
 		list = (ArrayList<StudentGrade>) msgFromServer.getData();
 		return list;	
 	}
+
+	
 }

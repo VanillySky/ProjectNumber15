@@ -305,7 +305,7 @@ import javafx.stage.Stage;
 			ExamTime = ExamTimeField.getText();
 			StudentIns = StudentInstructionField.getText();
 			TeacherIns = TeacherInstructionField.getText();
-			temp = true;
+			temp=true;
 		}
 		
 		
@@ -318,7 +318,7 @@ import javafx.stage.Stage;
 				ExamTimeField.setText(ExamTime);
 				StudentInstructionField.setText(StudentIns);
 				TeacherInstructionField.setText(TeacherIns);
-				if(help) { // if we come from question selection we dont need to disable fields .
+				if(help) { // if we in add put help true we dont need to disable fields
 				}
 				else {
 				ExamNumberField.setDisable(true);

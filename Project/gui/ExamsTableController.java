@@ -196,6 +196,7 @@ public class ExamsTableController implements Initializable {
 	public void AddNewExam(ActionEvent event) {
 		QuestionsSelectionController.temp = false;
 		BuildNewExamController.temp = false;
+		BuildNewExamController.help=true;
 		BuildNewExamController BNECC = new BuildNewExamController();
 		BNECC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();

@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class NewQuestionController implements Initializable {
@@ -73,6 +74,9 @@ public class NewQuestionController implements Initializable {
     
     @FXML
     private TextField RightAnswerTXT;
+    
+    @FXML
+    private ImageView Updatephoto;
     
     static ArrayList<String> AllQuestionscode = new ArrayList<String>();
     static String QuestionNum , Subject , Question , Answer1,Answer2,Answer3,Answer4,Rigthanswer ,QuestionIns;
@@ -210,6 +214,7 @@ public class NewQuestionController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(temp) {
+			Updatephoto.setVisible(true);
 			QuestionNumTXT.setText(QuestionNum);
 			SubjectTXT.setText(Subject);
 			QuestionTXT.setText(Question);
@@ -223,6 +228,7 @@ public class NewQuestionController implements Initializable {
 			SubjectTXT.setDisable(true);
 			
 		}else {
+			Updatephoto.setVisible(false);
 			QuestionNumTXT.setText("");
 			SubjectTXT.setText("");
 			QuestionTXT.setText("");
