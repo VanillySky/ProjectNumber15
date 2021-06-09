@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="499.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="499.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagerStatisticsController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="877.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,18 +20,13 @@
       <TextField fx:id="SearchStudentTXT" layoutX="180.0" layoutY="115.0" prefHeight="25.0" prefWidth="218.0" />
       <TextField fx:id="SearchCourseTXT" layoutX="180.0" layoutY="140.0" prefHeight="25.0" prefWidth="218.0" />
       <TextField fx:id="SearchTeacherTXT" layoutX="180.0" layoutY="165.0" prefHeight="25.0" prefWidth="218.0" />
-      <TableView layoutX="15.0" layoutY="190.0" prefHeight="200.0" prefWidth="850.0">
+      <TableView fx:id="TableStat" layoutX="15.0" layoutY="190.0" prefHeight="200.0" prefWidth="850.0">
         <columns>
-          <TableColumn fx:id="StudentNameCol" prefWidth="81.0" text="Student Name" />
-          <TableColumn fx:id="ExamCodeCol" prefWidth="68.0" text="Exam Code" />
-            <TableColumn fx:id="SubjectCol" prefWidth="64.0" text="Subject" />
-            <TableColumn fx:id="CourseCol" prefWidth="72.0" text="Course" />
-            <TableColumn fx:id="QuestionsNumCol" prefWidth="101.0" text="Questions number" />
-            <TableColumn fx:id="QuestionsPointsCol" prefWidth="100.0" text="Questions points" />
-            <TableColumn fx:id="ExamTimeCol" prefWidth="67.0" text="Exam Time" />
-            <TableColumn fx:id="StudentInstructionsCol" prefWidth="119.0" text="Student Instructions" />
-            <TableColumn fx:id="TeacherInstructionsCol" prefWidth="123.0" text="Teacher Instructions " />
-            <TableColumn fx:id="AuthorCol" prefWidth="54.0" text="Author " />
+          <TableColumn fx:id="StudentNameCol" prefWidth="182.0" text="Student Name" />
+          <TableColumn fx:id="ExamCodeCol" minWidth="0.0" prefWidth="196.0" text="Exam Code" />
+            <TableColumn fx:id="CourseCol" prefWidth="134.0" text="Course" />
+            <TableColumn fx:id="ExamGrade" prefWidth="155.0" text="Exam Grade" />
+            <TableColumn fx:id="AuthorCol" prefWidth="182.0" text="Author " />
         </columns>
          <opaqueInsets>
             <Insets />
@@ -42,27 +37,27 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="SearchStudentBTN" contentDisplay="CENTER" layoutX="398.0" layoutY="115.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
+      <Button fx:id="SearchStudentBTN" contentDisplay="CENTER" layoutX="398.0" layoutY="115.0" mnemonicParsing="false" onAction="#SerchByStudentName" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="SearchCourseBTN" contentDisplay="CENTER" layoutX="398.0" layoutY="140.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
+      <Button fx:id="SearchCourseBTN" contentDisplay="CENTER" layoutX="398.0" layoutY="140.0" mnemonicParsing="false" onAction="#SerchByCourseName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="SearchTeacherBTN" contentDisplay="CENTER" layoutX="398.0" layoutY="165.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
+      <Button fx:id="SearchTeacherBTN" contentDisplay="CENTER" layoutX="398.0" layoutY="165.0" mnemonicParsing="false" onAction="#SerchByTeacherName" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="SignOutBTN" contentDisplay="CENTER" layoutX="780.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
+      <Button fx:id="SignOutBTN" contentDisplay="CENTER" layoutX="780.0" layoutY="-2.0" mnemonicParsing="false" onAction="#PressOut" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="GetReportBTN" contentDisplay="CENTER" layoutX="624.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
+      <Button fx:id="GetReportBTN" contentDisplay="CENTER" layoutX="624.0" layoutY="396.0" mnemonicParsing="false" onAction="#PressGetReport" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>

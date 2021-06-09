@@ -20,11 +20,11 @@ public class StudentGrade implements Serializable {
 		TeacherName=teacherName;
 	}
 
-	public String getTecherName() {
+	public String getTeacherName() {
 		return TeacherName;
 	}
 
-	public void setTecherName(String techerName) {
+	public void setTeacherName(String techerName) {
 		TeacherName = techerName;
 	}
 

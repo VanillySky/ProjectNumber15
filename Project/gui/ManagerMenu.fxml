@@ -5,17 +5,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="579.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="579.0" prefWidth="1025.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagerMenuController">
    <children>
       <ImageView fitHeight="579.0" fitWidth="1048.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/ManagerMenu.png" />
          </image>
       </ImageView>
-      <Button fx:id="Informationbtn" layoutX="171.0" layoutY="327.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="142.0" style="-fx-background-color: transparent;" styleClass="O" />
-      <Button fx:id="Confirmationsbtn" layoutX="448.0" layoutY="318.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="164.0" style="-fx-background-color: transparent;" styleClass="c" />
-      <Button fx:id="Statisticsbtn" layoutX="726.0" layoutY="327.0" mnemonicParsing="false" onAction="#GoToStatistics" prefHeight="40.0" prefWidth="153.0" style="-fx-background-color: transparent;" styleClass="c" />
-      <Button fx:id="CEMSButton" mnemonicParsing="false" prefHeight="120.0" prefWidth="134.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="OutButton" layoutX="911.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="Informationbtn" layoutX="149.0" layoutY="207.0" mnemonicParsing="false" onAction="#GoToInfo" prefHeight="192.0" prefWidth="192.0" style="-fx-background-color: transparent;" styleClass="O" />
+      <Button fx:id="Confirmationsbtn" layoutX="433.0" layoutY="207.0" mnemonicParsing="false" onAction="#GoToConfirmations" prefHeight="192.0" prefWidth="201.0" style="-fx-background-color: transparent;" styleClass="c" />
+      <Button fx:id="Statisticsbtn" layoutX="702.0" layoutY="210.0" mnemonicParsing="false" onAction="#GoToStatistics" prefHeight="192.0" prefWidth="192.0" style="-fx-background-color: transparent;" styleClass="c" />
+      <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PresCEMS" prefHeight="120.0" prefWidth="134.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="OutButton" layoutX="911.0" layoutY="-1.0" mnemonicParsing="false" onAction="#PressSignOut" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

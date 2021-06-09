@@ -13,6 +13,7 @@ import client.ChatClient;
 import entities.Teacher;
 import entities.User;
 import entities.Exam;
+import entities.Manager;
 import entities.Question;
 import entities.Student;
 import entities.StudentExamanation;
@@ -80,6 +81,7 @@ public class SQLConnection {
 					case "Student":
 						return new Student(username, password, firstName, lastName, userId, email);
 					case "Manager":
+						return new Manager(username, password, firstName, lastName, userId, email);
 					default:
 						break;
 					}

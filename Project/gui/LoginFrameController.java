@@ -140,7 +140,7 @@ public class LoginFrameController {
 				incorrectLogin.setVisible(true);
 			}
 		}
-		/*if (user.getRole().equals("Manager")) {
+		if (user.getRole().equals("Manager")) {
 			try {
 				params.add(new Connection(InetAddress.getLocalHost().getHostAddress(),
 						InetAddress.getLocalHost().getHostName(), "Manager", user.getUserId()));
@@ -158,7 +158,7 @@ public class LoginFrameController {
 				incorrectLogin.setText("You are already logged in!");
 				incorrectLogin.setVisible(true);
 			}
-		}*/
+		}
 		}else {
 			System.out.println("This Account is not exist");
 			incorrectLogin.setText("*Login details are incorrect*");

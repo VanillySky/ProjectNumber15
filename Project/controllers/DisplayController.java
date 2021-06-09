@@ -9,13 +9,22 @@ import client.ChatClient;
 import client.ClientUI;
 import entities.Exam;
 import entities.Question;
+import entities.Statistics;
 import entities.StudentGrade;
 import entities.Teacher;
 
 public class DisplayController {
 	@SuppressWarnings("unchecked")
 	////function to add exams to exams building in teacher
-
+	
+	public static ArrayList<Statistics> ShowStatistics() {
+		ArrayList<Statistics> list = new ArrayList<Statistics>();
+		ClientMessage msgFromClient = new ClientMessage("getAllgrades", null, 0);
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Statistics>) msgFromServer.getData();
+		return list;
+	}
 	public static ArrayList<Exam> ShowExams() {
 		ArrayList<Exam> list = new ArrayList<Exam>();
 		ClientMessage msgFromClient = new ClientMessage("getAllexams", null, 0);
