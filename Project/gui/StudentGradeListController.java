@@ -1,24 +1,31 @@
 package gui;
 
-import java.awt.event.ActionEvent;
+import java.net.URL;
+import java.util.Collection;
+import java.util.ResourceBundle;
 
+import client.ChatClient;
 import entities.StudentGrade;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
-public class StudentGradeListController {
+public class StudentGradeListController implements Initializable {
 	@FXML
 	private TableView<StudentGrade> GradeTable;
-
-	@FXML
-	private AnchorPane AcnPane;
 
 	@FXML
 	private TableColumn<StudentGrade, String> ExamCodeColumn;
@@ -30,6 +37,9 @@ public class StudentGradeListController {
 	private TableColumn<StudentGrade, String> ExamGradeColumn;
 
 	@FXML
+	private TableColumn<StudentGrade, String> TeacherNamecolumn;
+
+	@FXML
 	private Button GetExamNotbookBTN;
 
 	@FXML
@@ -37,6 +47,8 @@ public class StudentGradeListController {
 
 	@FXML
 	private Button CEMSButton;
+	
+	private ObservableList<StudentGrade> dataList = FXCollections.observableArrayList();
 
 	/**
 	 * 
@@ -59,11 +71,29 @@ public class StudentGradeListController {
 
 	@FXML
 	void PressCEMS(ActionEvent event) {
-
+		TeacherMenuController TMCC = new TeacherMenuController();
+		TMCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
 	void SignOut(ActionEvent event) {
+		LoginFrameController LFCC = new LoginFrameController();
+		LFCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		this.ExamCodeColumn.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
+		this.ExamCourseColumn.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
+		this.ExamGradeColumn.setCellValueFactory((Callback) new PropertyValueFactory("ExamGrade"));
+		this.TeacherNamecolumn.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
+		
+		dataList = FXCollections.observableArrayList(
+				(Collection) controllers.DisplayController.ShowApprovedStudentGrade(ChatClient.currentUser.getUserName()));
+				GradeTable.setItems(dataList);
 
 	}
 

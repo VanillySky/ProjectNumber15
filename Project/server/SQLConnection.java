@@ -30,16 +30,11 @@ public class SQLConnection {
 		}
 		try {
 
-			//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
-				//	"Ahmf1144");
-			 conn =
-			DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
+					"Ahmf1144");
+//			 conn =
+//			DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 
-			// conn =
-			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST",
-			// "root","Ahmf1144");
-			// conn =
-			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 		//	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
 			//		"Shaden#2034");
 			System.out.println("SQL connection succeed");
@@ -93,6 +88,7 @@ public class SQLConnection {
 			}
 		return user;
 	}
+	
 	public static String checkManualCode(ArrayList<Object> arr) {
 		String ExamManCode = (String) arr.get(0);
      String ExamCode="";
@@ -193,6 +189,7 @@ public class SQLConnection {
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				while (rs.next()) {
+
 					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"),rs.getString("examCode"), rs.getString("examCourse"), rs.getString("examGrade"), rs.getString("TeacherName"));
 					array.add(SG);
 				}
@@ -206,6 +203,27 @@ public class SQLConnection {
 	
 	
 	
+	
+	public static ArrayList<StudentGrade> getAllApprovedgrades(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String StudentName = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM approvedstudentgrade WHERE studentUserName = '" + StudentName + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"), rs.getString("ExamCode"), rs.getString("ExamCourse"), rs.getString("ExamGrade"), rs.getString("TeacherName"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+
 
 
 	public static ArrayList<StudentExamanation> getTime() {

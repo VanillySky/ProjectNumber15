@@ -56,6 +56,17 @@ public class DisplayController {
 		return list;	
 	}
 	
+
+	public static Collection<Object> ShowApprovedStudentGrade(String studentName) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(studentName);
+		ClientMessage msgFromClient = new ClientMessage("getAllApprovedgrades", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;	
+	}
+	
 	
 	public static ArrayList<StudentGrade> ShowExamTime() {
 		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
@@ -66,5 +77,5 @@ public class DisplayController {
 		return list;	
 	}
 
-	
 }
+

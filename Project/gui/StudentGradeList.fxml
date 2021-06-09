@@ -5,34 +5,30 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StudentGradeListController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StudentGradeListController">
    <children>
-      <ImageView fx:id="GradeTable" fitHeight="576.0" fitWidth="972.0">
+      <ImageView fitHeight="576.0" fitWidth="972.0">
          <image>
             <Image url="@../Images/Gradelist.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="AcnPane" layoutX="96.0" layoutY="122.0" prefHeight="410.0" prefWidth="780.0">
-         <children>
-            <TableView fx:id="GradeTable" layoutX="22.0" prefHeight="320.0" prefWidth="769.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columns>
-                <TableColumn fx:id="ExamCodeColumn" prefWidth="256.0" text="Exam code" />
-                <TableColumn fx:id="ExamCourseColumn" minWidth="0.0" prefWidth="207.0" text="Exam course" />
-                  <TableColumn fx:id="ExamGradeColumn" prefWidth="316.0" text="Exam grade" />
-              </columns>
-            </TableView>
-            <Button fx:id="GetExamNotbookBTN" layoutX="304.0" layoutY="335.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="173.0" style="-fx-background-color: transparent;" textFill="#fffdfd">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
+      <TableView fx:id="GradeTable" layoutX="156.0" layoutY="140.0" prefHeight="297.0" prefWidth="640.0">
+        <columns>
+          <TableColumn fx:id="ExamCodeColumn" prefWidth="160.0" text="Exam code" />
+          <TableColumn fx:id="ExamCourseColumn" minWidth="0.0" prefWidth="160.0" text="Exam course" />
+            <TableColumn fx:id="ExamGradeColumn" minWidth="1.0" prefWidth="160.0" text="Exam grade" />
+            <TableColumn fx:id="TeacherNamecolumn" prefWidth="160.0" text="Teacher name" />
+        </columns>
+      </TableView>
       <Button fx:id="OutButton" layoutX="858.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" textFill="#051940" />
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="118.0" prefWidth="126.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="GetExamNotbookBTN" layoutX="400.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="173.0" style="-fx-background-color: transparent;" textFill="#fffdfd">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

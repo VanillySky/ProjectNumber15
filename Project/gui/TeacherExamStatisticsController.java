@@ -257,6 +257,5 @@ public class TeacherExamStatisticsController implements Initializable {
 			TeacherExamReportController.GradeRange[i]=0;
 		}
 		
-		
 	}
 }
