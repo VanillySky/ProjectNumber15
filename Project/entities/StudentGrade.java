@@ -20,6 +20,14 @@ public class StudentGrade implements Serializable {
 		TeacherName=teacherName;
 	}
 
+	public String getTecherName() {
+		return TeacherName;
+	}
+
+	public void setTecherName(String techerName) {
+		TeacherName = techerName;
+	}
+
 	/**
 	 * @return the studentUserName
 	 */
