@@ -14,6 +14,11 @@
             <Image url="@../Images/BuildNewQuestionB.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="Updatephoto" fitHeight="30.0" fitWidth="155.0" layoutX="742.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Images/UpdateQuestionbtn.png" />
+         </image>
+      </ImageView>
       <TextField fx:id="QuestionNumTXT" layoutX="408.0" layoutY="135.0" prefHeight="25.0" prefWidth="270.0" promptText="ex. 105" />
       <TextField fx:id="SubjectTXT" layoutX="408.0" layoutY="170.0" prefHeight="25.0" prefWidth="270.0" promptText="ex. 01" />
       <TextField fx:id="QuestionTXT" layoutX="408.0" layoutY="205.0" prefHeight="25.0" prefWidth="270.0" />

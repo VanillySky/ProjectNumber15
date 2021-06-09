@@ -37,8 +37,8 @@
       </TableView>
       <Button fx:id="CEMSButton" layoutX="-3.0" layoutY="-4.0" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="143.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
       <Button fx:id="DeleteQuestionButton" layoutX="34.0" layoutY="623.0" mnemonicParsing="false" onAction="#DeleteQuestion" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="UpdateQuestionButton" layoutX="34.0" layoutY="580.0" mnemonicParsing="false" onAction="#UpdateQuestion" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="AddQuestionButton" layoutX="34.0" layoutY="539.0" mnemonicParsing="false" onAction="#AddNewQuestion" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="UpdateQuestionButton" layoutX="34.0" layoutY="579.0" mnemonicParsing="false" onAction="#UpdateQuestion" prefHeight="25.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="AddQuestionButton" layoutX="34.0" layoutY="536.0" mnemonicParsing="false" onAction="#AddNewQuestion" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
       <Button fx:id="SignOutButton" layoutX="1039.0" layoutY="2.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: transparent;" />
       <Button fx:id="SerchBySubjectButton" layoutX="540.0" layoutY="245.0" minWidth="22.0" mnemonicParsing="false" onAction="#SearchBySubject" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="598.0" />
       <Button fx:id="SerchByTeacherButton" layoutX="540.0" layoutY="211.0" minWidth="22.0" mnemonicParsing="false" onAction="#SearchByTeacher" prefHeight="31.0" prefWidth="22.0" style="-fx-background-color: transparent;" />

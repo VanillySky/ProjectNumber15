@@ -314,7 +314,6 @@ public class QuestionsSelectionController extends Application implements Initial
 			saveQuestioncode += dataList2.get(i).getQuestionCode() + "\n";
 			savePoints += dataList2.get(i).getPoint() + "\n";
 		}
-		BuildNewExamController.help=true;
 		BuildNewExamController BNECC = new BuildNewExamController();
 		BNECC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();

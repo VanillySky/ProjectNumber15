@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import entities.Range;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -25,34 +30,31 @@ public class TeacherExamReportController implements Initializable {
     private TableView<Range> Table;
 
     @FXML
-    private TableColumn<Range, Number> Range95to100;
+    private TableColumn<Range, Integer> Range95to100;
 
     @FXML
-    private TableColumn<Range, Number> Range94to90;
+    private TableColumn<Range, Integer> Range94to90;
 
     @FXML
-    private TableColumn<Range, Number> Range85to85;
+    private TableColumn<Range, Integer> Range85to85;
 
     @FXML
-    private TableColumn<Range, Number> Range80to84;
+    private TableColumn<Range, Integer> Range80to84;
 
     @FXML
-    private TableColumn<Range, Number> Range75to79;
+    private TableColumn<Range, Integer> Range75to79;
 
     @FXML
-    private TableColumn<Range, Number> Range70to74;
+    private TableColumn<Range, Integer> Range70to74;
 
     @FXML
-    private TableColumn<Range, Number> Range65to69;
+    private TableColumn<Range, Integer> Range65to69;
 
     @FXML
-    private TableColumn<Range, Number> Range55to64;
+    private TableColumn<Range, Integer> Range55to64;
 
     @FXML
-    private TableColumn<Range, Number> Range0to54;
-
-    @FXML
-    private BarChart<?, ?> ExamTable;
+    private TableColumn<Range, Integer> Range0to54;
 
     @FXML
     private Button SignOutBTN;
@@ -73,13 +75,32 @@ public class TeacherExamReportController implements Initializable {
     private Label MinGradeLBL;
 
     @FXML
-    private Button CEMSBTN;
+    private Button CEMSbutton;
 
     @FXML
     private Button ReturnBTN;
 
     @FXML
     private Label CodeExam;
+    
+    @FXML
+    private BarChart<String, Integer> GradesChart;
+
+    @FXML
+    private CategoryAxis x;
+
+    @FXML
+    private NumberAxis y;
+    
+   static  int numberofStudents;
+	static  int MaxGrade, MinGrade;
+	static  double Average,median;
+	static  int [] GradeRange = new int[9];
+	
+	ObservableList<Range> List = FXCollections.observableArrayList(
+			new Range(GradeRange[0], GradeRange[1], GradeRange[2],GradeRange[3], GradeRange[4], GradeRange[5],
+					GradeRange[6],GradeRange[7], GradeRange[8]));
+	
     
     
     public void start(Stage primaryStage) {
@@ -91,6 +112,7 @@ public class TeacherExamReportController implements Initializable {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Exam Report");
 			primaryStage.show();
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,15 +122,40 @@ public class TeacherExamReportController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Range95to100.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range95to100"));
-		Range94to90.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range94to90"));
-		Range85to85.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range85to85"));
-		Range80to84.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range80to84"));
-		Range75to79.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range75to79"));
-		Range70to74.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range70to74"));
-		Range65to69.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range65to69"));
-		Range55to64.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range55to64"));
-		Range0to54.setCellValueFactory(new PropertyValueFactory<Range, Number>("Range0to54"));
+		
+		Range95to100.setCellValueFactory(new PropertyValueFactory<Range, Integer>("ramge1"));
+		Range94to90.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range2"));
+		Range85to85.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range3"));
+		Range80to84.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range4"));
+		Range75to79.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range5"));
+		Range70to74.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range6"));
+		Range65to69.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range7"));
+		Range55to64.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range8"));
+		Range0to54.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range9"));
+     	
+		Table.setItems(List);
+		
+		NumberofstudentsLBL.setText(Integer.toString(numberofStudents));
+		AverageLBL.setText(Double.toString(Average));
+		MedianLBL.setText(Double.toString(median));
+		MaxGradeLBL.setText(Integer.toString(MaxGrade));
+		MinGradeLBL.setText(Integer.toString(MinGrade));
+		
+		XYChart.Series<String, Integer> set1 = new XYChart.Series<>();
+		
+		set1.getData().add(new XYChart.Data<String, Integer>("95-100",GradeRange[0]));
+		set1.getData().add(new XYChart.Data<String, Integer>("94-90",GradeRange[1]));
+		set1.getData().add(new XYChart.Data<String, Integer>("89-85",GradeRange[2]));
+		set1.getData().add(new XYChart.Data<String, Integer>("84-80",GradeRange[3]));
+		set1.getData().add(new XYChart.Data<String, Integer>("79-75",GradeRange[4]));
+		set1.getData().add(new XYChart.Data<String, Integer>("74-70",GradeRange[5]));
+		set1.getData().add(new XYChart.Data<String, Integer>("69-65",GradeRange[6]));
+		set1.getData().add(new XYChart.Data<String, Integer>("64-55",GradeRange[7]));
+		set1.getData().add(new XYChart.Data<String, Integer>("54-0",GradeRange[8]));
+		
+		GradesChart.getData().addAll(set1);
+		
+		
 		
 	}	
 	

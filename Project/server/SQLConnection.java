@@ -16,6 +16,7 @@ import entities.Exam;
 import entities.Question;
 import entities.Student;
 import entities.StudentExamanation;
+import entities.StudentGrade;
 
 public class SQLConnection {
 	private static Connection conn = null;
@@ -49,38 +50,7 @@ public class SQLConnection {
 		}
 	}
 
-	/*
-	 * public static void saveUserToDB(final ArrayList<String> list) { if (conn !=
-	 * null) { try { PreparedStatement stmt =
-	 * conn.prepareStatement("INSERT INTO users VALUES (?,?,?,?,?,?,?);");
-	 * stmt.setString(1, list.get(0)); stmt.setString(2, list.get(1));
-	 * stmt.setString(3, list.get(2)); stmt.setString(4, list.get(3));
-	 * stmt.setString(5, list.get(4)); stmt.setString(6, list.get(5));
-	 * stmt.setString(7, list.get(6)); stmt.executeUpdate(); } catch (SQLException
-	 * e) { e.printStackTrace(); } } }
-	 * 
-	 * public static void UpdateOnDB(String id, String Field2, String newValue) { if
-	 * (conn != null) { try { String str = "UPDATE Test set "; str =
-	 * String.valueOf(str) + Field2; str = String.valueOf(str) + "= '"; str =
-	 * String.valueOf(str) + newValue; str = String.valueOf(str) +
-	 * "' Where userName = '"; str = String.valueOf(str) + id; str =
-	 * String.valueOf(str) + "'"; final Statement stmt = conn.createStatement();
-	 * stmt.executeUpdate(str); System.out.println("Update Successfuly "); } catch
-	 * (SQLException e) { e.printStackTrace(); } } }
-	 * 
-	 * public static String ShowExamInformation(String Id) { String str = ""; if
-	 * (conn != null) { try { String query = "Select * FROM Test WHERE TestID = '";
-	 * query = String.valueOf(query) + Id; query = String.valueOf(query) + "' ;";
-	 * final Statement st = conn.createStatement(); final ResultSet rs =
-	 * st.executeQuery(query); while (rs.next()) { str = String.valueOf(str) +
-	 * rs.getString("TestOD"); str = String.valueOf(str) + " "; str =
-	 * String.valueOf(str) + rs.getString("Subject"); str = String.valueOf(str) +
-	 * " "; str = String.valueOf(str) + rs.getString("Course"); str =
-	 * String.valueOf(str) + " "; str = String.valueOf(str) +
-	 * rs.getString("ExamTime"); str = String.valueOf(str) + " "; str =
-	 * String.valueOf(str) + rs.getString("QuestionsPoints"); } st.close(); } catch
-	 * (SQLException e) { e.printStackTrace(); } } return str; }
-	 */
+	
 	public static Connection getConn() {
 		return conn;
 	}
@@ -168,6 +138,29 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	public static ArrayList<Exam> getTeacherexams(ArrayList<Object> arr) {
+		ArrayList<Exam> array = new ArrayList<Exam>();
+		String TeacherExam = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM exams WHERE TeacherName = '" + TeacherExam + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					Exam ex = new Exam(rs.getString("ExamCode"), rs.getString("ExamNumber"),
+							rs.getString("ExamSubject"), rs.getString("ExamCourse"), rs.getString("ExamTime"),
+							rs.getString("TeacherName"), rs.getString("ChosenQuestion"), rs.getString("QuestionPoint"),
+							rs.getString("StudentInstructions"), rs.getString("TeacherInstructions"));
+					array.add(ex);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
 
 	public static ArrayList<Question> getAllquestions() {
 		ArrayList<Question> array = new ArrayList<Question>();
@@ -191,6 +184,28 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	public static ArrayList<StudentGrade> getAllgrades() {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		if (conn != null) {
+			try {
+				String query = "Select * FROM studentgrade";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"),rs.getString("examCode"), rs.getString("examCourse"), rs.getString("examGrade"), rs.getString("TeacherName"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
+	
 
 
 	public static ArrayList<StudentExamanation> getTime() {
