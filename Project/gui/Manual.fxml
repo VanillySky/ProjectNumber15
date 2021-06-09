@@ -2,12 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManualController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1019.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManualController">
    <children>
       <ImageView fitHeight="579.0" fitWidth="1140.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -15,19 +16,17 @@
          </image>
       </ImageView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="122.0" prefWidth="130.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="DownloadExamBTN" layoutX="388.0" layoutY="177.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="DownloadExamBTN" layoutX="390.0" layoutY="179.0" mnemonicParsing="false" onAction="#DownloadFileBTN" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: transparent;" />
       <Button fx:id="OutButton" layoutX="906.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="UploadExamBTN" layoutX="680.0" layoutY="297.0" mnemonicParsing="false" onAction="#uploadFileBTN" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="BackButton" layoutX="132.0" layoutY="429.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="31.0" prefWidth="130.0" style="-fx-background-color: transparent;" />
-      <Label fx:id="IsntValidLBL" alignment="CENTER" layoutX="295.0" layoutY="340.0" prefHeight="21.0" prefWidth="230.0" text="FILE IS NOT VALID" textFill="#e40808" visible="false">
+      <Button fx:id="UploadExamBTN" layoutX="680.0" layoutY="274.0" mnemonicParsing="false" onAction="#uploadFileBTN" prefHeight="57.0" prefWidth="184.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="BackButton" layoutX="72.0" layoutY="490.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="31.0" prefWidth="184.0" style="-fx-background-color: transparent;" />
+      <Label fx:id="IsntValidLBL" alignment="CENTER" layoutX="288.0" layoutY="362.0" prefHeight="21.0" prefWidth="230.0" text="FILE IS NOT VALID" textFill="#e40808" visible="false">
          <font>
             <Font name="David" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="FileLBL" alignment="CENTER" layoutX="45.0" layoutY="278.0" prefHeight="50.0" prefWidth="635.0" style="-fx-background-color: white; -fx-border-color: #130F5C;">
-         <font>
-            <Font name="David" size="24.0" />
-         </font>
-      </Label>
+      <Button fx:id="SubmitExamBTN" layoutX="672.0" layoutY="486.0" mnemonicParsing="false" onAction="#SubmitExamBTN" prefHeight="40.0" prefWidth="192.0" style="-fx-background-color: transparent;" />
+      <ListView fx:id="FileListView" editable="true" layoutX="172.0" layoutY="306.0" orientation="HORIZONTAL" prefHeight="50.0" prefWidth="500.0" />
+      <Button fx:id="DeleteChosenBTN" layoutX="680.0" layoutY="348.0" mnemonicParsing="false" onAction="#deleteFileBTN" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

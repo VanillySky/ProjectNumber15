@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -44,7 +45,9 @@ public class ManualController {
 
     @FXML
     private Label FileLBL;
-
+    @FXML
+	private Pane pane;
+    
     @FXML
     private Label IsntValidLBL;
     static private String ExamCode;
@@ -104,7 +107,22 @@ public class ManualController {
 		SMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-	
+	@FXML
+	public void DownloadFileBTN(ActionEvent event) {
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Download File");
+		
+		fc.setInitialFileName(ManualController.ExamCode);
+		fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Word Files", "*.docx"));
+		fc.setInitialDirectory(new File("C:\\Users\\Ibrahim Qassem\\Documents"));
+		
+		Stage stage = (Stage) pane.getScene().getWindow();
+		try {
+		File downloadedFile = fc.showSaveDialog(stage);
+		} catch (Exception ex) {
+			
+		}
+	}
 	@FXML
 	public void uploadFileBTN(ActionEvent event) {
 		FileChooser fc = new FileChooser();
