@@ -431,7 +431,7 @@ public class SQLConnection {
 
 				stmt.setString(4, ((StudentGrade) list.get(0)).getExamGrade());
 
-				stmt.setString(5, ((StudentGrade) list.get(0)).getTecherName());
+				stmt.setString(5, ((StudentGrade) list.get(0)).getTeacherName());
 
 				stmt.executeUpdate();
 				return true;
