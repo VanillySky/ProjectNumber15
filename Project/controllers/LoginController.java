@@ -25,6 +25,7 @@ public class LoginController {
 		User user = (User) msgFromServer.getData();
 		return user;
 	}
+	
 	public static String checkManual(String ExamManualCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamManualCode);
@@ -40,4 +41,21 @@ public class LoginController {
 		return "";
 		}
 	}
+	
+	public static String checkAuto(String ExamManualCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamManualCode);
+		
+		ClientMessage msgFromClient = new ClientMessage("checkAutoCode", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		String code = (String) msgFromServer.getData();
+		if(code!="")
+		return code;
+		else
+		{
+		return "";
+		}
+	}
+
 }

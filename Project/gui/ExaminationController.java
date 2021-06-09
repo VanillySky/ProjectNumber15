@@ -51,6 +51,8 @@ public class ExaminationController  {
 
 	@FXML
 	private Label IncorrectLBL;
+	
+	static String ExamCode;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -104,12 +106,19 @@ public class ExaminationController  {
 
 	@FXML
 	public void StartExam(ActionEvent event) {
+		char[] chars = insertCodeTxtField.getText().toCharArray();
+		int countletter = 0;
+		for(char c : chars) {
+			if(Character.isLetter(c))
+				countletter++;
+		}
+		
 		if (insertCodeTxtField.getText().isEmpty()) {
 			EmptyFieldLBL.setVisible(true);
 			ContainLetterMsgLBL.setVisible(false);
 			IncorrectLBL.setVisible(false);
 		}
-		else if (!insertCodeTxtField.getText().contains("[a-zA-Z]+")) {
+		 else if(countletter==0) {
 			EmptyFieldLBL.setVisible(false);
 			ContainLetterMsgLBL.setVisible(true);
 			IncorrectLBL.setVisible(false);
@@ -119,13 +128,16 @@ public class ExaminationController  {
 			EmptyFieldLBL.setVisible(false);
 			ContainLetterMsgLBL.setVisible(false);
 			IncorrectLBL.setVisible(true);
+		
 		}
 		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
-			String Examcode=LoginController.checkManual(insertCodeTxtField.getText());
-			if(Examcode!="")
+	
+			 ExamCode=LoginController.checkManual(insertCodeTxtField.getText());
+			if(ExamCode!="")
 			{
 			ManualController MC = new ManualController();
-			MC.getcode(Examcode);
+		
+			MC.getcode(ExamCode);
 			MC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
 			}
@@ -133,6 +145,14 @@ public class ExaminationController  {
 		}
 
 		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
+			ExamCode=LoginController.checkAuto(insertCodeTxtField.getText());
+			if(ExamCode!="")
+			{
+			AutoLoginController ALC = new AutoLoginController();
+			ALC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+			}
+			
 		}
 	
 	}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="396.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AutoController">
+   <children>
+      <ImageView fitHeight="411.0" fitWidth="706.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AutoExam.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="questionLBL" layoutX="68.0" layoutY="110.0" prefHeight="42.0" prefWidth="346.0" textFill="#130f5c">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="Answer1RB" layoutX="68.0" layoutY="180.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="610.0" textFill="#130f5c" />
+      <RadioButton fx:id="Answer2RB" layoutX="68.0" layoutY="210.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="610.0" textFill="#130f5c" />
+      <RadioButton fx:id="Answer4RB" layoutX="68.0" layoutY="270.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="610.0" textFill="#130f5c" />
+      <RadioButton fx:id="Answer3RB" layoutX="68.0" layoutY="240.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="610.0" textFill="#130f5c" />
+      <ImageView fx:id="prevIMG" fitHeight="25.0" fitWidth="91.0" layoutX="42.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Images/Prev.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="submitIMG" fitHeight="26.0" fitWidth="98.0" layoutX="565.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Images/Submit.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="CEMBTN" mnemonicParsing="false" onAction="#CEMS" prefHeight="82.0" prefWidth="90.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="SignOUTBTN" layoutX="626.0" layoutY="-9.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="27.0" prefWidth="80.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="NEXTBTN" layoutX="565.0" layoutY="339.0" mnemonicParsing="false" onAction="#GoNext" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="PrevBTN" disable="true" layoutX="42.0" layoutY="339.0" mnemonicParsing="false" onAction="#GoPrev" prefHeight="15.0" prefWidth="89.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="BackToMenu" layoutX="523.0" layoutY="332.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="65.0" prefWidth="182.0" text="Back To Menu" visible="false" />
+      <Label fx:id="TheExamDone" layoutX="183.0" layoutY="131.0" prefHeight="54.0" prefWidth="380.0" text="The exam is done" textFill="#130f5c" visible="false">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="label1" layoutX="126.0" layoutY="201.0" prefHeight="35.0" prefWidth="493.0" text="you will get your exam as soon as possible" textFill="#130f5c" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="questionIns" layoutX="73.0" layoutY="305.0" prefHeight="27.0" prefWidth="589.0" />
+   </children>
+</AnchorPane>

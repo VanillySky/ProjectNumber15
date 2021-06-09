@@ -34,6 +34,16 @@ public class DisplayController {
 		return list;
 	}
 	
+	public static  Collection<Object> ShowOneExam(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		ClientMessage msgFromClient = new ClientMessage("getOneExams", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
 	public static Collection<Object> ShowTeacherExams(String TeacherName)  {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(TeacherName);
@@ -54,6 +64,16 @@ public class DisplayController {
 		list = (ArrayList<Question>) msgFromServer.getData();
 		return list;	
 		}
+	
+	public static  Collection<Object> ShowOneQuestions(String QuestionCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(QuestionCode);
+		ClientMessage msgFromClient = new ClientMessage("getOneQuestion", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
 	
 	
 	public static ArrayList<StudentGrade> ShowStudentGrade() {
@@ -85,6 +105,7 @@ public class DisplayController {
 		list = (ArrayList<StudentGrade>) msgFromServer.getData();
 		return list;	
 	}
+
 
 }
 

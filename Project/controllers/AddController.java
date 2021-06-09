@@ -8,6 +8,7 @@ import client.ChatClient;
 import client.ClientUI;
 import entities.Exam;
 import entities.Question;
+import entities.StudentGrade;
 
 public class AddController {
 	public static boolean AddQuestion(Question question) {
@@ -29,5 +30,17 @@ public class AddController {
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();
+	}
+
+
+
+	public static boolean AddStudentGrade(StudentGrade sG) {
+		ArrayList<Object> newStudentGrade = new ArrayList<>();
+		newStudentGrade .add(sG);
+		ClientMessage msgFromClient = new ClientMessage("AddNewStudentGrade", newStudentGrade, newStudentGrade.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+		
 	}
 }

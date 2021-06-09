@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AutoLoginController">
+   <children>
+      <ImageView fitHeight="411.0" fitWidth="706.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/autologin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="66.0" layoutY="121.0" prefHeight="30.0" prefWidth="83.0" text="Enter ID:" textFill="#130f5c">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="WrongLBL" layoutX="152.0" layoutY="158.0" text="Wrong ID!" textFill="RED" visible="false" />
+      <Button fx:id="CEMSBTN" layoutX="-7.0" layoutY="-1.0" mnemonicParsing="false" onAction="#CEMS" prefHeight="82.0" prefWidth="95.0" style="-fx-background-color: Transparent;" textFill="#f2ebeb" />
+      <Button fx:id="GoToExamBTN" layoutX="306.0" layoutY="124.0" mnemonicParsing="false" onAction="#pressGoToExam" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: Transparent;" textFill="#f2ebeb" />
+      <Button fx:id="BackBTN" layoutX="48.0" layoutY="340.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: Transparent;" textFill="#f2ebeb" />
+      <TextField fx:id="IDTXT" layoutX="149.0" layoutY="123.0" prefHeight="26.0" prefWidth="144.0" />
+      <Label layoutX="66.0" layoutY="203.0" prefHeight="30.0" prefWidth="113.0" text="Instructions:" textFill="#130f5c">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="InstructionLBL" alignment="TOP_LEFT" layoutX="176.0" layoutY="203.0" prefHeight="92.0" prefWidth="511.0" textFill="#1a138e">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="SignOutBTN" layoutX="624.0" layoutY="2.0" mnemonicParsing="false" onAction="#PressSignOut" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="#f2ebeb" />
+      <Label layoutX="528.0" layoutY="325.0" prefHeight="73.0" prefWidth="166.0" text="Goooood luck !" textFill="#130f5c">
+         <font>
+            <Font name="Javanese Text" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -30,15 +30,16 @@ public class SQLConnection {
 			System.out.println("Driver definition failed");
 		}
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
-						"anitad31");
+//			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
+//						"anitad31");
 
-		//	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","Ahmf1144");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","Ahmf1144");
 //			 conn =
 //			DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 
 		//	conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
 			//		"Shaden#2034");
+					 
 			System.out.println("SQL connection succeed");
 		} catch (SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
@@ -116,11 +117,59 @@ public class SQLConnection {
 		return ExamCode;
 		}
 	
+	public static String checkAutoCode(ArrayList<Object> arr) {
+		String ExamAutoCode = (String) arr.get(0);
+     String ExamCode="";
+		if (conn != null)
+			try {
+				System.out.println("2222");
+
+				String query = "Select ExamCode FROM studentexamcode WHERE ExamAutoCode = '" + ExamAutoCode + "'";
+				Statement st = conn.createStatement();
+
+				ResultSet rs = st.executeQuery(query);
+
+				if (rs.next()) {
+					ExamCode = rs.getString("ExamCode");
+
+					if(ExamCode!="") return ExamCode;
+					
+					}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return ExamCode;
+		}
+	
 	public static ArrayList<Exam> getAllexams() {
 		ArrayList<Exam> array = new ArrayList<Exam>();
 		if (conn != null) {
 			try {
 				String query = "Select * FROM exams";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					Exam ex = new Exam(rs.getString("ExamCode"), rs.getString("ExamNumber"),
+							rs.getString("ExamSubject"), rs.getString("ExamCourse"), rs.getString("ExamTime"),
+							rs.getString("TeacherName"), rs.getString("ChosenQuestion"), rs.getString("QuestionPoint"),
+							rs.getString("StudentInstructions"), rs.getString("TeacherInstructions"));
+					array.add(ex);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	public static ArrayList<Exam> getOneExams(ArrayList<Object> arr) {
+		ArrayList<Exam> array = new ArrayList<Exam>();
+		String ExamCode = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM exams WHERE ExamCode = '" + ExamCode + "'";
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				while (rs.next()) {
@@ -183,6 +232,32 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	
+	public static ArrayList<Question> getOneQuestion(ArrayList<Object> arr) {
+		ArrayList<Question> array = new ArrayList<Question>();
+		String QuestionCode = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM questions WHERE QuestionCode = '" + QuestionCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					Question qu = new Question(rs.getString("QuestionCode"), rs.getString("QuestionNumber"),
+							rs.getString("Subject"), rs.getString("Question"), rs.getString("QuestionInstruction"),
+							rs.getString("Answer1"), rs.getString("Answer2"), rs.getString("Answer3"),
+							rs.getString("Answer4"), rs.getString("RightAnswer"), rs.getString("Author"),
+							rs.getString("point"));
+					array.add(qu);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
 	
 	public static ArrayList<StudentGrade> getAllgrades() {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
@@ -344,6 +419,29 @@ public class SQLConnection {
 		}
 		return false;
 	}
+	
+	public static boolean AddNewStudentGrade(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO studentgrade VALUES (?,?,?,?,?);");
+				stmt.setString(1, ((StudentGrade) list.get(0)).getStudentUserName());
+				stmt.setString(2, ((StudentGrade) list.get(0)).getExamCode());
+				stmt.setString(3, ((StudentGrade) list.get(0)).getExamCourse());
+
+				stmt.setString(4, ((StudentGrade) list.get(0)).getExamGrade());
+
+				stmt.setString(5, ((StudentGrade) list.get(0)).getTecherName());
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	public static boolean UpgradeExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {

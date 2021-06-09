@@ -165,6 +165,7 @@ public class QuestionsSelectionController extends Application implements Initial
 	private ObservableList<Question> dataList2 = FXCollections.observableArrayList();
 	static String saveQuestioncode, savePoints;
 	private Exam exam;
+	static int sumpoints=0;
 	static boolean temp;
 
 	public void start(Stage primaryStage) {
@@ -335,6 +336,7 @@ public class QuestionsSelectionController extends Application implements Initial
 	@FXML
 	public void PressDone(ActionEvent event) {
 		int count = 0;
+		sumpoints=0;
 		String questionscodes = "", points = "";
 
 		for (int i = 0; i < dataList2.size(); i++) {
@@ -356,6 +358,16 @@ public class QuestionsSelectionController extends Application implements Initial
 			pointERRLBL.setVisible(true);
 			count++;
 		}
+		for (int i = 0; i < dataList2.size(); i++) {
+			sumpoints+= Integer.parseInt(dataList2.get(i).getPoint());
+		}
+		
+		if(sumpoints!=100) {
+			pointERRLBL.setText("the grade of exam should be 100");
+			pointERRLBL.setVisible(true);
+			count++;
+		}
+		
 		if (count == 0) {
 			exam = new Exam(ExamCode, Examnumber, examSubject, ExamCourse, ExamTime,
 					ChatClient.currentUser.getFirstName(), questionscodes, points, StudentIns, TeacherIns);
@@ -394,12 +406,11 @@ public class QuestionsSelectionController extends Application implements Initial
 	@FXML
 	void AddPoint(ActionEvent event) {
 
-		if (selectedQuestion2 != null && AddPointTXT.getText() != null) {
-
+		if (selectedQuestion2 != null && !AddPointTXT.getText().equals("")) {
 			selectedQuestion2.setPoint(AddPointTXT.getText());
 			Table2.refresh();
 		} else {
-			pointERRLBL.setText("please add question");
+			pointERRLBL.setText("please add question/points");
 			pointERRLBL.setVisible(true);
 		}
 	}

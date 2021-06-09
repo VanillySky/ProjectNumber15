@@ -71,8 +71,8 @@ public class StudentGradeListController implements Initializable {
 
 	@FXML
 	void PressCEMS(ActionEvent event) {
-		TeacherMenuController TMCC = new TeacherMenuController();
-		TMCC.start(new Stage());
+		StudentMenuController SMC = new StudentMenuController();
+		SMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
