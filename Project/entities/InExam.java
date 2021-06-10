@@ -1,6 +1,8 @@
 package entities;
 
-public class InExam {
+import java.io.Serializable;
+
+public class InExam implements Serializable {
 	String ExamCode;
 	String userName;
 	String userId;

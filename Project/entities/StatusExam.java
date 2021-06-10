@@ -1,6 +1,8 @@
 package entities;
 
-public class StatusExam {
+import java.io.Serializable;
+
+public class StatusExam implements Serializable {
 	String ExamCode;
 	String NumberStartExam;
 	String NumberEndExam;

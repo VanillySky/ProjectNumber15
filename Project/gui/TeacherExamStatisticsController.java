@@ -96,6 +96,8 @@ public class TeacherExamStatisticsController implements Initializable {
 	private ArrayList<StudentGrade> ExamGrades = new ArrayList<StudentGrade>();
 	private int[] Grades;
 	boolean NoGrades;
+	static String Examcode;
+	static String Durition;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -250,6 +252,17 @@ public class TeacherExamStatisticsController implements Initializable {
 
 	@FXML
 	void PressStatus(ActionEvent event) {
+		if (selectedExam != null) {
+			Examcode=selectedExam.getExamCode();
+			Durition=selectedExam.getExamTime();
+			StatusController SCC = new StatusController();
+			SCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+			
+		}else {
+			ErrorLbl.setText("please chose any exam!!");
+			ErrorLbl.setVisible(true);	
+		}
 
 	}
 

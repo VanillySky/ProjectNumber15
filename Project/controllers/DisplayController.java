@@ -8,6 +8,7 @@ import Protocol.ServerMessage;
 import client.ChatClient;
 import client.ClientUI;
 import entities.Exam;
+import entities.InExam;
 import entities.Question;
 import entities.Statistics;
 import entities.StudentGrade;
@@ -141,6 +142,32 @@ public class DisplayController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		list = (ArrayList<StudentGrade>) msgFromServer.getData();
 		return list;	
+	}
+	
+	public static Collection<InExam> ShowStudentsInExam(String ExamCode) {
+		Collection<InExam> list = new ArrayList<InExam>();
+		ArrayList<Object> list2 = new ArrayList<Object>();
+		list2.add(ExamCode);
+
+		ClientMessage msgFromClient = new ClientMessage("ShowStudentsInExam", list2	, list2.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<InExam>) msgFromServer.getData();
+		return list;	
+	}
+	
+	
+	public static Collection<Object> ShowStatusExam(String ExamCode) {
+		
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		ClientMessage msgFromClient = new ClientMessage("ShowStatusExam", list	, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;	
+		
+		
 	}
 
 

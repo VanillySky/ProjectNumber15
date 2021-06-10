@@ -13,8 +13,10 @@ import client.ChatClient;
 import entities.Teacher;
 import entities.User;
 import entities.Exam;
+import entities.InExam;
 import entities.Manager;
 import entities.Question;
+import entities.StatusExam;
 import entities.Student;
 import entities.StudentExamanation;
 import entities.StudentGrade;
@@ -53,6 +55,8 @@ public class SQLConnection {
 		return conn;
 	}
 
+	
+	
 	public static User checkUser(ArrayList<Object> arr) {
 		String username = (String) arr.get(0);
 		String password = (String) arr.get(1);
@@ -93,6 +97,9 @@ public class SQLConnection {
 		return user;
 	}
 	
+	
+	
+	
 	public static String checkManualCode(ArrayList<Object> arr) {
 		String ExamManCode = (String) arr.get(0);
      String ExamCode="";
@@ -116,6 +123,8 @@ public class SQLConnection {
 			}
 		return ExamCode;
 		}
+	
+	
 	
 	public static String checkAutoCode(ArrayList<Object> arr) {
 		String ExamAutoCode = (String) arr.get(0);
@@ -142,6 +151,9 @@ public class SQLConnection {
 		return ExamCode;
 		}
 	
+	
+	
+	
 	public static ArrayList<Exam> getAllexams() {
 		ArrayList<Exam> array = new ArrayList<Exam>();
 		if (conn != null) {
@@ -163,6 +175,9 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	
+	
 	
 	public static ArrayList<Exam> getOneExams(ArrayList<Object> arr) {
 		ArrayList<Exam> array = new ArrayList<Exam>();
@@ -187,6 +202,9 @@ public class SQLConnection {
 		return array;
 	}
 	
+	
+	
+	
 	public static ArrayList<Exam> getTeacherexams(ArrayList<Object> arr) {
 		ArrayList<Exam> array = new ArrayList<Exam>();
 		String TeacherExam = (String) arr.get(0);
@@ -210,6 +228,10 @@ public class SQLConnection {
 		return array;
 	}
 
+	
+	
+	
+	
 	public static ArrayList<Question> getAllquestions() {
 		ArrayList<Question> array = new ArrayList<Question>();
 		if (conn != null) {
@@ -232,6 +254,9 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	
+	
 	
 	
 	public static ArrayList<Question> getOneQuestion(ArrayList<Object> arr) {
@@ -259,6 +284,9 @@ public class SQLConnection {
 	}
 	
 	
+	
+	
+	
 	public static ArrayList<StudentGrade> getAllgrades() {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		if (conn != null) {
@@ -278,6 +306,7 @@ public class SQLConnection {
 
 		return array;
 	}
+	
 	
 	
 	
@@ -302,6 +331,10 @@ public class SQLConnection {
 		return array;
 	}
 	
+	
+	
+	
+	
 	public static ArrayList<StudentGrade> getAllApprovedgradesTeacher(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String ExamCode = (String) arr.get(0);
@@ -321,6 +354,11 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	
+	
+	
+	
 	
 	public static ArrayList<StudentGrade> TeachergetAllgrades(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
@@ -342,6 +380,7 @@ public class SQLConnection {
 		return array;
 	}
 
+	
 
 
 	public static ArrayList<StudentExamanation> getTime() {
@@ -365,6 +404,10 @@ public class SQLConnection {
 		return array;
 	}
 
+	
+	
+	
+	
 	public static void DeleteExam(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -378,6 +421,10 @@ public class SQLConnection {
 			}
 	}
 
+	
+	
+	
+	
 	public static void DeleteQuestion(ArrayList<Object> arr) {
 
 		String questioncode = (String) arr.get(0);
@@ -390,6 +437,10 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 	}
+	
+	
+	
+	
 	
 	public static void DeleteApprovalStudentGrade(ArrayList<Object> arr) {
 		String username = (String) arr.get(0);
@@ -405,6 +456,9 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 	}
+	
+	
+	
 	
 	
 
@@ -444,6 +498,11 @@ public class SQLConnection {
 		}
 		return false;
 	}
+	
+	
+	
+	
+	
 
 	public static boolean AddNewExam(ArrayList<Object> list) {
 		if (conn != null) {
@@ -477,6 +536,12 @@ public class SQLConnection {
 		return false;
 	}
 	
+	
+	
+	
+	
+	
+	
 	public static boolean AddNewStudentGrade(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -498,6 +563,11 @@ public class SQLConnection {
 		}
 		return false;
 	}
+	
+	
+	
+	
+	
 	
 	public static boolean AddNewApprovalStudentGrade(ArrayList<Object> list) {
 		if (conn != null) {
@@ -521,6 +591,10 @@ public class SQLConnection {
 		}
 		return false;
 	}
+	
+	
+	
+	
 	
 	public static boolean UpgradeExam(ArrayList<Object> list) {
 		if (conn != null) {
@@ -550,6 +624,10 @@ public class SQLConnection {
 		return false;
 
 	}
+	
+	
+	
+	
 	
 	
 	public static boolean UpgradeQuestion(ArrayList<Object> list) {
@@ -589,13 +667,17 @@ public class SQLConnection {
 	}
 	
 	
+	
+	
+	
+	
 	public static String checkLockedExam(ArrayList<Object> arr) {
-		String ExamCode = (String) arr.get(0);
+		String AMCode = (String) arr.get(0);
      String locked="";
 		if (conn != null)
 			try {
 
-				String query = "Select isLocked FROM studentexamcode WHERE ExamAutoCode = '" + ExamCode + "'";
+				String query = "Select isLocked FROM studentexamcode WHERE ExamAutoCode = '" + AMCode + "'";
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 
@@ -609,6 +691,31 @@ public class SQLConnection {
 			}
 		return locked;
 		}
+	
+	public static String checkLockedEXCODE(ArrayList<Object> arr) {
+		String ExamCode = (String) arr.get(0);
+     String locked="";
+		if (conn != null)
+			try {
+
+				String query = "Select isLocked FROM studentexamcode WHERE ExamCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+
+				if (rs.next()) {
+					locked = rs.getString("isLocked");
+					
+					}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return locked;
+		}
+	
+	
+	
+	
 	
 	public static ArrayList<StudentGrade> CheckRepeatExam(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
@@ -624,7 +731,10 @@ public class SQLConnection {
 				ResultSet rs = st.executeQuery(query);
 
 				while (rs.next()) {
-					StudentGrade SG = new StudentGrade(username, ExamCode, rs.getString("ExamCourse"),   rs.getString("ExamGrade"), rs.getString("TeacherName"));
+					StudentGrade SG = new StudentGrade(username,
+							ExamCode, rs.getString("ExamCourse"),  
+							rs.getString("ExamGrade"),
+							rs.getString("TeacherName"));
 					array.add(SG);
 				}
 			} catch (SQLException e) {
@@ -632,6 +742,58 @@ public class SQLConnection {
 			}
 		return array;
 		}
+	
+	
+	
+	
+	
+	
+	public static ArrayList<InExam> ShowStudentsInExam(ArrayList<Object> arr) {
+		ArrayList<InExam> array = new ArrayList<InExam>();
+		String ExamCode = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM inexam WHERE ExamCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					InExam IE = new InExam(ExamCode, rs.getString("userName"),  rs.getString("userId"));
+					array.add(IE);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
+	public static ArrayList<StatusExam> ShowStatusExam(ArrayList<Object> arr) {
+		ArrayList<StatusExam> array = new ArrayList<StatusExam>();
+		String ExamCode = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM statusexam WHERE ExamCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StatusExam SE = new StatusExam(ExamCode,
+							rs.getString("NumberStartExam"),  
+							rs.getString("NumberEndExam"),
+							rs.getString("time"), 
+							rs.getString("Date"));
+					array.add(SE);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
 	
 	
 	

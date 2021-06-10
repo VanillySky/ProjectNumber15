@@ -58,11 +58,22 @@ public class LoginController {
 		}
 	}
 	
-	public static String checkLocked(String ExamCode) {
+	public static String checkLocked(String AMCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(AMCode);
+		
+		ClientMessage msgFromClient = new ClientMessage("checkLockedExam", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		String locked = (String) msgFromServer.getData();
+		return locked;
+	}
+	
+	public static String checkLockedEXCODE(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
 		
-		ClientMessage msgFromClient = new ClientMessage("checkLockedExam", list, list.size());
+		ClientMessage msgFromClient = new ClientMessage("checkLockedEXCODE", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		String locked = (String) msgFromServer.getData();
