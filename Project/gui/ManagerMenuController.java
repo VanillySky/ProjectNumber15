@@ -27,65 +27,7 @@ public class ManagerMenuController {
 
 	@FXML
 	private Button OutButton;
-
-	@FXML
-	void GoToConfirmations(ActionEvent event) {
-
-	}
-
-	@FXML
-	void GoToInfo(ActionEvent event) {
-
-	}
-
-	@FXML
-	void PresCEMS() {
-		CEMSButton.setOnAction(event -> {
-			CEMSButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/ManagerMenu.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
-	}
-
-	@FXML
-	void PressSignOut() {
-
-		OutButton.setOnAction(event -> {
-			OutButton.getScene().getWindow().hide();
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(getClass().getResource("/gui/LoginFrame.fxml"));
-
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
-
-	}
-
+	
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -102,26 +44,36 @@ public class ManagerMenuController {
 	}
 
 	@FXML
-	void GoToStatistics() {
-		Statisticsbtn.setOnAction(event -> {
-			Statisticsbtn.getScene().getWindow().hide();
+	void GoToConfirmations(ActionEvent event) {
 
-			FXMLLoader loader = new FXMLLoader();
+	}
 
-			loader.setLocation(getClass().getResource("/gui/ManagerStatistics.fxml"));
+	@FXML
+	void GoToInfo(ActionEvent event) {
 
-			try {
-				loader.load();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	}
 
-			Parent root = loader.getRoot();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		});
-	}// go to Manager Statistics
+	@FXML
+	void PresCEMS(ActionEvent event) {
+		ManagerStatisticsController MSCC = new ManagerStatisticsController();
+		MSCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+	}
+
+	@FXML
+	void PressSignOut(ActionEvent event) {
+		LoginFrameController LFCC = new LoginFrameController();
+		LFCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+	
+	}
+
+
+	@FXML
+	void GoToStatistics(ActionEvent event) {
+		ManagerStatisticsController MSC = new ManagerStatisticsController();
+		MSC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+			}// go to Manager Statistics
 
 }
