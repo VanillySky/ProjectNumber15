@@ -133,13 +133,6 @@ import javafx.stage.Stage;
 		@FXML
 		private Label emptyfieldLBL;
 
-		/**
-		 * Label that showing warning message "Only digits!!"
-		 */
-		@FXML
-		private Label onlynumbersLBL1;
-
-
 		@FXML
 		private Label onlytwonumberLBL1;
 
@@ -269,14 +262,6 @@ import javafx.stage.Stage;
 				}
 			}
 
-			try {
-				Integer.parseInt(ExamTimeField.getText());
-			} catch (NumberFormatException e) {
-				if (ExamTimeField.getText().length() != 0) {
-					onlynumbersLBL1.setVisible(true);// show the suitable warning message
-					count++;
-				}
-			}
 			String ExamCodeTemp = ExamSubjectField.getText()+ExamCourseField.getText()+ExamNumberField.getText();
 			for(int i=0 ; i < AllExamsCode.size();i++) 	
 				if(ExamCodeTemp.equals(AllExamsCode.get(i))&&(temp==false)) {

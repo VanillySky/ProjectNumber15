@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import client.ChatClient;
 import controllers.DisplayController;
 import entities.Exam;
-import entities.GradesStatics;
 import entities.StudentGrade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,6 +83,12 @@ public class TeacherExamStatisticsController implements Initializable {
 	@FXML
 	private Button SearchBTN;
 
+	@FXML
+	private Button ApprovalBTN;
+
+	@FXML
+	private Button StatusBTN;
+
 	private Exam selectedExam = null;
 
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
@@ -147,11 +152,12 @@ public class TeacherExamStatisticsController implements Initializable {
 	public void PressReport(ActionEvent event) {
 		if (selectedExam != null) {
 			AllExamGrades = FXCollections
-					.observableArrayList((Collection) controllers.DisplayController.ShowStudentGrade());
+					.observableArrayList((Collection) controllers.DisplayController.ShowApprovedStudentTeacher(selectedExam.getExamCode()));
 			for (int i = 0; i < AllExamGrades.size(); i++) {
 				if (selectedExam.getExamCode().equals(AllExamGrades.get(i).getExamCode()))
 					ExamGrades.add(AllExamGrades.get(i));
 			}
+			System.out.println(ExamGrades.size());
 			if (ExamGrades.size() == 0)
 				NoGrades = true;
 			else
@@ -205,21 +211,20 @@ public class TeacherExamStatisticsController implements Initializable {
 					if (Grades[i] >= 0 && Grades[i] <= 54)
 						TeacherExamReportController.GradeRange[8]++;
 				}
-			
-			TeacherExamReportController TERC = new TeacherExamReportController();
-			TERC.start(new Stage());
-			((Node) event.getSource()).getScene().getWindow().hide();
+
+				TeacherExamReportController TERC = new TeacherExamReportController();
+				TERC.start(new Stage());
+				((Node) event.getSource()).getScene().getWindow().hide();
+			} else {
+				ErrorLbl.setText("there is no grades");
+				ErrorLbl.setVisible(true);
+			}
 		} else {
-			ErrorLbl.setText("there is no grades");
-			ErrorLbl.setVisible(true);
-		}
-		}else {
 			ErrorLbl.setText("please chose any exam!!");
 			ErrorLbl.setVisible(true);
 		}
 
 	}
-	
 
 	@FXML
 	public void SignOut(ActionEvent event) {
@@ -233,6 +238,19 @@ public class TeacherExamStatisticsController implements Initializable {
 		if (ExamsTable.getSelectionModel().getSelectedItem() != null) {
 			selectedExam = ExamsTable.getSelectionModel().getSelectedItem();
 		}
+	}
+
+	@FXML
+	void PressApproval(ActionEvent event) {
+		ExamApprovalController EACC = new ExamApprovalController();
+		EACC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+
+	}
+
+	@FXML
+	void PressStatus(ActionEvent event) {
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -252,10 +270,10 @@ public class TeacherExamStatisticsController implements Initializable {
 		dataList = FXCollections.observableArrayList(
 				(Collection) controllers.DisplayController.ShowTeacherExams(ChatClient.currentUser.getFirstName()));
 		ExamsTable.setItems(dataList);
-		
+
 		for (int i = 0; i < 9; i++) {
-			TeacherExamReportController.GradeRange[i]=0;
+			TeacherExamReportController.GradeRange[i] = 0;
 		}
-		
+
 	}
 }

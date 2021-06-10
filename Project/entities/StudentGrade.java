@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 
 public class StudentGrade implements Serializable {
-	private String StudentUserName, ExamCode,ExamCourse,ExamGrade,TeacherName;
+	private String StudentUserName, ExamCode,ExamCourse,ExamGrade,TeacherName,instr;
 
 	/**
 	 * @param studentUserName
@@ -18,7 +18,30 @@ public class StudentGrade implements Serializable {
 		ExamCourse = examCourse;
 		ExamGrade = examGrade;
 		TeacherName=teacherName;
+		
 	}
+	
+	public StudentGrade(String studentUserName, String examCode, String examCourse, String examGrade, String teacherName,
+			String instr) {
+		super();
+		StudentUserName = studentUserName;
+		ExamCode = examCode;
+		ExamCourse = examCourse;
+		ExamGrade = examGrade;
+		TeacherName = teacherName;
+		this.instr = instr;
+	}
+	public String getInstr() {
+		return instr;
+	}
+
+	public void setInstr(String instr) {
+		this.instr = instr;
+	}
+
+	
+
+	
 
 	public String getTeacherName() {
 		return TeacherName;

@@ -76,6 +76,19 @@ public class DisplayController {
 	}
 	
 	
+	public static Collection<Object> CheckRepeatExam(String ExamCode , String userName) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		list.add(userName);
+		ClientMessage msgFromClient = new ClientMessage("CheckRepeatExam", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list= (ArrayList<Object>) msgFromServer.getData();
+		return list;	
+	}
+	
+	
+	
 	public static ArrayList<StudentGrade> ShowStudentGrade() {
 		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
 		ClientMessage msgFromClient = new ClientMessage("getAllgrades", null, 0);
@@ -85,7 +98,31 @@ public class DisplayController {
 		return list;	
 	}
 	
+	
+	public static  Collection<Object> ShowStudentGradeTeacher(String TeacherName) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(TeacherName);
+		ClientMessage msgFromClient = new ClientMessage("TeachergetAllgrades", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;	
+	}
+	
+	public static Collection<Object> ShowApprovedStudentTeacher(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		ClientMessage msgFromClient = new ClientMessage("getAllApprovedgradesTeacher", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;	
+	}
+	
+	
 
+	
+	
 	public static Collection<Object> ShowApprovedStudentGrade(String studentName) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(studentName);

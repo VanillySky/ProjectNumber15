@@ -291,6 +291,46 @@ public class SQLConnection {
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				while (rs.next()) {
+					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"), rs.getString("ExamCode"), rs.getString("ExamCourse"), rs.getString("ExamGrade"), rs.getString("TeacherName"), rs.getString("instr"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	public static ArrayList<StudentGrade> getAllApprovedgradesTeacher(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String ExamCode = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM approvedstudentgrade WHERE ExamCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"), rs.getString("ExamCode"), rs.getString("ExamCourse"), rs.getString("ExamGrade"), rs.getString("TeacherName"), rs.getString("instr"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	public static ArrayList<StudentGrade> TeachergetAllgrades(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String TeacherName = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM studentgrade WHERE TeacherName = '" + TeacherName+ "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
 					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"), rs.getString("ExamCode"), rs.getString("ExamCourse"), rs.getString("ExamGrade"), rs.getString("TeacherName"));
 					array.add(SG);
 				}
@@ -350,6 +390,23 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 	}
+	
+	public static void DeleteApprovalStudentGrade(ArrayList<Object> arr) {
+		String username = (String) arr.get(0);
+		String ExamCode = (String) arr.get(1);
+		
+		if (conn != null)
+			try {
+				PreparedStatement ps = conn.prepareStatement("DELETE FROM studentgrade  WHERE studentUserName = ? And ExamCode = ?");
+				ps.setString(1, username);
+				ps.setString(2, ExamCode);
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	
 
 	public static boolean AddNewQuestion(ArrayList<Object> list) {
 		if (conn != null) {
@@ -442,6 +499,29 @@ public class SQLConnection {
 		return false;
 	}
 	
+	public static boolean AddNewApprovalStudentGrade(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO approvedstudentgrade VALUES (?,?,?,?,?,?);");
+				stmt.setString(1, ((StudentGrade) list.get(0)).getStudentUserName());
+				stmt.setString(2, ((StudentGrade) list.get(0)).getExamCode());
+				stmt.setString(3, ((StudentGrade) list.get(0)).getExamCourse());
+
+				stmt.setString(4, ((StudentGrade) list.get(0)).getExamGrade());
+
+				stmt.setString(5, ((StudentGrade) list.get(0)).getTeacherName());
+				stmt.setString(6, ((StudentGrade) list.get(0)).getInstr());
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	public static boolean UpgradeExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -507,5 +587,53 @@ public class SQLConnection {
 		return false;
 
 	}
+	
+	
+	public static String checkLockedExam(ArrayList<Object> arr) {
+		String ExamCode = (String) arr.get(0);
+     String locked="";
+		if (conn != null)
+			try {
+
+				String query = "Select isLocked FROM studentexamcode WHERE ExamAutoCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+
+				if (rs.next()) {
+					locked = rs.getString("isLocked");
+					
+					}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return locked;
+		}
+	
+	public static ArrayList<StudentGrade> CheckRepeatExam(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String ExamCode = (String) arr.get(0);
+		String username= ( String)arr.get(1);
+     
+		if (conn != null)
+			try {
+
+				String query = "Select * FROM studentgrade WHERE studentUserName = '" + username + "'AND ExamCode = '" + ExamCode
+						+ "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+
+				while (rs.next()) {
+					StudentGrade SG = new StudentGrade(username, ExamCode, rs.getString("ExamCourse"),   rs.getString("ExamGrade"), rs.getString("TeacherName"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return array;
+		}
+	
+	
+	
 	
 }

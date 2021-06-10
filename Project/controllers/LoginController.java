@@ -57,5 +57,17 @@ public class LoginController {
 		return "";
 		}
 	}
+	
+	public static String checkLocked(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		
+		ClientMessage msgFromClient = new ClientMessage("checkLockedExam", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		String locked = (String) msgFromServer.getData();
+		return locked;
+	}
+	
 
 }

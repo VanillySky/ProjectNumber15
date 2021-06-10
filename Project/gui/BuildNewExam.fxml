@@ -46,7 +46,6 @@
          </image>
       </ImageView>
       <Label fx:id="onlytwonumberLBL" layoutX="665.0" layoutY="169.0" text="only two digitals please!!!" textFill="RED" visible="false" />
-      <Label fx:id="onlynumbersLBL1" layoutX="661.0" layoutY="313.0" text="only digitals!!" textFill="RED" visible="false" />
       <Label fx:id="emptyfieldLBL" layoutX="681.0" layoutY="500.0" prefHeight="34.0" prefWidth="224.0" text="* please fill an important empty fields !!" textFill="RED" visible="false" />
       <Label fx:id="UpdateExamLBL" layoutX="414.0" layoutY="24.0" prefHeight="42.0" prefWidth="290.0" text="Build Exam" textFill="#1e1572">
          <font>

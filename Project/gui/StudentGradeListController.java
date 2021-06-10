@@ -38,6 +38,9 @@ public class StudentGradeListController implements Initializable {
 
 	@FXML
 	private TableColumn<StudentGrade, String> TeacherNamecolumn;
+	
+	 @FXML
+	    private TableColumn<StudentGrade, String> InstructionColumn;
 
 	@FXML
 	private Button GetExamNotbookBTN;
@@ -90,6 +93,7 @@ public class StudentGradeListController implements Initializable {
 		this.ExamCourseColumn.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
 		this.ExamGradeColumn.setCellValueFactory((Callback) new PropertyValueFactory("ExamGrade"));
 		this.TeacherNamecolumn.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
+		this.InstructionColumn.setCellValueFactory((Callback) new PropertyValueFactory("instr"));
 		
 		dataList = FXCollections.observableArrayList(
 				(Collection) controllers.DisplayController.ShowApprovedStudentGrade(ChatClient.currentUser.getUserName()));

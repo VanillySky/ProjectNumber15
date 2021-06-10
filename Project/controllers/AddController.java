@@ -43,4 +43,14 @@ public class AddController {
 		return (boolean) msgFromServer.getData();
 		
 	}
+	
+	public static boolean AddApprovalStudentGrade(StudentGrade sG) {
+		ArrayList<Object> newStudentGrade = new ArrayList<>();
+		newStudentGrade.add(sG);
+		ClientMessage msgFromClient = new ClientMessage("AddNewApprovalStudentGrade", newStudentGrade, newStudentGrade.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+		
+	}
 }

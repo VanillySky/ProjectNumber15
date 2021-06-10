@@ -3,7 +3,8 @@
  */
 package gui;
 
-
+import client.ChatClient;
+import controllers.DisplayController;
 import controllers.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,12 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
 /**
  * @author shaden
  *
  */
-public class ExaminationController  {
+public class ExaminationController {
 	@FXML
 	private Button CEMSButton;
 
@@ -51,7 +51,7 @@ public class ExaminationController  {
 
 	@FXML
 	private Label IncorrectLBL;
-	
+
 	static String ExamCode;
 
 	public void start(Stage primaryStage) {
@@ -108,52 +108,57 @@ public class ExaminationController  {
 	public void StartExam(ActionEvent event) {
 		char[] chars = insertCodeTxtField.getText().toCharArray();
 		int countletter = 0;
-		for(char c : chars) {
-			if(Character.isLetter(c))
+		for (char c : chars) {
+			if (Character.isLetter(c))
 				countletter++;
 		}
-		
+
 		if (insertCodeTxtField.getText().isEmpty()) {
 			EmptyFieldLBL.setVisible(true);
 			ContainLetterMsgLBL.setVisible(false);
 			IncorrectLBL.setVisible(false);
-		}
-		 else if(countletter==0) {
+		} else if (countletter == 0) {
 			EmptyFieldLBL.setVisible(false);
+			ContainLetterMsgLBL.setText("The code should contains letter");
 			ContainLetterMsgLBL.setVisible(true);
 			IncorrectLBL.setVisible(false);
-		} 
+		}
 		if (!insertCodeTxtField.getText().isEmpty() & !insertCodeTxtField.getText().startsWith("M")
 				& !insertCodeTxtField.getText().startsWith("A")) {
 			EmptyFieldLBL.setVisible(false);
 			ContainLetterMsgLBL.setVisible(false);
 			IncorrectLBL.setVisible(true);
-		
-		}
-		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
-	
-			 ExamCode=LoginController.checkManual(insertCodeTxtField.getText());
-			if(ExamCode!="")
-			{
-			ManualController MC = new ManualController();
-		
-			MC.getcode(ExamCode);
-			MC.start(new Stage());
-			((Node) event.getSource()).getScene().getWindow().hide();
-			}
-			
+
 		}
 
-		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
-			ExamCode=LoginController.checkAuto(insertCodeTxtField.getText());
-			if(ExamCode!="")
-			{
-			AutoLoginController ALC = new AutoLoginController();
-			ALC.start(new Stage());
-			((Node) event.getSource()).getScene().getWindow().hide();
+		if (LoginController.checkLocked(insertCodeTxtField.getText()).equals("unlocked")) {
+			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
+
+				ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
+				if (ExamCode != "") {
+					ManualController MC = new ManualController();
+
+					MC.getcode(ExamCode);
+					MC.start(new Stage());
+					((Node) event.getSource()).getScene().getWindow().hide();
+				}
+
 			}
-			
+
+			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
+				ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
+				if (ExamCode != "") {
+					AutoLoginController ALC = new AutoLoginController();
+					ALC.start(new Stage());
+					((Node) event.getSource()).getScene().getWindow().hide();
+				}
+
+			}
+
+		} else {
+			ContainLetterMsgLBL.setText("The Exam is locked");
+			ContainLetterMsgLBL.setVisible(true);
 		}
-	
+
 	}
 }

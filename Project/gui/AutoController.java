@@ -107,6 +107,7 @@ public class AutoController implements Initializable {
 	@FXML
 	void GoNext(ActionEvent event) {
 		
+		
 		if (submit == false) {
 			prevIMG.setVisible(true);
 			PrevBTN.setDisable(false);
@@ -151,10 +152,6 @@ public class AutoController implements Initializable {
 
 			} else {
 				submitIMG.setVisible(true);
-				Answer1RB.setSelected(false);
-				Answer2RB.setSelected(false);
-				Answer3RB.setSelected(false);
-				Answer4RB.setSelected(false);
 
 				if (Answer1RB.isSelected()) 
 					StudentAnswer[N] = 1;
@@ -195,21 +192,6 @@ public class AutoController implements Initializable {
 			}
 
 		}else {
-			if(StudentAnswer[N]==0) {
-				Answer1RB.setSelected(false);
-				Answer2RB.setSelected(false);
-				Answer3RB.setSelected(false);
-				Answer4RB.setSelected(false);
-			}else {
-				if(StudentAnswer[N]==1)
-					Answer1RB.setSelected(true);
-				if(StudentAnswer[N]==2)
-					Answer2RB.setSelected(true);
-				if(StudentAnswer[N]==3)
-					Answer3RB.setSelected(true);
-				if(StudentAnswer[N]==4)
-					Answer4RB.setSelected(true);			
-			}
 			
 			if (Answer1RB.isSelected()) 
 				StudentAnswer[N] = 1;
@@ -223,6 +205,7 @@ public class AutoController implements Initializable {
 	
 			if (Answer4RB.isSelected())
 				StudentAnswer[N] = 4;
+			
 
 			for(N=0;N<AllQuestion.length;N++) {
 				if(StudentAnswer[N]==Integer.parseInt(AllQuestion[N].getRightAnswer()))
