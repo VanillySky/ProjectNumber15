@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="553.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatusController">
    <children>
-      <ImageView fitHeight="553.0" fitWidth="973.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="553.0" fitWidth="973.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/ExamStatus.png" />
          </image>
@@ -107,5 +107,7 @@
       <Button fx:id="AddTimeBTN" layoutX="820.0" layoutY="439.0" mnemonicParsing="false" onAction="#PressAddTime" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: transparent;" />
       <Button fx:id="LockBTN" layoutX="820.0" layoutY="479.0" mnemonicParsing="false" onAction="#PressLock" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: transparent;" />
       <Button fx:id="ReturnBTN" layoutX="48.0" layoutY="479.0" mnemonicParsing="false" onAction="#PressReturn" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: transparent;" />
+      <Label fx:id="ERRLabel" layoutX="673.0" layoutY="514.0" prefHeight="18.0" prefWidth="291.0" textFill="RED" visible="false" />
+      <Label fx:id="succedLBL" layoutX="637.0" layoutY="438.0" prefHeight="27.0" prefWidth="182.0" text="the message sent to manager" textFill="#24692e" visible="false" />
    </children>
 </AnchorPane>

@@ -1,6 +1,8 @@
 package entities;
 
-public class ManagerMessage {
+import java.io.Serializable;
+
+public class ManagerMessage implements Serializable  {
 	String Examcode;
 	String TeacherName;
 	String addtime;

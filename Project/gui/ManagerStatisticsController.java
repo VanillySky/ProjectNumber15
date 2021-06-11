@@ -1,7 +1,5 @@
 package gui;
 
-
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,14 +7,20 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.ResourceBundle;
+
+import entities.Exam;
 import entities.StudentGrade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +28,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableView;
-
 
 public class ManagerStatisticsController implements Initializable {
 
@@ -76,8 +79,17 @@ public class ManagerStatisticsController implements Initializable {
 	@FXML
 	private Button ReturnBTN;
 
+	@FXML
+	private Label ErrorLbl;
+
+	private StudentGrade selectedExam = null;
+	private ObservableList<StudentGrade> AllExamGrades = FXCollections.observableArrayList();
+	private ArrayList<StudentGrade> ExamGrades = new ArrayList<StudentGrade>();
+	private int[] Grades;
+	boolean NoGrades;
+
 	private ObservableList<StudentGrade> dataList = FXCollections.observableArrayList();
-	
+
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -95,13 +107,87 @@ public class ManagerStatisticsController implements Initializable {
 
 	@FXML
 	void PressCEMS(ActionEvent event) {
-		ManagerStatisticsController MSCC = new ManagerStatisticsController();
-		MSCC.start(new Stage());
+		ManagerMenuController MMCC = new ManagerMenuController();
+		MMCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
 	void PressGetReport(ActionEvent event) {
+		if (selectedExam != null) {
+			TeacherExamReportController.isTeacher=false;
+			AllExamGrades = FXCollections.observableArrayList(
+					(Collection) controllers.DisplayController.ShowApprovedStudentTeacher(selectedExam.getExamCode()));
+			for (int i = 0; i < AllExamGrades.size(); i++) {
+				if (selectedExam.getExamCode().equals(AllExamGrades.get(i).getExamCode()))
+					ExamGrades.add(AllExamGrades.get(i));
+			}
+
+			if (ExamGrades.size() == 0)
+				NoGrades = true;
+			else
+				NoGrades = false;
+
+			if (NoGrades == false) {
+				Grades = new int[ExamGrades.size()];
+
+				TeacherExamReportController.numberofStudents = ExamGrades.size();
+				int sum = 0;
+				for (int i = 0; i < ExamGrades.size(); i++) {
+					Grades[i] = Integer.parseInt(ExamGrades.get(i).getExamGrade());
+					sum += Integer.parseInt(ExamGrades.get(i).getExamGrade());
+				}
+				Arrays.sort(Grades);
+				TeacherExamReportController.MinGrade = Grades[0];
+				TeacherExamReportController.MaxGrade = Grades[Grades.length - 1];
+				TeacherExamReportController.Average = sum / (double) Grades.length;
+
+				if (Grades.length % 2 == 1)
+					TeacherExamReportController.median = Grades[(Grades.length + 1) / 2 - 1];
+				else
+					TeacherExamReportController.median = (Grades[Grades.length / 2 - 1] + Grades[Grades.length / 2])
+							/ 2;
+
+				for (int i = 0; i < Grades.length; i++) {
+					if (Grades[i] >= 95 && Grades[i] <= 100)
+						TeacherExamReportController.GradeRange[0]++;
+
+					if (Grades[i] >= 90 && Grades[i] <= 94)
+						TeacherExamReportController.GradeRange[1]++;
+
+					if (Grades[i] >= 85 && Grades[i] <= 89)
+						TeacherExamReportController.GradeRange[2]++;
+
+					if (Grades[i] >= 80 && Grades[i] <= 84)
+						TeacherExamReportController.GradeRange[3]++;
+
+					if (Grades[i] >= 75 && Grades[i] <= 79)
+						TeacherExamReportController.GradeRange[4]++;
+
+					if (Grades[i] >= 70 && Grades[i] <= 74)
+						TeacherExamReportController.GradeRange[5]++;
+
+					if (Grades[i] >= 65 && Grades[i] <= 69)
+						TeacherExamReportController.GradeRange[6]++;
+
+					if (Grades[i] >= 55 && Grades[i] <= 64)
+						TeacherExamReportController.GradeRange[7]++;
+
+					if (Grades[i] >= 0 && Grades[i] <= 54)
+						TeacherExamReportController.GradeRange[8]++;
+				}
+
+				TeacherExamReportController TERC = new TeacherExamReportController();
+				TERC.start(new Stage());
+				((Node) event.getSource()).getScene().getWindow().hide();
+			} else {
+				ErrorLbl.setText("there is no grades");
+				ErrorLbl.setVisible(true);
+			}
+		} else {
+			ErrorLbl.setText("please chose any exam!!");
+			ErrorLbl.setVisible(true);
+		}
 
 	}
 
@@ -140,7 +226,6 @@ public class ManagerStatisticsController implements Initializable {
 		TableStat.setItems(sortedData);
 	}
 
-	
 	@FXML
 	void SerchByStudentName(ActionEvent event) {
 		this.StudentNameCol.setCellValueFactory((Callback) new PropertyValueFactory("StudentUserName"));
@@ -148,7 +233,6 @@ public class ManagerStatisticsController implements Initializable {
 		this.CourseCol.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
 		this.ExamGrade.setCellValueFactory((Callback) new PropertyValueFactory("ExamGrade"));
 		this.AuthorCol.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
-
 
 		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowStatistics());
 		TableStat.setItems(dataList);
@@ -172,7 +256,6 @@ public class ManagerStatisticsController implements Initializable {
 		TableStat.setItems(sortedData);
 	}
 
-	
 	@FXML
 	void SerchByTeacherName(ActionEvent event) {
 		this.StudentNameCol.setCellValueFactory((Callback) new PropertyValueFactory("StudentUserName"));
@@ -203,11 +286,17 @@ public class ManagerStatisticsController implements Initializable {
 		TableStat.setItems(sortedData);
 	}
 
-
 	public void PressReturn(ActionEvent event) {
-		ManagerStatisticsController MSCC = new ManagerStatisticsController();
-		MSCC.start(new Stage());
+		ManagerMenuController MMCC = new ManagerMenuController();
+		MMCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
+	}
+
+	@FXML
+	void selectExam(MouseEvent event) {
+		if (TableStat.getSelectionModel().getSelectedItem() != null) {
+			selectedExam = TableStat.getSelectionModel().getSelectedItem();
+		}
 	}
 
 	@Override

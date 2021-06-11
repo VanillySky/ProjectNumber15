@@ -178,6 +178,30 @@ public class SQLConnection {
 	}
 	
 	
+	public static ArrayList<ManagerMessage> getManagerMessages() {
+		ArrayList<ManagerMessage> array = new ArrayList<ManagerMessage>();
+		if (conn != null) {
+			try {
+				String query = "Select * FROM managermessage";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					ManagerMessage MM = new ManagerMessage(rs.getString("Examcode"), rs.getString("TeacherName"), 
+							rs.getString("addtime"), rs.getString("instruction"));
+					array.add(MM);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
+
+	
+	
 	
 	
 	public static ArrayList<Exam> getOneExams(ArrayList<Object> arr) {
@@ -338,10 +362,10 @@ public class SQLConnection {
 	
 	public static ArrayList<StudentGrade> getAllApprovedgradesTeacher(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
-		String ExamCode = (String) arr.get(0);
+		String TeacherName = (String) arr.get(0);
 		if (conn != null) {
 			try {
-				String query = "Select * FROM approvedstudentgrade WHERE ExamCode = '" + ExamCode + "'";
+				String query = "Select * FROM approvedstudentgrade WHERE TeacherName = '" + TeacherName + "'";
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				while (rs.next()) {
@@ -599,7 +623,7 @@ public class SQLConnection {
 		if (conn != null) {
 			try {
 
-				PreparedStatement stmt = conn.prepareStatement("INSERT INTO managermessage VALUES (?,?,?,?,?,?);");
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO managermessage VALUES (?,?,?,?);");
 				stmt.setString(1, ((ManagerMessage) list.get(0)).getExamcode());
 				stmt.setString(2, ((ManagerMessage) list.get(0)).getTeacherName());
 				stmt.setString(3, ((ManagerMessage) list.get(0)).getAddtime());

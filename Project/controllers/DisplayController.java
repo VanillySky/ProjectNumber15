@@ -9,6 +9,7 @@ import client.ChatClient;
 import client.ClientUI;
 import entities.Exam;
 import entities.InExam;
+import entities.ManagerMessage;
 import entities.Question;
 import entities.Statistics;
 import entities.StudentGrade;
@@ -34,6 +35,19 @@ public class DisplayController {
 		list = (ArrayList<Exam>) msgFromServer.getData();
 		return list;
 	}
+	
+	
+	public static ArrayList<ManagerMessage> showManagerMessage() {
+		
+		ArrayList<ManagerMessage> list = new ArrayList<ManagerMessage>();
+		ClientMessage msgFromClient = new ClientMessage("getManagerMessages", null, 0);
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<ManagerMessage>) msgFromServer.getData();
+		return list;
+	}
+	
+	
 	
 	public static  Collection<Object> ShowOneExam(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -110,9 +124,9 @@ public class DisplayController {
 		return list;	
 	}
 	
-	public static Collection<Object> ShowApprovedStudentTeacher(String ExamCode) {
+	public static Collection<Object> ShowApprovedStudentTeacher(String TeacherName) {
 		ArrayList<Object> list = new ArrayList<Object>();
-		list.add(ExamCode);
+		list.add(TeacherName);
 		ClientMessage msgFromClient = new ClientMessage("getAllApprovedgradesTeacher", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());

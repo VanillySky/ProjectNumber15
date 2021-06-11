@@ -27,7 +27,7 @@ public class ManagerMenuController {
 
 	@FXML
 	private Button OutButton;
-	
+
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -45,18 +45,15 @@ public class ManagerMenuController {
 
 	@FXML
 	void GoToConfirmations(ActionEvent event) {
-
-	}
-
-	@FXML
-	void GoToInfo(ActionEvent event) {
-
+		ManagerApprovalController MACC = new ManagerApprovalController();
+		MACC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
 	@FXML
 	void PresCEMS(ActionEvent event) {
-		ManagerStatisticsController MSCC = new ManagerStatisticsController();
-		MSCC.start(new Stage());
+		ManagerMenuController MMC = new ManagerMenuController();
+		MMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
@@ -65,15 +62,14 @@ public class ManagerMenuController {
 		LoginFrameController LFCC = new LoginFrameController();
 		LFCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-	
-	}
 
+	}
 
 	@FXML
 	void GoToStatistics(ActionEvent event) {
 		ManagerStatisticsController MSC = new ManagerStatisticsController();
 		MSC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-			}// go to Manager Statistics
+	}// go to Manager Statistics
 
 }

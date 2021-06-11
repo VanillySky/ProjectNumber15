@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SubmittedExamController">
+   <children>
+      <ImageView fitHeight="579.0" fitWidth="1048.0">
+         <image>
+            <Image url="@../Images/CEMSBG.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="168.0" layoutY="99.0" prefHeight="405.0" prefWidth="860.0">
+         <children>
+            <GridPane layoutX="206.0" layoutY="130.0" prefHeight="405.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.0" minWidth="10.0" prefWidth="305.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="620.0" minWidth="10.0" prefWidth="555.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F4F6F7;">
+                     <children>
+                        <ImageView fitHeight="195.0" fitWidth="285.0" layoutX="52.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/v%20chick.jpeg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #051652;" GridPane.columnIndex="1">
+                     <children>
+                        <Text fill="#f4f6f7" layoutX="131.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUBMITTED">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="49.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#f4f6f7" layoutX="26.0" layoutY="121.0" stroke="#a81515" strokeLineCap="ROUND" strokeWidth="0.0" text="Your exam has been successfully uploaded." textAlignment="CENTER" wrappingWidth="502.75">
+                           <font>
+                              <Font name="Bell MT" size="32.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </Text>
+                        <ProgressBar layoutX="60.0" layoutY="221.0" prefHeight="23.0" prefWidth="448.0" progress="1.0" />
+                        <Label fx:id="ExamCodeAndSubject" alignment="CENTER" layoutX="53.0" layoutY="190.0" prefHeight="26.0" prefWidth="201.0" textAlignment="CENTER" textFill="#f4f6f7">
+                           <font>
+                              <Font name="Bell MT Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="460.0" layoutY="190.0" text="100%" textFill="#f4f6f7">
+                           <font>
+                              <Font name="Bell MT" size="21.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="StudentMenuBTN" layoutX="160.0" layoutY="270.0" mnemonicParsing="false" onAction="#BackToMainMenu" prefHeight="31.0" prefWidth="235.0" text="Return to the main menu" />
+                        <Button fx:id="OutBTN" layoutX="160.0" layoutY="320.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="235.0" text="Signout" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

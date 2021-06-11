@@ -96,6 +96,7 @@ public class TeacherExamReportController implements Initializable {
 	static  int MaxGrade, MinGrade;
 	static  double Average,median;
 	static  int [] GradeRange = new int[9];
+	static boolean isTeacher=false;
 	
 	ObservableList<Range> List = FXCollections.observableArrayList(
 			new Range(GradeRange[0], GradeRange[1], GradeRange[2],GradeRange[3], GradeRange[4], GradeRange[5],
@@ -161,9 +162,16 @@ public class TeacherExamReportController implements Initializable {
 	
 	@FXML
 	public void PressCEMS(ActionEvent event) {
+		if(isTeacher) {
 		TeacherMenuController TMCC = new TeacherMenuController();
 		TMCC.start(new Stage());
-		((Node) event.getSource()).getScene().getWindow().hide();
+		((Node) event.getSource()).getScene().getWindow().hide();}
+		else {
+			ManagerStatisticsController MSCC = new ManagerStatisticsController();
+			MSCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+			
+		}
 	}
 	
 	@FXML
@@ -175,9 +183,15 @@ public class TeacherExamReportController implements Initializable {
 	
 	@FXML
 	public void PressReturn(ActionEvent event) {
+		if(isTeacher) {
 		TeacherExamStatisticsController TESC = new TeacherExamStatisticsController();
 		TESC.start(new Stage());
-		((Node) event.getSource()).getScene().getWindow().hide();
+		((Node) event.getSource()).getScene().getWindow().hide();}
+		else {
+			ManagerStatisticsController MASC = new ManagerStatisticsController();
+			MASC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
+		}
 	}
 
 }

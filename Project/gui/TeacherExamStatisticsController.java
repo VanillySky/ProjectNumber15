@@ -153,13 +153,15 @@ public class TeacherExamStatisticsController implements Initializable {
 	@FXML
 	public void PressReport(ActionEvent event) {
 		if (selectedExam != null) {
+			TeacherExamReportController.isTeacher=true;
 			AllExamGrades = FXCollections
-					.observableArrayList((Collection) controllers.DisplayController.ShowApprovedStudentTeacher(selectedExam.getExamCode()));
+					.observableArrayList((Collection) controllers.DisplayController.ShowApprovedStudentTeacher(ChatClient.currentUser.getUserName()));
+			System.out.println(AllExamGrades.size());
 			for (int i = 0; i < AllExamGrades.size(); i++) {
 				if (selectedExam.getExamCode().equals(AllExamGrades.get(i).getExamCode()))
 					ExamGrades.add(AllExamGrades.get(i));
 			}
-			System.out.println(ExamGrades.size());
+			
 			if (ExamGrades.size() == 0)
 				NoGrades = true;
 			else
