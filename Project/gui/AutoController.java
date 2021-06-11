@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.AddController;
+import controllers.DeleteController;
 import controllers.LoginController;
 import entities.Exam;
 import entities.Question;
@@ -82,6 +83,7 @@ public class AutoController implements Initializable {
 	static int N;
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
 	private ArrayList<Object> getQuestion = new ArrayList<Object>();
+	static String ExamCode;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -216,6 +218,8 @@ public class AutoController implements Initializable {
 			String grade = ""+sum;
 			StudentGrade  SG = new StudentGrade(ChatClient.currentUser.getUserName() ,ExaminationController.ExamCode , dataList.get(0).getExamCourse(), grade , dataList.get(0).getTeacherName());
 			AddController.AddStudentGrade(SG);
+			DeleteController DC = new DeleteController();
+			DC.DeleteExam(ExamCode);
 			questionLBL.setVisible(false);
 			Answer1RB.setVisible(false);
 			Answer2RB.setVisible(false);
@@ -324,6 +328,9 @@ public class AutoController implements Initializable {
 		Answer3RB.setText("3)" + AllQuestion[N].getAnswer3());
 		Answer4RB.setText("4)" + AllQuestion[N].getAnswer4());
 		questionIns.setText("instruction:"+ AllQuestion[N].getQuestionInstruction());
+		
+		
+		
 
 	}
 

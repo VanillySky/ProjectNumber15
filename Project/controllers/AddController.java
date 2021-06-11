@@ -10,6 +10,7 @@ import entities.Exam;
 import entities.InExam;
 import entities.ManagerMessage;
 import entities.Question;
+import entities.StatusExam;
 import entities.StudentGrade;
 
 public class AddController {
@@ -69,6 +70,15 @@ public class AddController {
 		ArrayList<Object> IE = new ArrayList<>();
 		IE.add(MM);
 		ClientMessage msgFromClient = new ClientMessage("AddInExam", IE, IE.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+	}
+	
+	public static boolean AddNewExamStatus(StatusExam NewExamStatus) {
+		ArrayList<Object> ANES = new ArrayList<>();
+		ANES.add(NewExamStatus);
+		ClientMessage msgFromClient = new ClientMessage("AddNewExamStatus", ANES, ANES.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();

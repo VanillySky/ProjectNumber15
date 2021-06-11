@@ -45,6 +45,31 @@ public class DeleteController {
 	}
 	
 	
+	
+	public void DeleteInExam(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+	
+		ClientMessage msgFromClient = new ClientMessage("DeleteInExam", list, list.size());
+		
+		ClientUI.chat.accept(msgFromClient);
+	
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+	}
+	
+	
+	public void DeleteAllExam() {
+	
+		ClientMessage msgFromClient = new ClientMessage("DeleteAllInExam", null, 0);
+		
+		ClientUI.chat.accept(msgFromClient);
+	
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+	}
+	
+	
+	
+	
 	public void DeleteApprovalStudentGrade(String Username, String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(Username);

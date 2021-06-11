@@ -80,6 +80,8 @@ public class AutoLoginController implements Initializable {
 		
 		if (IDTXT.getText().equals(ChatClient.currentUser.getUserId())) {
 			///////////////////////// start time
+			
+			
 			InExam IE = new InExam(ExamCode, ChatClient.currentUser.getUserName(), ChatClient.currentUser.getUserId()); // add to table 
 			AddController.AddInExam(IE);
 			AutoController AC = new AutoController();

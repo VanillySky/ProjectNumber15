@@ -3,12 +3,17 @@
  */
 package gui;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import client.ChatClient;
 import client.ClientUI;
 import controllers.AddController;
 import controllers.DisplayController;
 import controllers.LoginController;
+import entities.Exam;
 import entities.InExam;
+import entities.StatusExam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +61,7 @@ public class ExaminationController {
 	private Label IncorrectLBL;
 
 	static String ExamCode;
+	static String ExamTime;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -136,7 +142,14 @@ public class ExaminationController {
 			IncorrectLBL.setVisible(true);
 
 		}
-	
+		Date date = new Date();
+		ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
+		ExamTime= DisplayController.GetExamTime(ExamCode);
+		System.out.println(ExamTime);
+		System.out.println(ExamCode);
+		StatusExam SE = new StatusExam(ExamCode, "0", "0","" , date.toString());
+		AddController.AddNewExamStatus(SE);
+	///////////////////////////////still not done !!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
 
@@ -162,12 +175,12 @@ public class ExaminationController {
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
 				ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
 				AutoLoginController.ExamCode=ExamCode;
+				AutoController.ExamCode=ExamCode;
 				if (ExamCode != "") {
 					AutoLoginController ALC = new AutoLoginController();
 					ALC.start(new Stage());
 					((Node) event.getSource()).getScene().getWindow().hide();
 				}
-
 			}
 
 		} else {

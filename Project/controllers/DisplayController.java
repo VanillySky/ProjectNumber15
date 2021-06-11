@@ -36,7 +36,6 @@ public class DisplayController {
 		return list;
 	}
 	
-	
 	public static ArrayList<ManagerMessage> showManagerMessage() {
 		
 		ArrayList<ManagerMessage> list = new ArrayList<ManagerMessage>();
@@ -49,7 +48,7 @@ public class DisplayController {
 	
 	
 	
-	public static  Collection<Object> ShowOneExam(String ExamCode) {
+	public static  ArrayList<Object> ShowOneExam(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
 		ClientMessage msgFromClient = new ClientMessage("getOneExams", list, list.size());
@@ -179,10 +178,38 @@ public class DisplayController {
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		list = (ArrayList<Object>) msgFromServer.getData();
-		return list;	
-		
-		
+		return list;		
 	}
+	/////////////////////////////////////////////////////////////////////////////////////
+	public static ArrayList<Object> checkLockedEXCODE(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		
+		ClientMessage msgFromClient = new ClientMessage("checkLockedEXCODE", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list= (ArrayList<Object>) msgFromServer.getData();
+
+		return list;
+	}
+	
+	
+	public static String GetExamTime(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		
+		ClientMessage msgFromClient = new ClientMessage("GetExamTime", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		String time = (String) msgFromServer.getData();
+		if(time!="")
+		return time;
+		else
+		{
+		return "";
+		}
+	}
+	
 
 
 }
