@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
+import client.ClientUI;
 import controllers.DisplayController;
 import entities.Exam;
 import entities.StudentGrade;
@@ -231,10 +232,11 @@ public class TeacherExamStatisticsController implements Initializable {
 	}
 
 	@FXML
-	public void SignOut(ActionEvent event) {
-		LoginFrameController LFCC = new LoginFrameController();
-		LFCC.start(new Stage());
+	public void SignOut(ActionEvent event) throws Exception {
+		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
+		clientUI.chat.quit();
+		clientUI.start(new Stage());
 	}
 
 	@FXML

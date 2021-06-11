@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 
+import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,10 +59,11 @@ public class ManagerMenuController {
 	}
 
 	@FXML
-	void PressSignOut(ActionEvent event) {
-		LoginFrameController LFCC = new LoginFrameController();
-		LFCC.start(new Stage());
+	void PressSignOut(ActionEvent event) throws Exception {
+		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
+		clientUI.chat.quit();
+		clientUI.start(new Stage());
 
 	}
 

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import client.ClientUI;
 import entities.Exam;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -192,13 +193,15 @@ import javafx.stage.Stage;
 		 * This method to sign out.
 		 * 
 		 * @param event
+		 * @throws Exception 
 		 */
 
 		@FXML
-		public void SignOut(ActionEvent event) {
-			LoginFrameController LFCC = new LoginFrameController();
-			LFCC.start(new Stage());
+		public void SignOut(ActionEvent event) throws Exception {
+			ClientUI clientUI = new ClientUI();
 			((Node) event.getSource()).getScene().getWindow().hide();
+			clientUI.chat.quit();
+			clientUI.start(new Stage());
 		}
 
 		/**

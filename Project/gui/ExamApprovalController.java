@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
+import client.ClientUI;
 import controllers.AddController;
 import controllers.DeleteController;
 import entities.StudentGrade;
@@ -185,10 +186,11 @@ public class ExamApprovalController implements Initializable {
 	}
 
 	@FXML
-	void PressSignOut(ActionEvent event) {
-		LoginFrameController LFCC = new LoginFrameController();
-		LFCC.start(new Stage());
+	void PressSignOut(ActionEvent event) throws Exception {
+		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
+		clientUI.chat.quit();
+		clientUI.start(new Stage());
 	}
 
 	@FXML

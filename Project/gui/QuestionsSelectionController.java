@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
+import client.ClientUI;
 import controllers.AddController;
 import controllers.DeleteController;
 import controllers.UpgradeConroller;
@@ -397,10 +398,11 @@ public class QuestionsSelectionController extends Application implements Initial
 	}
 
 	@FXML
-	public void SignOut(ActionEvent event) {
-		LoginFrameController LFCC = new LoginFrameController();
-		LFCC.start(new Stage());
+	public void SignOut(ActionEvent event) throws Exception {
+		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
+		clientUI.chat.quit();
+		clientUI.start(new Stage());
 	}
 
 	@FXML
