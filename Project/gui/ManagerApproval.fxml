@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -26,5 +27,6 @@
       <Button fx:id="SignOutButton" layoutX="805.0" layoutY="2.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="12.0" prefWidth="107.0" style="-fx-background-color: transparent;" />
       <Button fx:id="rejectBTN" layoutX="242.0" layoutY="402.0" mnemonicParsing="false" onAction="#PressReject" prefHeight="25.0" prefWidth="116.0" style="-fx-background-color: transparent;" />
       <Button fx:id="ApproveBTN" layoutX="503.0" layoutY="402.0" mnemonicParsing="false" onAction="#PressApprove" prefHeight="25.0" prefWidth="123.0" style="-fx-background-color: transparent;" />
+      <Label fx:id="ERRLabel" layoutX="242.0" layoutY="446.0" prefHeight="17.0" prefWidth="153.0" text="Please Chose Message" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

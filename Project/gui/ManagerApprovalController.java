@@ -5,8 +5,12 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 import client.ClientUI;
 import controllers.LoginController;
+=======
+import controllers.DeleteController;
+>>>>>>> 182ddfa .
 import entities.Exam;
 import entities.ManagerMessage;
 import entities.StudentGrade;
@@ -20,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -56,6 +61,10 @@ public class ManagerApprovalController implements Initializable {
     @FXML
     private Button ApproveBTN;
     
+    @FXML
+    private Label ERRLabel;
+
+    
 	private ManagerMessage selectedMessage = null;
     
 	private ObservableList<ManagerMessage> dataList = FXCollections.observableArrayList();
@@ -89,6 +98,20 @@ public class ManagerApprovalController implements Initializable {
 
     @FXML
     void PressReject(ActionEvent event) {
+    	if(selectedMessage!=null) {
+    	DeleteController DCC = new DeleteController();
+    	DCC.ManagerMessage(selectedMessage.getExamcode());
+    	
+    	dataList = FXCollections.observableArrayList(
+				(Collection) controllers.DisplayController.showManagerMessage());
+		MessageTable.setItems(dataList);
+    		
+    		
+    	}else {
+    		
+    	ERRLabel.setVisible(true);	
+    
+    	}
 
     }
 

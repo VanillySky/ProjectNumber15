@@ -135,7 +135,7 @@ public class ExamApprovalController implements Initializable {
 
 				AddController.AddApprovalStudentGrade(SG);
 				DeleteController DC = new DeleteController();
-				DC.AddApprovalStudentGrade(selectedGrade.getStudentUserName(), selectedGrade.getExamCode());
+				DC.DeleteApprovalStudentGrade(selectedGrade.getStudentUserName(), selectedGrade.getExamCode());
 				dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController
 						.ShowStudentGradeTeacher(ChatClient.currentUser.getFirstName()));
 				GradeTable.setItems(dataList);
@@ -166,7 +166,7 @@ public class ExamApprovalController implements Initializable {
 
 				AddController.AddApprovalStudentGrade(SG);
 				DeleteController DC = new DeleteController();
-				DC.AddApprovalStudentGrade(selectedGrade.getStudentUserName(), selectedGrade.getExamCode());
+				DC.DeleteApprovalStudentGrade(selectedGrade.getStudentUserName(), selectedGrade.getExamCode());
 				dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController
 						.ShowStudentGradeTeacher(ChatClient.currentUser.getFirstName()));
 				GradeTable.setItems(dataList);

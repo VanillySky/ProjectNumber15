@@ -4,9 +4,14 @@
 package gui;
 
 import client.ChatClient;
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 import client.ClientUI;
+=======
+import controllers.AddController;
+>>>>>>> 182ddfa .
 import controllers.DisplayController;
 import controllers.LoginController;
+import entities.InExam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -139,9 +144,11 @@ public class ExaminationController {
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
 
 				ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
+				InExam IE = new InExam(ExamCode, ChatClient.currentUser.getUserName(), ChatClient.currentUser.getUserId());
+				AddController.AddInExam(IE);
 				if (ExamCode != "") {
+					
 					ManualController MC = new ManualController();
-
 					MC.getcode(ExamCode);
 					MC.start(new Stage());
 					((Node) event.getSource()).getScene().getWindow().hide();
@@ -157,6 +164,7 @@ public class ExaminationController {
 
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
 				ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
+				AutoLoginController.ExamCode=ExamCode;
 				if (ExamCode != "") {
 					AutoLoginController ALC = new AutoLoginController();
 					ALC.start(new Stage());

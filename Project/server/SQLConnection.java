@@ -444,7 +444,19 @@ public class SQLConnection {
 			}
 	}
 
-	
+	public static void DeleteManagerMessage(ArrayList<Object> arr) {
+
+		String ExamCode = (String) arr.get(0);
+		if (conn != null)
+			try {
+				PreparedStatement ps = conn.prepareStatement("DELETE FROM managermessage  WHERE Examcode = ?");
+				ps.setString(1, ExamCode);
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+
 	
 	
 	
@@ -586,6 +598,25 @@ public class SQLConnection {
 		}
 		return false;
 	}
+	
+	public static boolean AddInExam(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO inexam VALUES (?,?,?);");
+				stmt.setString(1, ((InExam) list.get(0)).getExamCode());
+				stmt.setString(2, ((InExam) list.get(0)).getUserName());
+				stmt.setString(3, ((InExam) list.get(0)).getUserId());
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	
 	
 	
 	

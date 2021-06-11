@@ -7,6 +7,7 @@ import Protocol.ServerMessage;
 import client.ChatClient;
 import client.ClientUI;
 import entities.Exam;
+import entities.InExam;
 import entities.ManagerMessage;
 import entities.Question;
 import entities.StudentGrade;
@@ -63,4 +64,19 @@ public class AddController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();
 	}
+	
+	public static boolean AddInExam (InExam MM) {
+		ArrayList<Object> IE = new ArrayList<>();
+		IE.add(MM);
+		ClientMessage msgFromClient = new ClientMessage("AddInExam", IE, IE.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+	}
+	
+	
+	
+	
+	
+	
 }

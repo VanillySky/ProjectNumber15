@@ -5,9 +5,14 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 import client.ClientUI;
 import controllers.LoginController;
+=======
+import controllers.AddController;
+>>>>>>> 182ddfa .
 import entities.Exam;
+import entities.InExam;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,7 +49,7 @@ public class AutoLoginController implements Initializable {
 	
 	@FXML
     private Label WrongLBL;
-
+    static String ExamCode;
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
 
 	@FXML
@@ -79,6 +84,8 @@ public class AutoLoginController implements Initializable {
 		
 		if (IDTXT.getText().equals(ChatClient.currentUser.getUserId())) {
 			///////////////////////// start time
+			InExam IE = new InExam(ExamCode, ChatClient.currentUser.getUserName(), ChatClient.currentUser.getUserId()); // add to table 
+			AddController.AddInExam(IE);
 			AutoController AC = new AutoController();
 			AC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

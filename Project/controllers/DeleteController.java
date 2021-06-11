@@ -32,7 +32,20 @@ public class DeleteController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 	}
 	
-	public void AddApprovalStudentGrade(String Username, String ExamCode) {
+	
+	public void ManagerMessage(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+	
+		ClientMessage msgFromClient = new ClientMessage("DeleteManagerMessage", list, list.size());
+		
+		ClientUI.chat.accept(msgFromClient);
+	
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+	}
+	
+	
+	public void DeleteApprovalStudentGrade(String Username, String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(Username);
 		list.add(ExamCode);
