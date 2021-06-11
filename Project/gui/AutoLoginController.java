@@ -3,14 +3,10 @@ package gui;
 import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
-
 import client.ChatClient;
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 import client.ClientUI;
 import controllers.LoginController;
-=======
 import controllers.AddController;
->>>>>>> 182ddfa .
 import entities.Exam;
 import entities.InExam;
 import javafx.collections.FXCollections;

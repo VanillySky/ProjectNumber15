@@ -5,12 +5,9 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 import client.ClientUI;
 import controllers.LoginController;
-=======
 import controllers.DeleteController;
->>>>>>> 182ddfa .
 import entities.Exam;
 import entities.ManagerMessage;
 import entities.StudentGrade;

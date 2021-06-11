@@ -4,11 +4,8 @@
 package gui;
 
 import client.ChatClient;
-<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
 import client.ClientUI;
-=======
 import controllers.AddController;
->>>>>>> 182ddfa .
 import controllers.DisplayController;
 import controllers.LoginController;
 import entities.InExam;
