@@ -7,6 +7,7 @@ import Protocol.ServerMessage;
 import client.ChatClient;
 import client.ClientUI;
 import entities.Exam;
+import entities.ManagerMessage;
 import entities.Question;
 import entities.StudentGrade;
 
@@ -52,5 +53,14 @@ public class AddController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();
 		
+	}
+	
+	public static boolean AddMessagetoManager(ManagerMessage MM) {
+		ArrayList<Object> NewManagerMessage = new ArrayList<>();
+		NewManagerMessage.add(MM);
+		ClientMessage msgFromClient = new ClientMessage("AddMessagetoManager", NewManagerMessage, NewManagerMessage.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
 	}
 }

@@ -130,8 +130,8 @@ public class ExaminationController {
 			IncorrectLBL.setVisible(true);
 
 		}
-
-		if (LoginController.checkLocked(insertCodeTxtField.getText()).equals("unlocked")) {
+	
+		if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
 
 				ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
@@ -144,6 +144,12 @@ public class ExaminationController {
 				}
 
 			}
+		}else {
+			ContainLetterMsgLBL.setText("The Exam is locked");
+			ContainLetterMsgLBL.setVisible(true);
+		}
+		
+		if (LoginController.checkLockedA(insertCodeTxtField.getText()).contains("unlocked")) {
 
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
 				ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());

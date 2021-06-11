@@ -1,12 +1,15 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
+import controllers.AddController;
 import controllers.LoginController;
 import entities.InExam;
+import entities.ManagerMessage;
 import entities.StatusExam;
 import entities.StudentGrade;
 import javafx.collections.FXCollections;
@@ -80,6 +83,12 @@ public class StatusController implements Initializable {
 
 	@FXML
 	private Button ReturnBTN;
+	
+	@FXML
+    private Label ERRLabel;
+	
+	@FXML
+    private Label succedLBL;
 
 	private ObservableList<InExam> dataList = FXCollections.observableArrayList();
 	private ObservableList<StatusExam> dataList2 = FXCollections.observableArrayList();
@@ -101,7 +110,22 @@ public class StatusController implements Initializable {
 
 	@FXML
 	void PressAddTime(ActionEvent event) {
-
+		int count=0;
+		if(ChangeTimeTXT.getText().equals("")) {
+			ERRLabel.setText("There is no time to add , dont forget the instructions");
+			ERRLabel.setVisible(true);
+			count++;
+		}else if(InstructionsTXT.getText().equals("")) {
+			ERRLabel.setText("Please add instructions ");
+			ERRLabel.setVisible(true);
+			count++;
+		}
+		
+		if(count==0) {
+			ManagerMessage MM = new ManagerMessage(ExamCodeLBL.getText(), ChatClient.currentUser.getUserName(), ChangeTimeTXT.getText(), InstructionsTXT.getText());
+			AddController.AddMessagetoManager(MM);
+			succedLBL.setVisible(true);	
+		}
 	}
 
 	@FXML
@@ -111,9 +135,19 @@ public class StatusController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	@FXML
 	void PressLock(ActionEvent event) {
-
+		String Locked = "locked";
+		String Unlocked = "unlocked";
+	
+		if (LoginController.checkLockedEXCODE(ExamCodeLBL.getText()).contains("locked")){
+			LoginController.ChangeLockedEXCODE(ExamCodeLBL.getText(),Unlocked);
+			IsLockCircle.setFill(javafx.scene.paint.Color.GREEN);
+		}else {
+				LoginController.ChangeLockedEXCODE(ExamCodeLBL.getText(),Locked);
+				IsLockCircle.setFill(javafx.scene.paint.Color.RED);
+		}
 	}
 
 	@FXML
@@ -132,7 +166,6 @@ public class StatusController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println(TeacherExamStatisticsController.Examcode);
 		this.UserNameCol.setCellValueFactory((Callback) new PropertyValueFactory("userName"));
 		this.StudentIDcol.setCellValueFactory((Callback) new PropertyValueFactory("userId"));
 		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController
@@ -159,10 +192,10 @@ public class StatusController implements Initializable {
 			NotFinishLBL.setText("" + Integer.parseInt(dataList2.get(0).getNumberEndExam()));
 		else
 			NotFinishLBL.setText("NULL");
-		if (LoginController.checkLocked(ExamCodeLBL.getText()).equals("islocked")) 
+		if (LoginController.checkLockedEXCODE(ExamCodeLBL.getText()).contains("locked"))
 			IsLockCircle.setFill(javafx.scene.paint.Color.RED);
 		else
-		IsLockCircle.setFill(javafx.scene.paint.Color.GREEN);
-		
+			IsLockCircle.setFill(javafx.scene.paint.Color.GREEN);
+
 	}
 }

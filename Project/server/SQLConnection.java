@@ -15,6 +15,7 @@ import entities.User;
 import entities.Exam;
 import entities.InExam;
 import entities.Manager;
+import entities.ManagerMessage;
 import entities.Question;
 import entities.StatusExam;
 import entities.Student;
@@ -594,6 +595,25 @@ public class SQLConnection {
 	
 	
 	
+	public static boolean AddMessagetoManager(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO managermessage VALUES (?,?,?,?,?,?);");
+				stmt.setString(1, ((ManagerMessage) list.get(0)).getExamcode());
+				stmt.setString(2, ((ManagerMessage) list.get(0)).getTeacherName());
+				stmt.setString(3, ((ManagerMessage) list.get(0)).getAddtime());
+				stmt.setString(4, ((ManagerMessage) list.get(0)).getInstruction());
+				
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	
 	
 	public static boolean UpgradeExam(ArrayList<Object> list) {
@@ -667,34 +687,78 @@ public class SQLConnection {
 	}
 	
 	
-	
-	
-	
-	
-	public static String checkLockedExam(ArrayList<Object> arr) {
-		String AMCode = (String) arr.get(0);
-     String locked="";
-		if (conn != null)
+	public static boolean ChangeLockedExCode(ArrayList<Object> list) {
+		if (conn != null) {
 			try {
 
-				String query = "Select isLocked FROM studentexamcode WHERE ExamAutoCode = '" + AMCode + "'";
+				PreparedStatement stmt = conn.prepareStatement(
+						"UPDATE studentexamcode Set isLocked = ?   WHERE ExamCode = ? ");
+				
+				
+				stmt.setString(1, ((String) list.get(0)));
+
+				stmt.setString(2, ((String) list.get(1)));
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
+	
+	
+	
+	
+	
+	
+	public static ArrayList<String> checkLockedMExam(ArrayList<Object> arr) {
+		ArrayList<String> array = new ArrayList<String>();
+		String AMCode = (String) arr.get(0);
+     if (conn != null)
+			try {
+
+				String query = "Select isLocked FROM studentexamcode WHERE ExamManCode = '" + AMCode+ "'";
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 
-				if (rs.next()) {
-					locked = rs.getString("isLocked");
-					
+				while (rs.next()) {
+					String locked = new String(rs.getString("isLocked")); 
+					array.add(locked);
 					}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		return locked;
+		return array;
 		}
 	
-	public static String checkLockedEXCODE(ArrayList<Object> arr) {
+	public static ArrayList<String> checkLockedAExam(ArrayList<Object> arr) {
+		ArrayList<String> array = new ArrayList<String>();
+		String AMCode = (String) arr.get(0);
+     if (conn != null)
+			try {
+
+				String query = "Select isLocked FROM studentexamcode WHERE ExamAutoCode = '" + AMCode+ "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+
+				while (rs.next()) {
+					String locked = new String(rs.getString("isLocked")); 
+					array.add(locked);
+					}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return array;
+		}
+	
+	public static ArrayList<String> checkLockedEXCODE(ArrayList<Object> arr) {
+		ArrayList<String> array = new ArrayList<String>();
 		String ExamCode = (String) arr.get(0);
-     String locked="";
 		if (conn != null)
 			try {
 
@@ -702,19 +766,17 @@ public class SQLConnection {
 				Statement st = conn.createStatement();
 				ResultSet rs = st.executeQuery(query);
 
-				if (rs.next()) {
-					locked = rs.getString("isLocked");
-					
+				while (rs.next()) {
+					String locked = new String(rs.getString("isLocked")); 
+					array.add(locked);
 					}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		return locked;
+
+		return array;
 		}
-	
-	
-	
 	
 	
 	public static ArrayList<StudentGrade> CheckRepeatExam(ArrayList<Object> arr) {

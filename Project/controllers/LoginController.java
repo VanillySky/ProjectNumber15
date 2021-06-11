@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import Protocol.ClientMessage;
 import Protocol.ServerMessage;
@@ -58,26 +59,51 @@ public class LoginController {
 		}
 	}
 	
-	public static String checkLocked(String AMCode) {
+	public static ArrayList<Object> checkLockedM(String AMCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(AMCode);
 		
-		ClientMessage msgFromClient = new ClientMessage("checkLockedExam", list, list.size());
+		ClientMessage msgFromClient = new ClientMessage("checkLockedMExam", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
-		String locked = (String) msgFromServer.getData();
-		return locked;
+		list= (ArrayList<Object>) msgFromServer.getData();
+		return list;
 	}
 	
-	public static String checkLockedEXCODE(String ExamCode) {
+	public static ArrayList<Object> checkLockedA(String AMCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(AMCode);
+		
+		ClientMessage msgFromClient = new ClientMessage("checkLockedAExam", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list= (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
+	
+	
+	
+	public static ArrayList<Object> checkLockedEXCODE(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
 		
 		ClientMessage msgFromClient = new ClientMessage("checkLockedEXCODE", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
-		String locked = (String) msgFromServer.getData();
-		return locked;
+		list= (ArrayList<Object>) msgFromServer.getData();
+
+		return list;
+	}
+	
+	public static boolean ChangeLockedEXCODE(String ExamCode,String IsLocked) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(IsLocked);
+		list.add(ExamCode);
+		ClientMessage msgFromClient = new ClientMessage("ChangeLockedExCode", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
 	}
 	
 
