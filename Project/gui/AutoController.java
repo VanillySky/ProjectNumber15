@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.AddController;
+import controllers.LoginController;
 import entities.Exam;
 import entities.Question;
 import entities.StudentGrade;
@@ -285,6 +286,8 @@ public class AutoController implements Initializable {
 
 	@FXML
 	void SignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();

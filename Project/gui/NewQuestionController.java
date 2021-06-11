@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.AddController;
+import controllers.LoginController;
 import controllers.UpgradeConroller;
 import entities.Question;
 import javafx.event.ActionEvent;
@@ -206,6 +207,8 @@ public class NewQuestionController implements Initializable {
 
     @FXML
     void SignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
     	ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();

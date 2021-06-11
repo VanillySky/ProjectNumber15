@@ -8,6 +8,7 @@ import client.ChatClient;
 import client.ClientUI;
 import controllers.AddController;
 import controllers.DeleteController;
+import controllers.LoginController;
 import entities.StudentGrade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -187,6 +188,8 @@ public class ExamApprovalController implements Initializable {
 
 	@FXML
 	void PressSignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();

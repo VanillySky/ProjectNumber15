@@ -8,6 +8,7 @@ import client.ChatClient;
 import client.ClientUI;
 import controllers.AddController;
 import controllers.DeleteController;
+import controllers.LoginController;
 import controllers.UpgradeConroller;
 import entities.Exam;
 import entities.Question;
@@ -399,6 +400,8 @@ public class QuestionsSelectionController extends Application implements Initial
 
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();

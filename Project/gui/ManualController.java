@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.TreeMap;
 
+import client.ChatClient;
 import client.ClientUI;
 import controllers.LoginController;
 import javafx.animation.ParallelTransition;
@@ -125,6 +126,8 @@ public class ManualController implements Initializable {
 
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();

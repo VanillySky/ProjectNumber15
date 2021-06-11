@@ -730,11 +730,50 @@ public class SQLConnection {
 		return false;
 
 	}
+	public static boolean ChangeOnline(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(
+						"UPDATE users Set online = ?   WHERE username = ? ");
+				
+				
+				stmt.setString(1, ((String) list.get(0)));
+
+				stmt.setString(2, ((String) list.get(1)));
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
 	
 	
 	
-	
-	
+	public static ArrayList<String> checkOnline(ArrayList<Object> arr) {
+		ArrayList<String> array = new ArrayList<String>();
+		String username = (String) arr.get(0);
+     if (conn != null)
+			try {
+
+				String query = "Select online FROM users WHERE userName = '" + username+ "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+
+				while (rs.next()) {
+					String online = new String(rs.getString("online")); 
+					array.add(online);
+					}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return array;
+		}
 	
 	public static ArrayList<String> checkLockedMExam(ArrayList<Object> arr) {
 		ArrayList<String> array = new ArrayList<String>();

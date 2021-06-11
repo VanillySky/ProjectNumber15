@@ -12,7 +12,7 @@ import entities.User;
 
 
 public class LoginController {
-
+	
 	public static User checkUser(String userName, String password) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(userName);
@@ -83,7 +83,17 @@ public class LoginController {
 	
 	
 	
-	
+	public static ArrayList<Object> checkOnline(String username) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(username);
+		
+		ClientMessage msgFromClient = new ClientMessage("checkOnline", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list= (ArrayList<Object>) msgFromServer.getData();
+
+		return list;
+	}
 	public static ArrayList<Object> checkLockedEXCODE(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
@@ -101,6 +111,15 @@ public class LoginController {
 		list.add(IsLocked);
 		list.add(ExamCode);
 		ClientMessage msgFromClient = new ClientMessage("ChangeLockedExCode", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+	}
+	public static boolean ChangeOnline(String username,String online) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(online);
+		list.add(username);
+		ClientMessage msgFromClient = new ClientMessage("ChangeOnline", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();

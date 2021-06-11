@@ -29,6 +29,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import server.EchoServer;
 
 
 public class LoginFrameController {
@@ -99,6 +100,10 @@ public class LoginFrameController {
 		textPassword = password.getText();
 		ArrayList<Object> params = new ArrayList<Object>();
 		User user ;
+		
+		if(LoginController.checkOnline(textUserName).contains("0"))
+		{
+			LoginController.ChangeOnline(textUserName,"1");
 		user = LoginController.checkUser(textUserName, textPassword);
 		ChatClient.currentUser = user;
 		if(user!=null) {
@@ -162,6 +167,11 @@ public class LoginFrameController {
 		}else {
 			System.out.println("This Account is not exist");
 			incorrectLogin.setText("*Login details are incorrect*");
+			incorrectLogin.setVisible(true);
+		}
+		}else
+		{
+			incorrectLogin.setText("You are already logged in!");
 			incorrectLogin.setVisible(true);
 		}
 	}

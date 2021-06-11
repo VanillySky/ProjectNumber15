@@ -4,8 +4,10 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
+import client.ChatClient;
 import client.ClientUI;
 import controllers.DeleteController;
+import controllers.LoginController;
 import javafx.fxml.Initializable;
 
 import javafx.collections.FXCollections;
@@ -212,6 +214,8 @@ public class BuildQuestionsController implements Initializable {
 
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();

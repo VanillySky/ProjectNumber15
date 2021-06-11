@@ -4,7 +4,7 @@ import java.io.Serializable;
 /**
  * class Connection hold information about the user 'ip address , host name, role'
  * Connection class take (String ipAddress, String hostName, String role)
- * @author Group'2'
+ * @author Group15
  * 
  */
 @SuppressWarnings("serial")

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import client.ChatClient;
 import client.ClientUI;
+import controllers.LoginController;
 import entities.Exam;
 import entities.ManagerMessage;
 import entities.StudentGrade;
@@ -93,6 +94,8 @@ public class ManagerApprovalController implements Initializable {
 
     @FXML
     void SignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
     	ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();

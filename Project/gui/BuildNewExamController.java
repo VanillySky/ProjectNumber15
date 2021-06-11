@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import client.ChatClient;
 import client.ClientUI;
+import controllers.LoginController;
 import entities.Exam;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -198,6 +200,8 @@ import javafx.stage.Stage;
 
 		@FXML
 		public void SignOut(ActionEvent event) throws Exception {
+			LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
 			ClientUI clientUI = new ClientUI();
 			((Node) event.getSource()).getScene().getWindow().hide();
 			clientUI.chat.quit();

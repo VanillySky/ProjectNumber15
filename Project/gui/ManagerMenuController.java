@@ -2,7 +2,9 @@ package gui;
 
 import java.io.IOException;
 
+import client.ChatClient;
 import client.ClientUI;
+import controllers.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,6 +62,8 @@ public class ManagerMenuController {
 
 	@FXML
 	void PressSignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();
