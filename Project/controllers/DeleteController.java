@@ -10,6 +10,10 @@ import entities.User;
 
 public class DeleteController {
 
+	
+	
+	/** function that delete exist exam */
+
 	public void DeleteExam(String Examcode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(Examcode);
@@ -21,6 +25,10 @@ public class DeleteController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 	}
 	
+	
+	
+	/** function that delete exist question */
+
 	public void DeleteQuestion(String Questioncode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(Questioncode);
@@ -32,7 +40,7 @@ public class DeleteController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 	}
 	
-	
+	/**delete menager message  */
 	public void ManagerMessage(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
@@ -59,6 +67,8 @@ public class DeleteController {
 	}
 	
 	
+	/**delete all exam  */
+
 	public void DeleteAllExam() {
 	
 		ClientMessage msgFromClient = new ClientMessage("DeleteAllInExam", null, 0);
@@ -70,7 +80,8 @@ public class DeleteController {
 	
 	
 	
-	
+	/**delete approval grade  */
+
 	public void DeleteApprovalStudentGrade(String Username, String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(Username);

@@ -27,6 +27,11 @@ public class DisplayController {
 		list = (ArrayList<Statistics>) msgFromServer.getData();
 		return list;
 	}
+	
+	
+	
+	
+	/**function that show exam*/
 	public static ArrayList<Exam> ShowExams() {
 		ArrayList<Exam> list = new ArrayList<Exam>();
 		ClientMessage msgFromClient = new ClientMessage("getAllexams", null, 0);
@@ -35,7 +40,9 @@ public class DisplayController {
 		list = (ArrayList<Exam>) msgFromServer.getData();
 		return list;
 	}
+	 
 	
+	/**show manager message*/
 	public static ArrayList<ManagerMessage> showManagerMessage() {
 		
 		ArrayList<ManagerMessage> list = new ArrayList<ManagerMessage>();
@@ -48,6 +55,7 @@ public class DisplayController {
 	
 	
 	
+	/** show one exam */
 	public static  ArrayList<Object> ShowOneExam(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
@@ -58,6 +66,7 @@ public class DisplayController {
 		return list;
 	}
 	
+	/**show teacher exams  */
 	public static Collection<Object> ShowTeacherExams(String TeacherName)  {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(TeacherName);
@@ -68,7 +77,7 @@ public class DisplayController {
 		return list;
 	}
 	
-//function to add questions to Questions building in teacher
+/**function to add questions to Questions building in teacher*/
 	public static ArrayList<Question> ShowQuestions() {
 		// TODO Auto-generated method stub
 		ArrayList<Question> list = new ArrayList<Question>();
@@ -79,6 +88,9 @@ public class DisplayController {
 		return list;	
 		}
 	
+	
+	/**show one question  */
+
 	public static  Collection<Object> ShowOneQuestions(String QuestionCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(QuestionCode);
@@ -89,7 +101,8 @@ public class DisplayController {
 		return list;
 	}
 	
-	
+	/**check if the exam repeat  */
+
 	public static Collection<Object> CheckRepeatExam(String ExamCode , String userName) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
@@ -102,7 +115,8 @@ public class DisplayController {
 	}
 	
 	
-	
+	/** show student grades */
+
 	public static ArrayList<StudentGrade> ShowStudentGrade() {
 		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
 		ClientMessage msgFromClient = new ClientMessage("getAllgrades", null, 0);
@@ -112,6 +126,9 @@ public class DisplayController {
 		return list;	
 	}
 	
+	
+	/**show approval student grade  */
+
 	public static ArrayList<StudentGrade> ShowApprovaleStudentGrade() {
 		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
 		ClientMessage msgFromClient = new ClientMessage("getAllApprovalegrades", null, 0);
@@ -121,7 +138,8 @@ public class DisplayController {
 		return list;	
 	}
 	
-	
+	/**show students grade of the same teacher  */
+
 	public static  Collection<Object> ShowStudentGradeTeacher(String TeacherName) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(TeacherName);
@@ -132,6 +150,9 @@ public class DisplayController {
 		return list;	
 	}
 	
+	
+	/**show approval of studens of the same teacher  */
+
 	public static Collection<Object> ShowApprovedStudentTeacher(String TeacherName) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(TeacherName);
@@ -141,6 +162,8 @@ public class DisplayController {
 		list = (ArrayList<Object>) msgFromServer.getData();
 		return list;	
 	}
+	
+	
 	
 	public static Collection<Object> ShowApprovedStudentStudent(String StudentName) {
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -152,6 +175,9 @@ public class DisplayController {
 		return list;	
 	}
 	
+	
+	/**show approval of students of the course  */
+
 	public static Collection<Object> ShowApprovedStudentCourse(String CourseName) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(CourseName);
@@ -165,7 +191,8 @@ public class DisplayController {
 	
 
 	
-	
+	/**show approval grade of the student  */
+
 	public static Collection<Object> ShowApprovedStudentGrade(String studentName) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(studentName);
@@ -177,6 +204,9 @@ public class DisplayController {
 	}
 	
 	
+	
+	/**show exam time  */
+
 	public static ArrayList<StudentGrade> ShowExamTime() {
 		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
 		ClientMessage msgFromClient = new ClientMessage("getTime", null, 0);
@@ -186,6 +216,11 @@ public class DisplayController {
 		return list;	
 	}
 	
+	
+	
+	
+	/**show students on the exam  */
+
 	public static Collection<InExam> ShowStudentsInExam(String ExamCode) {
 		Collection<InExam> list = new ArrayList<InExam>();
 		ArrayList<Object> list2 = new ArrayList<Object>();
@@ -199,6 +234,9 @@ public class DisplayController {
 	}
 	
 	
+	
+	/**show status of the exam  */
+
 	public static Collection<Object> ShowStatusExam(String ExamCode) {
 		
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -223,6 +261,9 @@ public class DisplayController {
 	}
 	
 	
+	
+	/**function that get exam time  */
+
 	public static String GetExamTime(String ExamCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);

@@ -7,6 +7,8 @@ import gui.LoginFrameController;
 public class ClientUI extends Application {
 	public static ClientController chat; 
 	
+	
+	/**function that opened window of LogIn */
 	public void start(Stage primaryStage) throws Exception {
 		chat = new ClientController("localhost", 5555);
 		try {

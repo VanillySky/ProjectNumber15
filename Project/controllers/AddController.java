@@ -14,6 +14,10 @@ import entities.StatusExam;
 import entities.StudentGrade;
 
 public class AddController {
+	
+	
+	/**addnew question function  */
+
 	public static boolean AddQuestion(Question question) {
 		ArrayList<Object> list = new ArrayList<>();
 		list.add(question);
@@ -25,7 +29,8 @@ public class AddController {
 	}
 	
 	
-	
+	/**add new  exam function  */
+
 	public static boolean AddExam(Exam exam) {
 		ArrayList<Object> newExam = new ArrayList<>();
 		newExam.add(exam);
@@ -36,6 +41,7 @@ public class AddController {
 	}
 
 
+	/**add student grade  */
 
 	public static boolean AddStudentGrade(StudentGrade sG) {
 		ArrayList<Object> newStudentGrade = new ArrayList<>();
@@ -47,6 +53,9 @@ public class AddController {
 		
 	}
 	
+	
+	/**add approval student grade  */
+
 	public static boolean AddApprovalStudentGrade(StudentGrade sG) {
 		ArrayList<Object> newStudentGrade = new ArrayList<>();
 		newStudentGrade.add(sG);
@@ -57,6 +66,9 @@ public class AddController {
 		
 	}
 	
+	
+	/**add new message to manager  */
+
 	public static boolean AddMessagetoManager(ManagerMessage MM) {
 		ArrayList<Object> NewManagerMessage = new ArrayList<>();
 		NewManagerMessage.add(MM);
@@ -66,6 +78,9 @@ public class AddController {
 		return (boolean) msgFromServer.getData();
 	}
 	
+	
+	/**  */
+
 	public static boolean AddInExam (InExam MM) {
 		ArrayList<Object> IE = new ArrayList<>();
 		IE.add(MM);
@@ -75,6 +90,9 @@ public class AddController {
 		return (boolean) msgFromServer.getData();
 	}
 	
+	
+	/**add new exam status  */
+
 	public static boolean AddNewExamStatus(StatusExam NewExamStatus) {
 		ArrayList<Object> ANES = new ArrayList<>();
 		ANES.add(NewExamStatus);

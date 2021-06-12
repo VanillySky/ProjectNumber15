@@ -12,7 +12,7 @@ import entities.StatusExam;
 
 public class UpgradeConroller {
 	
-	
+	/**update exam that already exist*/
 	public static boolean UpgradeExam(Exam exam) {
 		ArrayList<Object> newExam = new ArrayList<>();
 		newExam.add(exam);
@@ -23,6 +23,9 @@ public class UpgradeConroller {
 		return (boolean) msgFromServer.getData();
 	}
 	
+	
+	
+	/**upgrade question that already exist*/
 	public static boolean UpgradeQuestion(Question question) {
 		ArrayList<Object> newQuestion = new ArrayList<>();
 		newQuestion.add(question);
@@ -32,6 +35,9 @@ public class UpgradeConroller {
 		return (boolean) msgFromServer.getData();
 	}
 	
+	
+	
+	/**change status of the user that he is in  */
 	public static boolean UpgradeStatusStart(StatusExam Status) {
 		ArrayList<Object> newStatus = new ArrayList<>();
 		newStatus.add(Status);
@@ -41,6 +47,9 @@ public class UpgradeConroller {
 		return (boolean) msgFromServer.getData();
 	}
 	
+	
+	
+	/**change status of the user that he is out  */
 	public static boolean UpgradeStatusEnd(StatusExam Status) {
 		ArrayList<Object> newStatus = new ArrayList<>();
 		newStatus.add(Status);

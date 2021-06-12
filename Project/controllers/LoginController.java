@@ -13,6 +13,8 @@ import entities.User;
 
 public class LoginController {
 	
+	
+	/** function that send the user data data to server*/
 	public static User checkUser(String userName, String password) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(userName);
@@ -27,6 +29,9 @@ public class LoginController {
 		return user;
 	}
 	
+	
+	
+	/**function that check code  of manual exam */
 	public static String checkManual(String ExamManualCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamManualCode);
@@ -43,6 +48,9 @@ public class LoginController {
 		}
 	}
 	
+	
+	
+	/**function that check code  of auto exam */
 	public static String checkAuto(String ExamManualCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamManualCode);
@@ -59,6 +67,9 @@ public class LoginController {
 		}
 	}
 	
+	
+	
+	/**function that check if the manual exam is lock  */
 	public static ArrayList<Object> checkLockedM(String AMCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(AMCode);
@@ -70,6 +81,10 @@ public class LoginController {
 		return list;
 	}
 	
+
+	
+	
+	/**function that check if the auto exam is lock  */
 	public static ArrayList<Object> checkLockedA(String AMCode) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(AMCode);
@@ -80,6 +95,8 @@ public class LoginController {
 		list= (ArrayList<Object>) msgFromServer.getData();
 		return list;
 	}
+	
+	
 	
 	
 	
