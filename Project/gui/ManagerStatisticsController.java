@@ -21,8 +21,6 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
-import client.ClientUI;
-import controllers.LoginController;
 import entities.Exam;
 import entities.StudentGrade;
 import javafx.collections.FXCollections;
@@ -84,6 +82,12 @@ public class ManagerStatisticsController implements Initializable {
 
 	@FXML
 	private Label ErrorLbl;
+	
+    @FXML
+    private Button GetTeacherReport;
+
+    @FXML
+    private Button GetCourseReport;
 
 	private StudentGrade selectedExam = null;
 	private ObservableList<StudentGrade> AllExamGrades = FXCollections.observableArrayList();
@@ -116,13 +120,92 @@ public class ManagerStatisticsController implements Initializable {
 	}
 
 	@FXML
-	void PressGetReport(ActionEvent event) {
+	void PressGetExamReport(ActionEvent event) {
+		if (selectedExam != null) {
+			TeacherExamReportController.isTeacher = true;
+			AllExamGrades = FXCollections.observableArrayList((Collection) controllers.DisplayController
+					.ShowApprovedStudentStudent(selectedExam.getStudentUserName()));
+
+			
+			if (AllExamGrades.size() != 0) {
+				for (int i = 0; i < AllExamGrades.size(); i++) {
+					if (selectedExam.getExamCode().equals(AllExamGrades.get(i).getExamCode()))
+						ExamGrades.add(AllExamGrades.get(i));
+				}
+
+				Grades = new int[ExamGrades.size()];
+
+				TeacherExamReportController.numberofStudents = ExamGrades.size();
+				int sum = 0;
+				for (int i = 0; i < ExamGrades.size(); i++) {
+					Grades[i] = Integer.parseInt(ExamGrades.get(i).getExamGrade());
+					sum += Integer.parseInt(ExamGrades.get(i).getExamGrade());
+				}
+				Arrays.sort(Grades);
+				if(Grades.length!=0) {
+				TeacherExamReportController.MinGrade = Grades[0];
+				TeacherExamReportController.MaxGrade = Grades[Grades.length - 1];
+				TeacherExamReportController.Average = sum / (double) Grades.length;
+
+				if (Grades.length % 2 == 1)
+					TeacherExamReportController.median = Grades[(Grades.length + 1) / 2 - 1];
+				else
+					TeacherExamReportController.median = (Grades[Grades.length / 2 - 1] + Grades[Grades.length / 2])
+							/ 2;
+
+				for (int i = 0; i < Grades.length; i++) {
+					if (Grades[i] >= 95 && Grades[i] <= 100)
+						TeacherExamReportController.GradeRange[0]++;
+
+					if (Grades[i] >= 90 && Grades[i] <= 94)
+						TeacherExamReportController.GradeRange[1]++;
+
+					if (Grades[i] >= 85 && Grades[i] <= 89)
+						TeacherExamReportController.GradeRange[2]++;
+
+					if (Grades[i] >= 80 && Grades[i] <= 84)
+						TeacherExamReportController.GradeRange[3]++;
+
+					if (Grades[i] >= 75 && Grades[i] <= 79)
+						TeacherExamReportController.GradeRange[4]++;
+
+					if (Grades[i] >= 70 && Grades[i] <= 74)
+						TeacherExamReportController.GradeRange[5]++;
+
+					if (Grades[i] >= 65 && Grades[i] <= 69)
+						TeacherExamReportController.GradeRange[6]++;
+
+					if (Grades[i] >= 55 && Grades[i] <= 64)
+						TeacherExamReportController.GradeRange[7]++;
+
+					if (Grades[i] >= 0 && Grades[i] <= 54)
+						TeacherExamReportController.GradeRange[8]++;
+				}
+				}
+				TeacherExamReportController TERC = new TeacherExamReportController();
+				TERC.start(new Stage());
+				((Node) event.getSource()).getScene().getWindow().hide();
+
+			} else {
+				ErrorLbl.setText("there is no grades");
+				ErrorLbl.setVisible(true);
+			}
+		} else {
+			ErrorLbl.setText("please chose any exam!!");
+			ErrorLbl.setVisible(true);
+		}
+
+
+	}
+
+	@FXML
+	void PressGetTeacherReport(ActionEvent event) {
 		if (selectedExam != null) {
 			TeacherExamReportController.isTeacher=false;
 			AllExamGrades = FXCollections.observableArrayList(
-					(Collection) controllers.DisplayController.ShowApprovedStudentTeacher(selectedExam.getExamCode()));
+					(Collection) controllers.DisplayController.ShowApprovedStudentTeacher(selectedExam.getTeacherName()));
 			for (int i = 0; i < AllExamGrades.size(); i++) {
-				if (selectedExam.getExamCode().equals(AllExamGrades.get(i).getExamCode()))
+				if (selectedExam.getTeacherName().equals(AllExamGrades.get(i).getTeacherName()))
 					ExamGrades.add(AllExamGrades.get(i));
 			}
 
@@ -193,15 +276,90 @@ public class ManagerStatisticsController implements Initializable {
 		}
 
 	}
-
 	@FXML
-	void PressOut(ActionEvent event) throws Exception {
-		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+	void PressGetCourseReport(ActionEvent event) {
+		if (selectedExam != null) {
+			TeacherExamReportController.isTeacher=false;
+			AllExamGrades = FXCollections.observableArrayList(
+					(Collection) controllers.DisplayController.ShowApprovedStudentCourse(selectedExam.getExamCourse()));
+			for (int i = 0; i < AllExamGrades.size(); i++) {
+				if (selectedExam.getExamCourse().equals(AllExamGrades.get(i).getExamCourse()))
+					ExamGrades.add(AllExamGrades.get(i));
+			}
 
-		ClientUI clientUI = new ClientUI();
+			if (ExamGrades.size() == 0)
+				NoGrades = true;
+			else
+				NoGrades = false;
+
+			if (NoGrades == false) {
+				Grades = new int[ExamGrades.size()];
+
+				TeacherExamReportController.numberofStudents = ExamGrades.size();
+				int sum = 0;
+				for (int i = 0; i < ExamGrades.size(); i++) {
+					Grades[i] = Integer.parseInt(ExamGrades.get(i).getExamGrade());
+					sum += Integer.parseInt(ExamGrades.get(i).getExamGrade());
+				}
+				Arrays.sort(Grades);
+				TeacherExamReportController.MinGrade = Grades[0];
+				TeacherExamReportController.MaxGrade = Grades[Grades.length - 1];
+				TeacherExamReportController.Average = sum / (double) Grades.length;
+
+				if (Grades.length % 2 == 1)
+					TeacherExamReportController.median = Grades[(Grades.length + 1) / 2 - 1];
+				else
+					TeacherExamReportController.median = (Grades[Grades.length / 2 - 1] + Grades[Grades.length / 2])
+							/ 2;
+
+				for (int i = 0; i < Grades.length; i++) {
+					if (Grades[i] >= 95 && Grades[i] <= 100)
+						TeacherExamReportController.GradeRange[0]++;
+
+					if (Grades[i] >= 90 && Grades[i] <= 94)
+						TeacherExamReportController.GradeRange[1]++;
+
+					if (Grades[i] >= 85 && Grades[i] <= 89)
+						TeacherExamReportController.GradeRange[2]++;
+
+					if (Grades[i] >= 80 && Grades[i] <= 84)
+						TeacherExamReportController.GradeRange[3]++;
+
+					if (Grades[i] >= 75 && Grades[i] <= 79)
+						TeacherExamReportController.GradeRange[4]++;
+
+					if (Grades[i] >= 70 && Grades[i] <= 74)
+						TeacherExamReportController.GradeRange[5]++;
+
+					if (Grades[i] >= 65 && Grades[i] <= 69)
+						TeacherExamReportController.GradeRange[6]++;
+
+					if (Grades[i] >= 55 && Grades[i] <= 64)
+						TeacherExamReportController.GradeRange[7]++;
+
+					if (Grades[i] >= 0 && Grades[i] <= 54)
+						TeacherExamReportController.GradeRange[8]++;
+				}
+
+				TeacherExamReportController TERC = new TeacherExamReportController();
+				TERC.start(new Stage());
+				((Node) event.getSource()).getScene().getWindow().hide();
+			} else {
+				ErrorLbl.setText("there is no grades");
+				ErrorLbl.setVisible(true);
+			}
+		} else {
+			ErrorLbl.setText("please chose any exam!!");
+			ErrorLbl.setVisible(true);
+		}
+
+	}
+	@FXML
+	void PressOut(ActionEvent event) {
+
+		LoginFrameController LFCC = new LoginFrameController();
+		LFCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-		clientUI.chat.quit();
-		clientUI.start(new Stage());
 	}
 
 	@FXML
@@ -312,7 +470,7 @@ public class ManagerStatisticsController implements Initializable {
 		this.ExamGrade.setCellValueFactory((Callback) new PropertyValueFactory("ExamGrade"));
 		this.AuthorCol.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
 
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowStudentGrade());
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowApprovaleStudentGrade());
 		TableStat.setItems(dataList);
 	}
 }

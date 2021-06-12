@@ -99,7 +99,7 @@ public class TeacherExamReportController implements Initializable {
 	static  int MaxGrade, MinGrade;
 	static  double Average,median;
 	static  int [] GradeRange = new int[9];
-	static boolean isTeacher=false;
+	static boolean isTeacher;
 	
 	ObservableList<Range> List = FXCollections.observableArrayList(
 			new Range(GradeRange[0], GradeRange[1], GradeRange[2],GradeRange[3], GradeRange[4], GradeRange[5],

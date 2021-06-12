@@ -112,6 +112,15 @@ public class DisplayController {
 		return list;	
 	}
 	
+	public static ArrayList<StudentGrade> ShowApprovaleStudentGrade() {
+		ArrayList<StudentGrade> list = new ArrayList<StudentGrade>();
+		ClientMessage msgFromClient = new ClientMessage("getAllApprovalegrades", null, 0);
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<StudentGrade>) msgFromServer.getData();
+		return list;	
+	}
+	
 	
 	public static  Collection<Object> ShowStudentGradeTeacher(String TeacherName) {
 		ArrayList<Object> list = new ArrayList<Object>();
@@ -127,6 +136,26 @@ public class DisplayController {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(TeacherName);
 		ClientMessage msgFromClient = new ClientMessage("getAllApprovedgradesTeacher", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;	
+	}
+	
+	public static Collection<Object> ShowApprovedStudentStudent(String StudentName) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(StudentName);
+		ClientMessage msgFromClient = new ClientMessage("getAllApprovedgradesStudent", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;	
+	}
+	
+	public static Collection<Object> ShowApprovedStudentCourse(String CourseName) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(CourseName);
+		ClientMessage msgFromClient = new ClientMessage("getAllApprovedgradesCourse", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		list = (ArrayList<Object>) msgFromServer.getData();

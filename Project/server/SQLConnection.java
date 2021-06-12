@@ -351,6 +351,29 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	public static ArrayList<StudentGrade> getAllApprovalegrades() {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		if (conn != null) {
+			try {
+				String query = "Select * FROM approvedstudentgrade";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+
+					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"), rs.getString("ExamCode"),
+							rs.getString("ExamCourse"), rs.getString("ExamGrade"), rs.getString("TeacherName"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
 
 	public static ArrayList<StudentGrade> getAllApprovedgrades(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
@@ -395,6 +418,52 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	public static ArrayList<StudentGrade> getAllApprovedgradesStudent(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String StudentName = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM approvedstudentgrade WHERE studentUserName = '" + StudentName + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"), rs.getString("ExamCode"),
+							rs.getString("ExamCourse"), rs.getString("ExamGrade"), rs.getString("TeacherName"),
+							rs.getString("instr"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	public static ArrayList<StudentGrade> getAllApprovedgradesCourse(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String CourseName = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM approvedstudentgrade WHERE ExamCourse = '" + CourseName + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StudentGrade SG = new StudentGrade(rs.getString("studentUserName"), rs.getString("ExamCode"),
+							rs.getString("ExamCourse"), rs.getString("ExamGrade"), rs.getString("TeacherName"),
+							rs.getString("instr"));
+					array.add(SG);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
 
 	public static ArrayList<StudentGrade> TeachergetAllgrades(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();

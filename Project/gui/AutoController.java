@@ -9,8 +9,10 @@ import client.ClientUI;
 import controllers.AddController;
 import controllers.DeleteController;
 import controllers.LoginController;
+import controllers.UpgradeConroller;
 import entities.Exam;
 import entities.Question;
+import entities.StatusExam;
 import entities.StudentGrade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -220,10 +222,22 @@ public class AutoController implements Initializable {
 			AddController.AddStudentGrade(SG);
 			DeleteController DC = new DeleteController();
 			DC.DeleteInExam(ExamCode);
-			SubmitConfirmationController.isAuto=true;
-			SubmitConfirmationController SCC = new SubmitConfirmationController();
-			SCC.start(new Stage());
-			((Node) event.getSource()).getScene().getWindow().hide();
+			int endExam = ExaminationController.Endnumber+1;
+			StatusExam EndStatus;
+			EndStatus=ExaminationController.SE;
+			EndStatus.setNumberEndExam(""+endExam);
+			UpgradeConroller.UpgradeStatusStart(EndStatus);
+			questionLBL.setVisible(false);
+			Answer1RB.setVisible(false);
+			Answer2RB.setVisible(false);
+			Answer3RB.setVisible(false);
+			Answer4RB.setVisible(false);
+			prevIMG.setVisible(false);
+			PrevBTN.setDisable(true);
+			BackToMenu.setVisible(true);
+			TheExamDone.setVisible(true);
+			label1.setVisible(true);
+			questionIns.setVisible(false);
 			
 		}
 	

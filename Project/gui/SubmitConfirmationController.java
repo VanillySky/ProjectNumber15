@@ -51,13 +51,10 @@ public class SubmitConfirmationController {
 
 	@FXML
 	public void GoBack(ActionEvent event) {
-		if(isAuto) {
-			
-		}else {
 		ManualController MC = new ManualController();
 		MC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-	}}
+	}
 
 	@FXML
 	public void SubmitExam(ActionEvent event) {

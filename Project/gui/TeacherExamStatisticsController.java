@@ -271,6 +271,11 @@ public class TeacherExamStatisticsController implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		TeacherExamReportController.MinGrade=0;
+		TeacherExamReportController.MaxGrade =0;
+		TeacherExamReportController.median = 0;
+		TeacherExamReportController.Average = 0;
+		
 		this.ExamCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
 		this.ExamNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamNumber"));
 		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamSubject"));
