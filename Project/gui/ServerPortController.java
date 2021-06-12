@@ -4,6 +4,8 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import controllers.LoginController;
 import entities.Connection;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -46,7 +48,7 @@ public class ServerPortController implements Initializable {
 	private TextField portTextField;
 
 	@FXML
-	private TableView<Connection> connectedClientsTable;
+	private  TableView<Connection> connectedClientsTable;
 
 	@FXML
 	private TableColumn<Connection, String> ipAddressColumn;
@@ -77,7 +79,9 @@ public class ServerPortController implements Initializable {
 	public static String pass_Mysql;
 
 	private ArrayList<Connection> connectionList;
+	private Thread connectionUpdater;
 
+	
 	
 
 	/**
@@ -91,6 +95,7 @@ public class ServerPortController implements Initializable {
 	
 	
 	public void start(Stage primaryStage) throws Exception {
+		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/gui/ServerPort.fxml"));
 		Parent root = loader.load();
@@ -107,10 +112,15 @@ public class ServerPortController implements Initializable {
 	 * 
 	 * 
 	 * @param event-javaFx ActionEvent,the event that started this method
+	 * @return 
 	 */
+
 	@FXML
-	void connect(ActionEvent event) {
+	 void connect(ActionEvent event) {
+	//LoginController.alloffline();
+        
 		String port = portTextField.getText();
+
 		pass_Mysql = mysqlPassword.getText();
 
 		if (port.trim().isEmpty()) {
@@ -119,12 +129,25 @@ public class ServerPortController implements Initializable {
 
 			if (ServerUI.runServer(port)) {
 				connectionStatusLabel.setText("Connected");
-				connectionCircle.setFill(javafx.scene.paint.Color.GREEN);
-				
 
+				connectionCircle.setFill(javafx.scene.paint.Color.GREEN);
+				connectionUpdater = new Thread(new Runnable() {
+					public void run() {
+						while (true) {
+							removeConnection();
+							try {
+								Thread.sleep(10);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				});
+					
 				if (SQLConnection.getConn() != null) {
 
-				
+					
+					connectionUpdater.start();
 					writeToConsole("Driver definition succeeded\n" + "SQL connection succeed\n"
 							+ "Server listening for connections on port " + port);
 				} else {
@@ -137,13 +160,14 @@ public class ServerPortController implements Initializable {
 						e.printStackTrace();
 					}
 				}
-			} else {
+					}
+		 else {
 				connectionStatusLabel.setText("Disconnected");
 				connectionCircle.setFill(javafx.scene.paint.Color.RED);
 			}
 		}
-	}
-
+}
+	
 	@FXML
 	
 
@@ -188,6 +212,7 @@ public class ServerPortController implements Initializable {
 		roleColumn.setCellValueFactory(new PropertyValueFactory<Connection, String>("role"));
 		connectedClientsTable.setItems(FXCollections.observableArrayList(connectionList));
 		ConsoleTexter = new StringBuilder();
+		refresh();
 	}
 
 	/**

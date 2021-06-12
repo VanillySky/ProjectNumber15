@@ -122,36 +122,6 @@ public class SQLConnection {
 		return ExamCode;
 	}
 	
-	
-	public static String GetExamTime(ArrayList<Object> arr) {
-		String ExamCode1 = (String) arr.get(0);
-		String ExamTime = "";
-		if (conn != null)
-			try {
-
-				String query = "Select ExamTime FROM exams WHERE ExamCode = '" + ExamCode1 + "'";
-				Statement st = conn.createStatement();
-
-				ResultSet rs = st.executeQuery(query);
-
-				if (rs.next()) {
-					ExamTime = rs.getString("ExamTime");
-
-					if (ExamTime != "")
-						return ExamTime;
-
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		return ExamTime;
-	}
-	
-	
-	
-	
-
 	public static String checkAutoCode(ArrayList<Object> arr) {
 		String ExamAutoCode = (String) arr.get(0);
 		String ExamCode = "";
@@ -176,6 +146,33 @@ public class SQLConnection {
 			}
 		return ExamCode;
 	}
+	
+	
+	public static String getexamtime(ArrayList<Object> arr) {
+		String ExamCode1 = (String) arr.get(0);
+		String ExamTime = "";
+		if (conn != null)
+			try {
+
+				String query = "Select ExamTime FROM exams WHERE ExamCode = '" + ExamCode1 + "'";
+				Statement st = conn.createStatement();
+
+				ResultSet rs = st.executeQuery(query);
+
+				if (rs.next()) {
+					ExamTime = rs.getString("ExamTime");
+
+					if (ExamTime != "")
+						return ExamTime;
+
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return ExamTime;
+	}
+	
 
 	public static ArrayList<Exam> getAllexams() {
 		ArrayList<Exam> array = new ArrayList<Exam>();
@@ -241,6 +238,28 @@ public class SQLConnection {
 
 		return array;
 	}
+	public static ArrayList<StatusExam> oneStatusExam(ArrayList<Object> arr) {
+		ArrayList<StatusExam> array = new ArrayList<StatusExam>();
+		String ExamCode = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM statusexam WHERE ExamCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StatusExam ex = new StatusExam(rs.getString("ExamCode"), rs.getString("NumberStartExam"),
+							rs.getString("NumberEndExam"), rs.getString("time"), rs.getString("Date"));
+					array.add(ex);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
 
 	public static ArrayList<Exam> getTeacherexams(ArrayList<Object> arr) {
 		ArrayList<Exam> array = new ArrayList<Exam>();
@@ -705,6 +724,51 @@ public class SQLConnection {
 		return false;
 
 	}
+	
+	public static boolean UpgradeStart(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(
+						"UPDATE statusexam Set NumberStartExam = ?  WHERE ExamCode = ? ");
+
+				stmt.setString(1, ((StatusExam) list.get(0)).getNumberStartExam());
+
+				stmt.setString(2, ((StatusExam) list.get(0)).getExamCode());
+
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
+	
+	public static boolean UpgradeEnd(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(
+						"UPDATE statusexam Set NumberEndExam = ?  WHERE ExamCode = ? ");
+
+				stmt.setString(1, ((StatusExam) list.get(0)).getNumberEndExam());
+
+				stmt.setString(2, ((StatusExam) list.get(0)).getExamCode());
+
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
+	
 
 	public static boolean ChangeLockedExCode(ArrayList<Object> list) {
 		if (conn != null) {
@@ -746,6 +810,26 @@ public class SQLConnection {
 		return false;
 
 	}
+	
+	
+
+	public static boolean RestOnline(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement("UPDATE users Set online = ? ");
+
+				stmt.setString(1, ((String)list.get(0)));
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
+	
 
 	public static ArrayList<String> checkOnline(ArrayList<Object> arr) {
 		ArrayList<String> array = new ArrayList<String>();

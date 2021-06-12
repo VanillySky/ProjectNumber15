@@ -181,7 +181,7 @@ public class StatusController implements Initializable {
 
 		dataList2 = FXCollections.observableArrayList(
 				(Collection) controllers.DisplayController.ShowStatusExam(TeacherExamStatisticsController.Examcode));
-
+if(dataList2.size()!=0) {
 		ExamDateLBL.setText(dataList2.get(0).getDate());
 		ExamDuritionLBL.setText(TeacherExamStatisticsController.Durition);
 		StartedExamLBL.setText(dataList2.get(0).getNumberStartExam());// the students who start the exam.
@@ -197,6 +197,7 @@ public class StatusController implements Initializable {
 			NotFinishLBL.setText("" + Integer.parseInt(dataList2.get(0).getNumberEndExam()));
 		else
 			NotFinishLBL.setText("NULL");
+}
 		if (LoginController.checkLockedEXCODE(ExamCodeLBL.getText()).contains("locked"))
 			IsLockCircle.setFill(javafx.scene.paint.Color.RED);
 		else

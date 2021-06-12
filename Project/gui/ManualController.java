@@ -175,6 +175,7 @@ public class ManualController implements Initializable {
 		// IF THE STUDENT STILL HAVE TIME DO
 		if (selectedFile != null) {
 			returnedFile = FileUploadTXT.getText();
+			SubmitConfirmationController.isAuto=false;
 			SubmitConfirmationController SCC = new SubmitConfirmationController();
 			SCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

@@ -198,7 +198,7 @@ public class DisplayController {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
 		
-		ClientMessage msgFromClient = new ClientMessage("GetExamTime", list, list.size());
+		ClientMessage msgFromClient = new ClientMessage("getexamtime", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		String time = (String) msgFromServer.getData();
@@ -210,6 +210,17 @@ public class DisplayController {
 		}
 	}
 	
+	
+
+	public static  ArrayList<Object> GetoneStatusExam(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		ClientMessage msgFromClient = new ClientMessage("oneStatusExam", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
 
 
 }

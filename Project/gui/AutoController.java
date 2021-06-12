@@ -219,18 +219,11 @@ public class AutoController implements Initializable {
 			StudentGrade  SG = new StudentGrade(ChatClient.currentUser.getUserName() ,ExaminationController.ExamCode , dataList.get(0).getExamCourse(), grade , dataList.get(0).getTeacherName());
 			AddController.AddStudentGrade(SG);
 			DeleteController DC = new DeleteController();
-			DC.DeleteExam(ExamCode);
-			questionLBL.setVisible(false);
-			Answer1RB.setVisible(false);
-			Answer2RB.setVisible(false);
-			Answer3RB.setVisible(false);
-			Answer4RB.setVisible(false);
-			prevIMG.setVisible(false);
-			PrevBTN.setDisable(true);
-			BackToMenu.setVisible(true);
-			TheExamDone.setVisible(true);
-			label1.setVisible(true);
-			questionIns.setVisible(false);
+			DC.DeleteInExam(ExamCode);
+			SubmitConfirmationController.isAuto=true;
+			SubmitConfirmationController SCC = new SubmitConfirmationController();
+			SCC.start(new Stage());
+			((Node) event.getSource()).getScene().getWindow().hide();
 			
 		}
 	

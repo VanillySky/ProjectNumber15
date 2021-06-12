@@ -1,5 +1,7 @@
 package gui;
 
+import controllers.UpgradeConroller;
+import entities.StatusExam;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +33,7 @@ public class SubmitConfirmationController {
 	
     @FXML
     private Label ConfirmationLBL;
+    static boolean isAuto = true;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -48,14 +51,23 @@ public class SubmitConfirmationController {
 
 	@FXML
 	public void GoBack(ActionEvent event) {
+		if(isAuto) {
+			
+		}else {
 		ManualController MC = new ManualController();
 		MC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-	}
+	}}
 
 	@FXML
 	public void SubmitExam(ActionEvent event) {
 		if (ConfirmCheckBTN.isSelected()) {
+			int endExam = ExaminationController.Endnumber+1;
+			StatusExam EndStatus;
+			EndStatus=ExaminationController.SE;
+			EndStatus.setNumberEndExam(""+endExam);
+			UpgradeConroller.UpgradeStatusStart(EndStatus);
+			
 			SubmittedExamController SEC = new SubmittedExamController();
 			SEC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

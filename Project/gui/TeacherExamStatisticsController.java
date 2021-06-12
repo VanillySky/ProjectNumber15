@@ -155,21 +155,15 @@ public class TeacherExamStatisticsController implements Initializable {
 	@FXML
 	public void PressReport(ActionEvent event) {
 		if (selectedExam != null) {
-			TeacherExamReportController.isTeacher=true;
-			AllExamGrades = FXCollections
-					.observableArrayList((Collection) controllers.DisplayController.ShowApprovedStudentTeacher(ChatClient.currentUser.getUserName()));
-			System.out.println(AllExamGrades.size());
-			for (int i = 0; i < AllExamGrades.size(); i++) {
-				if (selectedExam.getExamCode().equals(AllExamGrades.get(i).getExamCode()))
-					ExamGrades.add(AllExamGrades.get(i));
-			}
-			
-			if (ExamGrades.size() == 0)
-				NoGrades = true;
-			else
-				NoGrades = false;
+			TeacherExamReportController.isTeacher = true;
+			AllExamGrades = FXCollections.observableArrayList((Collection) controllers.DisplayController
+					.ShowApprovedStudentTeacher(ChatClient.currentUser.getUserName()));
+			if (AllExamGrades.size() != 0) {
+				for (int i = 0; i < AllExamGrades.size(); i++) {
+					if (selectedExam.getExamCode().equals(AllExamGrades.get(i).getExamCode()))
+						ExamGrades.add(AllExamGrades.get(i));
+				}
 
-			if (NoGrades == false) {
 				Grades = new int[ExamGrades.size()];
 
 				TeacherExamReportController.numberofStudents = ExamGrades.size();
@@ -179,6 +173,7 @@ public class TeacherExamStatisticsController implements Initializable {
 					sum += Integer.parseInt(ExamGrades.get(i).getExamGrade());
 				}
 				Arrays.sort(Grades);
+				if(Grades.length!=0) {
 				TeacherExamReportController.MinGrade = Grades[0];
 				TeacherExamReportController.MaxGrade = Grades[Grades.length - 1];
 				TeacherExamReportController.Average = sum / (double) Grades.length;
@@ -217,10 +212,11 @@ public class TeacherExamStatisticsController implements Initializable {
 					if (Grades[i] >= 0 && Grades[i] <= 54)
 						TeacherExamReportController.GradeRange[8]++;
 				}
-
+				}
 				TeacherExamReportController TERC = new TeacherExamReportController();
 				TERC.start(new Stage());
 				((Node) event.getSource()).getScene().getWindow().hide();
+
 			} else {
 				ErrorLbl.setText("there is no grades");
 				ErrorLbl.setVisible(true);
@@ -234,7 +230,7 @@ public class TeacherExamStatisticsController implements Initializable {
 
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
-		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();
@@ -259,15 +255,15 @@ public class TeacherExamStatisticsController implements Initializable {
 	@FXML
 	void PressStatus(ActionEvent event) {
 		if (selectedExam != null) {
-			Examcode=selectedExam.getExamCode();
-			Durition=selectedExam.getExamTime();
+			Examcode = selectedExam.getExamCode();
+			Durition = selectedExam.getExamTime();
 			StatusController SCC = new StatusController();
 			SCC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
-			
-		}else {
+
+		} else {
 			ErrorLbl.setText("please chose any exam!!");
-			ErrorLbl.setVisible(true);	
+			ErrorLbl.setVisible(true);
 		}
 
 	}

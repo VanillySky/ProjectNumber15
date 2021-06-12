@@ -11,6 +11,7 @@ import client.ClientUI;
 import controllers.AddController;
 import controllers.DisplayController;
 import controllers.LoginController;
+import controllers.UpgradeConroller;
 import entities.Exam;
 import entities.InExam;
 import entities.StatusExam;
@@ -62,6 +63,8 @@ public class ExaminationController {
 
 	static String ExamCode;
 	static String ExamTime;
+	static int Endnumber;
+	static StatusExam SE;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -143,19 +146,26 @@ public class ExaminationController {
 
 		}
 		Date date = new Date();
-		ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
-		ExamTime= DisplayController.GetExamTime(ExamCode);
-		System.out.println(ExamTime);
-		System.out.println(ExamCode);
-		StatusExam SE = new StatusExam(ExamCode, "0", "0","" , date.toString());
+		ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
+		ArrayList<Object> ArrayList =  DisplayController.ShowOneExam(ExamCode);
+		Exam exam = (Exam) ArrayList.get(0);
+		ExamTime=exam.getExamTime();
+		SE = new StatusExam(ExamCode, "0", "0",exam.getExamTime(), date.toString());
 		AddController.AddNewExamStatus(SE);
-	///////////////////////////////still not done !!!!!!!!!!!!!!!!!!!!!!!!!!!
+		ArrayList<Object> ArrayList1 =  DisplayController.GetoneStatusExam(ExamCode);
+		StatusExam st = (StatusExam) ArrayList1.get(0);
+		int startnum = Integer.parseInt(st.getNumberStartExam());
+		startnum++;
+		Endnumber = Integer.parseInt(st.getNumberEndExam());
+		SE.setNumberStartExam(""+startnum);
+		UpgradeConroller.UpgradeStatusStart(SE);
+		
 		if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
 
 				ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
-				InExam IE = new InExam(ExamCode, ChatClient.currentUser.getUserName(), ChatClient.currentUser.getUserId());
-				AddController.AddInExam(IE);
+				//InExam IE = new InExam(ExamCode, ChatClient.currentUser.getUserName(), ChatClient.currentUser.getUserId());
+			//	AddController.AddInExam(IE);
 				if (ExamCode != "") {
 					
 					ManualController MC = new ManualController();

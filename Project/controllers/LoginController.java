@@ -115,11 +115,22 @@ public class LoginController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();
 	}
+	
+	
 	public static boolean ChangeOnline(String username,String online) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(online);
 		list.add(username);
 		ClientMessage msgFromClient = new ClientMessage("ChangeOnline", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+	}
+	
+	public static boolean RestOnline(String online) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(online);
+		ClientMessage msgFromClient = new ClientMessage("RestOnline", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();
