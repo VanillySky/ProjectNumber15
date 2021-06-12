@@ -46,9 +46,10 @@ public class DeleteController {
 	
 	
 	
-	public void DeleteInExam(String ExamCode) {
+	public void DeleteInExam(String ExamCode,String UserName) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(ExamCode);
+		list.add(UserName);
 	
 		ClientMessage msgFromClient = new ClientMessage("DeleteInExam", list, list.size());
 		

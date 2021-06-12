@@ -221,7 +221,7 @@ public class AutoController implements Initializable {
 			StudentGrade  SG = new StudentGrade(ChatClient.currentUser.getUserName() ,ExaminationController.ExamCode , dataList.get(0).getExamCourse(), grade , dataList.get(0).getTeacherName());
 			AddController.AddStudentGrade(SG);
 			DeleteController DC = new DeleteController();
-			DC.DeleteInExam(ExamCode);
+			DC.DeleteInExam(ExamCode,ChatClient.currentUser.getUserName());
 			int endExam = ExaminationController.Endnumber+1;
 			StatusExam EndStatus;
 			EndStatus=ExaminationController.SE;

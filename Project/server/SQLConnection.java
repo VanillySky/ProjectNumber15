@@ -519,6 +519,22 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 	}
+	
+	public static void DeleteInExam(ArrayList<Object> arr) {
+
+		String ExamCode = (String) arr.get(0);
+		String UserName= (String) arr.get(1);
+		if (conn != null)
+			try {
+				PreparedStatement ps = conn.prepareStatement("DELETE FROM inexam  WHERE ExamCode = ? and userName = ?");
+				ps.setString(1, ExamCode);
+				ps.setString(2, UserName);
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	
 
 	public static void DeleteManagerMessage(ArrayList<Object> arr) {
 
