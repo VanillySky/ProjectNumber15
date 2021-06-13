@@ -25,62 +25,63 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
 public class ManualController implements Initializable {
 	@FXML
-    private Pane pane;
+	private Pane pane;
 
-    @FXML
-    private Button CEMSButton;
+	@FXML
+	private Button CEMSButton;
 
-    @FXML
-    private Button DownloadExamBTN;
+	@FXML
+	private Button DownloadExamBTN;
 
-    @FXML
-    private Button OutButton;
+	@FXML
+	private Button OutButton;
 
-    @FXML
-    private Button UploadExamBTN;
+	@FXML
+	private Button UploadExamBTN;
 
-    @FXML
-    private Button BackButton;
+	@FXML
+	private Button BackButton;
 
-    @FXML
-    private Label IsntValidLBL;
+	@FXML
+	private Label IsntValidLBL;
 
-    @FXML
-    private Button SubmitExamBTN;
+	@FXML
+	private Button SubmitExamBTN;
 
-    @FXML
-    private AnchorPane menuPane;
+	@FXML
+	private AnchorPane menuPane;
 
-    @FXML
-    private Text hoursTimer;
+	@FXML
+	private Text hoursTimer;
 
-    @FXML
-    private Text MinutesTimer;
+	@FXML
+	private Text MinutesTimer;
 
-    @FXML
-    private Text SecondsTimer;
+	@FXML
+	private Text SecondsTimer;
 
-    @FXML
-    private Label UploadaFileMsg;
+	@FXML
+	private Label UploadaFileMsg;
 
-    @FXML
-    private TextField FileUploadTXT;
+	@FXML
+	private TextField FileUploadTXT;
 
-    @FXML
-    private Button DeleteChosenBTN;
-    
-    @FXML
-    private Label timelbl;
+	@FXML
+	private Button DeleteChosenBTN;
+
+	@FXML
+	private Label timelbl;
 
 	static String returnedFile;
 	File selectedFile;
 	Map<Integer, String> numberMap;
-	Integer CurrSeconds;
+	static Integer CurrSeconds;
 	Thread thrd;
-	Integer hours, min;
+	static Integer hours, min;
+	static boolean timefinish ;
+	static String ExamCode;
 
 	/**
 	 * 
@@ -106,18 +107,17 @@ public class ManualController implements Initializable {
 			@Override
 			public void run() {
 				try {
+
 					while (true) {
 
+						CurrSeconds -= 1;
 						setOutput();
-
 						Thread.sleep(1000);
 						if (CurrSeconds == 0) {
-							Done();
+							timefinish = true;
+							doneTime();
 							thrd.stop();
-							
 						}
-
-						CurrSeconds -= 1;
 
 					}
 				} catch (Exception e) {
@@ -129,21 +129,21 @@ public class ManualController implements Initializable {
 		thrd.start();
 	}
 
+	void doneTime() {
+		timelbl.setVisible(true);
+		LoginController.ChangeLockedEXCODE(ExamCode, "locked");
+	}
+	
 	void setOutput() {
 		LinkedList<Integer> currHms = secondsToHms(CurrSeconds);
 		hoursTimer.setText(numberMap.get(currHms.get(0)));
 		MinutesTimer.setText(numberMap.get(currHms.get(1)));
 		SecondsTimer.setText(numberMap.get(currHms.get(2)));
 	}
-	
-    void Done() {
-    	timelbl.setVisible(true);
-    	SubmitExamBTN.setDisable(true);
-
-    }
 
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
+		thrd.stop();
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -158,6 +158,7 @@ public class ManualController implements Initializable {
 	 */
 	@FXML
 	public void PressBack(ActionEvent event) {
+		thrd.stop();
 		ExaminationController EC = new ExaminationController();
 		EC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -170,6 +171,7 @@ public class ManualController implements Initializable {
 	 */
 	@FXML
 	public void PressCEMS(ActionEvent event) {
+		thrd.stop();
 		StudentMenuController SMC = new StudentMenuController();
 		SMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -189,14 +191,24 @@ public class ManualController implements Initializable {
 	void SubmitExam(ActionEvent event) {
 		// AFTER CHECKING THE TIME
 		// IF THE STUDENT STILL HAVE TIME DO
-		if (selectedFile != null) {
-			returnedFile = FileUploadTXT.getText();
-			SubmitConfirmationController.isAuto = false;
-			SubmitConfirmationController SCC = new SubmitConfirmationController();
-			SCC.start(new Stage());
+
+		if (timefinish == false) {
+
+			if (selectedFile != null) {
+
+				thrd.stop();
+				returnedFile = FileUploadTXT.getText();
+				SubmitConfirmationController.isAuto = false;
+				SubmitConfirmationController SCC = new SubmitConfirmationController();
+				SCC.start(new Stage());
+				((Node) event.getSource()).getScene().getWindow().hide();
+			} else
+				UploadaFileMsg.setVisible(true);
+		} else {
+			UnsubmittedExamController USMEC = new UnsubmittedExamController();
+			USMEC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
-		} else
-			UploadaFileMsg.setVisible(true);
+		}
 	}
 
 	@FXML
@@ -213,50 +225,51 @@ public class ManualController implements Initializable {
 	Integer hmsToSeconds(Integer h, Integer m, Integer s) {
 		Integer hToSeconds = h * 3600;
 		Integer mToSeconds = m * 60;
-		return hToSeconds + mToSeconds + s;
+		Integer total = hToSeconds + mToSeconds + s;
+		return total;
 	}
 
 	LinkedList<Integer> secondsToHms(Integer currSeconds) {
 		Integer hours = currSeconds / 3600;
-		CurrSeconds %= 3600;
+		currSeconds = CurrSeconds % 3600;
 		Integer minutes = CurrSeconds / 60;
-		CurrSeconds %= 60;
+		currSeconds = CurrSeconds % 60;
+		Integer seconds = currSeconds;
 		LinkedList<Integer> answer = new LinkedList<>();
 		answer.add(hours);
 		answer.add(minutes);
-		answer.add(CurrSeconds);
+		answer.add(seconds);
 		return answer;
 	}
 
 	@FXML
 	public void DownloadFileBTN(ActionEvent event) {
-		CurrSeconds = hmsToSeconds(hours, min, 0);
 
+		CurrSeconds = hmsToSeconds(hours, min, 0);
+		//CurrSeconds = 10;
 		startCountdown();
 
 	}
 
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		timefinish = false;
 		String time = ExaminationController.ExamTime;
 		String[] hourmin = time.split(":");
 		hours = Integer.parseInt(hourmin[0]);
 		min = Integer.parseInt(hourmin[1]);
-		hoursTimer.setText(hours+"");
-		MinutesTimer.setText(min+"");
+		System.out.println(hours + ":" + min);
+		hoursTimer.setText(hours + "");
+		MinutesTimer.setText(min + "");
 		SecondsTimer.setText("0");
 
 		numberMap = new TreeMap<Integer, String>();
 		for (Integer i = 0; i <= 60; i++) {
-			if (i >= 0 && i <= 24)
+			if (i >= 0 && i <= 9)
 				numberMap.put(i, "0" + i.toString());
 			else
 				numberMap.put(i, i.toString());
 		}
-		// if (!returnedFile.equals(""))
-	//	FileUploadTXT.setText(returnedFile);
 	}
 
 }

@@ -22,7 +22,7 @@
       </ImageView>
       <RadioButton fx:id="Answer1RB" layoutX="70.0" layoutY="250.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="610.0" textFill="#130f5c">
          <font>
-            <Font size="24.0" />
+            <Font name="David" size="24.0" />
          </font></RadioButton>
       <RadioButton fx:id="Answer2RB" layoutX="70.0" layoutY="300.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="610.0" textFill="#130f5c">
          <font>
@@ -137,6 +137,11 @@
       <Label fx:id="questionIns" alignment="TOP_LEFT" layoutX="41.0" layoutY="455.0" prefHeight="43.0" prefWidth="755.0" textFill="#130f5c" wrapText="true">
          <font>
             <Font name="David" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="cantSubmit" layoutX="829.0" layoutY="546.0" prefHeight="31.0" prefWidth="166.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font size="13.0" />
          </font>
       </Label>
    </children>

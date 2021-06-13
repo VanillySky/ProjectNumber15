@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UnsubmittedExamController">
    <children>
       <ImageView fitHeight="579.0" fitWidth="1048.0">
          <image>
@@ -71,13 +71,14 @@
                               <Font name="Bell MT" size="21.0" />
                            </font>
                         </Label>
-                        <Button layoutX="160.0" layoutY="270.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="235.0" text="Return to the main menu" />
-                        <Button layoutX="160.0" layoutY="320.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="235.0" text="Signout" />
+                        <Button fx:id="MainMenu" layoutX="160.0" layoutY="270.0" mnemonicParsing="false" onAction="#PressMainMenu" prefHeight="31.0" prefWidth="235.0" text="Return to the main menu" />
+                        <Button fx:id="signout" layoutX="160.0" layoutY="320.0" mnemonicParsing="false" onAction="#PressSignOut" prefHeight="31.0" prefWidth="235.0" text="Signout" />
                      </children>
                   </AnchorPane>
                </children>
             </GridPane>
          </children>
       </AnchorPane>
+      <Button fx:id="CEMSbutton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="143.0" prefWidth="149.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

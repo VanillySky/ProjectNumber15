@@ -119,7 +119,7 @@
             <Font name="David" size="24.0" />
          </font></TextField>
       <Button fx:id="DeleteChosenBTN" layoutX="72.0" layoutY="374.0" mnemonicParsing="false" onAction="#deleteFileBTN" prefHeight="35.0" prefWidth="192.0" style="-fx-background-color: transparent;" />
-      <Label fx:id="timelbl" layoutX="172.0" layoutY="332.0" prefHeight="31.0" prefWidth="328.0" text="The time is done , you can't Upload the exam" textFill="RED" visible="false">
+      <Label fx:id="timelbl" layoutX="608.0" layoutY="522.0" prefHeight="31.0" prefWidth="328.0" text="The time is done , you can't Submit the exam" textFill="RED" visible="false">
          <font>
             <Font size="14.0" />
          </font>

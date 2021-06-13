@@ -19,8 +19,8 @@
          <columns>
             <TableColumn fx:id="ExamCodeCol" minWidth="1.0" prefWidth="98.0" text="ExamCode" />
             <TableColumn fx:id="TeacherNameCol" prefWidth="116.0" text="TeacherName" />
-            <TableColumn fx:id="TimeChangeCol" minWidth="0.0" prefWidth="103.0" text="Time change" />
-            <TableColumn fx:id="InstructionsCol" minWidth="1.0" prefWidth="283.0" text="Instructions" />
+            <TableColumn fx:id="TimeChangeCol" minWidth="0.0" prefWidth="141.0" text="Time change" />
+            <TableColumn fx:id="InstructionsCol" minWidth="1.0" prefWidth="244.0" text="Instructions" />
          </columns>
       </TableView>
       <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="104.0" prefWidth="116.0" style="-fx-background-color: transparent;" />

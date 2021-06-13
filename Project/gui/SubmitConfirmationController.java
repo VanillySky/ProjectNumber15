@@ -1,5 +1,6 @@
 package gui;
 
+import controllers.LoginController;
 import controllers.UpgradeConroller;
 import entities.StatusExam;
 import javafx.event.ActionEvent;
@@ -35,6 +36,7 @@ public class SubmitConfirmationController {
     private Label ConfirmationLBL;
     static boolean isAuto = true;
     static int endExam;
+    static String ExamCode;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -63,8 +65,12 @@ public class SubmitConfirmationController {
 			StatusExam EndStatus;
 			
 			EndStatus=ExaminationController.SE;
+			endExam+=1;
 			EndStatus.setNumberEndExam(""+endExam);
 			UpgradeConroller.UpgradeStatusEnd(EndStatus);
+			if(ExaminationController.starNum==endExam)
+				System.out.println("heelllllooooooooo");
+				LoginController.ChangeLockedEXCODE(ExamCode, "locked");
 			SubmittedExamController SEC = new SubmittedExamController();
 			SEC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

@@ -65,6 +65,7 @@ public class ExaminationController {
 	static String ExamTime;
 	static StatusExam SE;
 	static int starNum;
+
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -105,7 +106,7 @@ public class ExaminationController {
 
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
-		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
 
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -117,7 +118,6 @@ public class ExaminationController {
 	public void PressHelpButton(ActionEvent event) {
 		AskTeacherLBL.setVisible(true);
 	}
-	
 
 	@FXML
 	public void StartExam(ActionEvent event) {
@@ -145,59 +145,61 @@ public class ExaminationController {
 			IncorrectLBL.setVisible(true);
 
 		}
-		
+
 		Date date = new Date();
 		if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
 
 				ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
-				ArrayList<Object> ArrayList =  DisplayController.ShowOneExam(ExamCode);
+				ArrayList<Object> ArrayList = DisplayController.ShowOneExam(ExamCode);
 				Exam exam = (Exam) ArrayList.get(0);
-				ExamTime=exam.getExamTime();
-				SE = new StatusExam(ExamCode, "0", "0",ExamTime, date.toString());
-				if(DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show status exam
+				ExamTime = exam.getExamTime();
+				SE = new StatusExam(ExamCode, "0", "0", ExamTime, date.toString());
+				if (DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show status
+																			// exam
 					AddController.AddNewExamStatus(SE);
 				}
-				ArrayList<Object> ArrayList1 =  DisplayController.GetoneStatusExam(ExamCode);
-			StatusExam st = (StatusExam) ArrayList1.get(0);
-				int startnum = Integer.parseInt(st.getNumberStartExam());
-				startnum++;
+				ArrayList<Object> ArrayList1 = DisplayController.GetoneStatusExam(ExamCode);
+				StatusExam st = (StatusExam) ArrayList1.get(0);
+				starNum = Integer.parseInt(st.getNumberStartExam());
+				starNum++;
+				SubmitConfirmationController.ExamCode = ExamCode;
 				int Endnumber = Integer.parseInt(st.getNumberEndExam());
-				SubmitConfirmationController.endExam=Endnumber;
-				SE.setNumberStartExam(""+startnum);
+				SubmitConfirmationController.endExam = Endnumber;
+				SE.setNumberStartExam("" + starNum);
 				UpgradeConroller.UpgradeStatusStart(SE);
-					
-					ManualController MC = new ManualController();
-					MC.start(new Stage());
-					((Node) event.getSource()).getScene().getWindow().hide();
+				ManualController.ExamCode=ExamCode;
+				ManualController MC = new ManualController();
+				MC.start(new Stage());
+				((Node) event.getSource()).getScene().getWindow().hide();
 
-			
 			}
-		}else {
+		} else {
 			ContainLetterMsgLBL.setText("The Exam is locked");
 			ContainLetterMsgLBL.setVisible(true);
 		}
-		
+
 		if (LoginController.checkLockedA(insertCodeTxtField.getText()).contains("unlocked")) {
 			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
-				
+
 				ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
-				ArrayList<Object> ArrayList =  DisplayController.ShowOneExam(ExamCode);
+				ArrayList<Object> ArrayList = DisplayController.ShowOneExam(ExamCode);
 				Exam exam = (Exam) ArrayList.get(0);
-				ExamTime=exam.getExamTime();
-				SE = new StatusExam(ExamCode, "0", "0",ExamTime, date.toString());
-				if(DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show status exam
+				ExamTime = exam.getExamTime();
+				SE = new StatusExam(ExamCode, "0", "0", ExamTime, date.toString());
+				if (DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show status
+																			// exam
 					AddController.AddNewExamStatus(SE);
 				}
-				ArrayList<Object> ArrayList1 =  DisplayController.GetoneStatusExam(ExamCode);
-			StatusExam st = (StatusExam) ArrayList1.get(0);
-		  	starNum = Integer.parseInt(st.getNumberStartExam());
-		  	starNum++;
+				ArrayList<Object> ArrayList1 = DisplayController.GetoneStatusExam(ExamCode);
+				StatusExam st = (StatusExam) ArrayList1.get(0);
+				starNum = Integer.parseInt(st.getNumberStartExam());
+				starNum++;
 				int Endnumber = Integer.parseInt(st.getNumberEndExam());
-				AutoController.Endnumber=Endnumber;
-				SE.setNumberStartExam(""+starNum);
-				AutoLoginController.ExamCode=ExamCode;
-				AutoController.ExamCode=ExamCode;
+				AutoController.Endnumber = Endnumber;
+				SE.setNumberStartExam("" + starNum);
+				AutoLoginController.ExamCode = ExamCode;
+				AutoController.ExamCode = ExamCode;
 				UpgradeConroller.UpgradeStatusStart(SE);
 				if (ExamCode != "") {
 					AutoLoginController ALC = new AutoLoginController();

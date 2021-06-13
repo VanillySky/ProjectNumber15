@@ -99,6 +99,10 @@ public class AutoController implements Initializable {
 
 	@FXML
 	private Label questionIns;
+	
+	@FXML
+    private Label cantSubmit;
+
 
 	int sum;
 	boolean submit = false;
@@ -112,9 +116,10 @@ public class AutoController implements Initializable {
 	static String ExamCode;
 	static int Endnumber;
 	Map<Integer, String> numberMap;
-	Integer CurrSeconds;
+	static Integer CurrSeconds;
 	Thread thrd;
 	Integer hours, min;
+	static boolean timefinish;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -146,18 +151,16 @@ public class AutoController implements Initializable {
 			public void run() {
 				try {
 					while (true) {
-
+						CurrSeconds -= 1;
 						setOutput();
-
 						Thread.sleep(1000);
 						if (CurrSeconds == 0) {
-
-							thrd.stop();
+							
+							timefinish = true;
 							Done();
+							thrd.stop();
+						
 						}
-
-						CurrSeconds -= 1;
-
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -176,17 +179,10 @@ public class AutoController implements Initializable {
 	}
 
 	void Done() {
-		questionLBL.setVisible(false);
-		Answer1RB.setVisible(false);
-		Answer2RB.setVisible(false);
-		Answer3RB.setVisible(false);
-		Answer4RB.setVisible(false);
-		prevIMG.setVisible(false);
-		PrevBTN.setDisable(true);
-		BackToMenu.setVisible(true);
-		TheExamDone.setText("the Time done you can't submit your exam");
-		TheExamDone.setVisible(true);
-		questionIns.setVisible(false);
+
+		cantSubmit.setText("the Time done you can't submit your exam");
+		cantSubmit.setVisible(true);
+		LoginController.ChangeLockedEXCODE(ExamCode, "locked");
 
 	}
 
@@ -198,13 +194,14 @@ public class AutoController implements Initializable {
 
 	LinkedList<Integer> secondsToHms(Integer currSeconds) {
 		Integer hours = currSeconds / 3600;
-		CurrSeconds %= 3600;
+		currSeconds = CurrSeconds % 3600;
 		Integer minutes = CurrSeconds / 60;
-		CurrSeconds %= 60;
+		currSeconds = CurrSeconds % 60;
+		Integer seconds = currSeconds;
 		LinkedList<Integer> answer = new LinkedList<>();
 		answer.add(hours);
 		answer.add(minutes);
-		answer.add(CurrSeconds);
+		answer.add(seconds);
 		return answer;
 	}
 
@@ -291,69 +288,78 @@ public class AutoController implements Initializable {
 			}
 
 		} else {
+			if (timefinish == false) {
 
-			if (Answer1RB.isSelected())
-				StudentAnswer[N] = 1;
+				if (Answer1RB.isSelected())
+					StudentAnswer[N] = 1;
 
-			if (Answer2RB.isSelected())
-				StudentAnswer[N] = 2;
+				if (Answer2RB.isSelected())
+					StudentAnswer[N] = 2;
 
-			if (Answer3RB.isSelected())
-				StudentAnswer[N] = 3;
+				if (Answer3RB.isSelected())
+					StudentAnswer[N] = 3;
 
-			if (Answer4RB.isSelected())
-				StudentAnswer[N] = 4;
+				if (Answer4RB.isSelected())
+					StudentAnswer[N] = 4;
+				sum = 0;
+				for (N = 0; N < AllQuestion.length; N++) {
 
-			for (N = 0; N < AllQuestion.length; N++) {
-				if (StudentAnswer[N] == Integer.parseInt(AllQuestion[N].getRightAnswer()))
-					sum += Integer.parseInt(Allpoint[N]);
-			}
+					if (StudentAnswer[N] == Integer.parseInt(AllQuestion[N].getRightAnswer()))
+						sum += Integer.parseInt(Allpoint[N]);
+				}
 
-			for (N = 0; N < AllQuestion.length; N++) {
-				ExamResponse ER = new ExamResponse(ExamCode, ChatClient.currentUser.getUserName(),
-						AllQuestion[N].QuestionCode, "" + StudentAnswer[N]);
-				AddController.ExamResponse(ER);
-			}
-			String grade = "" + sum;
-			StudentGrade SG = new StudentGrade(ChatClient.currentUser.getUserName(), ExaminationController.ExamCode,
-					dataList.get(0).getExamCourse(), grade, dataList.get(0).getTeacherName());
-			AddController.AddStudentGrade(SG);
+				for (N = 0; N < AllQuestion.length; N++) {
+					ExamResponse ER = new ExamResponse(ExamCode, ChatClient.currentUser.getUserName(),
+							AllQuestion[N].QuestionCode, "" + StudentAnswer[N]);
+					AddController.ExamResponse(ER);
+				}
+				String grade = "" + sum;
+				StudentGrade SG = new StudentGrade(ChatClient.currentUser.getUserName(), ExaminationController.ExamCode,
+						dataList.get(0).getExamCourse(), grade, dataList.get(0).getTeacherName());
+				AddController.AddStudentGrade(SG);
 
-			for (N = 0; N < AllQuestion.length; N++) {
-				if (!AllQuestion[N].getRightAnswer().equals("" + StudentAnswer[N])) {
-					dataList2 = FXCollections.observableArrayList((Collection) controllers.DisplayController
-							.GetAllSameAnswer(ExamCode, AllQuestion[N].getQuestionCode(), "" + StudentAnswer[N]));
-					
-					for (int i = 0; i < dataList2.size(); i++) {
-						commonmistake CM = new commonmistake(ExamCode, AllQuestion[N].getQuestionCode(),
-								ChatClient.currentUser.getUserName(), dataList2.get(i).getUserName());
-						if (!dataList2.get(i).getUserName().equals(ChatClient.currentUser.getUserName()))
-							AddController.AddCommonMistake(CM);
+				for (N = 0; N < AllQuestion.length; N++) {
+					if (!AllQuestion[N].getRightAnswer().equals("" + StudentAnswer[N])) {
+						dataList2 = FXCollections.observableArrayList((Collection) controllers.DisplayController
+								.GetAllSameAnswer(ExamCode, AllQuestion[N].getQuestionCode(), "" + StudentAnswer[N]));
+
+						for (int i = 0; i < dataList2.size(); i++) {
+							commonmistake CM = new commonmistake(ExamCode, AllQuestion[N].getQuestionCode(),
+									ChatClient.currentUser.getUserName(), dataList2.get(i).getUserName());
+							if (!dataList2.get(i).getUserName().equals(ChatClient.currentUser.getUserName()))
+								AddController.AddCommonMistake(CM);
+						}
 					}
 				}
+
+				StatusExam EndStatus;
+				Endnumber++;
+				EndStatus = ExaminationController.SE;
+				EndStatus.setNumberEndExam("" + Endnumber);
+				UpgradeConroller.UpgradeStatusEnd(EndStatus);
+
+				if (ExaminationController.starNum == Endnumber)
+					LoginController.ChangeLockedEXCODE(ExamCode, "locked");
+
+				submitIMG.setVisible(false);
+				questionLBL.setVisible(false);
+				Answer1RB.setVisible(false);
+				Answer2RB.setVisible(false);
+				Answer3RB.setVisible(false);
+				Answer4RB.setVisible(false);
+				prevIMG.setVisible(false);
+				PrevBTN.setDisable(true);
+				BackToMenu.setVisible(true);
+				TheExamDone.setVisible(true);
+				label1.setVisible(true);
+				questionIns.setVisible(false);
+				menuPane.setVisible(false);
+
+			} else {
+				UnsubmittedExamController USMEC = new UnsubmittedExamController();
+				USMEC.start(new Stage());
+				((Node) event.getSource()).getScene().getWindow().hide();
 			}
-
-			StatusExam EndStatus;
-			Endnumber++;
-			EndStatus = ExaminationController.SE;
-			EndStatus.setNumberEndExam("" + Endnumber);
-
-			UpgradeConroller.UpgradeStatusEnd(EndStatus);
-
-			submitIMG.setVisible(false);
-			questionLBL.setVisible(false);
-			Answer1RB.setVisible(false);
-			Answer2RB.setVisible(false);
-			Answer3RB.setVisible(false);
-			Answer4RB.setVisible(false);
-			prevIMG.setVisible(false);
-			PrevBTN.setDisable(true);
-			BackToMenu.setVisible(true);
-			TheExamDone.setVisible(true);
-			label1.setVisible(true);
-			questionIns.setVisible(false);
-			menuPane.setVisible(false);
-
 		}
 
 	}
@@ -404,6 +410,7 @@ public class AutoController implements Initializable {
 
 	@FXML
 	void BackToMenu(ActionEvent event) {
+		thrd.stop();
 		StudentMenuController SMC = new StudentMenuController();
 		SMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -411,6 +418,7 @@ public class AutoController implements Initializable {
 
 	@FXML
 	void SignOut(ActionEvent event) throws Exception {
+		thrd.stop();
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -456,12 +464,14 @@ public class AutoController implements Initializable {
 		hoursTimer.setText(hours + "");
 		MinutesTimer.setText(min + "");
 		SecondsTimer.setText("0");
-		CurrSeconds = hmsToSeconds(hours, min, 0);
+	//	CurrSeconds = hmsToSeconds(hours, min, 0);
+		CurrSeconds =5;
+		timefinish = false;
 		startCountdown();
 
 		numberMap = new TreeMap<Integer, String>();
 		for (Integer i = 0; i <= 60; i++) {
-			if (i >= 0 && i <= 24)
+			if (i >= 0 && i <= 9)
 				numberMap.put(i, "0" + i.toString());
 			else
 				numberMap.put(i, i.toString());
