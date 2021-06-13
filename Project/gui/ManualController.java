@@ -13,7 +13,6 @@ import java.util.TreeMap;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.LoginController;
-import entities.Exam;
 import entities.ManagerMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,57 +32,67 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * The manual conroller is a class to control the manual fxml
+ * @author Ahmed
+ *
+ */
 public class ManualController implements Initializable {
-	@FXML
-	private Pane pane;
-
-	@FXML
-	private Button CEMSButton;
-
-	@FXML
-	private Button DownloadExamBTN;
-
-	@FXML
-	private Button OutButton;
-
-	@FXML
-	private Button UploadExamBTN;
-
-	@FXML
-	private Button BackButton;
-
-	@FXML
-	private Label IsntValidLBL;
-
-	@FXML
-	private Button SubmitExamBTN;
-
-	@FXML
-	private AnchorPane menuPane;
-
-	@FXML
-	private Text hoursTimer;
-
-	@FXML
-	private Text MinutesTimer;
-
-	@FXML
-	private Text SecondsTimer;
-
-	@FXML
-	private Label UploadaFileMsg;
-
-	@FXML
-	private TextField FileUploadTXT;
-
-	@FXML
-	private Button DeleteChosenBTN;
-
-	@FXML
-	private Label timelbl;
 	
-	  @FXML
-	    private Label AddLBL;
+	//The main pane that conatains evreything in the gui
+    @FXML
+    private Pane pane;
+
+    /**
+     * 
+     */
+    @FXML
+    private Button CEMSButton;
+
+    @FXML
+    private Button DownloadExamBTN;
+
+    @FXML
+    private Button OutButton;
+
+    @FXML
+    private Button UploadExamBTN;
+
+    @FXML
+    private Button BackButton;
+
+    @FXML
+    private Label IsntValidLBL;
+
+    @FXML
+    private Button SubmitExamBTN;
+
+    @FXML
+    private AnchorPane menuPane;
+
+    @FXML
+    private Text hoursTimer;
+
+    @FXML
+    private Text MinutesTimer;
+
+    @FXML
+    private Text SecondsTimer;
+
+    @FXML
+    private Label UploadaFileMsg;
+
+    @FXML
+    private TextField FileUploadTXT;
+
+    @FXML
+    private Button DeleteChosenBTN;
+
+    @FXML
+    private Label timelbl;
+
+    @FXML
+    private Label AddLBL;
 
 	static String returnedFile;
 	File selectedFile;
