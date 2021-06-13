@@ -124,5 +124,10 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="AddLBL" alignment="TOP_LEFT" layoutX="608.0" layoutY="145.0" prefHeight="40.0" prefWidth="317.0" text="Label" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

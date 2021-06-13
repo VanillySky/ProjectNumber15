@@ -7,13 +7,15 @@ public class ManagerMessage implements Serializable  {
 	String TeacherName;
 	String addtime;
 	String instruction;
+	String Approved;
 	
-	public ManagerMessage(String examcode, String teacherName, String addtime, String instruction) {
+	public ManagerMessage(String examcode, String teacherName, String addtime, String instruction,String Approved) {
 		super();
 		Examcode = examcode;
 		TeacherName = teacherName;
 		this.addtime = addtime;
 		this.instruction = instruction;
+		this.Approved=Approved;
 	}
 
 	public String getExamcode() {
@@ -46,6 +48,14 @@ public class ManagerMessage implements Serializable  {
 
 	public void setInstruction(String instruction) {
 		this.instruction = instruction;
+	}
+
+	public String getApproved() {
+		return Approved;
+	}
+
+	public void setApproved(String approved) {
+		Approved = approved;
 	}
 	
 	

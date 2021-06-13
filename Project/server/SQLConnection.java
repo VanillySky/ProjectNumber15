@@ -36,10 +36,10 @@ public class SQLConnection {
 		}
 		try {
 //			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","anitad31");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","1vikylja1");
+//			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","1vikylja1");
 
-			//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
-					//"Ahmf1144");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root",
+					"Ahmf1144");
 			// conn =
 			// DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST","root","IbraPro1234");
 
@@ -230,7 +230,7 @@ public class SQLConnection {
 				ResultSet rs = st.executeQuery(query);
 				while (rs.next()) {
 					ManagerMessage MM = new ManagerMessage(rs.getString("Examcode"), rs.getString("TeacherName"),
-							rs.getString("addtime"), rs.getString("instruction"));
+							rs.getString("addtime"), rs.getString("instruction"), rs.getString("Approved"));
 					array.add(MM);
 				}
 			} catch (SQLException e) {
@@ -1013,7 +1013,26 @@ public class SQLConnection {
 		return false;
 
 	}
-	
+
+	public static boolean UpgradeApprove(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement("UPDATE managermessage Set Approved = ?   WHERE Examcode = ? ");
+
+				stmt.setString(1, ((String) list.get(0)));
+
+				stmt.setString(2, ((String) list.get(1)));
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+
+	}
 	
 
 	public static boolean RestOnline(ArrayList<Object> list) {
@@ -1209,5 +1228,72 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	
+	public static ArrayList<ManagerMessage> oneApprovedChangeTime(ArrayList<Object> arr) {
+		ArrayList<ManagerMessage> array = new ArrayList<ManagerMessage>();
+		String ExamCode = (String) arr.get(0);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM managermessage WHERE ExamCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					ManagerMessage MS = new ManagerMessage(ExamCode, rs.getString("TeacherName"),
+							rs.getString("addtime"), rs.getString("instruction"), rs.getString("Approved"));
+					array.add(MS);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
+		return array;
+	}
+	
+	
+	public static ArrayList<StudentGrade> checkOneGradeExist(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String ExamCode = (String) arr.get(0);
+		String username = (String) arr.get(1);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM approvedstudentgrade WHERE studentUserName = '" + username + "'AND ExamCode = '"
+						+ ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StudentGrade ST = new StudentGrade( rs.getString("studentUserName"), ExamCode,  rs.getString("ExamCourse"),  rs.getString("ExamGrade"),  rs.getString("TeacherName"),  rs.getString("instr"));
+					array.add(ST);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
+	
+	
+	public static ArrayList<StudentGrade> checkOneApprovalGradeExist(ArrayList<Object> arr) {
+		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
+		String ExamCode = (String) arr.get(0);
+		String username = (String) arr.get(1);
+		if (conn != null) {
+			try {
+				String query = "Select * FROM studentgrade WHERE studentUserName = '" + username + "'AND ExamCode = '"
+						+ ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					StudentGrade ST = new StudentGrade( rs.getString("studentUserName"), ExamCode,  rs.getString("ExamCourse"),  rs.getString("ExamGrade"),  rs.getString("TeacherName"));
+					array.add(ST);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
+	}
 }

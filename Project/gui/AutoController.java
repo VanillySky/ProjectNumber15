@@ -17,6 +17,7 @@ import controllers.UpgradeConroller;
 import entities.Exam;
 import entities.commonmistake;
 import entities.ExamResponse;
+import entities.ManagerMessage;
 import entities.Question;
 import entities.StatusExam;
 import entities.StudentGrade;
@@ -99,10 +100,12 @@ public class AutoController implements Initializable {
 
 	@FXML
 	private Label questionIns;
-	
-	@FXML
-    private Label cantSubmit;
 
+	@FXML
+	private Label cantSubmit;
+
+	@FXML
+	private Label AddLBL;
 
 	int sum;
 	boolean submit = false;
@@ -110,6 +113,7 @@ public class AutoController implements Initializable {
 	String[] Allpoint;
 	Question[] AllQuestion;
 	static int N;
+	private ObservableList<ManagerMessage> dataList3 = FXCollections.observableArrayList();
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
 	private ObservableList<ExamResponse> dataList2 = FXCollections.observableArrayList();
 	private ArrayList<Object> getQuestion = new ArrayList<Object>();
@@ -118,9 +122,8 @@ public class AutoController implements Initializable {
 	Map<Integer, String> numberMap;
 	static Integer CurrSeconds;
 	Thread thrd;
-	Integer hours, min;
+	Integer hours, min, addSec;
 	static boolean timefinish;
-
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -155,11 +158,11 @@ public class AutoController implements Initializable {
 						setOutput();
 						Thread.sleep(1000);
 						if (CurrSeconds == 0) {
-							
+
 							timefinish = true;
 							Done();
 							thrd.stop();
-						
+
 						}
 					}
 				} catch (Exception e) {
@@ -428,7 +431,7 @@ public class AutoController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		CurrSeconds = 0;
 		ToggleGroup group = new ToggleGroup();
 		Answer1RB.setToggleGroup(group);
 		Answer2RB.setToggleGroup(group);
@@ -457,6 +460,17 @@ public class AutoController implements Initializable {
 		Answer4RB.setText("4)" + AllQuestion[N].getAnswer4());
 		questionIns.setText("instruction:" + AllQuestion[N].getQuestionInstruction());
 
+		dataList3 = FXCollections
+				.observableArrayList((Collection) controllers.DisplayController.ApprovedChangeTime(ExamCode)); ///// add
+																								///// manager																									///// approved
+		if (dataList3.size() != 0) {
+			String addtime = dataList3.get(0).getAddtime();
+			String[] Addhourmin = addtime.split(":");
+			Integer addH = Integer.parseInt(Addhourmin[0]);
+			Integer addM = Integer.parseInt(Addhourmin[1]);
+			 addSec = hmsToSeconds(addH, addM, 0);
+		}
+
 		String time = ExaminationController.ExamTime;
 		String[] hourmin = time.split(":");
 		hours = Integer.parseInt(hourmin[0]);
@@ -464,8 +478,9 @@ public class AutoController implements Initializable {
 		hoursTimer.setText(hours + "");
 		MinutesTimer.setText(min + "");
 		SecondsTimer.setText("0");
-	//	CurrSeconds = hmsToSeconds(hours, min, 0);
-		CurrSeconds =5;
+		CurrSeconds = hmsToSeconds(hours, min, 0);
+		CurrSeconds += addSec;
+		// CurrSeconds =200;
 		timefinish = false;
 		startCountdown();
 

@@ -138,6 +138,8 @@ public class DisplayController {
 		return list;
 	}
 	
+	
+	
 	/**check if the exam repeat  */
 
 	public static Collection<Object> CheckRepeatExam(String ExamCode , String userName) {
@@ -174,6 +176,21 @@ public class DisplayController {
 		list = (ArrayList<StudentGrade>) msgFromServer.getData();
 		return list;	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**show students grade of the same teacher  */
 
@@ -256,22 +273,6 @@ public class DisplayController {
 	
 	
 	
-	/**show students on the exam  */
-
-	public static Collection<InExam> ShowStudentsInExam(String ExamCode) {
-		Collection<InExam> list = new ArrayList<InExam>();
-		ArrayList<Object> list2 = new ArrayList<Object>();
-		list2.add(ExamCode);
-
-		ClientMessage msgFromClient = new ClientMessage("ShowStudentsInExam", list2	, list2.size());
-		ClientUI.chat.accept(msgFromClient);
-		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
-		list = (ArrayList<InExam>) msgFromServer.getData();
-		return list;	
-	}
-	
-	
-	
 	/**show status of the exam  */
 
 	public static Collection<Object> ShowStatusExam(String ExamCode) {
@@ -328,6 +329,44 @@ public class DisplayController {
 		list = (ArrayList<Object>) msgFromServer.getData();
 		return list;
 	}
+	
+	public static  ArrayList<Object> ApprovedChangeTime(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		ClientMessage msgFromClient = new ClientMessage("oneApprovedChangeTime", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
+	public static  ArrayList<Object> checkGradeExist(String ExamCode,String username) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		list.add(username);
+		ClientMessage msgFromClient = new ClientMessage("checkOneGradeExist", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
+	public static  ArrayList<Object> checkapprovalgradeExist(String ExamCode,String username) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		list.add(username);
+		ClientMessage msgFromClient = new ClientMessage("checkOneApprovalGradeExist", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
+	
+	
+	
+	
+	
 
 
 }

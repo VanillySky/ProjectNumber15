@@ -124,7 +124,7 @@ public class StatusController implements Initializable {
 		
 		if(count==0) {
 			
-			ManagerMessage MM = new ManagerMessage(ExamCodeLBL.getText(), ChatClient.currentUser.getUserName(), ChangeTimeTXT.getText(), InstructionsTXT.getText());
+			ManagerMessage MM = new ManagerMessage(ExamCodeLBL.getText(), ChatClient.currentUser.getUserName(), ChangeTimeTXT.getText(), InstructionsTXT.getText(),"-");
 			AddController.AddMessagetoManager(MM);
 			succedLBL.setVisible(true);	
 		}

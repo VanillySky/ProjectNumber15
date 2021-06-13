@@ -46,7 +46,7 @@
             <Image url="@../Images/Submit.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="menuPane" layoutX="790.0" layoutY="33.0" prefHeight="107.0" prefWidth="244.0" style="-fx-background-color: #130f5c;">
+      <AnchorPane fx:id="menuPane" layoutX="790.0" layoutY="33.0" prefHeight="92.0" prefWidth="254.0" style="-fx-background-color: #130f5c;">
          <children>
             <GridPane layoutX="35.0" layoutY="-16.0" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #130f5c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columnConstraints>
@@ -129,7 +129,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="questionLBL" alignment="TOP_LEFT" layoutX="70.0" layoutY="140.0" prefHeight="101.0" prefWidth="968.0" textFill="#130f5c" wrapText="true">
+      <Label fx:id="questionLBL" alignment="TOP_LEFT" layoutX="70.0" layoutY="149.0" prefHeight="92.0" prefWidth="968.0" textFill="#130f5c" wrapText="true">
          <font>
             <Font name="David" size="36.0" />
          </font>
@@ -139,10 +139,11 @@
             <Font name="David" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="cantSubmit" layoutX="829.0" layoutY="546.0" prefHeight="31.0" prefWidth="166.0" text="Label" textFill="RED" visible="false">
+      <Label fx:id="cantSubmit" layoutX="829.0" layoutY="546.0" prefHeight="31.0" prefWidth="166.0" text="the Time done you can't submit your exam" textFill="RED" visible="false">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
+      <Label layoutX="790.0" layoutY="132.0" prefHeight="17.0" prefWidth="254.0" text="Label" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

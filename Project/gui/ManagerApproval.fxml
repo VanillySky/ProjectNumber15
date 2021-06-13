@@ -10,23 +10,24 @@
 
 <AnchorPane prefHeight="516.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagerApprovalController">
    <children>
-      <ImageView fitHeight="525.0" fitWidth="912.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="579.0" fitWidth="1048.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/ManagerConfirmation.png" />
          </image>
       </ImageView>
-      <TableView fx:id="MessageTable" layoutX="156.0" layoutY="110.0" onMousePressed="#selectMessage" prefHeight="274.0" prefWidth="600.0">
+      <TableView fx:id="MessageTable" layoutX="141.0" layoutY="113.0" onMousePressed="#selectMessage" prefHeight="311.0" prefWidth="746.0">
          <columns>
-            <TableColumn fx:id="ExamCodeCol" minWidth="1.0" prefWidth="98.0" text="ExamCode" />
-            <TableColumn fx:id="TeacherNameCol" prefWidth="116.0" text="TeacherName" />
-            <TableColumn fx:id="TimeChangeCol" minWidth="0.0" prefWidth="141.0" text="Time change" />
-            <TableColumn fx:id="InstructionsCol" minWidth="1.0" prefWidth="244.0" text="Instructions" />
+            <TableColumn fx:id="ExamCodeCol" minWidth="1.0" prefWidth="130.0" text="ExamCode" />
+            <TableColumn fx:id="TeacherNameCol" prefWidth="130.0" text="TeacherName" />
+            <TableColumn fx:id="TimeChangeCol" minWidth="0.0" prefWidth="130.0" text="Time change" />
+            <TableColumn fx:id="InstructionsCol" minWidth="0.0" prefWidth="225.0" text="Instructions" />
+            <TableColumn fx:id="ApprovedCol" minWidth="1.0" prefWidth="130.0" text="Approved" />
          </columns>
       </TableView>
-      <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="104.0" prefWidth="116.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="SignOutButton" layoutX="805.0" layoutY="2.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="12.0" prefWidth="107.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="rejectBTN" layoutX="242.0" layoutY="402.0" mnemonicParsing="false" onAction="#PressReject" prefHeight="25.0" prefWidth="116.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="ApproveBTN" layoutX="503.0" layoutY="402.0" mnemonicParsing="false" onAction="#PressApprove" prefHeight="25.0" prefWidth="123.0" style="-fx-background-color: transparent;" />
-      <Label fx:id="ERRLabel" layoutX="242.0" layoutY="446.0" prefHeight="17.0" prefWidth="153.0" text="Please Chose Message" textFill="RED" visible="false" />
+      <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="120.0" prefWidth="132.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SignOutButton" layoutX="920.0" layoutY="2.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="12.0" prefWidth="107.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="rejectBTN" layoutX="326.0" layoutY="473.0" mnemonicParsing="false" onAction="#PressReject" prefHeight="25.0" prefWidth="116.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ApproveBTN" layoutX="607.0" layoutY="473.0" mnemonicParsing="false" onAction="#PressApprove" prefHeight="25.0" prefWidth="123.0" style="-fx-background-color: transparent;" />
+      <Label fx:id="ERRLabel" layoutX="422.0" layoutY="534.0" prefHeight="17.0" prefWidth="208.0" text="Please Chose a change time message" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

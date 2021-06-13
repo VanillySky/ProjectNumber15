@@ -3,8 +3,11 @@
  */
 package gui;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import client.ChatClient;
 import client.ClientUI;
@@ -15,9 +18,13 @@ import controllers.UpgradeConroller;
 import entities.Exam;
 import entities.InExam;
 import entities.StatusExam;
+import entities.StudentGrade;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -65,6 +72,8 @@ public class ExaminationController {
 	static String ExamTime;
 	static StatusExam SE;
 	static int starNum;
+	private ObservableList<StudentGrade> dataList = FXCollections.observableArrayList();
+	private ObservableList<StudentGrade> dataList2 = FXCollections.observableArrayList();
 
 	public void start(Stage primaryStage) {
 		try {
@@ -146,72 +155,98 @@ public class ExaminationController {
 
 		}
 
-		Date date = new Date();
-		if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {
-			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
+		/// get the ExamCode to check if the student done the exam before
+		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
 
-				ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
-				ArrayList<Object> ArrayList = DisplayController.ShowOneExam(ExamCode);
-				Exam exam = (Exam) ArrayList.get(0);
-				ExamTime = exam.getExamTime();
-				SE = new StatusExam(ExamCode, "0", "0", ExamTime, date.toString());
-				if (DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show status
-																			// exam
-					AddController.AddNewExamStatus(SE);
-				}
-				ArrayList<Object> ArrayList1 = DisplayController.GetoneStatusExam(ExamCode);
-				StatusExam st = (StatusExam) ArrayList1.get(0);
-				starNum = Integer.parseInt(st.getNumberStartExam());
-				starNum++;
-				SubmitConfirmationController.ExamCode = ExamCode;
-				int Endnumber = Integer.parseInt(st.getNumberEndExam());
-				SubmitConfirmationController.endExam = Endnumber;
-				SE.setNumberStartExam("" + starNum);
-				UpgradeConroller.UpgradeStatusStart(SE);
-				ManualController.ExamCode=ExamCode;
-				ManualController MC = new ManualController();
-				MC.start(new Stage());
-				((Node) event.getSource()).getScene().getWindow().hide();
-
-			}
-		} else {
-			ContainLetterMsgLBL.setText("The Exam is locked");
-			ContainLetterMsgLBL.setVisible(true);
+			ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
 		}
 
-		if (LoginController.checkLockedA(insertCodeTxtField.getText()).contains("unlocked")) {
-			if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
+		if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
 
-				ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
-				ArrayList<Object> ArrayList = DisplayController.ShowOneExam(ExamCode);
-				Exam exam = (Exam) ArrayList.get(0);
-				ExamTime = exam.getExamTime();
-				SE = new StatusExam(ExamCode, "0", "0", ExamTime, date.toString());
-				if (DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show status
-																			// exam
-					AddController.AddNewExamStatus(SE);
-				}
-				ArrayList<Object> ArrayList1 = DisplayController.GetoneStatusExam(ExamCode);
-				StatusExam st = (StatusExam) ArrayList1.get(0);
-				starNum = Integer.parseInt(st.getNumberStartExam());
-				starNum++;
-				int Endnumber = Integer.parseInt(st.getNumberEndExam());
-				AutoController.Endnumber = Endnumber;
-				SE.setNumberStartExam("" + starNum);
-				AutoLoginController.ExamCode = ExamCode;
-				AutoController.ExamCode = ExamCode;
-				UpgradeConroller.UpgradeStatusStart(SE);
-				if (ExamCode != "") {
-					AutoLoginController ALC = new AutoLoginController();
-					ALC.start(new Stage());
+			ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
+
+		}
+
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController
+				.checkGradeExist(ExamCode, ChatClient.currentUser.getUserName()));
+		dataList2 = FXCollections.observableArrayList((Collection) controllers.DisplayController
+				.checkapprovalgradeExist(ExamCode, ChatClient.currentUser.getUserName()));
+		
+		if (dataList.size() == 0 && dataList2.size() == 0) {
+			Date date = new Date();
+			if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {
+				if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
+
+					ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
+					ArrayList<Object> ArrayList = DisplayController.ShowOneExam(ExamCode);
+					Exam exam = (Exam) ArrayList.get(0);
+					ExamTime = exam.getExamTime();
+					SE = new StatusExam(ExamCode, "0", "0", ExamTime, date.toString());
+					if (DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show
+																				// status
+																				// exam
+						AddController.AddNewExamStatus(SE);
+					}
+					ArrayList<Object> ArrayList1 = DisplayController.GetoneStatusExam(ExamCode);
+					StatusExam st = (StatusExam) ArrayList1.get(0);
+					starNum = Integer.parseInt(st.getNumberStartExam());
+					starNum++;
+					SubmitConfirmationController.ExamCode = ExamCode;
+					int Endnumber = Integer.parseInt(st.getNumberEndExam());
+					SubmitConfirmationController.endExam = Endnumber;
+					SE.setNumberStartExam("" + starNum);
+					UpgradeConroller.UpgradeStatusStart(SE);
+					ManualController.ExamCode = ExamCode;
+					ManualController MC = new ManualController();
+					MC.start(new Stage());
 					((Node) event.getSource()).getScene().getWindow().hide();
+
 				}
+			} else {
+				ContainLetterMsgLBL.setText("The Exam is locked");
+				ContainLetterMsgLBL.setVisible(true);
+			}
+
+			if (LoginController.checkLockedA(insertCodeTxtField.getText()).contains("unlocked")) {
+				if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
+
+					ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
+					ArrayList<Object> ArrayList = DisplayController.ShowOneExam(ExamCode);
+					Exam exam = (Exam) ArrayList.get(0);
+					ExamTime = exam.getExamTime();
+					SE = new StatusExam(ExamCode, "0", "0", ExamTime, date.toString());
+					if (DisplayController.ShowStatusExam(ExamCode).isEmpty()) { // if this exam not found in Show
+																				// status
+																				// exam
+						AddController.AddNewExamStatus(SE);
+					}
+					ArrayList<Object> ArrayList1 = DisplayController.GetoneStatusExam(ExamCode);
+					StatusExam st = (StatusExam) ArrayList1.get(0);
+					starNum = Integer.parseInt(st.getNumberStartExam());
+					starNum++;
+					int Endnumber = Integer.parseInt(st.getNumberEndExam());
+					AutoController.Endnumber = Endnumber;
+					SE.setNumberStartExam("" + starNum);
+					AutoLoginController.ExamCode = ExamCode;
+					AutoController.ExamCode = ExamCode;
+					UpgradeConroller.UpgradeStatusStart(SE);
+					if (ExamCode != "") {
+						AutoLoginController ALC = new AutoLoginController();
+						ALC.start(new Stage());
+						((Node) event.getSource()).getScene().getWindow().hide();
+					}
+				}
+
+			} else {
+				ContainLetterMsgLBL.setText("The Exam is locked");
+				ContainLetterMsgLBL.setVisible(true);
 			}
 
 		} else {
-			ContainLetterMsgLBL.setText("The Exam is locked");
+			ContainLetterMsgLBL.setText("You already did the exam ");
 			ContainLetterMsgLBL.setVisible(true);
 		}
 
 	}
+
 }
