@@ -32,6 +32,11 @@ import javafx.util.Callback;
 import entities.Exam;
 import entities.Question;
 
+/**
+ * @author axwara1
+ * in the class we build a new questions , we put question code and question number and question answers and more
+ *
+ */
 public class BuildQuestionsController implements Initializable {
 
 	@FXML
@@ -110,6 +115,10 @@ public class BuildQuestionsController implements Initializable {
 
 	private ObservableList<Question> dataList = FXCollections.observableArrayList();
 
+	/**
+	 * @param primaryStage
+	 * this method start BuildQuesion FXML , that appear table that have all the question in CEMS 
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -125,6 +134,9 @@ public class BuildQuestionsController implements Initializable {
 		}
 	}
 
+	/**
+	 * this method start when the frame open , we put all the data that existing in sql to this table
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
@@ -149,6 +161,10 @@ public class BuildQuestionsController implements Initializable {
 			
 		}
 
+	/**
+	 * @param event
+	 * we press to AddnewQuestion to go to the frame of write a new question , temp =false because join next page as add not update  
+	 */
 	@FXML
 	public void AddNewQuestion(ActionEvent event) {
 		NewQuestionController.temp = false;
@@ -157,6 +173,10 @@ public class BuildQuestionsController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * send all arguments to next page if we need to update it .
+	 */
 	@FXML
 	void UpdateQuestion(ActionEvent event) {
 		if (selectedQuestion != null) {
@@ -182,6 +202,10 @@ public class BuildQuestionsController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * this method to delete a question from the table 
+	 */
 	@FXML
 	public void DeleteQuestion(ActionEvent event) {
 		if (selectedQuestion != null) {
@@ -198,6 +222,10 @@ public class BuildQuestionsController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * we using this method to mouse event that help us for select 
+	 */
 	@FXML
 	void selectQuestion(MouseEvent event) {
 		if (Table.getSelectionModel().getSelectedItem() != null) {
@@ -205,6 +233,10 @@ public class BuildQuestionsController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * if we press the CEMS logo we go to TeacherMenu
+	 */
 	@FXML
 	public void PressCEMS(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
@@ -212,6 +244,11 @@ public class BuildQuestionsController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * This method to sign out.
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -222,6 +259,10 @@ public class BuildQuestionsController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event
+	 * this method doing search on the table by teacher 
+	 */
 	@FXML
 	public void SearchByTeacher(ActionEvent event) {
 		this.QuestCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));
@@ -258,6 +299,10 @@ public class BuildQuestionsController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * this method doing search on the table by Subject
+	 */
 	@FXML
 	public void SearchBySubject(ActionEvent event) {
 		this.QuestCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("QuestionCode"));

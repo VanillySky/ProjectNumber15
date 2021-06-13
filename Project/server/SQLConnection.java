@@ -24,6 +24,18 @@ import entities.Student;
 import entities.StudentExamanation;
 import entities.StudentGrade;
 
+/**This class is SQL Connection is made to connect to sql and to call all the sql methods 
+ * @author Group number 15
+ *
+ */
+/**
+ * @author Ibrahim Qassem
+ *
+ */
+/**
+ * @author axwara1
+ *
+ */
 public class SQLConnection {
 	private static Connection conn = null;
 
@@ -60,6 +72,10 @@ public class SQLConnection {
 		return conn;
 	}
 
+	/**Checks the loginframecontroller role and checks if he is in the system or not
+	 * @param arr an array list the has the input
+	 * @return user that is in the Database
+	 */
 	public static User checkUser(ArrayList<Object> arr) {
 		String username = (String) arr.get(0);
 		String password = (String) arr.get(1);
@@ -100,6 +116,10 @@ public class SQLConnection {
 		return user;
 	}
 
+	/**This method checks the code of the exam in the manual method to do an auto exam
+	 * @param arr
+	 * @return
+	 */
 	public static String checkManualCode(ArrayList<Object> arr) {
 		String ExamManCode = (String) arr.get(0);
 		String ExamCode = "";
@@ -125,6 +145,10 @@ public class SQLConnection {
 		return ExamCode;
 	}
 	
+	/**Checks if the auto code that the student entered is in the database and returns the code of the exam
+	 * @param arr
+	 * @return
+	 */
 	public static String checkAutoCode(ArrayList<Object> arr) {
 		String ExamAutoCode = (String) arr.get(0);
 		String ExamCode = "";
@@ -151,6 +175,10 @@ public class SQLConnection {
 	}
 	
 	
+	/**This function is made to return the timem of the exam if the input is arraylist with the code (primary key in database )
+	 * @param arr
+	 * @return
+	 */
 	public static String getexamtime(ArrayList<Object> arr) {
 		String ExamCode1 = (String) arr.get(0);
 		String ExamTime = "";
@@ -178,6 +206,9 @@ public class SQLConnection {
 	
 	
 	
+	/**This method is made to check if display all the student that copied from each other
+	 * @return
+	 */
 	public static ArrayList<commonmistake> getAllCommonMistake() {
 		ArrayList<commonmistake> array = new ArrayList<commonmistake>();
 		if (conn != null) {
@@ -199,6 +230,9 @@ public class SQLConnection {
 	}
 	
 
+	/**
+	 * @return This function is written to display all the exams
+	 */
 	public static ArrayList<Exam> getAllexams() {
 		ArrayList<Exam> array = new ArrayList<Exam>();
 		if (conn != null) {
@@ -221,6 +255,9 @@ public class SQLConnection {
 		return array;
 	}
 
+	/**This method is written to show all the messages that the manager got from teacher
+	 * @return
+	 */
 	public static ArrayList<ManagerMessage> getManagerMessages() {
 		ArrayList<ManagerMessage> array = new ArrayList<ManagerMessage>();
 		if (conn != null) {
@@ -241,6 +278,10 @@ public class SQLConnection {
 		return array;
 	}
 
+	/**This function is written to find an specific exam or one exam according to it's code
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<Exam> getOneExams(ArrayList<Object> arr) {
 		ArrayList<Exam> array = new ArrayList<Exam>();
 		String ExamCode = (String) arr.get(0);
@@ -263,6 +304,10 @@ public class SQLConnection {
 
 		return array;
 	}
+	/** The method is made to take one status of exam from the database and table status exam
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StatusExam> oneStatusExam(ArrayList<Object> arr) {
 		ArrayList<StatusExam> array = new ArrayList<StatusExam>();
 		String ExamCode = (String) arr.get(0);
@@ -286,6 +331,10 @@ public class SQLConnection {
 	
 	
 
+	/**This method returns the exams of the teacher according to his name 
+	 * @param arr input it has his name
+	 * @return
+	 */
 	public static ArrayList<Exam> getTeacherexams(ArrayList<Object> arr) {
 		ArrayList<Exam> array = new ArrayList<Exam>();
 		String TeacherExam = (String) arr.get(0);
@@ -309,6 +358,9 @@ public class SQLConnection {
 		return array;
 	}
 
+	/**
+	 * @return akk the question in the table Questions in database
+	 */
 	public static ArrayList<Question> getAllquestions() {
 		ArrayList<Question> array = new ArrayList<Question>();
 		if (conn != null) {
@@ -332,6 +384,10 @@ public class SQLConnection {
 		return array;
 	}
 
+	/** returns one specific question from database
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<Question> getOneQuestion(ArrayList<Object> arr) {
 		ArrayList<Question> array = new ArrayList<Question>();
 		String QuestionCode = (String) arr.get(0);
@@ -356,6 +412,9 @@ public class SQLConnection {
 		return array; 
 	}
 
+	/**
+	 * @return displays all the studentgrade exams that he has done
+	 */
 	public static ArrayList<StudentGrade> getAllgrades() {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		if (conn != null) {
@@ -377,6 +436,9 @@ public class SQLConnection {
 		return array;
 	}
 	
+	/**
+	 * @return it displays all the approved student grades that has been approved by the teacher
+	 */
 	public static ArrayList<StudentGrade> getAllApprovalegrades() {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		if (conn != null) {
@@ -400,6 +462,10 @@ public class SQLConnection {
 	
 	
 
+	/** it displays all the approved grades according to the student username
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StudentGrade> getAllApprovedgrades(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String StudentName = (String) arr.get(0);
@@ -422,6 +488,10 @@ public class SQLConnection {
 		return array;
 	}
 
+	/** it returns all the approved grades by the teacher using her name
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StudentGrade> getAllApprovedgradesTeacher(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String TeacherName = (String) arr.get(0);
@@ -444,6 +514,10 @@ public class SQLConnection {
 		return array;
 	}
 	
+	/** method returns all the approved grade of student according to his username
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StudentGrade> getAllApprovedgradesStudent(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String StudentName = (String) arr.get(0);
@@ -468,7 +542,11 @@ public class SQLConnection {
 	
 	
 	
-	public static ArrayList<StudentGrade> getAllApprovedgradesCourse(ArrayList<Object> arr) {
+	/** it returns all the approved grades of student according to the course name
+	 * @param arr
+	 * @return
+	 */
+	public static ArrayList<StudentGrade> getAllApprovedgradesCourse(ArrayList<Object> arr) { 
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String CourseName = (String) arr.get(0);
 		if (conn != null) {
@@ -492,6 +570,10 @@ public class SQLConnection {
 	
 	
 
+	/** returns all the grades from student grade according to the teacher name
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StudentGrade> TeachergetAllgrades(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String TeacherName = (String) arr.get(0);
@@ -513,6 +595,9 @@ public class SQLConnection {
 		return array;
 	}
 
+	/** returns the time of the exam according to students username
+	 * @return
+	 */
 	public static ArrayList<StudentExamanation> getTime() {
 		ArrayList<StudentExamanation> array = new ArrayList<StudentExamanation>();
 		if (conn != null) {
@@ -534,6 +619,9 @@ public class SQLConnection {
 		return array;
 	}
 
+	/** this method deletes an exam from database exams
+	 * @param arr
+	 */
 	public static void DeleteExam(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -547,6 +635,9 @@ public class SQLConnection {
 			}
 	}
 	
+	/** deletes user that is in the database who is doing an exam
+	 * @param arr
+	 */
 	public static void DeleteInExam(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -564,6 +655,10 @@ public class SQLConnection {
 	
 	
 	
+		/** it returns the information about the student answers in the exam according to the code and username
+		 * @param arr
+		 * @return
+		 */
 		public static ArrayList<ExamResponse> getStudentsAnswer(ArrayList<Object> arr) {
 			ArrayList<ExamResponse> array = new ArrayList<ExamResponse>();
 			String ExamCode = (String) arr.get(0);
@@ -586,6 +681,10 @@ public class SQLConnection {
 		}
 	
 
+		/**this method returns what the student answered according to the table examresponse
+		 * @param arr
+		 * @return
+		 */
 		public static ArrayList<ExamResponse> getSameAnswer(ArrayList<Object> arr) {
 			ArrayList<ExamResponse> array = new ArrayList<ExamResponse>();
 			String ExamCode = (String) arr.get(0);
@@ -610,6 +709,9 @@ public class SQLConnection {
 		
 
 
+	/**this function deletes manager message from database according to exam code 
+	 * @param arr
+	 */
 	public static void DeleteManagerMessage(ArrayList<Object> arr) {
 
 		String ExamCode = (String) arr.get(0);
@@ -623,6 +725,9 @@ public class SQLConnection {
 			}
 	}
 
+	/** delete question from questions according to question code
+	 * @param arr
+	 */
 	public static void DeleteQuestion(ArrayList<Object> arr) {
 
 		String questioncode = (String) arr.get(0);
@@ -636,6 +741,9 @@ public class SQLConnection {
 			}
 	}
 
+	/** delete approvalstudentgrade according the username and examcode from the database
+	 * @param arr
+	 */
 	public static void DeleteApprovalStudentGrade(ArrayList<Object> arr) {
 		String username = (String) arr.get(0);
 		String ExamCode = (String) arr.get(1);
@@ -652,6 +760,10 @@ public class SQLConnection {
 			}
 	}
 
+	/** Addnew question to the questions table in sql
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddNewQuestion(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -689,6 +801,10 @@ public class SQLConnection {
 		return false;
 	}
 
+	/** add new exam to the table exams in database
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddNewExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -721,6 +837,10 @@ public class SQLConnection {
 		return false;
 	}
  
+	/**this method adds the answer of student to database examresponse 
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddNewExamResponse(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -743,6 +863,10 @@ public class SQLConnection {
 
 
 
+	/** adds a common mistake for 2students to the database
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddCommonMistake(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -765,6 +889,10 @@ public class SQLConnection {
 
 	
 	
+	/** adds the new student grade to the database to show it to the teacher
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddNewStudentGrade(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -787,6 +915,10 @@ public class SQLConnection {
 		return false;
 	}
 
+	/** adds the student to inexam table in database that he is 
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddInExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -804,6 +936,10 @@ public class SQLConnection {
 		return false;
 	}
 
+	/** add the new approval student grade by the teacher to database
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddNewApprovalStudentGrade(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -828,6 +964,10 @@ public class SQLConnection {
 		return false;
 	}
 
+	/** add new message to the managaer about changing time from teacher
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddMessagetoManager(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -847,6 +987,10 @@ public class SQLConnection {
 		return false;
 	}
 
+	/**add new status of exam with startexam and endexam etc..
+	 * @param list
+	 * @return
+	 */
 	public static boolean AddNewExamStatus(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -865,6 +1009,10 @@ public class SQLConnection {
 		return false;
 	}
 
+	/**updates time of exam in database exams
+	 * @param list
+	 * @return
+	 */
 	public static boolean UpgradeExam(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -893,6 +1041,10 @@ public class SQLConnection {
 
 	}
 
+	/** this method updates the question in the database questions
+	 * @param list
+	 * @return
+	 */
 	public static boolean UpgradeQuestion(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -928,6 +1080,10 @@ public class SQLConnection {
 
 	}
 	
+	/**This method updates status exam and changes the number of student who started the exam 
+	 * @param list
+	 * @return
+	 */
 	public static boolean UpgradeStart(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -950,6 +1106,10 @@ public class SQLConnection {
 
 	}
 	
+	/** updates the number of student who finished the exam
+	 * @param list
+	 * @return
+	 */
 	public static boolean UpgradeEnd(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -973,6 +1133,10 @@ public class SQLConnection {
 	}
 	
 
+	/**updates the exam situation locked/unlocked
+	 * @param list
+	 * @return
+	 */
 	public static boolean ChangeLockedExCode(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -994,6 +1158,10 @@ public class SQLConnection {
 
 	}
 
+	/** it changes the connection of the client if he is oline/offline
+	 * @param list
+	 * @return
+	 */
 	public static boolean ChangeOnline(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -1014,6 +1182,10 @@ public class SQLConnection {
 
 	}
 
+	/** updates approved field in the table managermessage when the manager approves to changing time
+	 * @param list
+	 * @return
+	 */
 	public static boolean UpgradeApprove(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -1035,6 +1207,10 @@ public class SQLConnection {
 	}
 	
 
+	/**change online/offline situation for users
+	 * @param list
+	 * @return
+	 */
 	public static boolean RestOnline(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -1053,6 +1229,10 @@ public class SQLConnection {
 	}
 	
 
+	/**display the online/offline situation of the user
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<String> checkOnline(ArrayList<Object> arr) {
 		ArrayList<String> array = new ArrayList<String>();
 		String username = (String) arr.get(0);
@@ -1074,6 +1254,10 @@ public class SQLConnection {
 		return array;
 	}
 
+	/** check if the exam is locked by checking the table studentexamcode
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<String> checkLockedMExam(ArrayList<Object> arr) {
 		ArrayList<String> array = new ArrayList<String>();
 		String AMCode = (String) arr.get(0);
@@ -1094,7 +1278,7 @@ public class SQLConnection {
 			}
 		return array;
 	}
-
+   //the same but auto examination
 	public static ArrayList<String> checkLockedAExam(ArrayList<Object> arr) {
 		ArrayList<String> array = new ArrayList<String>();
 		String AMCode = (String) arr.get(0);
@@ -1138,6 +1322,10 @@ public class SQLConnection {
 		return array;
 	}
 	
+	/**returns the student who did the exam 
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<String> checkDoneExamBefore(ArrayList<Object> arr) {
 		ArrayList<String> array = new ArrayList<String>();
 		String ExamCode = (String) arr.get(0);
@@ -1164,6 +1352,10 @@ public class SQLConnection {
 	
 	
 
+	/** check if he did exam more than 1 time
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StudentGrade> CheckRepeatExam(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String ExamCode = (String) arr.get(0);
@@ -1188,6 +1380,11 @@ public class SQLConnection {
 		return array;
 	}
 
+	
+	/**show the situation of student while doing an exam
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<InExam> ShowStudentsInExam(ArrayList<Object> arr) {
 		ArrayList<InExam> array = new ArrayList<InExam>();
 		String ExamCode = (String) arr.get(0);
@@ -1208,6 +1405,10 @@ public class SQLConnection {
 		return array;
 	}
 
+	/**display status of an exam according to status exam table from database
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StatusExam> ShowStatusExam(ArrayList<Object> arr) {
 		ArrayList<StatusExam> array = new ArrayList<StatusExam>();
 		String ExamCode = (String) arr.get(0);
@@ -1230,6 +1431,10 @@ public class SQLConnection {
 	}
 	
 	
+	/**returns the exam that we should change it's time
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<ManagerMessage> oneApprovedChangeTime(ArrayList<Object> arr) {
 		ArrayList<ManagerMessage> array = new ArrayList<ManagerMessage>();
 		String ExamCode = (String) arr.get(0);
@@ -1252,6 +1457,10 @@ public class SQLConnection {
 	}
 	
 	
+	/** returns the exam that the student has done it
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StudentGrade> checkOneGradeExist(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String ExamCode = (String) arr.get(0);
@@ -1275,6 +1484,10 @@ public class SQLConnection {
 	}
 	
 	
+	/**returns the exam thaat the student has done it but not approved by teacher
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<StudentGrade> checkOneApprovalGradeExist(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String ExamCode = (String) arr.get(0);

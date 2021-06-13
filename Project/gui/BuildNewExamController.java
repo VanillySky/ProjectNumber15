@@ -290,6 +290,9 @@ import javafx.stage.Stage;
 
 		
 
+		/**
+		 * save all the arguments because if we go another next frame and back
+		 */
 		public void Saveargs() {
 			Examnumber = ExamNumberField.getText();
 			examSubject = ExamSubjectField.getText();
@@ -300,7 +303,7 @@ import javafx.stage.Stage;
 			temp=true;
 		}
 		
-		
+		// temp = true if we join as update 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			if (temp) {

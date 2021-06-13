@@ -88,6 +88,12 @@ public class ExamApprovalController implements Initializable {
 		}
 	}
 
+	
+	/**
+	 * @param event
+	 * if we press the CEMS logo we go to TeacherMenu
+	 */
+	 
 	@FXML
 	void PressCEMS(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();

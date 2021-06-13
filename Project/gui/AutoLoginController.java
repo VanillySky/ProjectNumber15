@@ -22,6 +22,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author axwara1
+ *this class ask from us to insert the id for the student , before start the exam 
+ */
 public class AutoLoginController implements Initializable {
 
 	@FXML
@@ -47,6 +52,10 @@ public class AutoLoginController implements Initializable {
     static String ExamCode;
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
 
+	/**
+	 * @param event
+	 * this method back to student menu when we press the logo
+	 */
 	@FXML
 	void CEMS(ActionEvent event) {
 		StudentMenuController SMC = new StudentMenuController();
@@ -55,6 +64,10 @@ public class AutoLoginController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * when we press to back button we back to Examination frame
+	 */
 	@FXML
 	void PressBack(ActionEvent event) {
 
@@ -62,7 +75,11 @@ public class AutoLoginController implements Initializable {
 		EXCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-
+ 
+	/**
+	 * @param event - > when we press to sign out button we back to login frame  
+	 * @throws Exception 
+	 */
 	@FXML
 	void PressSignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -73,12 +90,14 @@ public class AutoLoginController implements Initializable {
 	}
 
 
+	/**
+	 * @param event
+	 * this method check the student id 
+	 */
 	@FXML
 	void pressGoToExam(ActionEvent event) {
 		
-		if (IDTXT.getText().equals(ChatClient.currentUser.getUserId())) {
-			///////////////////////// start time
-			
+		if (IDTXT.getText().equals(ChatClient.currentUser.getUserId())) {	
 			AutoController AC = new AutoController();
 			AC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();
@@ -91,6 +110,11 @@ public class AutoLoginController implements Initializable {
 		}
 	}
 
+	
+	/**
+	 * @param primaryStage
+	 * this method start the autoLogin frame .
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -108,6 +132,9 @@ public class AutoLoginController implements Initializable {
 	}
 
 
+	/**
+	 *this method we write the Exam instruction. 
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		dataList = FXCollections.observableArrayList(

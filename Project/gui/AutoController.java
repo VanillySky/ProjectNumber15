@@ -40,6 +40,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * @author axwara1 this class is doing a auto exam for student , only the
+ *         students can join it , and all the questions come in one frame we
+ *         just changes the labels
+ *
+ */
 public class AutoController implements Initializable {
 
 	@FXML
@@ -124,6 +130,13 @@ public class AutoController implements Initializable {
 	Thread thrd;
 	Integer hours, min, addSec;
 	static boolean timefinish;
+
+	
+	
+	
+	/**
+	 * @param primaryStage this function open the FXML of the auto exam , we call it from Login auto class... 
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -140,6 +153,9 @@ public class AutoController implements Initializable {
 
 	}
 
+	/**
+	 * @param event => when we press to CEMS LOGO we back to menu 
+	 */
 	@FXML
 	void CEMS(ActionEvent event) {
 		StudentMenuController SMC = new StudentMenuController();
@@ -147,6 +163,10 @@ public class AutoController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * start a thread that every time decrease from the current seconds 1  , 
+	 * just a doing count down 
+	 */
 	void startCountdown() {
 		thrd = new Thread(new Runnable() {
 
@@ -174,6 +194,9 @@ public class AutoController implements Initializable {
 		thrd.start();
 	}
 
+	/**
+	 *  this method help the thread , every time the thread join this method to write the count down 
+	 */
 	void setOutput() {
 		LinkedList<Integer> currHms = secondsToHms(CurrSeconds);
 		hoursTimer.setText(numberMap.get(currHms.get(0)));
@@ -181,6 +204,10 @@ public class AutoController implements Initializable {
 		SecondsTimer.setText(numberMap.get(currHms.get(2)));
 	}
 
+	/**
+	 * when the thread come to current seconds to 0
+	 * he call this method to stop the thread   
+	 */
 	void Done() {
 
 		cantSubmit.setText("the Time done you can't submit your exam");
@@ -189,12 +216,22 @@ public class AutoController implements Initializable {
 
 	}
 
+	/**
+	 * @param h -> mean the hour 
+	 * @param m -> mean the minutes 
+	 * @param s -> mean the seconds
+	 * @return -> the time with seconds 
+	 */
 	Integer hmsToSeconds(Integer h, Integer m, Integer s) {
 		Integer hToSeconds = h * 3600;
 		Integer mToSeconds = m * 60;
 		return hToSeconds + mToSeconds + s;
 	}
 
+	/**
+	 * @param currSeconds -> the amount of seconds 
+	 * @return -> the hour and minutes and seconds -> 3600 seconds => 1:00
+	 */
 	LinkedList<Integer> secondsToHms(Integer currSeconds) {
 		Integer hours = currSeconds / 3600;
 		currSeconds = CurrSeconds % 3600;
@@ -208,6 +245,11 @@ public class AutoController implements Initializable {
 		return answer;
 	}
 
+	/**
+	 * @param event when we press the next button first we check the answer of the student we put it in studentAnswer array , and then we write the new question and answers , there is question arrays
+	 * and points array and all the answers ,,, if the student answer a question and press next then prev the answer saved . if we come to last question next change to submit and when we press submit
+	 * we check all the common mistake we upgrade the status we calculate the grade , and appear like labels that told us that the exam is done  . 
+	 */
 	@FXML
 	void GoNext(ActionEvent event) {
 
@@ -367,6 +409,9 @@ public class AutoController implements Initializable {
 
 	}
 
+	/**
+	 * @param event - >join this method when we press prev button in javaFX ,when we press prev change the labels to questions and answers that was before and the answer of student  .
+	 */
 	@FXML
 	void GoPrev(ActionEvent event) {
 		submit = false;
@@ -411,6 +456,9 @@ public class AutoController implements Initializable {
 
 	}
 
+	/**
+	 * @param event -> when we press to return button we back to student menu
+	 */
 	@FXML
 	void BackToMenu(ActionEvent event) {
 		thrd.stop();
@@ -419,6 +467,10 @@ public class AutoController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event - > when we press to sign out button we back to login frame  
+	 * @throws Exception 
+	 */
 	@FXML
 	void SignOut(ActionEvent event) throws Exception {
 		thrd.stop();
@@ -429,6 +481,9 @@ public class AutoController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 *this method start the class we put the first question and answer labels and make all the arrays ready , and make the count down ready
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		CurrSeconds = 0;
@@ -462,13 +517,13 @@ public class AutoController implements Initializable {
 
 		dataList3 = FXCollections
 				.observableArrayList((Collection) controllers.DisplayController.ApprovedChangeTime(ExamCode)); ///// add
-																								///// manager																									///// approved
+		///// manager ///// approved
 		if (dataList3.size() != 0) {
 			String addtime = dataList3.get(0).getAddtime();
 			String[] Addhourmin = addtime.split(":");
 			Integer addH = Integer.parseInt(Addhourmin[0]);
 			Integer addM = Integer.parseInt(Addhourmin[1]);
-			 addSec = hmsToSeconds(addH, addM, 0);
+			addSec = hmsToSeconds(addH, addM, 0);
 		}
 
 		String time = ExaminationController.ExamTime;

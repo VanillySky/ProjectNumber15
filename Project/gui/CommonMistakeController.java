@@ -25,6 +25,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author axwara1
+ * this method appear for the teacher a common mistake for the students answers 
+ */
 public class CommonMistakeController implements Initializable{
 
 	@FXML
@@ -53,6 +57,10 @@ public class CommonMistakeController implements Initializable{
 	
 	private ObservableList<commonmistake> dataList = FXCollections.observableArrayList();
 
+	/**
+	 * @param primaryStage
+	 * this method start the class and open the commonMistake FXML
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -68,6 +76,10 @@ public class CommonMistakeController implements Initializable{
 		}
 	}
 
+	/**
+	 * @param event
+	 * if we press the CEMS logo we go to TeacherMenu
+	 */
 	@FXML
 	void PressCEMS(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
@@ -75,6 +87,11 @@ public class CommonMistakeController implements Initializable{
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * this method to sign out
+	 */
 	@FXML
 	void PressSignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
@@ -84,6 +101,10 @@ public class CommonMistakeController implements Initializable{
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event
+	 * press return button to back to Teacher Statics 
+	 */
 	@FXML
 	void pressReturn(ActionEvent event) {
 		TeacherExamStatisticsController TECC = new TeacherExamStatisticsController();
@@ -91,6 +112,9 @@ public class CommonMistakeController implements Initializable{
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 *start this class , fill the table of the commonMistake like ExamCode ,Question Code , Username1 and username2
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	
