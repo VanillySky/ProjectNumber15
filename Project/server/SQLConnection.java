@@ -1484,7 +1484,7 @@ public class SQLConnection {
 	}
 	
 	
-	/**returns the exam thaat the student has done it but not approved by teacher
+	/**returns the exam that the student has done it but not approved by teacher
 	 * @param arr
 	 * @return
 	 */

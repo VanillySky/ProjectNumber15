@@ -113,6 +113,12 @@ public class ExaminationController {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	
+	/**
+	 * @param event
+	 * @throws Exception
+	 * this method doing sign out 
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
@@ -123,11 +129,20 @@ public class ExaminationController {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event
+	 * you press helpButton  to help you and told you from where to get the examcode
+	 */
 	@FXML
 	public void PressHelpButton(ActionEvent event) {
 		AskTeacherLBL.setVisible(true);
 	}
 
+	/**
+	 * @param event
+	 * this method check the code of the exam, if he manual or auto , if its incorrect dont cant join , check if the exam lock , check if we done this exam before 
+	 * and start to calculate the status exam  
+	 */
 	@FXML
 	public void StartExam(ActionEvent event) {
 		char[] chars = insertCodeTxtField.getText().toCharArray();
@@ -167,14 +182,14 @@ public class ExaminationController {
 
 		}
 
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController // check if student done the exam before
 				.checkGradeExist(ExamCode, ChatClient.currentUser.getUserName()));
 		dataList2 = FXCollections.observableArrayList((Collection) controllers.DisplayController
 				.checkapprovalgradeExist(ExamCode, ChatClient.currentUser.getUserName()));
 		
 		if (dataList.size() == 0 && dataList2.size() == 0) {
 			Date date = new Date();
-			if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {
+			if (LoginController.checkLockedM(insertCodeTxtField.getText()).contains("unlocked")) {  //get ready to go to manual exam 
 				if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("M")) {
 
 					ExamCode = LoginController.checkManual(insertCodeTxtField.getText());
@@ -208,7 +223,7 @@ public class ExaminationController {
 			}
 
 			if (LoginController.checkLockedA(insertCodeTxtField.getText()).contains("unlocked")) {
-				if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {
+				if (!insertCodeTxtField.getText().isEmpty() & insertCodeTxtField.getText().startsWith("A")) {// get ready to go to auto exam 
 
 					ExamCode = LoginController.checkAuto(insertCodeTxtField.getText());
 					ArrayList<Object> ArrayList = DisplayController.ShowOneExam(ExamCode);

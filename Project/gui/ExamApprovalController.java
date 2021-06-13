@@ -29,6 +29,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author axwara1
+ * this class for teacher , when the student done the exam , the grade appear in this table , the teacher need to approve it to go for student back
+ *
+ */
 public class ExamApprovalController implements Initializable {
 
 	@FXML
@@ -73,6 +78,10 @@ public class ExamApprovalController implements Initializable {
 	private StudentGrade selectedGrade = null;
 	private ObservableList<StudentGrade> dataList = FXCollections.observableArrayList();
 
+	/**
+	 * @param primaryStage
+	 * this method start the ExamApproval FXML
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -101,6 +110,10 @@ public class ExamApprovalController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * if we press approve the grade go back for the student , if you change the grade you need to put instruction
+	 */
 	@FXML
 	void PressApprove(ActionEvent event) {
 		int count = 0;
@@ -131,7 +144,7 @@ public class ExamApprovalController implements Initializable {
 				}
 
 			}
-			if (count == 0) {
+			if (count == 0) {//no bugs , you can send the grade for student 
 
 				if (!NewGradeTXT.getText().equals(""))
 					selectedGrade.setExamGrade(NewGradeTXT.getText());
@@ -155,6 +168,10 @@ public class ExamApprovalController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * the teacher disapprove the grade , the student got grade 0 with rejected instruction
+	 */
 	@FXML
 	void PressDisapprove(ActionEvent event) {
 		int count = 0;
@@ -184,6 +201,10 @@ public class ExamApprovalController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * press return to go back in exam statics 
+	 */
 	@FXML
 	void PressReturn(ActionEvent event) {
 		TeacherExamStatisticsController TESC = new TeacherExamStatisticsController();
@@ -192,6 +213,11 @@ public class ExamApprovalController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * press sign out to left the CEMS
+	 */
 	@FXML
 	void PressSignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -202,6 +228,10 @@ public class ExamApprovalController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event
+	 * this method a mouse event that help us to select grade from the table
+	 */
 	@FXML
 	void selectGrade(MouseEvent event) {
 		if (GradeTable.getSelectionModel().getSelectedItem() != null) {
@@ -209,6 +239,9 @@ public class ExamApprovalController implements Initializable {
 		}
 	}
 
+	/**
+	 *start this class by put all the student grade in the table
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.StudentNameColumn.setCellValueFactory((Callback) new PropertyValueFactory("studentUserName"));

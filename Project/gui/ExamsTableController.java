@@ -32,6 +32,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author axwara1
+ * this method appear all the exams in table , and you can also go to update,add or doing delete .
+ *
+ */
 public class ExamsTableController implements Initializable {
 
 	@FXML
@@ -101,6 +106,10 @@ public class ExamsTableController implements Initializable {
 
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
 
+	/**
+	 * @param primaryStage
+	 * this method start the FXML of this ExamTable 
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -116,6 +125,10 @@ public class ExamsTableController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * search the exams by teacher name
+	 */
 	@FXML
 	public void SearchByTeacher(ActionEvent event) {
 
@@ -152,6 +165,10 @@ public class ExamsTableController implements Initializable {
 		ExamTable.setItems(sortedData);
 	}
 
+	/**
+	 * @param event
+	 * search the exams table by the course name 
+	 */
 	@FXML
 	public void SearchByCourse(ActionEvent event) {
 
@@ -189,6 +206,10 @@ public class ExamsTableController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * press the CEMS logo to go to Teacher Menu
+	 */
 	@FXML
 	public void PressCEMS(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
@@ -196,6 +217,10 @@ public class ExamsTableController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * press add new exam and go to another frame to write the exam information
+	 */
 	@FXML
 	public void AddNewExam(ActionEvent event) {
 		QuestionsSelectionController.temp = false;
@@ -206,6 +231,10 @@ public class ExamsTableController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * press Update Exam and go to another frame to update the exam information , send the arguments there .
+	 */
 	@FXML
 	public void UpdateExam(ActionEvent event) {
 		if (selectedExam != null) {
@@ -230,6 +259,10 @@ public class ExamsTableController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * delete exam from the table
+	 */
 	@FXML
 	public void DeleteExam(ActionEvent event) {
 		if(selectedExam!=null) {
@@ -245,6 +278,10 @@ public class ExamsTableController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * this method a mouse event that help us to select Exam from the table
+	 */
 	@FXML
 	void selectExam(MouseEvent event) {
 		if (ExamTable.getSelectionModel().getSelectedItem() != null) {
@@ -252,6 +289,11 @@ public class ExamsTableController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * this method to sign out from the CEMS
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -262,6 +304,9 @@ public class ExamsTableController implements Initializable {
 		clientUI.start(new Stage());
 	}
 	
+	/**
+	 * start this class by put all the Exams in the Table 
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 

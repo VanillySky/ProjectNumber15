@@ -32,6 +32,10 @@ import javafx.stage.Stage;
 import server.EchoServer;
 
 
+/**
+ * @author axwara1
+ *this class a login frame . 
+ */
 public class LoginFrameController {
 	@FXML
 	private AnchorPane AnPane;
@@ -92,6 +96,10 @@ public class LoginFrameController {
 		}
 	}
 	
+	/**
+	 * @param event
+	 * this method when we press to login button its check if the user name and password is right and decide who log in the CEMS its is a teacher manager or students 
+	 */
 	@FXML
 	void actionLogInBtn(ActionEvent event) {
 		String textUserName;
