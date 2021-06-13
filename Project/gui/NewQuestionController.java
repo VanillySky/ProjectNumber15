@@ -107,7 +107,7 @@ public class NewQuestionController implements Initializable {
     	int count=0;
     	if(QuestionNumTXT.getText().isEmpty()||SubjectTXT.getText().isEmpty()||QuestionTXT.getText().isEmpty()
     			|| Answer1TXT.getText().isEmpty()||Answer2TXT.getText().isEmpty()||Answer3TXT.getText().isEmpty()
-    			||Answer4TXT.getText().isEmpty()) {
+    			||Answer4TXT.getText().isEmpty() || RightAnswerTXT.getText().isEmpty()) {
     		ErrorLabel.setText("* please fill an important empty fields !!");
 			ErrorLabel.setVisible(true);
     		count++;	
