@@ -127,6 +127,7 @@ public class TeacherExamReportController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		
 		Range95to100.setCellValueFactory(new PropertyValueFactory<Range, Integer>("ramge1"));
 		Range94to90.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range2"));
 		Range85to85.setCellValueFactory(new PropertyValueFactory<Range, Integer>("range3"));

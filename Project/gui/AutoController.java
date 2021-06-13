@@ -3,7 +3,11 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
+
 import client.ChatClient;
 import client.ClientUI;
 import controllers.AddController;
@@ -11,6 +15,8 @@ import controllers.DeleteController;
 import controllers.LoginController;
 import controllers.UpgradeConroller;
 import entities.Exam;
+import entities.commonmistake;
+import entities.ExamResponse;
 import entities.Question;
 import entities.StatusExam;
 import entities.StudentGrade;
@@ -28,12 +34,29 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AutoController implements Initializable {
 
 	@FXML
+	private Pane pane;
+	@FXML
 	private Label questionLBL;
+
+	@FXML
+	private AnchorPane menuPane;
+
+	@FXML
+	private Text hoursTimer;
+
+	@FXML
+	private Text MinutesTimer;
+
+	@FXML
+	private Text SecondsTimer;
 
 	@FXML
 	private RadioButton Answer1RB;
@@ -64,18 +87,18 @@ public class AutoController implements Initializable {
 
 	@FXML
 	private Button PrevBTN;
-	
+
 	@FXML
-    private Button BackToMenu;
+	private Button BackToMenu;
 
-    @FXML
-    private Label TheExamDone;
+	@FXML
+	private Label TheExamDone;
 
-    @FXML
-    private Label label1;
-    
-    @FXML
-    private Label questionIns;
+	@FXML
+	private Label label1;
+
+	@FXML
+	private Label questionIns;
 
 	int sum;
 	boolean submit = false;
@@ -84,8 +107,14 @@ public class AutoController implements Initializable {
 	Question[] AllQuestion;
 	static int N;
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
+	private ObservableList<ExamResponse> dataList2 = FXCollections.observableArrayList();
 	private ArrayList<Object> getQuestion = new ArrayList<Object>();
 	static String ExamCode;
+	static int Endnumber;
+	Map<Integer, String> numberMap;
+	Integer CurrSeconds;
+	Thread thrd;
+	Integer hours, min;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -110,17 +139,85 @@ public class AutoController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	void startCountdown() {
+		thrd = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					while (true) {
+
+						setOutput();
+
+						Thread.sleep(1000);
+						if (CurrSeconds == 0) {
+
+							thrd.stop();
+							Done();
+						}
+
+						CurrSeconds -= 1;
+
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			}
+		});
+		thrd.start();
+	}
+
+	void setOutput() {
+		LinkedList<Integer> currHms = secondsToHms(CurrSeconds);
+		hoursTimer.setText(numberMap.get(currHms.get(0)));
+		MinutesTimer.setText(numberMap.get(currHms.get(1)));
+		SecondsTimer.setText(numberMap.get(currHms.get(2)));
+	}
+
+	void Done() {
+		questionLBL.setVisible(false);
+		Answer1RB.setVisible(false);
+		Answer2RB.setVisible(false);
+		Answer3RB.setVisible(false);
+		Answer4RB.setVisible(false);
+		prevIMG.setVisible(false);
+		PrevBTN.setDisable(true);
+		BackToMenu.setVisible(true);
+		TheExamDone.setText("the Time done you can't submit your exam");
+		TheExamDone.setVisible(true);
+		questionIns.setVisible(false);
+
+	}
+
+	Integer hmsToSeconds(Integer h, Integer m, Integer s) {
+		Integer hToSeconds = h * 3600;
+		Integer mToSeconds = m * 60;
+		return hToSeconds + mToSeconds + s;
+	}
+
+	LinkedList<Integer> secondsToHms(Integer currSeconds) {
+		Integer hours = currSeconds / 3600;
+		CurrSeconds %= 3600;
+		Integer minutes = CurrSeconds / 60;
+		CurrSeconds %= 60;
+		LinkedList<Integer> answer = new LinkedList<>();
+		answer.add(hours);
+		answer.add(minutes);
+		answer.add(CurrSeconds);
+		return answer;
+	}
+
 	@FXML
 	void GoNext(ActionEvent event) {
-		
-		
+
 		if (submit == false) {
 			prevIMG.setVisible(true);
 			PrevBTN.setDisable(false);
 			if (N != AllQuestion.length - 2) {
-				if (Answer1RB.isSelected()) 
+				if (Answer1RB.isSelected())
 					StudentAnswer[N] = 1;
-				
+
 				if (Answer2RB.isSelected())
 					StudentAnswer[N] = 2;
 
@@ -129,37 +226,35 @@ public class AutoController implements Initializable {
 
 				if (Answer4RB.isSelected())
 					StudentAnswer[N] = 4;
-				
+
 				N++;
-				if(StudentAnswer[N]==0) {
+				if (StudentAnswer[N] == 0) {
 					Answer1RB.setSelected(false);
 					Answer2RB.setSelected(false);
 					Answer3RB.setSelected(false);
 					Answer4RB.setSelected(false);
-				}else {
-					if(StudentAnswer[N]==1)
+				} else {
+					if (StudentAnswer[N] == 1)
 						Answer1RB.setSelected(true);
-					if(StudentAnswer[N]==2)
+					if (StudentAnswer[N] == 2)
 						Answer2RB.setSelected(true);
-					if(StudentAnswer[N]==3)
+					if (StudentAnswer[N] == 3)
 						Answer3RB.setSelected(true);
-					if(StudentAnswer[N]==4)
-						Answer4RB.setSelected(true);			
+					if (StudentAnswer[N] == 4)
+						Answer4RB.setSelected(true);
 				}
-					
-				
 
-				questionLBL.setText(N + 1 + "- " + AllQuestion[N].getQuestion()+"     ("+Allpoint[N]+")points");
+				questionLBL.setText(N + 1 + "- " + AllQuestion[N].getQuestion() + "     (" + Allpoint[N] + ")points");
 				Answer1RB.setText("1) " + AllQuestion[N].getAnswer1());
 				Answer2RB.setText("2) " + AllQuestion[N].getAnswer2());
 				Answer3RB.setText("3) " + AllQuestion[N].getAnswer3());
 				Answer4RB.setText("4) " + AllQuestion[N].getAnswer4());
-				questionIns.setText("instruction:"+ AllQuestion[N].getQuestionInstruction());
+				questionIns.setText("instruction:" + AllQuestion[N].getQuestionInstruction());
 
 			} else {
 				submitIMG.setVisible(true);
 
-				if (Answer1RB.isSelected()) 
+				if (Answer1RB.isSelected())
 					StudentAnswer[N] = 1;
 				if (Answer2RB.isSelected())
 					StudentAnswer[N] = 2;
@@ -167,66 +262,85 @@ public class AutoController implements Initializable {
 					StudentAnswer[N] = 3;
 				if (Answer4RB.isSelected())
 					StudentAnswer[N] = 4;
-				
 
 				N++;
-				if(StudentAnswer[N]==0) {
+				if (StudentAnswer[N] == 0) {
 					Answer1RB.setSelected(false);
 					Answer2RB.setSelected(false);
 					Answer3RB.setSelected(false);
 					Answer4RB.setSelected(false);
-				}else {
-					if(StudentAnswer[N]==1)
+				} else {
+					if (StudentAnswer[N] == 1)
 						Answer1RB.setSelected(true);
-					if(StudentAnswer[N]==2)
+					if (StudentAnswer[N] == 2)
 						Answer2RB.setSelected(true);
-					if(StudentAnswer[N]==3)
+					if (StudentAnswer[N] == 3)
 						Answer3RB.setSelected(true);
-					if(StudentAnswer[N]==4)
-						Answer4RB.setSelected(true);			
+					if (StudentAnswer[N] == 4)
+						Answer4RB.setSelected(true);
 				}
-				
 
-				questionLBL.setText(N + 1 + "-" + AllQuestion[N].getQuestion()+"   ("+Allpoint[N]+")points");
+				questionLBL.setText(N + 1 + "-" + AllQuestion[N].getQuestion() + "   (" + Allpoint[N] + ")points");
 				Answer1RB.setText("1)" + AllQuestion[N].getAnswer1());
 				Answer2RB.setText("2)" + AllQuestion[N].getAnswer2());
 				Answer3RB.setText("3)" + AllQuestion[N].getAnswer3());
 				Answer4RB.setText("4)" + AllQuestion[N].getAnswer4());
-				questionIns.setText("instruction:"+ AllQuestion[N].getQuestionInstruction());
+				questionIns.setText("instruction:" + AllQuestion[N].getQuestionInstruction());
 				submit = true;
 
 			}
 
-		}else {
-			
-			if (Answer1RB.isSelected()) 
+		} else {
+
+			if (Answer1RB.isSelected())
 				StudentAnswer[N] = 1;
-			
-				
+
 			if (Answer2RB.isSelected())
 				StudentAnswer[N] = 2;
-	
+
 			if (Answer3RB.isSelected())
 				StudentAnswer[N] = 3;
-	
+
 			if (Answer4RB.isSelected())
 				StudentAnswer[N] = 4;
-			
 
-			for(N=0;N<AllQuestion.length;N++) {
-				if(StudentAnswer[N]==Integer.parseInt(AllQuestion[N].getRightAnswer()))
-					sum+=Integer.parseInt(Allpoint[N]);
+			for (N = 0; N < AllQuestion.length; N++) {
+				if (StudentAnswer[N] == Integer.parseInt(AllQuestion[N].getRightAnswer()))
+					sum += Integer.parseInt(Allpoint[N]);
 			}
-			String grade = ""+sum;
-			StudentGrade  SG = new StudentGrade(ChatClient.currentUser.getUserName() ,ExaminationController.ExamCode , dataList.get(0).getExamCourse(), grade , dataList.get(0).getTeacherName());
+
+			for (N = 0; N < AllQuestion.length; N++) {
+				ExamResponse ER = new ExamResponse(ExamCode, ChatClient.currentUser.getUserName(),
+						AllQuestion[N].QuestionCode, "" + StudentAnswer[N]);
+				AddController.ExamResponse(ER);
+			}
+			String grade = "" + sum;
+			StudentGrade SG = new StudentGrade(ChatClient.currentUser.getUserName(), ExaminationController.ExamCode,
+					dataList.get(0).getExamCourse(), grade, dataList.get(0).getTeacherName());
 			AddController.AddStudentGrade(SG);
-			DeleteController DC = new DeleteController();
-			DC.DeleteInExam(ExamCode,ChatClient.currentUser.getUserName());
-			int endExam = ExaminationController.Endnumber+1;
+
+			for (N = 0; N < AllQuestion.length; N++) {
+				if (!AllQuestion[N].getRightAnswer().equals("" + StudentAnswer[N])) {
+					dataList2 = FXCollections.observableArrayList((Collection) controllers.DisplayController
+							.GetAllSameAnswer(ExamCode, AllQuestion[N].getQuestionCode(), "" + StudentAnswer[N]));
+					
+					for (int i = 0; i < dataList2.size(); i++) {
+						commonmistake CM = new commonmistake(ExamCode, AllQuestion[N].getQuestionCode(),
+								ChatClient.currentUser.getUserName(), dataList2.get(i).getUserName());
+						if (!dataList2.get(i).getUserName().equals(ChatClient.currentUser.getUserName()))
+							AddController.AddCommonMistake(CM);
+					}
+				}
+			}
+
 			StatusExam EndStatus;
-			EndStatus=ExaminationController.SE;
-			EndStatus.setNumberEndExam(""+endExam);
-			UpgradeConroller.UpgradeStatusStart(EndStatus);
+			Endnumber++;
+			EndStatus = ExaminationController.SE;
+			EndStatus.setNumberEndExam("" + Endnumber);
+
+			UpgradeConroller.UpgradeStatusEnd(EndStatus);
+
+			submitIMG.setVisible(false);
 			questionLBL.setVisible(false);
 			Answer1RB.setVisible(false);
 			Answer2RB.setVisible(false);
@@ -238,66 +352,66 @@ public class AutoController implements Initializable {
 			TheExamDone.setVisible(true);
 			label1.setVisible(true);
 			questionIns.setVisible(false);
-			
+			menuPane.setVisible(false);
+
 		}
-	
+
 	}
 
 	@FXML
 	void GoPrev(ActionEvent event) {
-		submit=false;
+		submit = false;
 		submitIMG.setVisible(false);
 
-		if (Answer1RB.isSelected()) 
-			StudentAnswer[N] = 1;		
+		if (Answer1RB.isSelected())
+			StudentAnswer[N] = 1;
 		if (Answer2RB.isSelected())
 			StudentAnswer[N] = 2;
 		if (Answer3RB.isSelected())
 			StudentAnswer[N] = 3;
 		if (Answer4RB.isSelected())
 			StudentAnswer[N] = 4;
-		
-		
+
 		N--;
-		if(StudentAnswer[N]==0) {
+		if (StudentAnswer[N] == 0) {
 			Answer1RB.setSelected(false);
 			Answer2RB.setSelected(false);
 			Answer3RB.setSelected(false);
 			Answer4RB.setSelected(false);
-		}else {
-			if(StudentAnswer[N]==1)
+		} else {
+			if (StudentAnswer[N] == 1)
 				Answer1RB.setSelected(true);
-			if(StudentAnswer[N]==2)
+			if (StudentAnswer[N] == 2)
 				Answer2RB.setSelected(true);
-			if(StudentAnswer[N]==3)
+			if (StudentAnswer[N] == 3)
 				Answer3RB.setSelected(true);
-			if(StudentAnswer[N]==4)
-				Answer4RB.setSelected(true);			
+			if (StudentAnswer[N] == 4)
+				Answer4RB.setSelected(true);
 		}
 		if (N == 0) {
 			prevIMG.setVisible(false);
 			PrevBTN.setDisable(true);
 		}
 
-		questionLBL.setText(N + 1 + "-" + AllQuestion[N].getQuestion()+"   ("+Allpoint[N]+")points");
+		questionLBL.setText(N + 1 + "-" + AllQuestion[N].getQuestion() + "   (" + Allpoint[N] + ")points");
 		Answer1RB.setText("1)" + AllQuestion[N].getAnswer1());
 		Answer2RB.setText("2)" + AllQuestion[N].getAnswer2());
 		Answer3RB.setText("3)" + AllQuestion[N].getAnswer3());
 		Answer4RB.setText("4)" + AllQuestion[N].getAnswer4());
-		questionIns.setText("instruction:"+ AllQuestion[N].getQuestionInstruction());
+		questionIns.setText("instruction:" + AllQuestion[N].getQuestionInstruction());
 
 	}
-	
+
 	@FXML
-    void BackToMenu(ActionEvent event) {
+	void BackToMenu(ActionEvent event) {
 		StudentMenuController SMC = new StudentMenuController();
 		SMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-    }
+	}
 
 	@FXML
 	void SignOut(ActionEvent event) throws Exception {
-		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();
@@ -314,31 +428,44 @@ public class AutoController implements Initializable {
 		Answer4RB.setToggleGroup(group);
 
 		N = 0;
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowOneExam(ExaminationController.ExamCode));
-	   String[] QuestionCodes = dataList.get(0).getChosenQuestion().split("\n");
+		dataList = FXCollections.observableArrayList(
+				(Collection) controllers.DisplayController.ShowOneExam(ExaminationController.ExamCode));
+		String[] QuestionCodes = dataList.get(0).getChosenQuestion().split("\n");
 		String[] points = dataList.get(0).getQuestionPoint().split("\n");
 		AllQuestion = new Question[QuestionCodes.length];
-		Allpoint = new String [QuestionCodes.length];
+		Allpoint = new String[QuestionCodes.length];
 		StudentAnswer = new int[QuestionCodes.length];
 
 		for (int i = 0; i < QuestionCodes.length; i++) {
-			getQuestion =   (ArrayList<Object>) controllers.DisplayController.ShowOneQuestions(QuestionCodes[i]);
-			AllQuestion[i]=(Question) getQuestion.get(0);
-			Allpoint[i]=points[i];
+			getQuestion = (ArrayList<Object>) controllers.DisplayController.ShowOneQuestions(QuestionCodes[i]);
+			AllQuestion[i] = (Question) getQuestion.get(0);
+			Allpoint[i] = points[i];
 		}
 
-		
-		
-		questionLBL.setText(N + 1 + "-" + AllQuestion[N].getQuestion()+"   ("+Allpoint[N]+")points");
+		questionLBL.setText(N + 1 + "-" + AllQuestion[N].getQuestion() + "   (" + Allpoint[N] + ")points");
 		Answer1RB.setText("1)" + AllQuestion[N].getAnswer1());
 		Answer2RB.setText("2)" + AllQuestion[N].getAnswer2());
 		Answer3RB.setText("3)" + AllQuestion[N].getAnswer3());
 		Answer4RB.setText("4)" + AllQuestion[N].getAnswer4());
-		questionIns.setText("instruction:"+ AllQuestion[N].getQuestionInstruction());
-		
-		
-		
+		questionIns.setText("instruction:" + AllQuestion[N].getQuestionInstruction());
 
+		String time = ExaminationController.ExamTime;
+		String[] hourmin = time.split(":");
+		hours = Integer.parseInt(hourmin[0]);
+		min = Integer.parseInt(hourmin[1]);
+		hoursTimer.setText(hours + "");
+		MinutesTimer.setText(min + "");
+		SecondsTimer.setText("0");
+		CurrSeconds = hmsToSeconds(hours, min, 0);
+		startCountdown();
+
+		numberMap = new TreeMap<Integer, String>();
+		for (Integer i = 0; i <= 60; i++) {
+			if (i >= 0 && i <= 24)
+				numberMap.put(i, "0" + i.toString());
+			else
+				numberMap.put(i, i.toString());
+		}
 	}
 
 }

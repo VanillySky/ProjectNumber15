@@ -122,7 +122,14 @@ public class ManagerStatisticsController implements Initializable {
 	@FXML
 	void PressGetExamReport(ActionEvent event) {
 		if (selectedExam != null) {
-			TeacherExamReportController.isTeacher = true;
+			TeacherExamReportController.numberofStudents=0;
+			TeacherExamReportController.MaxGrade=0;
+			TeacherExamReportController.MinGrade=0;
+			TeacherExamReportController.Average=0;
+			TeacherExamReportController.median=0;
+			for(int i=0 ; i < 9 ;i++)
+				TeacherExamReportController.GradeRange[i]=0;
+			TeacherExamReportController.isTeacher = false;
 			AllExamGrades = FXCollections.observableArrayList((Collection) controllers.DisplayController
 					.ShowApprovedStudentStudent(selectedExam.getStudentUserName()));
 
@@ -201,6 +208,14 @@ public class ManagerStatisticsController implements Initializable {
 	@FXML
 	void PressGetTeacherReport(ActionEvent event) {
 		if (selectedExam != null) {
+			TeacherExamReportController.numberofStudents=0;
+			TeacherExamReportController.MaxGrade=0;
+			TeacherExamReportController.MinGrade=0;
+			TeacherExamReportController.Average=0;
+			TeacherExamReportController.median=0;
+			for(int i=0 ; i < 9 ;i++)
+				TeacherExamReportController.GradeRange[i]=0;
+			
 			TeacherExamReportController.isTeacher=false;
 			AllExamGrades = FXCollections.observableArrayList(
 					(Collection) controllers.DisplayController.ShowApprovedStudentTeacher(selectedExam.getTeacherName()));
@@ -279,6 +294,13 @@ public class ManagerStatisticsController implements Initializable {
 	@FXML
 	void PressGetCourseReport(ActionEvent event) {
 		if (selectedExam != null) {
+			TeacherExamReportController.numberofStudents=0;
+			TeacherExamReportController.MaxGrade=0;
+			TeacherExamReportController.MinGrade=0;
+			TeacherExamReportController.Average=0;
+			TeacherExamReportController.median=0;
+			for(int i=0 ; i < 9 ;i++)
+				TeacherExamReportController.GradeRange[i]=0;
 			TeacherExamReportController.isTeacher=false;
 			AllExamGrades = FXCollections.observableArrayList(
 					(Collection) controllers.DisplayController.ShowApprovedStudentCourse(selectedExam.getExamCourse()));
@@ -369,7 +391,7 @@ public class ManagerStatisticsController implements Initializable {
 		this.CourseCol.setCellValueFactory((Callback) new PropertyValueFactory("ExamCourse"));
 		this.ExamGrade.setCellValueFactory((Callback) new PropertyValueFactory("ExamGrade"));
 		this.AuthorCol.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowStudentGrade());
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowApprovaleStudentGrade());
 		TableStat.setItems(dataList);
 		FilteredList<StudentGrade> filteredData = new FilteredList<StudentGrade>(dataList, b -> true);
 		SearchCourseTXT.textProperty().addListener((Observable, oldValue, newValue) -> {
@@ -397,7 +419,7 @@ public class ManagerStatisticsController implements Initializable {
 		this.ExamGrade.setCellValueFactory((Callback) new PropertyValueFactory("ExamGrade"));
 		this.AuthorCol.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
 
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowStatistics());
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowApprovaleStudentGrade());
 		TableStat.setItems(dataList);
 
 		FilteredList<StudentGrade> filteredData = new FilteredList<StudentGrade>(dataList, b -> true);
@@ -427,7 +449,7 @@ public class ManagerStatisticsController implements Initializable {
 		this.ExamGrade.setCellValueFactory((Callback) new PropertyValueFactory("ExamGrade"));
 		this.AuthorCol.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
 
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowStatistics());
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ShowApprovaleStudentGrade());
 		TableStat.setItems(dataList);
 
 		FilteredList<StudentGrade> filteredData = new FilteredList<StudentGrade>(dataList, b -> true);

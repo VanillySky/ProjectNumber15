@@ -34,6 +34,7 @@ public class SubmitConfirmationController {
     @FXML
     private Label ConfirmationLBL;
     static boolean isAuto = true;
+    static int endExam;
 
 	public void start(Stage primaryStage) {
 		try {
@@ -59,12 +60,11 @@ public class SubmitConfirmationController {
 	@FXML
 	public void SubmitExam(ActionEvent event) {
 		if (ConfirmCheckBTN.isSelected()) {
-			int endExam = ExaminationController.Endnumber+1;
 			StatusExam EndStatus;
+			
 			EndStatus=ExaminationController.SE;
 			EndStatus.setNumberEndExam(""+endExam);
-			UpgradeConroller.UpgradeStatusStart(EndStatus);
-			
+			UpgradeConroller.UpgradeStatusEnd(EndStatus);
 			SubmittedExamController SEC = new SubmittedExamController();
 			SEC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

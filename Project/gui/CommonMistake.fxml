@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CommonMistakeController">
+   <children>
+      <ImageView fitHeight="579.0" fitWidth="1048.0">
+         <image>
+            <Image url="@../Images/CommonMistake.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="ReturnBTN" layoutX="70.0" layoutY="468.0" mnemonicParsing="false" onAction="#pressReturn" prefHeight="29.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="CEMSBTN" layoutY="-1.0" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="121.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="SignoutBTN" layoutX="929.0" layoutY="-1.0" mnemonicParsing="false" onAction="#PressSignOut" prefHeight="31.0" prefWidth="119.0" style="-fx-background-color: transparent;" />
+      <TableView fx:id="CommonMisTable" layoutX="138.0" layoutY="130.0" prefHeight="319.0" prefWidth="795.0">
+        <columns>
+          <TableColumn fx:id="ExamCodeCol" prefWidth="231.0" text="Exam code" />
+          <TableColumn fx:id="QuestionCodeCol" minWidth="0.0" prefWidth="159.0" text="Question code" />
+            <TableColumn fx:id="userName1col" minWidth="0.0" prefWidth="184.0" text="First student user name" />
+            <TableColumn fx:id="userName2Col" minWidth="0.0" prefWidth="220.0" text="Second student user name" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>

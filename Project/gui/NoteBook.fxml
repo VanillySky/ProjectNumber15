@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="533.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.NoteBookController">
+   <children>
+      <ImageView fitHeight="540.0" fitWidth="946.0" layoutX="2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/NoteBookExam.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="prevImage" fitHeight="24.0" fitWidth="116.0" layoutX="657.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../Images/Prev.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="NextImg" fitHeight="24.0" fitWidth="123.0" layoutX="788.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Next.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="questionLBL" alignment="TOP_LEFT" layoutX="78.0" layoutY="150.0" prefHeight="42.0" prefWidth="677.0" textFill="#130f5c">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="RightAnswer" alignment="TOP_LEFT" layoutX="78.0" layoutY="216.0" prefHeight="42.0" prefWidth="685.0" textFill="#130f5c">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="StudentAnswer" alignment="TOP_LEFT" layoutX="78.0" layoutY="289.0" prefHeight="42.0" prefWidth="685.0" textFill="#130f5c">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="Point" alignment="TOP_LEFT" layoutX="757.0" layoutY="150.0" prefHeight="42.0" prefWidth="108.0" textFill="#130f5c">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="CEMBTN" mnemonicParsing="false" onAction="#CEMS" prefHeight="119.0" prefWidth="126.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="SignOUTBTN" layoutX="842.0" layoutY="1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="NEXTBTN" layoutX="788.0" layoutY="478.0" mnemonicParsing="false" onAction="#GoNext" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="PrevBTN" disable="true" layoutX="657.0" layoutY="479.0" mnemonicParsing="false" onAction="#GoPrev" prefHeight="25.0" prefWidth="116.0" style="-fx-background-color: Transparent;" />
+      <Button fx:id="RetrurnBTN" layoutX="53.0" layoutY="479.0" mnemonicParsing="false" onAction="#GoReturn" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: Transparent;" />
+   </children>
+</AnchorPane>

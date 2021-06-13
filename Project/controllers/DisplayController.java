@@ -8,12 +8,14 @@ import Protocol.ServerMessage;
 import client.ChatClient;
 import client.ClientUI;
 import entities.Exam;
+import entities.ExamResponse;
 import entities.InExam;
 import entities.ManagerMessage;
 import entities.Question;
 import entities.Statistics;
 import entities.StudentGrade;
 import entities.Teacher;
+import entities.commonmistake;
 
 public class DisplayController {
 	@SuppressWarnings("unchecked")
@@ -41,6 +43,15 @@ public class DisplayController {
 		return list;
 	}
 	 
+	public static ArrayList<commonmistake> ShowCommonMistake() {
+		ArrayList<commonmistake> list = new ArrayList<commonmistake>();
+		ClientMessage msgFromClient = new ClientMessage("getAllCommonMistake", null, 0);
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<commonmistake>) msgFromServer.getData();
+		return list;
+	}
+	
 	
 	/**show manager message*/
 	public static ArrayList<ManagerMessage> showManagerMessage() {
@@ -65,6 +76,32 @@ public class DisplayController {
 		list = (ArrayList<Object>) msgFromServer.getData();
 		return list;
 	}
+	
+	public static  ArrayList<Object> GetAllStudentAnswer(String ExamCode , String username) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		list.add(username);
+		ClientMessage msgFromClient = new ClientMessage("getStudentsAnswer", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
+	
+
+	public static  ArrayList<Object> GetAllSameAnswer(String ExamCode , String QuestionCode , String StudentAnswer) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		list.add(QuestionCode);
+		list.add(StudentAnswer);
+		ClientMessage msgFromClient = new ClientMessage("getSameAnswer", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list = (ArrayList<Object>) msgFromServer.getData();
+		return list;
+	}
+	
 	
 	/**show teacher exams  */
 	public static Collection<Object> ShowTeacherExams(String TeacherName)  {

@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="500.0" fitWidth="877.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/Statistics.jpeg" />
+            <Image url="@../Images/Statistics.png" />
          </image>
       </ImageView>
       <TextField fx:id="SearchStudentTXT" layoutX="180.0" layoutY="115.0" prefHeight="10.0" prefWidth="218.0" />
@@ -23,9 +23,9 @@
       <TextField fx:id="SearchTeacherTXT" layoutX="180.0" layoutY="181.0" prefHeight="10.0" prefWidth="218.0" />
       <TableView fx:id="TableStat" layoutX="15.0" layoutY="219.0" onMousePressed="#selectExam" prefHeight="188.0" prefWidth="850.0">
         <columns>
-          <TableColumn fx:id="StudentNameCol" prefWidth="182.0" text="Student Name" />
-          <TableColumn fx:id="ExamCodeCol" minWidth="0.0" prefWidth="196.0" text="Exam Code" />
-            <TableColumn fx:id="CourseCol" prefWidth="134.0" text="Course" />
+          <TableColumn fx:id="StudentNameCol" prefWidth="191.0" text="Student Name" />
+          <TableColumn fx:id="ExamCodeCol" minWidth="0.0" prefWidth="160.0" text="Exam Code" />
+            <TableColumn fx:id="CourseCol" prefWidth="161.0" text="Course" />
             <TableColumn fx:id="ExamGrade" prefWidth="155.0" text="Exam Grade" />
             <TableColumn fx:id="AuthorCol" prefWidth="182.0" text="Author " />
         </columns>
@@ -58,7 +58,7 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="GetReportBTN" contentDisplay="CENTER" layoutX="693.0" layoutY="416.0" mnemonicParsing="false" onAction="#PressGetExamReport" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
+      <Button fx:id="GetReportBTN" contentDisplay="CENTER" layoutX="93.0" layoutY="416.0" mnemonicParsing="false" onAction="#PressGetExamReport" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: transparent;" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
@@ -69,7 +69,7 @@
          </font>
       </Button>
       <Label fx:id="ErrorLbl" layoutX="647.0" layoutY="450.0" prefHeight="17.0" prefWidth="204.0" textFill="RED" />
-      <Button fx:id="GetTeacherReport" layoutX="390.0" layoutY="413.0" mnemonicParsing="false" onAction="#PressGetTeacherReport" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="GetCourseReport" layoutX="90.0" layoutY="413.0" mnemonicParsing="false" onAction="#PressGetCourseReport" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="GetTeacherReport" layoutX="691.0" layoutY="413.0" mnemonicParsing="false" onAction="#PressGetTeacherReport" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="GetCourseReport" layoutX="392.0" layoutY="413.0" mnemonicParsing="false" onAction="#PressGetCourseReport" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

@@ -81,6 +81,7 @@ public class LoginController {
 		return list;
 	}
 	
+	
 
 	
 	
@@ -116,6 +117,18 @@ public class LoginController {
 		list.add(ExamCode);
 		
 		ClientMessage msgFromClient = new ClientMessage("checkLockedEXCODE", list, list.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		list= (ArrayList<Object>) msgFromServer.getData();
+
+		return list;
+	}
+
+	public static ArrayList<Object> checkDoneExBefore(String ExamCode) {
+		ArrayList<Object> list = new ArrayList<Object>();
+		list.add(ExamCode);
+		
+		ClientMessage msgFromClient = new ClientMessage("checkDoneExamBefore", list, list.size());
 		ClientUI.chat.accept(msgFromClient);
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		list= (ArrayList<Object>) msgFromServer.getData();

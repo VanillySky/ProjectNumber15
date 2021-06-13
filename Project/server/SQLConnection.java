@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import client.ChatClient;
 import entities.Teacher;
 import entities.User;
+import entities.commonmistake;
 import entities.Exam;
+import entities.ExamResponse;
 import entities.InExam;
 import entities.Manager;
 import entities.ManagerMessage;
@@ -171,6 +173,28 @@ public class SQLConnection {
 				e.printStackTrace();
 			}
 		return ExamTime;
+	}
+	
+	
+	
+	public static ArrayList<commonmistake> getAllCommonMistake() {
+		ArrayList<commonmistake> array = new ArrayList<commonmistake>();
+		if (conn != null) {
+			try {
+				String query = "Select * FROM commonmistakes";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				while (rs.next()) {
+					commonmistake CM = new commonmistake(rs.getString("ExamCode"), rs.getString("QuestionCode"),
+							rs.getString("UserName1"), rs.getString("UserName2"));
+					array.add(CM);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return array;
 	}
 	
 
@@ -441,6 +465,8 @@ public class SQLConnection {
 		return array;
 	}
 	
+	
+	
 	public static ArrayList<StudentGrade> getAllApprovedgradesCourse(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();
 		String CourseName = (String) arr.get(0);
@@ -535,6 +561,53 @@ public class SQLConnection {
 			}
 	}
 	
+	
+	
+		public static ArrayList<ExamResponse> getStudentsAnswer(ArrayList<Object> arr) {
+			ArrayList<ExamResponse> array = new ArrayList<ExamResponse>();
+			String ExamCode = (String) arr.get(0);
+			String UserName= (String) arr.get(1);
+			if (conn != null) {
+				try {
+					String query = "Select * FROM examresponse WHERE ExamCode = '" + ExamCode + "' AND UserName = '"+ UserName + "'";
+					Statement st = conn.createStatement();
+					ResultSet rs = st.executeQuery(query);
+					while (rs.next()) {
+						ExamResponse ER = new ExamResponse(rs.getString("ExamCode"), rs.getString("UserName"), rs.getString("QuestionCode"), rs.getString("StudentAnswer"));
+						array.add(ER);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			return array;
+		}
+	
+
+		public static ArrayList<ExamResponse> getSameAnswer(ArrayList<Object> arr) {
+			ArrayList<ExamResponse> array = new ArrayList<ExamResponse>();
+			String ExamCode = (String) arr.get(0);
+			String QuestionCode= (String) arr.get(1);
+			String StudentAnswer = (String)arr.get(2);
+			if (conn != null) {
+				try {
+					String query = "Select * FROM examresponse WHERE ExamCode = '" + ExamCode + "' AND QuestionCode = '"+ QuestionCode + "' AND StudentAnswer = '" +StudentAnswer+"'" ;
+					Statement st = conn.createStatement();
+					ResultSet rs = st.executeQuery(query);
+					while (rs.next()) {
+						ExamResponse ER = new ExamResponse(rs.getString("ExamCode"), rs.getString("UserName"), rs.getString("QuestionCode"), rs.getString("StudentAnswer"));
+						array.add(ER);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			return array;
+		}
+		
+
 
 	public static void DeleteManagerMessage(ArrayList<Object> arr) {
 
@@ -646,7 +719,51 @@ public class SQLConnection {
 		}
 		return false;
 	}
+ 
+	public static boolean AddNewExamResponse(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
 
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO examresponse VALUES (?,?,?,?);");
+				stmt.setString(1, ((ExamResponse) list.get(0)).getExamCode());
+				stmt.setString(2, ((ExamResponse) list.get(0)).getUserName());
+				stmt.setString(3, ((ExamResponse) list.get(0)).getQuestionCode());
+				stmt.setString(4, ((ExamResponse) list.get(0)).getStudentAnswer());
+			
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+
+
+	public static boolean AddCommonMistake(ArrayList<Object> list) {
+		if (conn != null) {
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement("INSERT INTO commonmistakes VALUES (?,?,?,?);");
+				stmt.setString(1, ((commonmistake) list.get(0)).getExamCode());
+				stmt.setString(2, ((commonmistake) list.get(0)).getQuestionCode());
+				stmt.setString(3, ((commonmistake) list.get(0)).getUserName1());
+				stmt.setString(4, ((commonmistake) list.get(0)).getUserName2());
+			
+
+				stmt.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	
+	
 	public static boolean AddNewStudentGrade(ArrayList<Object> list) {
 		if (conn != null) {
 			try {
@@ -1000,6 +1117,32 @@ public class SQLConnection {
 
 		return array;
 	}
+	
+	public static ArrayList<String> checkDoneExamBefore(ArrayList<Object> arr) {
+		ArrayList<String> array = new ArrayList<String>();
+		String ExamCode = (String) arr.get(0);
+		if (conn != null)
+			try {
+
+				String query = "Select studentUserName FROM studentgrade WHERE ExamCode = '" + ExamCode + "'";
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(query);
+
+				while (rs.next()) {
+					String locked = new String(rs.getString("studentUserName"));
+					array.add(locked);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		return array;
+	}
+	
+	
+	
+	
 
 	public static ArrayList<StudentGrade> CheckRepeatExam(ArrayList<Object> arr) {
 		ArrayList<StudentGrade> array = new ArrayList<StudentGrade>();

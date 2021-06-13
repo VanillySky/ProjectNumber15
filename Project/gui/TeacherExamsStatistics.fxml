@@ -17,8 +17,8 @@
          </image>
       </ImageView>
       <Button fx:id="SignOutBTN" layoutX="1067.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: transparent;" />
-      <TextField fx:id="SearchByCourseNameTXT" layoutX="245.0" layoutY="159.0" prefHeight="31.0" prefWidth="292.0" />
-      <Button fx:id="SearchBTN" layoutX="537.0" layoutY="159.0" mnemonicParsing="false" onAction="#Search" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="SearchByCourseNameTXT" layoutX="245.0" layoutY="159.0" prefHeight="31.0" prefWidth="302.0" />
+      <Button fx:id="SearchBTN" layoutX="547.0" layoutY="159.0" mnemonicParsing="false" onAction="#Search" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" />
       <Button fx:id="ReturnBTN" layoutX="129.0" layoutY="461.0" mnemonicParsing="false" onAction="#PressBack" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
       <Button fx:id="GetReportBTN" layoutX="851.0" layoutY="461.0" mnemonicParsing="false" onAction="#PressReport" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
       <TableView fx:id="ExamsTable" layoutX="4.0" layoutY="211.0" onMousePressed="#selectExam" prefHeight="238.0" prefWidth="1190.0">
@@ -39,7 +39,8 @@
       <Label fx:id="ErrorLbl" layoutX="851.0" layoutY="503.0" prefHeight="17.0" prefWidth="195.0" text="please chose any Exam!" textFill="RED" visible="false" />
 
       <Label fx:id="ErrorLbl" layoutX="851.0" layoutY="502.0" text="Label" textFill="RED" visible="false" />
-      <Button fx:id="ApprovalBTN" layoutX="939.0" layoutY="151.0" mnemonicParsing="false" onAction="#PressApproval" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="StatusBTN" layoutX="707.0" layoutY="151.0" mnemonicParsing="false" onAction="#PressStatus" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="ApprovalBTN" layoutX="962.0" layoutY="159.0" mnemonicParsing="false" onAction="#PressApproval" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="StatusBTN" layoutX="700.0" layoutY="159.0" mnemonicParsing="false" onAction="#PressStatus" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="commonmistakeBTN" layoutX="455.0" layoutY="461.0" mnemonicParsing="false" onAction="#PressCommonMistake" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

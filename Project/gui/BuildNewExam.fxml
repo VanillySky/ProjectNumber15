@@ -22,7 +22,7 @@
       <TextField fx:id="ExamNumberField" layoutX="395.0" layoutY="162.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 01" />
       <TextField fx:id="ExamSubjectField" layoutX="395.0" layoutY="205.0" prefHeight="33.0" prefWidth="260.0" promptText="ex. 02" />
       <TextField fx:id="ExamCourseField" layoutX="395.0" layoutY="254.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 03" />
-      <TextField fx:id="ExamTimeField" layoutX="395.0" layoutY="307.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 3" />
+      <TextField fx:id="ExamTimeField" layoutX="395.0" layoutY="307.0" prefHeight="31.0" prefWidth="260.0" promptText="ex. 3:00" />
       <TextField fx:id="StudentInstructionField" layoutX="395.0" layoutY="350.0" prefHeight="31.0" prefWidth="260.0" />
       <TextField fx:id="TeacherInstructionField" layoutX="395.0" layoutY="396.0" prefHeight="31.0" prefWidth="260.0" />
       <ImageView fx:id="ExamNumberER" fitHeight="15.0" fitWidth="18.0" layoutX="252.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">

@@ -91,6 +91,9 @@ public class TeacherExamStatisticsController implements Initializable {
 	@FXML
 	private Button StatusBTN;
 
+	@FXML
+	private Button commonmistakeBTN;
+
 	private Exam selectedExam = null;
 
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
@@ -146,6 +149,14 @@ public class TeacherExamStatisticsController implements Initializable {
 	}
 
 	@FXML
+	void PressCommonMistake(ActionEvent event) {
+		CommonMistakeController CMCC = new CommonMistakeController();
+		CMCC.start(new Stage());
+		((Node) event.getSource()).getScene().getWindow().hide();
+
+	}
+
+	@FXML
 	public void PressBack(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
 		TMCC.start(new Stage());
@@ -155,6 +166,13 @@ public class TeacherExamStatisticsController implements Initializable {
 	@FXML
 	public void PressReport(ActionEvent event) {
 		if (selectedExam != null) {
+			TeacherExamReportController.numberofStudents = 0;
+			TeacherExamReportController.MaxGrade = 0;
+			TeacherExamReportController.MinGrade = 0;
+			TeacherExamReportController.Average = 0;
+			TeacherExamReportController.median = 0;
+			for (int i = 0; i < 9; i++)
+				TeacherExamReportController.GradeRange[i] = 0;
 			TeacherExamReportController.isTeacher = true;
 			AllExamGrades = FXCollections.observableArrayList((Collection) controllers.DisplayController
 					.ShowApprovedStudentTeacher(ChatClient.currentUser.getUserName()));
@@ -173,45 +191,45 @@ public class TeacherExamStatisticsController implements Initializable {
 					sum += Integer.parseInt(ExamGrades.get(i).getExamGrade());
 				}
 				Arrays.sort(Grades);
-				if(Grades.length!=0) {
-				TeacherExamReportController.MinGrade = Grades[0];
-				TeacherExamReportController.MaxGrade = Grades[Grades.length - 1];
-				TeacherExamReportController.Average = sum / (double) Grades.length;
+				if (Grades.length != 0) {
+					TeacherExamReportController.MinGrade = Grades[0];
+					TeacherExamReportController.MaxGrade = Grades[Grades.length - 1];
+					TeacherExamReportController.Average = sum / (double) Grades.length;
 
-				if (Grades.length % 2 == 1)
-					TeacherExamReportController.median = Grades[(Grades.length + 1) / 2 - 1];
-				else
-					TeacherExamReportController.median = (Grades[Grades.length / 2 - 1] + Grades[Grades.length / 2])
-							/ 2;
+					if (Grades.length % 2 == 1)
+						TeacherExamReportController.median = Grades[(Grades.length + 1) / 2 - 1];
+					else
+						TeacherExamReportController.median = (Grades[Grades.length / 2 - 1] + Grades[Grades.length / 2])
+								/ 2;
 
-				for (int i = 0; i < Grades.length; i++) {
-					if (Grades[i] >= 95 && Grades[i] <= 100)
-						TeacherExamReportController.GradeRange[0]++;
+					for (int i = 0; i < Grades.length; i++) {
+						if (Grades[i] >= 95 && Grades[i] <= 100)
+							TeacherExamReportController.GradeRange[0]++;
 
-					if (Grades[i] >= 90 && Grades[i] <= 94)
-						TeacherExamReportController.GradeRange[1]++;
+						if (Grades[i] >= 90 && Grades[i] <= 94)
+							TeacherExamReportController.GradeRange[1]++;
 
-					if (Grades[i] >= 85 && Grades[i] <= 89)
-						TeacherExamReportController.GradeRange[2]++;
+						if (Grades[i] >= 85 && Grades[i] <= 89)
+							TeacherExamReportController.GradeRange[2]++;
 
-					if (Grades[i] >= 80 && Grades[i] <= 84)
-						TeacherExamReportController.GradeRange[3]++;
+						if (Grades[i] >= 80 && Grades[i] <= 84)
+							TeacherExamReportController.GradeRange[3]++;
 
-					if (Grades[i] >= 75 && Grades[i] <= 79)
-						TeacherExamReportController.GradeRange[4]++;
+						if (Grades[i] >= 75 && Grades[i] <= 79)
+							TeacherExamReportController.GradeRange[4]++;
 
-					if (Grades[i] >= 70 && Grades[i] <= 74)
-						TeacherExamReportController.GradeRange[5]++;
+						if (Grades[i] >= 70 && Grades[i] <= 74)
+							TeacherExamReportController.GradeRange[5]++;
 
-					if (Grades[i] >= 65 && Grades[i] <= 69)
-						TeacherExamReportController.GradeRange[6]++;
+						if (Grades[i] >= 65 && Grades[i] <= 69)
+							TeacherExamReportController.GradeRange[6]++;
 
-					if (Grades[i] >= 55 && Grades[i] <= 64)
-						TeacherExamReportController.GradeRange[7]++;
+						if (Grades[i] >= 55 && Grades[i] <= 64)
+							TeacherExamReportController.GradeRange[7]++;
 
-					if (Grades[i] >= 0 && Grades[i] <= 54)
-						TeacherExamReportController.GradeRange[8]++;
-				}
+						if (Grades[i] >= 0 && Grades[i] <= 54)
+							TeacherExamReportController.GradeRange[8]++;
+					}
 				}
 				TeacherExamReportController TERC = new TeacherExamReportController();
 				TERC.start(new Stage());
@@ -271,11 +289,11 @@ public class TeacherExamStatisticsController implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		TeacherExamReportController.MinGrade=0;
-		TeacherExamReportController.MaxGrade =0;
+		TeacherExamReportController.MinGrade = 0;
+		TeacherExamReportController.MaxGrade = 0;
 		TeacherExamReportController.median = 0;
 		TeacherExamReportController.Average = 0;
-		
+
 		this.ExamCodeTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamCode"));
 		this.ExamNumberTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamNumber"));
 		this.SubjectTable.setCellValueFactory((Callback) new PropertyValueFactory("ExamSubject"));

@@ -8,7 +8,6 @@ import client.ClientUI;
 import controllers.LoginController;
 import controllers.AddController;
 import entities.Exam;
-import entities.InExam;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -80,9 +79,6 @@ public class AutoLoginController implements Initializable {
 		if (IDTXT.getText().equals(ChatClient.currentUser.getUserId())) {
 			///////////////////////// start time
 			
-			
-			InExam IE = new InExam(ExamCode, ChatClient.currentUser.getUserName(), ChatClient.currentUser.getUserId()); // add to table 
-			AddController.AddInExam(IE);
 			AutoController AC = new AutoController();
 			AC.start(new Stage());
 			((Node) event.getSource()).getScene().getWindow().hide();

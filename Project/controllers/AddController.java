@@ -12,6 +12,7 @@ import entities.ManagerMessage;
 import entities.Question;
 import entities.StatusExam;
 import entities.StudentGrade;
+import entities.*;
 
 public class AddController {
 	
@@ -53,6 +54,17 @@ public class AddController {
 		
 	}
 	
+	// add a new exam Response
+	public static boolean ExamResponse(ExamResponse ER) {
+		ArrayList<Object> newExamResponse = new ArrayList<>();
+		newExamResponse.add(ER);
+		ClientMessage msgFromClient = new ClientMessage("AddNewExamResponse", newExamResponse, newExamResponse.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+		
+	}
+	
 	
 	/**add approval student grade  */
 
@@ -77,6 +89,17 @@ public class AddController {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();
 	}
+	
+	
+	public static boolean AddCommonMistake(commonmistake CM) {
+		ArrayList<Object> NewCommonMistake = new ArrayList<>();
+		NewCommonMistake.add(CM);
+		ClientMessage msgFromClient = new ClientMessage("AddCommonMistake", NewCommonMistake, NewCommonMistake.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+	}
+	
 	
 	
 	/**  */

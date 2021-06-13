@@ -171,12 +171,6 @@ public class StatusController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.UserNameCol.setCellValueFactory((Callback) new PropertyValueFactory("userName"));
-		this.StudentIDcol.setCellValueFactory((Callback) new PropertyValueFactory("userId"));
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController
-				.ShowStudentsInExam(TeacherExamStatisticsController.Examcode));
-
-		studentTable.setItems(dataList);
 		ExamCodeLBL.setText(TeacherExamStatisticsController.Examcode);
 
 		dataList2 = FXCollections.observableArrayList(
