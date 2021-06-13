@@ -13,6 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**unsubmiited exam :if the student didn't finish the exam before the time is done, o
+ *or the teacher locked the exam
+ * @author Ibrahim Qassem
+ * 
+ */
 public class UnsubmittedExamController {
 
     @FXML
@@ -27,6 +32,9 @@ public class UnsubmittedExamController {
     @FXML
     private Button CEMSbutton;
 
+    /**
+     * @param primaryStage to launch the UnsubmittedExam fxml whenever we call this method start 
+     */
     public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -42,6 +50,9 @@ public class UnsubmittedExamController {
 	}
     
     
+    /**
+     * @param it returns the student to the menu page
+     */
     @FXML
     void PressCEMS(ActionEvent event) {
     	StudentMenuController SMC = new StudentMenuController();
@@ -50,6 +61,9 @@ public class UnsubmittedExamController {
 
     }
 
+    /**
+     * @param it returns the student to the menu page
+     */ 
     @FXML
     void PressMainMenu(ActionEvent event) {
     	StudentMenuController SMC = new StudentMenuController();
@@ -58,6 +72,10 @@ public class UnsubmittedExamController {
 
     }
 
+    /**
+     * @param event
+     * @throws Exception it logs out from the system and throws exception if there's a problem with javafx or server
+     */
     @FXML
     void PressSignOut(ActionEvent event) throws Exception {
     	LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
