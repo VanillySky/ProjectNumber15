@@ -32,7 +32,7 @@ public class SQLConnection {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			System.out.println("Driver definition succeed");
 		} catch (Exception ex2) {
-			System.out.println("Driver definition failed");
+			System.out.println("Driver definition failed"); 
 		}
 		try {
 //			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/projectass3?serverTimezone=IST", "root","anitad31");
@@ -353,7 +353,7 @@ public class SQLConnection {
 			}
 		}
 
-		return array;
+		return array; 
 	}
 
 	public static ArrayList<StudentGrade> getAllgrades() {

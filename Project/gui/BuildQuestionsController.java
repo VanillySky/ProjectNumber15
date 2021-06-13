@@ -120,7 +120,7 @@ public class BuildQuestionsController implements Initializable {
 			primaryStage.setTitle("Build Question");
 			primaryStage.show();
 
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			e.printStackTrace();
 		}
 	}

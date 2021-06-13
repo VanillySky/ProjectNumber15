@@ -17,7 +17,7 @@ public class StudentGrade implements Serializable {
 		ExamCode = examCode;
 		ExamCourse = examCourse;
 		ExamGrade = examGrade;
-		TeacherName=teacherName;
+		TeacherName=teacherName; 
 		
 	}
 	

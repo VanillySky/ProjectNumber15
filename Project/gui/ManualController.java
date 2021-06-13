@@ -96,7 +96,7 @@ public class ManualController implements Initializable {
 			primaryStage.setTitle("Manual");
 			primaryStage.show();
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 
