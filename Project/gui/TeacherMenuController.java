@@ -20,6 +20,10 @@ import javafx.scene.Scene;
  * @author Shaden
  *
  */
+/**
+ * @author Ibrahim Qassem
+ *
+ */
 public class TeacherMenuController {
 
 	/**
@@ -71,6 +75,10 @@ public class TeacherMenuController {
 		}
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception this method logs out from the system and updates the connection situation
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -80,6 +88,9 @@ public class TeacherMenuController {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event this function opens the exam from the teacher  menu
+	 */
 	@FXML
 	public void ExamIn(ActionEvent event) {
 		ExamsTableController ETCC = new ExamsTableController();
@@ -87,6 +98,9 @@ public class TeacherMenuController {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}// In to ExamsTable.fxml a
 
+	/**
+	 * @param event this function opens the question from the teacher  menu
+	 */
 	@FXML
 	public void QuestionIn(ActionEvent event) {
 		BuildQuestionsController BQCC = new BuildQuestionsController();
@@ -95,6 +109,9 @@ public class TeacherMenuController {
 
 	}
 
+	/**
+	 * @param event this function opens the statistics from the teacher  menu
+	 */
 	public void StatisticIn(ActionEvent event) {
 		TeacherExamStatisticsController TES = new TeacherExamStatisticsController();
 		TES.start(new Stage());

@@ -33,6 +33,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author Rostislav
+ *this class controlls the statistics of the exams for each teacher and her own exams
+ */
 public class TeacherExamStatisticsController implements Initializable {
 
 	@FXML
@@ -104,6 +108,9 @@ public class TeacherExamStatisticsController implements Initializable {
 	static String Examcode;
 	static String Durition;
 
+	/**
+	 * @param primaryStage this method starts the teacheexamstatistics fxml
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -119,6 +126,9 @@ public class TeacherExamStatisticsController implements Initializable {
 		}
 	}
 
+	/**this function searches for the exams that has this specific course name
+	 * @param event in order to search
+	 */
 	@FXML
 	public void Search(ActionEvent event) {
 		FilteredList<Exam> filteredData = new FilteredList<Exam>(dataList, b -> true);
@@ -141,6 +151,9 @@ public class TeacherExamStatisticsController implements Initializable {
 		ExamsTable.setItems(sortedData);
 	}
 
+	/**this function returns to the teacher menu
+	 * @param event
+	 */
 	@FXML
 	public void PressCEMS(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
@@ -148,6 +161,9 @@ public class TeacherExamStatisticsController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**The button common mistakes in order to show the students that has common mistakes while doing the exam
+	 * @param event
+	 */
 	@FXML
 	void PressCommonMistake(ActionEvent event) {
 		CommonMistakeController CMCC = new CommonMistakeController();
@@ -156,6 +172,9 @@ public class TeacherExamStatisticsController implements Initializable {
 
 	}
 
+	/** returns back to the menu of the teacher
+	 * @param event
+	 */
 	@FXML
 	public void PressBack(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
@@ -163,6 +182,9 @@ public class TeacherExamStatisticsController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/** This function shows the statistics of the exam inclcuding :max grade,min grade , with a chart of the overall grades...average ..median
+	 * @param event
+	 */
 	@FXML
 	public void PressReport(ActionEvent event) {
 		if (selectedExam != null) {
@@ -246,6 +268,10 @@ public class TeacherExamStatisticsController implements Initializable {
 
 	}
 
+	/**this function logs out from the system and returns the online situation to "0"
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
@@ -255,6 +281,9 @@ public class TeacherExamStatisticsController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**select an exam fromt the table
+	 * @param event
+	 */
 	@FXML
 	void selectExam(MouseEvent event) {
 		if (ExamsTable.getSelectionModel().getSelectedItem() != null) {
@@ -262,6 +291,9 @@ public class TeacherExamStatisticsController implements Initializable {
 		}
 	}
 
+	/**The approval button gives the abillity for the teacher to approve the exams that students did
+	 * @param event
+	 */
 	@FXML
 	void PressApproval(ActionEvent event) {
 		ExamApprovalController EACC = new ExamApprovalController();
@@ -270,6 +302,9 @@ public class TeacherExamStatisticsController implements Initializable {
 
 	}
 
+	/**Status of each exam which is selected from the table and it shows how many student started and finished the exam etc..
+	 * @param event
+	 */
 	@FXML
 	void PressStatus(ActionEvent event) {
 		if (selectedExam != null) {
@@ -286,6 +321,9 @@ public class TeacherExamStatisticsController implements Initializable {
 
 	}
 
+	/**
+	 *The initialize function to start the fxml and adding the values of the labels and shows all the information ...
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

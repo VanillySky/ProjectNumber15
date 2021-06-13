@@ -11,6 +11,10 @@ import entities.Exam;
 import entities.User;
 
 
+/**
+ * @author Ibrahim Qassem
+ *This class is made to call all the SQL methods that is related to "LOGIN" to the system
+ */
 public class LoginController {
 	
 	
@@ -147,6 +151,11 @@ public class LoginController {
 	}
 	
 	
+	/**this function changes the situation of the connection if it's online/offline
+	 * @param username username of the user
+	 * @param online the new situation
+	 * @return
+	 */
 	public static boolean ChangeOnline(String username,String online) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		list.add(online);

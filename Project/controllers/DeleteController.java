@@ -8,6 +8,10 @@ import client.ChatClient;
 import client.ClientUI;
 import entities.User;
 
+/**This class is made to call the sql methods from SQLConnection which has the method "DELETE"
+ * @author Ibrahim Qassem
+ *
+ */
 public class DeleteController {
 
 	

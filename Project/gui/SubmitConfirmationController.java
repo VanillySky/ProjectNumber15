@@ -15,6 +15,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/** 
+ * @author Ibrahim Qassem
+ *
+ */
 public class SubmitConfirmationController {
 
 	@FXML
@@ -38,6 +42,9 @@ public class SubmitConfirmationController {
     static int endExam;
     static String ExamCode;
 
+	/**This method starts the submitconfirmation fxml and tells the student that he has finished the exam
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -52,6 +59,9 @@ public class SubmitConfirmationController {
 		}
 	}
 
+	/** this button goes back to the manual fxml 
+	 * @param event
+	 */
 	@FXML
 	public void GoBack(ActionEvent event) {
 		ManualController MC = new ManualController();
@@ -59,6 +69,9 @@ public class SubmitConfirmationController {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/** we launch this method when we press on button submit exam 
+	 * @param event
+	 */
 	@FXML
 	public void SubmitExam(ActionEvent event) {
 		if (ConfirmCheckBTN.isSelected()) {

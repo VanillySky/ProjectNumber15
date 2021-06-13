@@ -27,6 +27,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/** This class controlls the fxml of exam report it shows the max min grade with average and statistics of grades etc...
+ * @author Ibrahim Qassem
+ *
+ */
 public class TeacherExamReportController implements Initializable {
 
     @FXML
@@ -107,6 +111,9 @@ public class TeacherExamReportController implements Initializable {
 	
     
     
+    /** this function starts the fxml teacherexam
+     * @param primaryStage
+     */
     public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -124,8 +131,12 @@ public class TeacherExamReportController implements Initializable {
 	}
 
 
+	/**
+	 *This function starts the initialize situatuin to present all the information that we have about the exam
+	 *which is selected by the teacher.
+	 */
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1) { 
 		
 		
 		Range95to100.setCellValueFactory(new PropertyValueFactory<Range, Integer>("ramge1"));
@@ -164,6 +175,9 @@ public class TeacherExamReportController implements Initializable {
 		
 	}	
 	
+	/**Cems button it returns the teacher to his Menu
+	 * @param event
+	 */
 	@FXML
 	public void PressCEMS(ActionEvent event) {
 		if(isTeacher) {
@@ -178,6 +192,10 @@ public class TeacherExamReportController implements Initializable {
 		}
 	}
 	
+	/**this function logs out from the system and returns the online situation to offline "0"
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -188,7 +206,10 @@ public class TeacherExamReportController implements Initializable {
 		clientUI.start(new Stage());
 	}
 	
-	@FXML
+	/**this function returns the teacher to the examstatistics fxml 
+	 * @param event
+	 */
+	@FXML 
 	public void PressReturn(ActionEvent event) {
 		if(isTeacher) {
 		TeacherExamStatisticsController TESC = new TeacherExamStatisticsController();

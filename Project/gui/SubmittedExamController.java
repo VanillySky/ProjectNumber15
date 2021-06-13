@@ -20,6 +20,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/** this class controlls the submittedexam fxml
+ * @author Ibrahim Qassem
+ *
+ */
 public class SubmittedExamController {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -37,6 +41,10 @@ public class SubmittedExamController {
     @FXML // fx:id="OutBTN"
     private Button OutBTN; // Value injected by FXMLLoader
 
+    /** This function starts the submitted exam fxml and shows the students that he is done and submitted 
+     * the exam successfully
+     * @param primaryStage
+     */
     public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -51,6 +59,9 @@ public class SubmittedExamController {
 		}
 	}
     
+    /** this function returns the teacher back to his Menu
+     * @param event
+     */
     @FXML
     void BackToMainMenu(ActionEvent event) {
     	StudentMenuController SMC = new StudentMenuController();
@@ -58,6 +69,10 @@ public class SubmittedExamController {
 		((Node) event.getSource()).getScene().getWindow().hide();
     }
 
+    /** The sign out button gets out of the system and returns the online situation to "0"
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
