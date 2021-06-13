@@ -1,5 +1,10 @@
 package entities;
 
+/**
+ * 
+ * @author Viktoria
+ *
+ */
 public class StudentExamanation {
 	private String StudentUserName, ExamCode, ExamHourse,ExamMinutes;
 

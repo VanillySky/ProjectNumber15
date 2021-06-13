@@ -6,7 +6,14 @@ public class Statistics {
 	String examCourse;
 	String examGrade;
 	String TeacherName;
-
+/**
+ * Construction 
+ * @param studentUserName
+ * @param examCode
+ * @param examCourse
+ * @param examGrade
+ * @param TeacherName
+ */
 	public Statistics(String studentUserName, String examCode, String examCourse, String examGrade, String TeacherName) {
 		super();
 		studentUserName = studentUserName;
@@ -16,44 +23,75 @@ public class Statistics {
 		TeacherName = TeacherName;
 	}
 
-	public String getstudentUserName() {
+	/**
+	 * @return the studentUserName
+	 */
+	public String getStudentUserName() {
 		return studentUserName;
 	}
 
-	public void setstudentUserName(String studentUserName) {
-		studentUserName = studentUserName;
+	/**
+	 * @param studentUserName the studentUserName to set
+	 */
+	public void setStudentUserName(String studentUserName) {
+		this.studentUserName = studentUserName;
 	}
 
-	public String getexamCode() {
+	/**
+	 * @return the examCode
+	 */
+	public String getExamCode() {
 		return examCode;
 	}
 
-	public void setexamCode(String examCode) {
-		examCode = examCode;
+	/**
+	 * @param examCode the examCode to set
+	 */
+	public void setExamCode(String examCode) {
+		this.examCode = examCode;
 	}
 
-	public String getexamCourse() {
+	/**
+	 * @return the examCourse
+	 */
+	public String getExamCourse() {
 		return examCourse;
 	}
 
-	public void setexamCourse(String examCourse) {
-		examCourse = examCourse;
+	/**
+	 * @param examCourse the examCourse to set
+	 */
+	public void setExamCourse(String examCourse) {
+		this.examCourse = examCourse;
 	}
 
-	public String getexamGrade() {
+	/**
+	 * @return the examGrade
+	 */
+	public String getExamGrade() {
 		return examGrade;
 	}
 
-	public void setexamGrade(String examGrade) {
-		examGrade = examGrade;
+	/**
+	 * @param examGrade the examGrade to set
+	 */
+	public void setExamGrade(String examGrade) {
+		this.examGrade = examGrade;
 	}
 
+	/**
+	 * @return the teacherName
+	 */
 	public String getTeacherName() {
 		return TeacherName;
 	}
 
-	public void setTeacherName(String TeacherName) {
-		TeacherName = TeacherName;
+	/**
+	 * @param teacherName the teacherName to set
+	 */
+	public void setTeacherName(String teacherName) {
+		TeacherName = teacherName;
 	}
-
+	
+	
 }

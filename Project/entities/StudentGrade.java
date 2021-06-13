@@ -1,11 +1,16 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * Student Grade class
+ * @author shaden
+ *
+ */
 public class StudentGrade implements Serializable {
 	private String StudentUserName, ExamCode,ExamCourse,ExamGrade,TeacherName,instr;
 
 	/**
+	 * First Construction
 	 * @param studentUserName
 	 * @param examCode
 	 * @param examCourse
@@ -21,6 +26,16 @@ public class StudentGrade implements Serializable {
 		
 	}
 	
+	/**
+	 * Second Construction 
+	 * @param studentUserName
+	 * @param examCode
+	 * @param examCourse
+	 * @param examGrade
+	 * @param teacherName
+	 * @param instr
+	 * in this cunstruction we define the instructions too
+	 */
 	public StudentGrade(String studentUserName, String examCode, String examCourse, String examGrade, String teacherName,
 			String instr) {
 		super();
@@ -31,6 +46,11 @@ public class StudentGrade implements Serializable {
 		TeacherName = teacherName;
 		this.instr = instr;
 	}
+	
+	/**
+	 * This function 
+	 * @return the exam cunstroction
+	 */
 	public String getInstr() {
 		return instr;
 	}
@@ -39,10 +59,10 @@ public class StudentGrade implements Serializable {
 		this.instr = instr;
 	}
 
-	
-
-	
-
+	/**
+	 * This function 
+	 * @return the teacher name
+	 */
 	public String getTeacherName() {
 		return TeacherName;
 	}

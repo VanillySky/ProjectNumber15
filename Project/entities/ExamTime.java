@@ -1,16 +1,20 @@
 package entities;
 
 import java.io.Serializable;
-
+/**
+ * This class presents the time of the exam by hours and minutes and seconds
+ * @author shaden
+ *
+ */
 public class ExamTime implements Serializable {
 	private String hours, minutes;
 
 	/**
+	 * Construction
 	 * @param hours
 	 * @param minutes
 	 */
 	public ExamTime(String hours, String minutes) {
-		super();
 		this.hours = hours;
 		this.minutes = minutes;
 	}
