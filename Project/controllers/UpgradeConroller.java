@@ -10,6 +10,10 @@ import entities.Exam;
 import entities.Question;
 import entities.StatusExam;
 
+/**This class is made to call all the methods from SQLConnection which has the method "UPDATE ....FROM ..."
+ * @author Ibrahim Qassem
+ *
+ */
 public class UpgradeConroller {
 	
 	/**update exam that already exist*/

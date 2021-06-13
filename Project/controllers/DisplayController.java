@@ -17,6 +17,10 @@ import entities.StudentGrade;
 import entities.Teacher;
 import entities.commonmistake;
 
+/**This class is made to call the SQLConnection methods which has the sql method (SELECT)
+ * @author Ibrahim Qassem
+ *
+ */
 public class DisplayController {
 	@SuppressWarnings("unchecked")
 	////function to add exams to exams building in teacher

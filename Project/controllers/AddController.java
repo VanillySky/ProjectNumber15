@@ -14,6 +14,10 @@ import entities.StatusExam;
 import entities.StudentGrade;
 import entities.*;
 
+/**This class is made to call all the SQLConnection methods that have sql method "INSERT INTO"
+ * @author Ibrahim Qassem
+ *
+ */
 public class AddController {
 	
 	
