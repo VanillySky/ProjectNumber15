@@ -7,32 +7,26 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StudentGradeListController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="1048.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StudentGradeListController">
    <children>
-      <ImageView fitHeight="576.0" fitWidth="972.0">
+      <ImageView fitHeight="579.0" fitWidth="1048.0">
          <image>
             <Image url="@../Images/Gradelist.png" />
          </image>
       </ImageView>
-      <TableView fx:id="GradeTable" layoutX="156.0" layoutY="140.0" onMousePressed="#selectGrade" prefHeight="297.0" prefWidth="640.0">
+      <TableView fx:id="GradeTable" layoutX="142.0" layoutY="141.0" onMousePressed="#selectGrade" prefHeight="297.0" prefWidth="789.0">
         <columns>
           <TableColumn fx:id="ExamCodeColumn" prefWidth="100.0" text="Exam code" />
-          <TableColumn fx:id="ExamCourseColumn" minWidth="0.0" prefWidth="100.0" text="Exam course" />
-            <TableColumn fx:id="ExamGradeColumn" minWidth="1.0" prefWidth="100.0" text="Exam grade" />
-            <TableColumn fx:id="TeacherNamecolumn" prefWidth="100.0" text="Teacher name" />
-            <TableColumn fx:id="InstructionColumn" prefWidth="239.20001220703125" text="Instruction" />
+          <TableColumn fx:id="ExamCourseColumn" minWidth="0.0" prefWidth="148.0" text="Exam course" />
+            <TableColumn fx:id="ExamGradeColumn" minWidth="1.0" prefWidth="94.0" text="Exam grade" />
+            <TableColumn fx:id="TeacherNamecolumn" prefWidth="143.0" text="Teacher name" />
+            <TableColumn fx:id="InstructionColumn" prefWidth="303.0" text="Instruction" />
         </columns>
       </TableView>
-      <Button fx:id="OutButton" layoutX="858.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" textFill="#051940" />
-      <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="118.0" prefWidth="126.0" style="-fx-background-color: transparent;" />
-      <Button fx:id="GetExamNotbookBTN" layoutX="400.0" layoutY="454.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="173.0" style="-fx-background-color: transparent;" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="GetExamNoteBook" layoutX="400.0" layoutY="458.0" mnemonicParsing="false" onAction="#PressGetExam" prefHeight="39.0" prefWidth="173.0" style="-fx-background-color: transparent;" />
-      <Label fx:id="ERRLBL" layoutX="400.0" layoutY="504.0" prefHeight="17.0" prefWidth="276.0" textFill="RED" />
+      <Button fx:id="OutButton" layoutX="931.0" layoutY="-1.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" textFill="#051940" />
+      <Button fx:id="CEMSButton" mnemonicParsing="false" onAction="#PressCEMS" prefHeight="118.0" prefWidth="140.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="GetExamNoteBook" layoutX="438.0" layoutY="454.0" mnemonicParsing="false" onAction="#PressGetExam" prefHeight="39.0" prefWidth="173.0" style="-fx-background-color: transparent;" />
+      <Label fx:id="ERRLBL" layoutX="387.0" layoutY="504.0" prefHeight="17.0" prefWidth="276.0" textFill="RED" />
    </children>
 </Pane>

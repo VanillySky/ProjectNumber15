@@ -58,5 +58,17 @@ public class UpgradeConroller {
 		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
 		return (boolean) msgFromServer.getData();
 	}
+	
+	public static boolean UpgradeToApproved(String ExamCode,String Approved ) {
+		ArrayList<Object> Approve = new ArrayList<>();
+		Approve.add(Approved);
+		Approve.add(ExamCode);
+		ClientMessage msgFromClient = new ClientMessage("UpgradeApprove", Approve, Approve.size());
+		ClientUI.chat.accept(msgFromClient);
+		ServerMessage msgFromServer = ChatClient.messageRecievedFromServerEvents.get(msgFromClient.getMethodName());
+		return (boolean) msgFromServer.getData();
+	}
+	
+	
 
 }

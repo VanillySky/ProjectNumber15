@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import client.ChatClient;
 import client.ClientUI;
 import controllers.LoginController;
+import controllers.UpgradeConroller;
 import controllers.DeleteController;
 import entities.Exam;
 import entities.ManagerMessage;
@@ -31,42 +32,44 @@ import javafx.util.Callback;
 
 public class ManagerApprovalController implements Initializable {
 
-    @FXML
-    private TableView<ManagerMessage> MessageTable;
+	@FXML
+	private TableView<ManagerMessage> MessageTable;
 
-    @FXML
-    private TableColumn<ManagerMessage, String> ExamCodeCol;
+	@FXML
+	private TableColumn<ManagerMessage, String> ExamCodeCol;
 
-    @FXML
-    private TableColumn<ManagerMessage, String>TeacherNameCol;
+	@FXML
+	private TableColumn<ManagerMessage, String> TeacherNameCol;
 
-    @FXML
-    private TableColumn<ManagerMessage, String> TimeChangeCol;
+	@FXML
+	private TableColumn<ManagerMessage, String> TimeChangeCol;
 
-    @FXML
-    private TableColumn<ManagerMessage, String> InstructionsCol;
+	@FXML
+	private TableColumn<ManagerMessage, String> InstructionsCol;
 
-    @FXML
-    private Button CEMSButton;
+	@FXML
+	private TableColumn<ManagerMessage, String> ApprovedCol;
 
-    @FXML
-    private Button SignOutButton;
+	@FXML
+	private Button CEMSButton;
 
-    @FXML
-    private Button rejectBTN;
+	@FXML
+	private Button SignOutButton;
 
-    @FXML
-    private Button ApproveBTN;
-    
-    @FXML
-    private Label ERRLabel;
+	@FXML
+	private Button rejectBTN;
 
-    
+	@FXML
+	private Button ApproveBTN;
+
+	@FXML
+	private Label ERRLabel;
+
 	private ManagerMessage selectedMessage = null;
-    
+
 	private ObservableList<ManagerMessage> dataList = FXCollections.observableArrayList();
-    
-    public void start(Stage primaryStage) {
+
+	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/gui/ManagerApproval.fxml"));
@@ -81,54 +84,59 @@ public class ManagerApprovalController implements Initializable {
 		}
 	}
 
-    @FXML
-    void PressApprove(ActionEvent event) {
+	@FXML
+	void PressApprove(ActionEvent event) {
+		if (selectedMessage != null) {
+			UpgradeConroller.UpgradeToApproved(selectedMessage.getExamcode(), "Approved");
+			dataList = FXCollections
+					.observableArrayList((Collection) controllers.DisplayController.showManagerMessage());
+			MessageTable.setItems(dataList);
 
-    }
+		} else
+			ERRLabel.setVisible(true);
 
-    @FXML
-    void PressCEMS(ActionEvent event) {
-    	ManagerMenuController MMC = new ManagerMenuController();
+	}
+
+	@FXML
+	void PressCEMS(ActionEvent event) {
+		ManagerMenuController MMC = new ManagerMenuController();
 		MMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-    }
+	}
 
-    @FXML
-    void PressReject(ActionEvent event) {
-    	if(selectedMessage!=null) {
-    	DeleteController DCC = new DeleteController();
-    	DCC.ManagerMessage(selectedMessage.getExamcode());
-    	
-    	dataList = FXCollections.observableArrayList(
-				(Collection) controllers.DisplayController.showManagerMessage());
-		MessageTable.setItems(dataList);
-    		
-    		
-    	}else {
-    		
-    	ERRLabel.setVisible(true);	
-    
-    	}
+	@FXML
+	void PressReject(ActionEvent event) {
+		if (selectedMessage != null) {
+			DeleteController DCC = new DeleteController();
+			DCC.ManagerMessage(selectedMessage.getExamcode());
 
-    }
+			dataList = FXCollections
+					.observableArrayList((Collection) controllers.DisplayController.showManagerMessage());
+			MessageTable.setItems(dataList);
 
-    @FXML
-    void SignOut(ActionEvent event) throws Exception {
-		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
+		} else {
 
-    	ClientUI clientUI = new ClientUI();
+			ERRLabel.setVisible(true);
+
+		}
+
+	}
+
+	@FXML
+	void SignOut(ActionEvent event) throws Exception {
+		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
+		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		clientUI.chat.quit();
 		clientUI.start(new Stage());
-    }
+	}
 
-    @FXML
-    void selectMessage(MouseEvent event) {
-    	if (MessageTable.getSelectionModel().getSelectedItem() != null) {
+	@FXML
+	void selectMessage(MouseEvent event) {
+		if (MessageTable.getSelectionModel().getSelectedItem() != null) {
 			selectedMessage = MessageTable.getSelectionModel().getSelectedItem();
 		}
-    }
-
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -136,12 +144,10 @@ public class ManagerApprovalController implements Initializable {
 		this.TeacherNameCol.setCellValueFactory((Callback) new PropertyValueFactory("TeacherName"));
 		this.TimeChangeCol.setCellValueFactory((Callback) new PropertyValueFactory("addtime"));
 		this.InstructionsCol.setCellValueFactory((Callback) new PropertyValueFactory("instruction"));
-		dataList = FXCollections.observableArrayList(
-				(Collection) controllers.DisplayController.showManagerMessage());
+		this.ApprovedCol.setCellValueFactory((Callback) new PropertyValueFactory("Approved"));
+		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.showManagerMessage());
 		MessageTable.setItems(dataList);
 
-		
 	}
-    
 
 }
