@@ -20,8 +20,7 @@ public class ClientMessage implements Serializable {
 	 */
 	public String getMethodName() {
 		return methodName;
-	}
-
+	}////
 	/**
 	 * sets the methodName 
 	 * @param methodName
