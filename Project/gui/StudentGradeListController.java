@@ -1,6 +1,8 @@
 package gui;
 
 import java.net.URL;
+
+
 import java.util.Collection;
 import java.util.ResourceBundle;
 
@@ -28,6 +30,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author axwara1
+ * this class for the students , he can see all his approvals grades 
+ *
+ */
 public class StudentGradeListController implements Initializable {
 	@FXML
 	private TableView<StudentGrade> GradeTable;
@@ -66,7 +73,7 @@ public class StudentGradeListController implements Initializable {
 	private ObservableList<StudentGrade> dataList = FXCollections.observableArrayList();
 
 	/**
-	 * 
+	 * this method to open studentGradeList FXML
 	 * @param primaryStage
 	 */
 	public void start(Stage primaryStage) {
@@ -85,6 +92,10 @@ public class StudentGradeListController implements Initializable {
 	}
 
 	
+	/**
+	 * @param event
+	 * this method help to select a grade
+	 */
 	@FXML
 	void selectGrade(MouseEvent event) {
 		if (GradeTable.getSelectionModel().getSelectedItem() != null) {
@@ -94,6 +105,10 @@ public class StudentGradeListController implements Initializable {
 	}
 	
 	
+	/**
+	 * @param event
+	 * press getExam to get the copy of exam
+	 */
 	@FXML
 	void PressGetExam(ActionEvent event) {
 		if(selectedGrade!=null) {
@@ -119,6 +134,10 @@ public class StudentGradeListController implements Initializable {
 		
 	}
 
+	/**
+	 * @param event
+	 * press to logo to go to StudentMenu
+	 */
 	@FXML
 	void PressCEMS(ActionEvent event) {
 		StudentMenuController SMC = new StudentMenuController();
@@ -126,6 +145,11 @@ public class StudentGradeListController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * press to sign out
+	 */
 	@FXML
 	void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
@@ -136,6 +160,9 @@ public class StudentGradeListController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 *start this class by put all the Grades in the Table 
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 

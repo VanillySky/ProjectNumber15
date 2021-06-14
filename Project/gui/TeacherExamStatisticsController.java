@@ -281,7 +281,7 @@ public class TeacherExamStatisticsController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
-	/**select an exam fromt the table
+	/**select a exam from the table
 	 * @param event
 	 */
 	@FXML

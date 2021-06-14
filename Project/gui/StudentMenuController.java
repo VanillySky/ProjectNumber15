@@ -15,40 +15,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * @author axwara1
+ * this method about the student menu , he can do exam and watch statics 
+ *
+ */
 public class StudentMenuController {
 
-	/**
-	 * 
-	 */
+	
 	@FXML
 	private ResourceBundle resources;
 
-	/**
-	 * 
-	 */
 	@FXML
 	private URL location;
 
-	/**
-	 * 
-	 */
 	@FXML
 	private Button OutButton;
 
-	/**
-	 * 
-	 */
 	@FXML
 	private Button StatisticsButton;
 
-	/**
-	 * 
-	 */
 	@FXML
 	private Button ExamButton;
 
 	/**
-	 * 
+	 * this method start the StudentMenuFrame FXML
 	 * @param primaryStage
 	 */
 	public void start(Stage primaryStage) {
@@ -66,6 +57,11 @@ public class StudentMenuController {
 		}
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * press to sign out 
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -76,6 +72,10 @@ public class StudentMenuController {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event
+	 * go to do a exam 
+	 */
 	@FXML
 	public void ExamIn(ActionEvent event) {
 		ExaminationController EC = new ExaminationController();
@@ -85,6 +85,10 @@ public class StudentMenuController {
 
 
 	
+	/**
+	 * @param event
+	 * go to see statics 
+	 */
 	public void StatisticIn(ActionEvent event) {
 		StudentGradeListController SGS = new StudentGradeListController();
 		SGS.start(new Stage());

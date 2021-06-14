@@ -30,6 +30,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author axwara1
+ *this class appear table of messages from teachers that need to change the exam time .
+ */
 public class ManagerApprovalController implements Initializable {
 
 	@FXML
@@ -69,6 +73,10 @@ public class ManagerApprovalController implements Initializable {
 
 	private ObservableList<ManagerMessage> dataList = FXCollections.observableArrayList();
 
+	/**
+	 * @param primaryStage
+	 * this method start the ManagerApproval FXML
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -84,6 +92,10 @@ public class ManagerApprovalController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * Press Approve to approved the change the exam , when the student start the exam the time will be added
+	 */
 	@FXML
 	void PressApprove(ActionEvent event) {
 		if (selectedMessage != null) {
@@ -97,6 +109,10 @@ public class ManagerApprovalController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * press CEMS logo to go to Manager Menu
+	 */
 	@FXML
 	void PressCEMS(ActionEvent event) {
 		ManagerMenuController MMC = new ManagerMenuController();
@@ -104,6 +120,10 @@ public class ManagerApprovalController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * press reject to remove and disapprove the ask of change time 
+	 */
 	@FXML
 	void PressReject(ActionEvent event) {
 		if (selectedMessage != null) {
@@ -122,6 +142,11 @@ public class ManagerApprovalController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * this method sign out 
+	 */
 	@FXML
 	void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
@@ -131,6 +156,10 @@ public class ManagerApprovalController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event
+	 * select a message from the Table 
+	 */
 	@FXML
 	void selectMessage(MouseEvent event) {
 		if (MessageTable.getSelectionModel().getSelectedItem() != null) {
@@ -138,6 +167,9 @@ public class ManagerApprovalController implements Initializable {
 		}
 	}
 
+	/**
+	 *this method start the class , put all the asks to change time in the table  
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.ExamCodeCol.setCellValueFactory((Callback) new PropertyValueFactory("Examcode"));

@@ -32,6 +32,10 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableView;
 
+/**
+ * @author axwara1
+ * this class is a manager statics , appear a information for students in a table and he can do more than report 
+ */
 public class ManagerStatisticsController implements Initializable {
 
 	@FXML
@@ -99,6 +103,10 @@ public class ManagerStatisticsController implements Initializable {
 
 	private ObservableList<StudentGrade> dataList = FXCollections.observableArrayList();
 
+	/**
+	 * @param primaryStage
+	 * this method start the manager Statics FXML
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -114,6 +122,10 @@ public class ManagerStatisticsController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * go to CEMS after press CEMS logo
+	 */
 	@FXML
 	void PressCEMS(ActionEvent event) {
 		ManagerMenuController MMCC = new ManagerMenuController();
@@ -121,6 +133,10 @@ public class ManagerStatisticsController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * get a report of exams by a student .
+	 */
 	@FXML
 	void PressGetExamReport(ActionEvent event) {
 		if (selectedExam != null) {
@@ -207,6 +223,10 @@ public class ManagerStatisticsController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * get a report of exams by a teacher.
+	 */
 	@FXML
 	void PressGetTeacherReport(ActionEvent event) {
 		if (selectedExam != null) {
@@ -293,6 +313,10 @@ public class ManagerStatisticsController implements Initializable {
 		}
 
 	}
+	/**
+	 * @param event
+	 * get a report of exams by a course.
+	 */
 	@FXML
 	void PressGetCourseReport(ActionEvent event) {
 		if (selectedExam != null) {
@@ -378,6 +402,11 @@ public class ManagerStatisticsController implements Initializable {
 		}
 
 	}
+	/**
+	 * @param event
+	 * @throws Exception
+	 * this method sign out from CEMS
+	 */
 	@FXML
 	void PressOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -388,6 +417,10 @@ public class ManagerStatisticsController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * @param event
+	 * Search by course name
+	 */
 	@FXML
 	void SerchByCourseName(ActionEvent event) {
 		this.StudentNameCol.setCellValueFactory((Callback) new PropertyValueFactory("StudentUserName"));
@@ -415,6 +448,10 @@ public class ManagerStatisticsController implements Initializable {
 		TableStat.setItems(sortedData);
 	}
 
+	/**
+	 * @param event
+	 * Search by Student Name
+	 */
 	@FXML
 	void SerchByStudentName(ActionEvent event) {
 		this.StudentNameCol.setCellValueFactory((Callback) new PropertyValueFactory("StudentUserName"));
@@ -445,6 +482,10 @@ public class ManagerStatisticsController implements Initializable {
 		TableStat.setItems(sortedData);
 	}
 
+	/**
+	 * @param event
+	 * Search by Teacher Name
+	 */
 	@FXML
 	void SerchByTeacherName(ActionEvent event) {
 		this.StudentNameCol.setCellValueFactory((Callback) new PropertyValueFactory("StudentUserName"));
@@ -475,12 +516,20 @@ public class ManagerStatisticsController implements Initializable {
 		TableStat.setItems(sortedData);
 	}
 
+	/**
+	 * @param event
+	 * press return button to back to managerMenu
+	 */
 	public void PressReturn(ActionEvent event) {
 		ManagerMenuController MMCC = new ManagerMenuController();
 		MMCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * select a grade from the table
+	 */
 	@FXML
 	void selectExam(MouseEvent event) {
 		if (TableStat.getSelectionModel().getSelectedItem() != null) {
@@ -488,6 +537,9 @@ public class ManagerStatisticsController implements Initializable {
 		}
 	}
 
+	/**
+	 *start this class by put all the grades in the Table 
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.StudentNameCol.setCellValueFactory((Callback) new PropertyValueFactory("StudentUserName"));

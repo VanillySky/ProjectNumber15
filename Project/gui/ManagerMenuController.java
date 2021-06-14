@@ -14,6 +14,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+
+/**
+ * @author axwara1
+ * this class the menu of Manager , he can see statics and Confirmations the asks 
+ *
+ */
 public class ManagerMenuController {
 
 	@FXML
@@ -31,6 +37,10 @@ public class ManagerMenuController {
 	@FXML
 	private Button OutButton;
 
+	/**
+	 * @param primaryStage
+	 * this method start the ManagerMenu FXML
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -46,13 +56,23 @@ public class ManagerMenuController {
 		}
 	}
 
+	
+	/**
+	 * @param event
+	 * go to Confirmations
+	 */
 	@FXML
 	void GoToConfirmations(ActionEvent event) {
 		ManagerApprovalController MACC = new ManagerApprovalController();
 		MACC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
+		
 	}
 
+	/**
+	 * @param event
+	 * press the CEMS logo and go to Manager menu
+	 */
 	@FXML
 	void PresCEMS(ActionEvent event) {
 		ManagerMenuController MMC = new ManagerMenuController();
@@ -60,6 +80,11 @@ public class ManagerMenuController {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * @param event
+	 * @throws Exception
+	 * sign out from CEMS
+	 */
 	@FXML
 	void PressSignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -71,11 +96,15 @@ public class ManagerMenuController {
 
 	}
 
+	/**
+	 * @param event
+	 * go to Manager Statistics
+	 */
 	@FXML
 	void GoToStatistics(ActionEvent event) {
 		ManagerStatisticsController MSC = new ManagerStatisticsController();
 		MSC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
-	}// go to Manager Statistics
+	}
 
 }

@@ -34,8 +34,12 @@ import javafx.stage.Stage;
 
 /**
  * The manual conroller is a class to control the manual fxml
+<<<<<<< Upstream, based on branch 'main' of https://github.com/VanillySky/ProjectNumber15.git
  * 
  * @author Ahmed
+=======
+ * @author Ahmad
+>>>>>>> cf3fe4b ..
  *
  */
 public class ManualController implements Initializable {
