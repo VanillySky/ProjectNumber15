@@ -524,6 +524,7 @@ public class AutoController implements Initializable {
 			Integer addH = Integer.parseInt(Addhourmin[0]);
 			Integer addM = Integer.parseInt(Addhourmin[1]);
 			addSec = hmsToSeconds(addH, addM, 0);
+			CurrSeconds += addSec;
 		}
 
 		String time = ExaminationController.ExamTime;
@@ -534,7 +535,6 @@ public class AutoController implements Initializable {
 		MinutesTimer.setText(min + "");
 		SecondsTimer.setText("0");
 		CurrSeconds = hmsToSeconds(hours, min, 0);
-		CurrSeconds += addSec;
 		// CurrSeconds =200;
 		timefinish = false;
 		startCountdown();
