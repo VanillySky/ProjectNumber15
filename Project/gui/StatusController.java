@@ -32,6 +32,10 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**status controller to show status of an exam num of student date etc..
+ * @author Ibrahim Qassem
+ *
+ */
 public class StatusController implements Initializable {
 
 	@FXML
@@ -94,6 +98,9 @@ public class StatusController implements Initializable {
 	private ObservableList<InExam> dataList = FXCollections.observableArrayList();
 	private ObservableList<StatusExam> dataList2 = FXCollections.observableArrayList();
 
+	/**it launchs the status fxml that shows the status of an exam
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -109,6 +116,9 @@ public class StatusController implements Initializable {
 		}
 	}
 
+	/**add time button to add time to exam
+	 * @param event
+	 */
 	@FXML
 	void PressAddTime(ActionEvent event) {
 		int count=0;
@@ -130,6 +140,9 @@ public class StatusController implements Initializable {
 		}
 	}
 
+	/**returns back to the menu of the teacher
+	 * @param event
+	 */
 	@FXML
 	void PressCEMS(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
@@ -137,6 +150,9 @@ public class StatusController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**lock button to switch exam from locked/unlocked
+	 * @param event
+	 */
 	@SuppressWarnings("unlikely-arg-type")
 	@FXML
 	void PressLock(ActionEvent event) {
@@ -152,6 +168,10 @@ public class StatusController implements Initializable {
 		}
 	}
 
+	/**sign out button to get out of the system and turns online to 0
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	void PressSignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -162,6 +182,9 @@ public class StatusController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**return to exam statistic 
+	 * @param event
+	 */
 	@FXML
 	void PressReturn(ActionEvent event) {
 		TeacherExamStatisticsController TESC = new TeacherExamStatisticsController();

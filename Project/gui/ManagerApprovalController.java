@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
- * @author axwara1
+ * @author vika
  *this class appear table of messages from teachers that need to change the exam time .
  */
 public class ManagerApprovalController implements Initializable {

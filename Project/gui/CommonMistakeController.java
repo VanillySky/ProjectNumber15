@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
- * @author axwara1
+ * @author saher
  * this method appear for the teacher a common mistake for the students answers 
  */
 public class CommonMistakeController implements Initializable{

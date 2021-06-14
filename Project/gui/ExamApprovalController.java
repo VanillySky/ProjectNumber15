@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
- * @author axwara1
+ * @author saher
  * this class for teacher , when the student done the exam , the grade appear in this table , the teacher need to approve it to go for student back
  *
  */
