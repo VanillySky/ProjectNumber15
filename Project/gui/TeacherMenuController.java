@@ -64,7 +64,7 @@ public class TeacherMenuController {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/GUI/TeacherMain.fxml"));
+			loader.setLocation(getClass().getResource("/gui/TeacherMain.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);

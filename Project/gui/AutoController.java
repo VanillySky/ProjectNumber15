@@ -386,6 +386,7 @@ public class AutoController implements Initializable {
 				if (ExaminationController.starNum == Endnumber)
 					LoginController.ChangeLockedEXCODE(ExamCode, "locked");
 
+				NEXTBTN.setVisible(false);
 				submitIMG.setVisible(false);
 				questionLBL.setVisible(false);
 				Answer1RB.setVisible(false);
