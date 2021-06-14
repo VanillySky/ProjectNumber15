@@ -534,7 +534,7 @@ public class AutoController implements Initializable {
 		hoursTimer.setText(hours + "");
 		MinutesTimer.setText(min + "");
 		SecondsTimer.setText("0");
-		CurrSeconds = hmsToSeconds(hours, min, 0);
+		CurrSeconds += hmsToSeconds(hours, min, 0);
 		// CurrSeconds =200;
 		timefinish = false;
 		startCountdown();
