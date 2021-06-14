@@ -33,7 +33,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
+/**
+ * 14.06.2021
+ * @author Ahmad
+ *
+ */
 public class QuestionsSelectionController extends Application implements Initializable {
 
 	@FXML
@@ -170,6 +174,11 @@ public class QuestionsSelectionController extends Application implements Initial
 	static int sumpoints=0;
 	static boolean temp;
 
+	/**
+	 * The method is the main entry point for JavaFX applications.
+	 * 
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -185,6 +194,10 @@ public class QuestionsSelectionController extends Application implements Initial
 		}
 	}
 
+	/**
+	 * By this method we search for the question by the teacher name
+	 * @param event
+	 */
 	@FXML
 	public void SearchByTeacher(ActionEvent event) {
 
@@ -222,6 +235,10 @@ public class QuestionsSelectionController extends Application implements Initial
 		Table.setItems(sortedData);
 	}
 
+	/**
+	 * By this method we search for the question by the course
+	 * @param event
+	 */
 	@FXML
 	public void SearchByCourse(ActionEvent event) {
 
@@ -259,13 +276,21 @@ public class QuestionsSelectionController extends Application implements Initial
 		Table.setItems(sortedData);
 	}
 
+	/**
+	 * The method is to go back to the previous frame
+	 * @param event
+	 */
 	@FXML
 	public void PressCEMS(ActionEvent event) {
 		TeacherMenuController TMCC = new TeacherMenuController();
 		TMCC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-
+	
+	/**
+	 * This function apply the teacher to add questions to the question bank
+	 * @param event
+	 */
 	@FXML
 	public void AddNewQuestion(ActionEvent event) {
 		boolean flag = false;
@@ -295,7 +320,10 @@ public class QuestionsSelectionController extends Application implements Initial
 		}
 
 	}
-
+	/**
+	 * This function removes the question from the question bank 
+	 * @param event
+	 */
 	@FXML
 	public void RemoveQuestion(ActionEvent event) {
 		if (Table2.getSelectionModel().getSelectedItem() != null) {
@@ -310,7 +338,10 @@ public class QuestionsSelectionController extends Application implements Initial
 		}
 
 	}
-
+	/**
+	 * The method is to go back to the previous frame
+	 * @param event
+	 */
 	@FXML
 	public void PressReturn(ActionEvent event) {
 		for (int i = 0; i < dataList2.size(); i++) {
@@ -334,7 +365,11 @@ public class QuestionsSelectionController extends Application implements Initial
 		QuestionsSelectionController.getquestionscodes = questionscodes;
 		QuestionsSelectionController.getpoints = points;
 	}
-
+	
+	/**
+	 * After Adding all the relvant textfeilds press done to add the question to questions bank
+	 * @param event
+	 */
 	@FXML
 	public void PressDone(ActionEvent event) {
 		int count = 0;
@@ -383,14 +418,22 @@ public class QuestionsSelectionController extends Application implements Initial
 			((Node) event.getSource()).getScene().getWindow().hide();
 		}
 	}
-
+	
+	/**
+	 * In this function the teacher select the question from the first table to add it to the next table
+	 * @param event
+	 */
 	@FXML
 	void selectQuestion(MouseEvent event) {
 		if (Table.getSelectionModel().getSelectedItem() != null) {
 			selectedQuestion = Table.getSelectionModel().getSelectedItem();
 		}
 	}
-
+	
+	/**
+	 * In this function the teacher select the question from the second table to remove it or to add points
+	 * @param event
+	 */
 	@FXML
 	void selectQuestion2(MouseEvent event) {
 		if (Table2.getSelectionModel().getSelectedItem() != null) {
@@ -398,6 +441,11 @@ public class QuestionsSelectionController extends Application implements Initial
 		}
 	}
 
+	/**
+	 * This function signs out the student from the system and retuens to the login frame 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -407,7 +455,11 @@ public class QuestionsSelectionController extends Application implements Initial
 		clientUI.chat.quit();
 		clientUI.start(new Stage());
 	}
-
+	
+	/**
+	 * In this function the teacher adds points to the selected question
+	 * @param event
+	 */
 	@FXML
 	void AddPoint(ActionEvent event) {
 
@@ -419,7 +471,10 @@ public class QuestionsSelectionController extends Application implements Initial
 			pointERRLBL.setVisible(true);
 		}
 	}
-
+	
+	/**
+	 * initialize the controls in the fxml
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 

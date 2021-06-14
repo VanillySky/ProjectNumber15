@@ -34,77 +34,129 @@ import javafx.stage.Stage;
 
 /**
  * The manual conroller is a class to control the manual fxml
+ * 
  * @author Ahmed
  *
  */
 public class ManualController implements Initializable {
-	
-	//The main pane that conatains evreything in the gui
-    @FXML
-    private Pane pane;
 
-    /**
-     * 
-     */
-    @FXML
-    private Button CEMSButton;
+	// The main pane that conatains evreything in the gui
+	@FXML
+	private Pane pane;
 
-    @FXML
-    private Button DownloadExamBTN;
+	/**
+	 * Cems button that allows the user to return to the main menu
+	 */
+	@FXML
+	private Button CEMSButton;
 
-    @FXML
-    private Button OutButton;
+	/**
+	 * Download button that allows the student to download the exam to solve it
+	 * manually
+	 */
+	@FXML
+	private Button DownloadExamBTN;
 
-    @FXML
-    private Button UploadExamBTN;
+	/**
+	 * Out button allows the student to signout from the system
+	 */
+	@FXML
+	private Button OutButton;
 
-    @FXML
-    private Button BackButton;
+	/**
+	 * Upload button allows the student to upload the exam after he solve it
+	 */
+	@FXML
+	private Button UploadExamBTN;
 
-    @FXML
-    private Label IsntValidLBL;
+	/**
+	 * Back button allows the student to return to the previous frame/page (in this
+	 * case to the examanation page)
+	 */
+	@FXML
+	private Button BackButton;
 
-    @FXML
-    private Button SubmitExamBTN;
+	/**
+	 * Is Valid label to warn the student that he didn't upload any file
+	 */
+	@FXML
+	private Label IsntValidLBL;
 
-    @FXML
-    private AnchorPane menuPane;
+	/**
+	 * Submit exam button allows the student to submit the exam whenever he want
+	 */
+	@FXML
+	private Button SubmitExamBTN;
 
-    @FXML
-    private Text hoursTimer;
+	/**
+	 * The menupane is an anchor pane that we saves the time on it
+	 */
+	@FXML
+	private AnchorPane menuPane;
 
-    @FXML
-    private Text MinutesTimer;
+	/**
+	 * This text to fill the hours in the exam time
+	 */
+	@FXML
+	private Text hoursTimer;
 
-    @FXML
-    private Text SecondsTimer;
+	/**
+	 * This text to fill the minutes in the exam time
+	 */
+	@FXML
+	private Text MinutesTimer;
 
-    @FXML
-    private Label UploadaFileMsg;
+	/**
+	 * This text to fill the seconds in the exam time
+	 */
+	@FXML
+	private Text SecondsTimer;
 
-    @FXML
-    private TextField FileUploadTXT;
+	/**
+	 * in case the student press "Submit" witout uploading any file, he recieves:
+	 * "Please upload a file"
+	 */
+	@FXML
+	private Label UploadaFileMsg;
 
-    @FXML
-    private Button DeleteChosenBTN;
+	/*
+	 * after uploading the file, the name of the uploaded file appers her
+	 */
+	@FXML
+	private TextField FileUploadTXT;
 
-    @FXML
-    private Label timelbl;
+	/*
+	 * Delete button deletes the file that the student uploaded in case he uploaded
+	 * a wrong
+	 */
+	@FXML
+	private Button DeleteChosenBTN;
 
-    @FXML
-    private Label AddLBL;
+	/*
+	 * When the exam time is done the student receives
+	 * "The time is done , you can't Submit the exam"
+	 */
+	@FXML
+	private Label timelbl;
+
+	/*
+	 * When the teacher adds time the student receives a warning message
+	 */
+	@FXML
+	private Label AddLBL;
 
 	static String returnedFile;
 	File selectedFile;
 	Map<Integer, String> numberMap;
 	static Integer CurrSeconds;
 	Thread thrd;
-	 Integer hours, min;
-	static boolean timefinish ;
+	Integer hours, min;
+	static boolean timefinish;
 	static String ExamCode;
 	private ObservableList<ManagerMessage> dataList = FXCollections.observableArrayList();
 
 	/**
+	 * The method is the main entry point for JavaFX applications.
 	 * 
 	 * @param primaryStage
 	 */
@@ -118,19 +170,19 @@ public class ManualController implements Initializable {
 			primaryStage.setTitle("Manual");
 			primaryStage.show();
 		} catch (Exception e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 		}
 	}
-
+	
+	/*
+	 * This function  starts the timer as a countdown
+	 */
 	void startCountdown() {
 		thrd = new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				try {
-
 					while (true) {
-
 						CurrSeconds -= 1;
 						setOutput();
 						Thread.sleep(1000);
@@ -139,32 +191,40 @@ public class ManualController implements Initializable {
 							doneTime();
 							thrd.stop();
 						}
-
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
 				}
-
 			}
 		});
 		thrd.start();
 	}
-
+	
+	/*
+	 * This function lockes the exam when the exam time ends
+	 */
 	void doneTime() {
 		timelbl.setVisible(true);
 		LoginController.ChangeLockedEXCODE(ExamCode, "locked");
 	}
-	
+
+	/*
+	 * This function prints the time in the suitable text 
+	 */
 	void setOutput() {
 		LinkedList<Integer> currHms = secondsToHms(CurrSeconds);
 		hoursTimer.setText(numberMap.get(currHms.get(0)));
 		MinutesTimer.setText(numberMap.get(currHms.get(1)));
 		SecondsTimer.setText(numberMap.get(currHms.get(2)));
 	}
-
+	
+	/**
+	 * This function signs out the student from the system and retuens to the login frame 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void SignOut(ActionEvent event) throws Exception {
-		thrd.stop();
+		thrd.stop();	//stop the timer when the student get out
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
 		ClientUI clientUI = new ClientUI();
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -174,12 +234,11 @@ public class ManualController implements Initializable {
 
 	/**
 	 * The method is to go back to the previous frame
-	 * 
 	 * @param event
 	 */
 	@FXML
 	public void PressBack(ActionEvent event) {
-			thrd.stop();	
+		thrd.stop();
 		ExaminationController EC = new ExaminationController();
 		EC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
@@ -192,23 +251,32 @@ public class ManualController implements Initializable {
 	 */
 	@FXML
 	public void PressCEMS(ActionEvent event) {
-			thrd.stop();
+		thrd.stop();
 
 		StudentMenuController SMC = new StudentMenuController();
 		SMC.start(new Stage());
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	
+	/**
+	 * In this function the student uploads the file to submit it 
+	 * @param event
+	 */
 	@FXML
 	public void uploadFileBTN(ActionEvent event) {
 		FileChooser fc = new FileChooser();
-		selectedFile = fc.showOpenDialog(null);
-		if (selectedFile != null) {
+		selectedFile = fc.showOpenDialog(null);	
+		if (selectedFile != null) {	
 			FileUploadTXT.setText(selectedFile.getName());
-		} else
+		} else	//if he didn't upload any file
 			IsntValidLBL.setVisible(true);
 	}
 
+	/**
+	 * Allows the student to submit the exam after he uploaded it to the system
+	 * @param event
+	 */
 	@FXML
 	void SubmitExam(ActionEvent event) {
 		// AFTER CHECKING THE TIME
@@ -233,24 +301,35 @@ public class ManualController implements Initializable {
 		}
 	}
 
-	@FXML
-	void deleteFileBTN(ActionEvent event) {
-		FileUploadTXT.setText("");
-	}
-
 	/**
-	 * This method gets the ExamCode from ExaminationController
-	 * 
+	 * Delete the selected file in case the student want to change it
 	 * @param event
 	 */
-
+	@FXML
+	void deleteFileBTN(ActionEvent event) {
+		selectedFile = null;
+		FileUploadTXT.setText("");
+	}
+	
+	/**
+	 * This method converts to hourse and the minutes and the seconds to the seconds
+	 * @param h
+	 * @param m
+	 * @param s
+	 * @return
+	 */
 	Integer hmsToSeconds(Integer h, Integer m, Integer s) {
 		Integer hToSeconds = h * 3600;
 		Integer mToSeconds = m * 60;
 		Integer total = hToSeconds + mToSeconds + s;
 		return total;
 	}
-
+	
+	/**
+	 * Converts the seconds to hours, minutes and seconds 
+	 * @param currSeconds
+	 * @return as linked list
+	 */
 	LinkedList<Integer> secondsToHms(Integer currSeconds) {
 		Integer hours = currSeconds / 3600;
 		currSeconds = CurrSeconds % 3600;
@@ -264,42 +343,50 @@ public class ManualController implements Initializable {
 		return answer;
 	}
 
+	/**
+	 * Download the file to the user computer
+	 * @param event
+	 */
 	@FXML
 	public void DownloadFileBTN(ActionEvent event) {
 		AddLBL.setVisible(false);
 		Integer temp = hmsToSeconds(hours, min, 0);
-		CurrSeconds = CurrSeconds+temp;
-		//CurrSeconds = 10;
+		CurrSeconds = CurrSeconds + temp;
+		// CurrSeconds = 10;
 		startCountdown();
-		
-		// UserController.byteManualTest = null;
-				// Message msg = new Message(MessageType.downloadedManualTest, TestTypeController.code);
-				try {
-					FileChooser fc = new FileChooser();
-					fc.setTitle("Download File");
-					fc.setInitialFileName(ManualController.ExamCode);
-					fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Word Files", "*.docx"));
-					File downloadedFile = fc.showSaveDialog(null);//UserController.currentStage
-					System.out.println("Downloaded");
-					if(downloadedFile == null)
-						return;
-					File ManualExam = new File(downloadedFile.getAbsolutePath());
-					FileOutputStream fos = new FileOutputStream(ManualExam);
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					
-					//bos.write(0,0,0); //UserController.byteManualTest,0, UserController.byteManualTest.length
-					bos.flush();
-					fos.flush();
-					bos.close();
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}
 
+		// UserController.byteManualTest = null;
+		// Message msg = new Message(MessageType.downloadedManualTest,
+		// TestTypeController.code);
+		try {
+			FileChooser fc = new FileChooser();
+			fc.setTitle("Download File");
+			fc.setInitialFileName(ManualController.ExamCode);
+			fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Word Files", "*.docx"));
+			File downloadedFile = fc.showSaveDialog(null);// UserController.currentStage
+			System.out.println("Downloaded");
+			if (downloadedFile == null)
+				return;
+			File ManualExam = new File(downloadedFile.getAbsolutePath());
+			FileOutputStream fos = new FileOutputStream(ManualExam);
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+			// bos.write(0,0,0); //UserController.byteManualTest,0,
+			// UserController.byteManualTest.length
+			bos.flush();
+			fos.flush();
+			bos.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 
+	/**
+	 * initialize the controls in the fxml
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		CurrSeconds=0;
+		CurrSeconds = 0;
 		timefinish = false;
 		String time = ExaminationController.ExamTime;
 		String[] hourmin = time.split(":");
@@ -308,20 +395,20 @@ public class ManualController implements Initializable {
 		hoursTimer.setText(hours + "");
 		MinutesTimer.setText(min + "");
 		SecondsTimer.setText("0");
-		
-		dataList = FXCollections.observableArrayList((Collection) controllers.DisplayController.ApprovedChangeTime(ExamCode)); ///// add time to examtime .. check if the manager approved
-		if(dataList.size()!=0) {
-		String addtime= dataList.get(0).getAddtime();
-		String[] Addhourmin = addtime.split(":");
-		Integer addH = Integer.parseInt(Addhourmin[0]);
-		Integer addM = Integer.parseInt(Addhourmin[1]);
-		Integer addSec = hmsToSeconds(addH,addM,0);
-		AddLBL.setVisible(true);
-		AddLBL.setText("the Additional time: "+Addhourmin[0]+":"+Addhourmin[1]);
-		CurrSeconds+=addSec;
-		}
 
-		numberMap = new TreeMap<Integer, String>();
+		dataList = FXCollections
+				.observableArrayList((Collection) controllers.DisplayController.ApprovedChangeTime(ExamCode)); ///// add time to examtime.. check if the manager approved
+		if (dataList.size() != 0) {
+			String addtime = dataList.get(0).getAddtime();
+			String[] Addhourmin = addtime.split(":");
+			Integer addH = Integer.parseInt(Addhourmin[0]);
+			Integer addM = Integer.parseInt(Addhourmin[1]);
+			Integer addSec = hmsToSeconds(addH, addM, 0);
+			AddLBL.setVisible(true);
+			AddLBL.setText("the Additional time: " + Addhourmin[0] + ":" + Addhourmin[1]);
+			CurrSeconds += addSec;
+		}
+				numberMap = new TreeMap<Integer, String>();
 		for (Integer i = 0; i <= 60; i++) {
 			if (i >= 0 && i <= 9)
 				numberMap.put(i, "0" + i.toString());
@@ -329,5 +416,4 @@ public class ManualController implements Initializable {
 				numberMap.put(i, i.toString());
 		}
 	}
-
 }

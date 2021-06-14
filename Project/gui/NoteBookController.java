@@ -25,6 +25,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Rostik
+ *
+ */
 public class NoteBookController implements Initializable {
 
 	@FXML
@@ -70,6 +75,11 @@ public class NoteBookController implements Initializable {
 	private ObservableList<Exam> dataList = FXCollections.observableArrayList();
 	private ObservableList<ExamResponse> dataList2 = FXCollections.observableArrayList();
 
+	/**
+	 * The method is the main entry point for JavaFX applications.
+	 * 
+	 * @param primaryStage
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -85,6 +95,11 @@ public class NoteBookController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method to go to the main menu
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void CEMS(ActionEvent event) {
 		StudentMenuController SMC = new StudentMenuController();
@@ -93,6 +108,10 @@ public class NoteBookController implements Initializable {
 
 	}
 
+	/**
+	 * By this methos we proccess to the next question
+	 * @param event
+	 */
 	@FXML
 	void GoNext(ActionEvent event) {
 
@@ -152,6 +171,10 @@ public class NoteBookController implements Initializable {
 
 	}
 
+	/**
+	 * By this method we get back to the previous question
+	 * @param event
+	 */
 	@FXML
 	void GoPrev(ActionEvent event) {
 		
@@ -190,6 +213,10 @@ public class NoteBookController implements Initializable {
 
 	}
 
+	/**
+	 * The method is to go back to the previous frame
+	 * @param event
+	 */
 	@FXML
 	void GoReturn(ActionEvent event) {
 		StudentGradeListController SGLC = new StudentGradeListController();
@@ -197,6 +224,11 @@ public class NoteBookController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * This function signs out the student from the system and retuens to the login frame 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(), "0");
@@ -207,6 +239,9 @@ public class NoteBookController implements Initializable {
 		clientUI.start(new Stage());
 	}
 
+	/**
+	 * initialize the controls in the fxml
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		N = 0;

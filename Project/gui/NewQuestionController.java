@@ -24,8 +24,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author shaden
+ *
+ */
 public class NewQuestionController implements Initializable {
 
+	/*
+	 * 
+	 */
+    @FXML
+    private ImageView Updatephoto;
+    
+    /**
+     * 
+     */
     @FXML
     private TextField QuestionNumTXT;
 
@@ -73,19 +87,19 @@ public class NewQuestionController implements Initializable {
 
     @FXML
     private Label ErrorSelectRDLBL;
-    
+
     @FXML
     private TextField RightAnswerTXT;
-    
-    @FXML
-    private ImageView Updatephoto;
-    
+
     static ArrayList<String> AllQuestionscode = new ArrayList<String>();
     static String QuestionNum , Subject , Question , Answer1,Answer2,Answer3,Answer4,Rigthanswer ,QuestionIns;
     static boolean temp;// true if update ..
     
-    
-    
+	/**
+	 * The method is the main entry point for JavaFX applications.
+	 * 
+	 * @param primaryStage
+	 */
     public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -101,7 +115,10 @@ public class NewQuestionController implements Initializable {
 		}
 	}
     
-
+    /**
+     * Whith this button the teacher goes to add a question frame, their he fill the question in the suitable textfeilds
+     * @param event
+     */
     @FXML
     void PressAddQuestion(ActionEvent event) {
     	int count=0;
@@ -191,6 +208,10 @@ public class NewQuestionController implements Initializable {
     	}
     }
 
+	/**
+	 * This method to go to the main menu
+	 * @param event
+	 */
     @FXML
     void PressCEMS(ActionEvent event) {
     	TeacherMenuController TMCC = new TeacherMenuController();
@@ -198,6 +219,10 @@ public class NewQuestionController implements Initializable {
 		((Node) event.getSource()).getScene().getWindow().hide();
     }
 
+	/**
+	 * The method is to go back to the previous frame
+	 * @param event
+	 */
     @FXML
     void PressReturn(ActionEvent event) {
     	BuildQuestionsController BQCC = new BuildQuestionsController();
@@ -205,6 +230,11 @@ public class NewQuestionController implements Initializable {
     	((Node) event.getSource()).getScene().getWindow().hide();
     }
 
+	/**
+	 * this method logs out from the system and updates the connection situation
+	 * @param event
+	 * @throws Exception 
+	 */
     @FXML
     void SignOut(ActionEvent event) throws Exception {
 		LoginController.ChangeOnline(ChatClient.currentUser.getUserName(),"0");
@@ -214,8 +244,10 @@ public class NewQuestionController implements Initializable {
 		clientUI.chat.quit();
 		clientUI.start(new Stage());
     }
-
-
+    
+	/**
+	 * initialize the controls in the fxml
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(temp) {
@@ -244,7 +276,5 @@ public class NewQuestionController implements Initializable {
 			RightAnswerTXT.setText("");
 			QuestionINSTXT.setText("");
 		}
-		
 	}
-
 }
